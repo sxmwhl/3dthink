@@ -28,6 +28,9 @@
 								name="cate_id">disabled="disabled"</notempty> >
 							<option value="0">作为顶级分类</option>{$category_option}
 					</select><a href="__URL__/lists"> 分类编辑</a></td>
+					<notempty	name="cate_id">
+					<input name="root_id" id="root_id" value="{$cate_id}" type="hidden" />
+					</notempty>
 				</tr>
 				<include file="Public:category_form" />
 				<include file="Public:footer" />

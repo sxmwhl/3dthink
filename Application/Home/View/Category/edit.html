@@ -27,6 +27,7 @@
 			<td><select name="root_id" id="root_id" class="sel" disabled="disabled"><option
 						value="0">作为顶级分类</option>{$category_option}
 			</select><a href="__URL__/lists"> 分类编辑</a></td>
+			<input name="root_id" id="root_id" value="{$onecategory.root_id}" type="hidden" />
 		</tr>		
 		<include file="Public:category_form" />
 		<include file="Public:footer" />

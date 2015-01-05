@@ -43,6 +43,7 @@ class CategoryController extends Controller {
     	$row2=null;
     	$category_option=null;
     	echo $Category->getLastSql();
+    	header("Location:".__MODULE__."/category/lists");
     	//$this->display('add');
     }
     public function edit(){
@@ -71,7 +72,14 @@ class CategoryController extends Controller {
     		$inputs['cate_arrparentid']='0';
     	}else{
     		$inputs['cate_arrparentid']=$Category->get_root_ids($inputs['root_id']).','.$inputs['root_id'];
-    	}    	
+    	}
+    	//计算分类等级    	
+    	$inputs['cate_level']= substr_count($inputs['cate_arrparentid'],',')+1 ;
+    	//判断同级分类是否重名
+    	$where="cate_name='".$inputs['cate_name']."' and cate_level=".$inputs['cate_level'];
+    	$same_name=$Category->where($where)->field('cate_id')->find();
+    	//echo $Category->getLastSql();
+    	if(!empty($same_name))exit('相同等级分类重名！');
     	if (!$Category->create($inputs,1)){ // 创建数据对象
     		// 如果创建失败 表示验证没有通过 输出错误提示信息
     		exit($Category->getError());
