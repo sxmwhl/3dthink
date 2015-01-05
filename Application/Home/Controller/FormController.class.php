@@ -108,6 +108,7 @@ class FormController extends Controller {
     	$model_show['hl_on']=$model_show['hl_on']==0?"false":"true";
     	$model_show['dl_on']=$model_show['dl_on']==0?"false":"true";
     	$model_show['ip_last_modify']=get_client_ip();
+    	$model_show['old_category']=$cate;
     	$this->model=$model_show;
     	$this->display('modify');
     }
@@ -127,6 +128,16 @@ class FormController extends Controller {
     		//echo $Moxing->title;
     		$where="folder='".$inputs['folder']."'";
     		$Moxing->where($where)->save();
+    		//更新分类下模型数
+    		if($inputs['category']!=$inputs['old_category']){
+    			$Category=D('Category');
+    			if($inputs['category']!=0){
+    				$Category->add_postcount($inputs['category']);
+    			}
+    			if($inputs['old_category']!=0){
+    				$Category->del_postcount($inputs['old_category']);
+    			}
+    		}
     	}
     	//echo $Moxing->getLastSql(); //最后运行sql语句
     	header("Location:".__MODULE__."/index/model?f=".$inputs['folder']);

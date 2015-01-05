@@ -70,8 +70,11 @@
 			</h2>
 			<select name="category" id="category">
 				<option value="0">请选择分类</option> {$category_option}
-			</select> <input type="hidden" name="preview_ext" value="{$model.preview_ext}" />
-			<input type="hidden" name="folder" value="{$model.folder}" /> <input
+			</select> 
+			<input type="hidden" name="preview_ext" value="{$model.preview_ext}" />
+			<input type="hidden" name="folder" value="{$model.folder}" /> 
+			<input type="hidden" name="old_category" value="{$model.old_category}" /> 
+			<input
 				type="hidden" name="ip_last_modify" value="{$model.ip_last_modify}" />
 			<h2>创作者：</h2>
 			<input name="creator" type="text" id="creator" size="10"

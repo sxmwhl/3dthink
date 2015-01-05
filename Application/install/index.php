@@ -46,6 +46,7 @@ CREATE TABLE think_category
   `cate_name` varchar(50) NOT NULL DEFAULT '',
   `cate_isbest` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `cate_order` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `cate_level` smallint(5) unsigned NOT NULL DEFAULT '1',
   `cate_keywords` varchar(100) NOT NULL DEFAULT '',
   `cate_description` varchar(255) NOT NULL DEFAULT '',
   `cate_arrparentid` varchar(255) NOT NULL DEFAULT '',

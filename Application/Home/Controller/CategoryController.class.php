@@ -20,6 +20,7 @@ class CategoryController extends Controller {
     public function add(){
     	$cate_id=I('cate');
     	$Category=D('Category');
+    	if(isset($cate_id))$this->cate_id=$cate_id;
     	$category_option = $Category->get_category_option(0, $cate_id, 0);
     	$this->category_option=$category_option;    	
     	//echo $Moxing->getLastSql();
@@ -65,6 +66,7 @@ class CategoryController extends Controller {
     public function save(){
     	$inputs=I('post.');
     	$Category=D('Category');
+    	//添加父类字符串
     	if($inputs['root_id']==0){
     		$inputs['cate_arrparentid']='0';
     	}else{
@@ -75,10 +77,10 @@ class CategoryController extends Controller {
     		exit($Category->getError());
     	}else{
     		// 验证通过 写入新增数据
-    		//echo $Moxing->title;
     		$cate_id=$Category->add();
     		if ($cate_id==false)exit('添加分类出错！');
-    	}  
+    	} 
+    	//给父分类添加子分类数 
     	if($inputs['root_id']>0){
     		$row=$Category->get_one_category($inputs['root_id']);
     		$cate_childcount=$row['cate_childcount']+1;
@@ -87,11 +89,14 @@ class CategoryController extends Controller {
     	$row=null;
     	//$Category->add_category_update($cate_id);
     	echo '添加路径成功：'.$Category->get_root_string($cate_id)."/".$inputs['cate_name'];
+    	header("Location:".__MODULE__."/category/lists?cate=".$inputs['root_id']);
     	//$this->display('modelIn');
     }
     public function update(){
     	$inputs=I('post.');
     	$Category=D('Category');
+    	$row=$Category->get_one_category($inputs['cate_id']);
+    	if($inputs['root_id']!=$row['root_id'])exit('请不要更改分类父目录！');
     	if (!$Category->create($inputs,2)){ // 创建数据对象
     		// 如果创建失败 表示验证没有通过 输出错误提示信息
     		exit($Category->getError());
@@ -101,6 +106,6 @@ class CategoryController extends Controller {
     		$Category->where('cate_id='.$inputs['cate_id'])->save();
     	}
     	//$this->display('modelIn');
-    	header("Location:".__ROOT__."/Home/category/lists?cate=".$inputs['root_id']);
+    	header("Location:".__MODULE__."/category/lists?cate=".$inputs['root_id']);
     }
 }

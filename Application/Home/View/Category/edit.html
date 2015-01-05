@@ -18,6 +18,16 @@
 				<span>让更多的人看到你的作品..</span>
 			</div>
 		</div>
+		<form name="category_form" method="post" action="__URL__/update"
+	class="formclass longform">
+		<h1>编 辑 分 类</h1>
+	<table width="100%" border="0" cellspacing="1" cellpadding="0">
+		<tr>
+			<th>所属分类：</th>
+			<td><select name="root_id" id="root_id" class="sel" disabled="disabled"><option
+						value="0">作为顶级分类</option>{$category_option}
+			</select><a href="__URL__/lists"> 分类编辑</a></td>
+		</tr>		
 		<include file="Public:category_form" />
 		<include file="Public:footer" />
 	</div>
