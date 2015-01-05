@@ -1,0 +1,119 @@
+<form name="category_form" method="post" action="__URL__/update"
+	class="formclass longform">
+	<h1>编 辑 分 类</h1>
+	<table width="100%" border="0" cellspacing="1" cellpadding="0">
+		<tr>
+			<th>所属分类：</th>
+			<td><select name="root_id" id="root_id" class="sel"><option
+						value="0">作为顶级分类</option>{$category_option}
+			</select><a href="__URL__/lists"> 分类编辑</a></td>
+		</tr>
+		<tr>
+			<th>分类名称：</th>
+			<td><input name="cate_name" type="text" class="ipt"
+				id="cate_name" size="35" maxlength="50"
+				value="{$onecategory.cate_name}" /> <input name="cate_isbest"
+				type="checkbox" id="cate_isbest" value="1" /><label
+				for="cate_isbest">设为推荐</label></td>
+		</tr>
+		<tr>
+			<th>关 键 词：</th>
+			<td><input name="cate_keywords" type="text" class="ipt"
+				id="cate_keywords" size="50" maxlength="255"
+				placeholder="多个关键词之间用“逗号”隔开" value='{$onecategory.cate_keywords}' /><span
+				class="tips"></span></td>
+		</tr>
+		<tr>
+			<th class="table">分类描述：</th>
+			<td><textarea name="cate_description" cols="50" rows="6"
+					class="ipt" id="cate_description"
+					value='{$onecategory.cate_description}'></textarea></td>
+		</tr>
+		<tr>
+			<th>排列顺序：</th>
+			<td><input name="cate_order" type="text" class="ipt"
+				id="cate_order" size="10" maxlength="10"
+				value='{$onecategory.cate_order}' /></td>
+		</tr>
+		<tr class="btnbox">
+			<td>&nbsp;</td>
+			<td><input name="cate_id" id="cate_id"
+				value="{$onecategory.cate_id}" type="hidden"> <input
+				type="submit" class="btn" value="保 存" />&nbsp; <input type="reset"
+				class="btn" value="取 消" /></td>
+		</tr>
+	</table>
+	<h1 id="error"></h1>
+</form>
+<script>
+		var validator = new FormValidator(
+				'category_form',
+				[ {
+					name : 'cate_name"',
+					display : '分类名称',
+					rules : 'required|max_length[50]|is_key'
+				}, {
+					name : 'cate_keywords',
+					display : '关键词',
+					rules : 'required|max_length[50]|is_key'
+				}, {
+					name : 'cate_description',
+					display : '分类描述',
+					rules : 'required|max_length[300]'
+				}, {
+					name : 'root_id',
+					display : '模型分类未选择',
+					rules : 'greater_than[0]'
+				}, {
+					name : 'creator',
+					display : '创作者',
+					rules : 'max_length[30]|is_key'
+				}, {
+					name : 'email',
+					display : '邮箱地址',
+					rules : 'valid_email'
+				}, {
+					name : 'vp_x',
+					display : '位置x',
+					rules : 'decimal|max_length[6]'	
+				}, {
+					name : 'vp_y',
+					display : '位置y',
+					rules : 'max_length[6]'
+				}, {
+					name : 'vp_z',
+					display : '位置z',
+					rules : 'max_length[6]'
+				}, {
+					name : 'vp_d_x',
+					display : '方向x',
+					rules : 'max_length[6]'
+				}, {
+					name : 'vp_d_y',
+					display : '方向y',
+					rules : 'max_length[6]'
+				}, {
+					name : 'vp_d_z',
+					display : '方向z',
+					rules : 'max_length[6]'
+				}, {
+					name : 'vp_d_a',
+					display : '方向a',
+					rules : 'max_length[6]'
+				} ],
+				function(errors, evt) {
+					if (errors.length > 0) {
+						var errorString = '';
+
+						for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+							errorString += errors[i].message + '<br />';
+						}
+						document.getElementById("error").innerHTML = errorString;
+						if (evt && evt.preventDefault) {
+							evt.preventDefault();
+						} else if (event) {
+							event.returnValue = false;
+						}
+					}
+				});
+	</script>

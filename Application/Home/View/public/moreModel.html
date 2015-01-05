@@ -1,0 +1,26 @@
+<div class="InfoContainer">
+	<div id="Name" class="InfoBlack">模型搜索</div>
+	<form id="form" action="__MODULE__/index/search" method="post"
+		class="shortform">
+		<input type='text' name='keywords' class='formclass-input'
+			placeholder="请输入模型名称" /> <input type="submit" name="baocun"
+			id="baocun" value="模 型 搜  索" class="formclass-submit shortsubmit" />
+	</form>
+	<div id="Name" class="InfoBlack">模型分类</div>
+	<div class="InfoOrange">
+		<div class="InfoDesc">
+			<a href='__ROOT__/'>首页</a>/
+			<volist name="category_path" id="vo"> 
+			<a href='__MODULE__/category?cate={$vo.cate_id}'>{$vo.cate_name}</a>/ </volist>
+		</div>
+	</div>
+	<volist name="categories" id="vo">
+	<div class="InfoOrange">
+		<div class="InfoDesc">
+			<a href='__MODULE__/category?cate={$vo.cate_id}' class='title'
+				title='分类名称'>{$vo.cate_name}</a>
+		</div>
+	</div>
+	</volist>
+	<a href="__MODULE__/form" target="_parent"><div	class="button blue">分享模型</div></a>
+</div>
