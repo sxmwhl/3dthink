@@ -42,7 +42,7 @@ class CategoryController extends Controller {
     	$row=null;
     	$row2=null;
     	$category_option=null;
-    	echo $Category->getLastSql();
+    	//echo $Category->getLastSql();
     	header("Location:".__MODULE__."/category/lists");
     	//$this->display('add');
     }

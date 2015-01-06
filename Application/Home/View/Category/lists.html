@@ -28,8 +28,11 @@
 				<th>分类属性</th>
 				<th>操作选项</th>
 			</tr>
+			<empty name="categories">
+			           <td colspan="6"><h1 id="error">暂无子分类。<a href ="javascript:history.go(-1);">点击返回</a></h1></td>
+                <else />
 			<volist name="categories" id="cate">
-			<tr>
+			<tr>    
 				<td>{$cate.cate_id}</td>
 				<td>{$cate.cate_name} <span style="color: #999; font-size: 10px;">({$cate.cate_childcount})</span></td>
 				<td>{$cate.cate_postcount}</td>
@@ -38,6 +41,7 @@
 				<td><a href='edit?cate={$cate.cate_id}'>编辑</a> | 清空 | <a href='del?cate={$cate.cate_id}'>删除</a> | <a href='lists?cate={$cate.cate_id}'>进入子类</a> | <a href='add?cate={$cate.cate_id}'>添加子类</a></td>
 			</tr>
 			</volist>
+			</empty>
 		</table>
 		</form>
 			<include file="Public:footer" />
