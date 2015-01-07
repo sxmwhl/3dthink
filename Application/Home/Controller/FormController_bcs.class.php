@@ -9,7 +9,7 @@ class FormController extends Controller {
     	$upload = new \Think\Upload();// 实例化上传类
     	$upload->maxSize = 3145728 ;// 设置附件上传大小
     	$upload->exts = array('jpg', 'gif', 'png', 'jpeg','x3d');// 设置附件上传类型    	
-    	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
+    	$upload->rootPath = '/'; // 设置附件上传根目录
     	$upload->autoSub  = false;
     	$upload->savePath = 'upload/'; // 设置附件上传（子）目录
     	// 上传文件
@@ -18,7 +18,7 @@ class FormController extends Controller {
     		$this->error($upload->getError());
     	}else{// 上传成功 获取上传文件信息
     		foreach($info as $file){    
-    			if ($file['key']=='model'){
+    			if ($file['key']=='model'){    				
     				//是否为x3d格式
     				if($file['ext']!="x3d"&&$file['ext']!="X3D")exit(模型格式不正确！);
     				//>>>添加判断MD5是否重复 超链接需修改##############################
@@ -45,18 +45,35 @@ class FormController extends Controller {
     		}
     		if(empty($model_savename_empty))exit("分享模型失败，请确认模型文件是否正确！");    		
     		if(empty($preview_savename_empty))exit("分享模型失败，请确认缩略图文件是否正确！");
-    		$uploadPath=__ROOT__.'Public/upload/';
+    		$uploadPath='upload/';
     		$movePath=$uploadPath.$model_md5_empty.'/';
-    		if(!file_exists($movePath)){
-    		mkdir($movePath) or exit('创建路径失败，请重试！');
-    		}
-    		$rename_model_ok=rename($uploadPath.$model_savename_empty, $movePath.'model.x3d');
-    		$rename_preview_ok=rename($uploadPath.$preview_savename_empty, $movePath.'preview.'.$preview_ext_empty);
+    		//if(!file_exists($movePath)){
+    		//mkdir($movePath) or exit('创建路径失败，请重试！');
+    		//}
+    		//$rename_model_ok=rename($uploadPath.$model_savename_empty, $movePath.'model.x3d');
+    		$Bcs=D('Bcs');
+    		$bucket='x3dfile';
+    		$object='/'.$uploadPath.$model_savename_empty;
+    		$toObject='/'.$movePath.'model.x3d';
+    		//echo $bucket.'>>'.$object.'>>'.$toObject;
+    		$rename_model_ok=$Bcs->copy_object($bucket,$object,$bucket,$toObject);
+    		$Bcs->delete_object($bucket,$object);
+    		//$rename_preview_ok=rename($uploadPath.$preview_savename_empty, $movePath.'preview.'.$preview_ext_empty);
+    		$object='/'.$uploadPath.$preview_savename_empty;
+    		$toObject='/'.$movePath.'preview.'.$preview_ext_empty;
+    		//echo $bucket.'>>'.$object.'>>'.$toObject;
+    		$rename_preview_ok=$Bcs->copy_object($bucket,$object,$bucket,$toObject);
+    		$Bcs->delete_object($bucket,$object);
     		if(!empty($texture_name_empty)){
-    			if(!file_exists($movePath.'texture/')){
-    				mkdir($movePath.'texture/') or exit('创建路径失败，请重试！');
-    			}
-    			$rename_texture_ok=rename($uploadPath.$texture_savename_empty, $movePath.'texture/'.$texture_name_empty);
+    			//if(!file_exists($movePath.'texture/')){
+    			//	mkdir($movePath.'texture/') or exit('创建路径失败，请重试！');
+    			//}
+    			//$rename_texture_ok=rename($uploadPath.$texture_savename_empty, $movePath.'texture/'.$texture_name_empty);
+    			$object='/'.$uploadPath.$texture_savename_empty;
+    			$toObject='/'.$movePath.'texture/'.$texture_name_empty;
+    			//echo $bucket.'>>'.$object.'>>'.$toObject;
+    			$rename_texture_ok=$Bcs->copy_object($bucket,$object,$bucket,$toObject);
+    			$Bcs->delete_object($bucket,$object);
     			if(!$rename_texture_ok)exit("系统出错，请重试！1");
     		}
     		//echo $rename_model_ok;
@@ -143,4 +160,11 @@ class FormController extends Controller {
     	header("Location:".__MODULE__."/index/model?f=".$inputs['folder']);
     	//$this->display('public:jump');
     }
+    public function createbucket(){
+    	$Bcs=D('Bcs');
+    	//$Bcs->create_bucket(x3dfiless);
+    	$result=$Bcs->copy_object('x3dfile','54acbf29946d8.x3d','x3dfile','model.x3d');
+    	print $result;
+    }
+    
 }

@@ -58,7 +58,7 @@
 		<div class="InfoOrange">
 			<div class="InfoDesc">预览图片</div>
 			<div id="Location" class="InfoValue">
-				<?php echo "<img src='__PUBLIC__/upload/" . $model['folder'] . "/preview." . $model['preview_ext'] . "' alt='" . $model['title'] . "' />"?>
+				<?php echo "<img src='__BCS_UPLOAD__/" . $model['folder'] . "/preview." . $model['preview_ext'] . "' alt='" . $model['title'] . "' />"?>
 			</div>
 		</div>
 		<a href="__MODULE__/form/modify?f={$model['folder']}&cate={$model['category']}" target="_parent"><div class="button blue">修改信息</div></a>

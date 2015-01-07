@@ -11,8 +11,7 @@ Class BcsModel {
 		$this->baidu_bcs = new BaiduBCS ( $ak, $sk, $host );
 	}
 	/**
-	 * ************************single test******************************************* *	
-	try {
+	 * ************************方法索引************************************ *	
 		//create_bucket ( $baidu_bcs );
 		//list_bucket ( $baidu_bcs );
 		//list_object ( $baidu_bcs );
@@ -37,9 +36,6 @@ Class BcsModel {
 		//generate_get_object_url ( $baidu_bcs );
 		//generate_put_object_url ( $baidu_bcs );
 		//generate_post_object_url ( $baidu_bcs );
-	} catch ( Exception $e ) {
-		trigger_error ( $e->getMessage () );
-	}
 	* */
 	/**
 	 * ************************bucket********************************** *

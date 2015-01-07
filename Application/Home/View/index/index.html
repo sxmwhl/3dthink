@@ -1,6 +1,6 @@
 <include file="Public:header" />
-<script type='text/javascript' src='__PUBLIC__/css/x3dom.js'></script>
-<link rel='stylesheet' type='text/css' href='__PUBLIC__/css/x3dom.css' />
+<script type='text/javascript' src='__BCS_PUBLIC__/css/x3dom.js'></script>
+<link rel='stylesheet' type='text/css' href='__BCS_PUBLIC__/css/x3dom.css' />
 </head>
 <body>
 <input type='radio' name='model' id='modelcategory'/>
@@ -16,13 +16,13 @@
 <div class="wrap">
   <div class="header">
     <div class="logo">
-      <h1> <a href="__ROOT__/"><img src="__PUBLIC__/images/logo.png" alt="" /></a> </h1>
+      <h1> <a href="__ROOT__/"><img src="__BCS_PUBLIC__/images/logo.png" alt="__SITENAME__" /></a> </h1>
       <span>让更多的人看到你的作品..</span> </div>
   </div>
   <div class="carousel">
     <volist name="models1" id="vo">
     <div class='item'>
-    <img src='__PUBLIC__/upload/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
+    <img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
     <div class='item-background'></div>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='title' title='模型名称'>模型名称：{$vo.title}</a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='creator' title='作者'>创作者：{$vo.creator}</a>
@@ -32,7 +32,7 @@
     
     <volist name="models2" id="vo">
     <div class='item'>
-    <img src='__PUBLIC__/upload/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
+    <img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
     <div class='item-background'></div>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='title' title='模型名称'>模型名称：{$vo.title}</a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='creator' title='作者'>创作者：{$vo.creator}</a>

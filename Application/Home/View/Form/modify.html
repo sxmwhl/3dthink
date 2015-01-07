@@ -1,7 +1,7 @@
 <include file="Public:header" />
-<script type='text/javascript' src='__PUBLIC__/js/x3dom.js'></script>
-<script type="text/javascript" src="__PUBLIC__/js/validate.js"></script>
-<link rel='stylesheet' type='text/css' href='__PUBLIC__/css/x3dom.css' />
+<script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
+<script type="text/javascript" src="__BCS_PUBLIC__/js/validate.js"></script>
+<link rel='stylesheet' type='text/css' href='__BCS_PUBLIC__/css/x3dom.css' />
 <script>
 	function change() {
 		var dou = ",";
@@ -111,7 +111,7 @@
 				<h2 id="error"></h2>
 		</form>
 		<img
-			src="__PUBLIC__/upload/{$model.folder}/preview.{$model.preview_ext}"
+			src="__BCS_UPLOAD__/{$model.folder}/preview.{$model.preview_ext}"
 			width="280" height="200" title="模型缩略图" alt="模型缩略图" />
 	</div>
 	</aside>
@@ -128,7 +128,7 @@
 		transparency="1.0" skycolor="0 0 0"> </background> <Environment
 		id="gamma" gammaCorrectionDefault="linear"></Environment> <Inline
 		nameSpaceName="s" mapDEFToID="true"
-		url="__PUBLIC__/upload/{$model.folder}/model.x3d"> </Inline> </scene> </x3d>
+		url="__BCS_UPLOAD__/{$model.folder}/model.x3d"> </Inline> </scene> </x3d>
 
 	<script>
 		var validator = new FormValidator(

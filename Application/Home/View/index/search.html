@@ -14,7 +14,7 @@
 <div class="wrap">
   <div class="header">
     <div class="logo">
-      <h1> <a href="__ROOT__/"><img src="__PUBLIC__/images/logo.png" alt="" /></a> </h1>
+      <h1> <a href="__ROOT__/"><img src="__BCS_PUBLIC__/images/logo.png" alt="" /></a> </h1>
       <span>让更多的人看到你的作品..</span> </div>
   </div>
     <div class="content">
@@ -26,7 +26,7 @@
   <div class="carousel">
     <volist name="model" id="vo" empty="暂无相关模型">
     <div class='item'>
-    <img src='__PUBLIC__/upload/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
+    <img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
     <div class='item-background'></div>
     <a href='__MODULE__/index/model?f={$vo.folder}' class='title' title='模型名称'>模型名称：{$vo.title}</a>
     <a href='__MODULE__/index/model?f={$vo.folder}' class='creator' title='作者'>创作者：{$vo.creator}</a>
