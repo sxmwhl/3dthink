@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 class FormController extends Controller {
     public function index(){
+      $this->title='分型您的模型';
       $this->display();
     }
     public function upload(){
@@ -110,6 +111,7 @@ class FormController extends Controller {
     	$model_show['ip_last_modify']=get_client_ip();
     	$model_show['old_category']=$cate;
     	$this->model=$model_show;
+    	$this->title='修改模型'.$model_show['title'].'的信息';
     	$this->display('modify');
     }
     public function save(){

@@ -41,7 +41,7 @@ Class BcsModel {
 	 * ************************bucket********************************** *
 	 * */
 	
-	function create_bucket($bucket=null) {
+	function create_bucket($bucket=null) {//ok
 		//	$acl = BaiduBCS::BCS_SDK_ACL_TYPE_PUBLIC_CONTROL;
 		//	$acl = BaiduBCS::BCS_SDK_ACL_TYPE_PUBLIC_READ;
 		//	$acl = BaiduBCS::BCS_SDK_ACL_TYPE_PUBLIC_READ_WRITE;
@@ -51,30 +51,29 @@ Class BcsModel {
 		return $response->isOK ();
 	}
 	
-	function delete_bucket($bucket=null) {
+	function delete_bucket($bucket=null) {//ok
 		$response = $this->baidu_bcs->delete_bucket ( $bucket );
 		return $response->isOK ();
 	}
 	
-	function list_object($baidu_bcs) {
+	function list_object($bucket=null,$prefix='/') {//ok
 		global $bucket, $fileWriteTo;
 		$opt = array (
 				'start' => 0,
 				'limit' => 5,
-				'prefix' => '/' );
-		$response = $baidu_bcs->list_object ( $bucket, $opt );
-		printResponse ( $response );
+				'prefix' => $prefix );
+		$response = $this->baidu_bcs->list_object ( $bucket, $opt );
+		return $response->isOK();
 	}
 	
-	function list_bucket($baidu_bcs) {
-		$response = $baidu_bcs->list_bucket ();
-		printResponse ( $response );
+	function list_bucket() {//ok
+		$response = $this->baidu_bcs->list_bucket ();
+		return $response->isOK();
 	}
 	
-	function get_bucket_acl($baidu_bcs) {
-		global $bucket;
-		$response = $baidu_bcs->get_bucket_acl ( $bucket );
-		printResponse ( $response );
+	function get_bucket_acl($bucket) {//ok
+		$response = $this->baidu_bcs->get_bucket_acl ( $bucket );
+		return $response->isOK();
 	}
 	
 	function set_bucket_acl_by_acl_type($baidu_bcs) {

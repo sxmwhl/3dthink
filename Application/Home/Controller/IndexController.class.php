@@ -40,7 +40,7 @@ class IndexController extends Controller {
     	$this->category_path=$category_path;
     	$root_category=$Category->get_child_categories(0);
     	$this->categories=$root_category;
-    	$this->title=$data['title'];
+    	$this->title=$data['title'].'模型';
     	//echo $Moxing->getLastSql();
     	$this->display('model');
     }
