@@ -12,6 +12,8 @@ class IndexController extends Controller {
     	$Category=D('Category');
     	$list3=$Category->get_child_categories(0);
     	$this->categories=$list3;
+    	$this->title='首页';
+    	$this->keywords='模型分享,3d模型,web3d,x3d模型,三维网站,三维模型';
     	$this->display();
     }
     public function model(){
@@ -38,6 +40,7 @@ class IndexController extends Controller {
     	$this->category_path=$category_path;
     	$root_category=$Category->get_child_categories(0);
     	$this->categories=$root_category;
+    	$this->title=$data['title'];
     	//echo $Moxing->getLastSql();
     	$this->display('model');
     }
@@ -54,6 +57,7 @@ class IndexController extends Controller {
     	$data['hl_on']=$data['hl_on']==0?"false":"true";
     	$data['dl_on']=$data['dl_on']==0?"false":"true";
     	$this->assign('model',$data);
+    	$this->title=$data['title'];
     	//echo $Moxing->getLastSql();
     	$this->display('modelIn');
     }
@@ -67,6 +71,7 @@ class IndexController extends Controller {
     	$list = $Moxing->where($map)->select();
     	$this->assign('model',$list);
     	$this->assign('keywords',$keywords);
+    	$this->title=$keywords.' 搜索结果';
     	//echo $Moxing->getLastSql();
     	$this->display('search');
     }

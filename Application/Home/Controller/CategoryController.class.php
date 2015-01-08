@@ -6,6 +6,7 @@ class CategoryController extends Controller {
     	$cate_id=I('cate');
     	if(empty($cate_id))$cate_id=0;
     	$Category=D('Category');
+    	$cate_name=$Category->get_one_category($cate_id);
     	$category_path=$Category->get_category_path($cate_id);
     	$this->category_path=$category_path;
     	//echo $Category->getLastSql();
@@ -14,7 +15,8 @@ class CategoryController extends Controller {
     	$Moxing=D('Moxing');
     	$moxings = $Moxing->get_category_moxings($cate_id);
     	$this->moxings=$moxings;
-    	
+    	$title=empty($cate_name['cate_name'])?'根':$cate_name['cate_name'];
+    	$this->title=$title.'分类下模型及子分类';
     	$this->display();
     }
     public function add(){
@@ -24,6 +26,7 @@ class CategoryController extends Controller {
     	$category_option = $Category->get_category_option(0, $cate_id, 0);
     	$this->category_option=$category_option;    	
     	//echo $Moxing->getLastSql();
+    	$this->title='添加分类';
     	$this->display('add');
     }
     public function del(){
@@ -51,8 +54,10 @@ class CategoryController extends Controller {
     	$Category=D('Category');
     	$root_id=$Category->where('cate_id='.$cate_id)->field('root_id')->find();    	
     	$this->category_option=$Category->get_category_option(0, $root_id['root_id'], 0);
-    	$this->onecategory=$Category->get_one_category($cate_id);    	
+    	$onecategory=$Category->get_one_category($cate_id);
+    	$this->onecategory=$onecategory;    	
     	//echo $Category->getLastSql();
+    	$this->title=$onecategory['cate_name'].'分类编辑';
     	$this->display('edit');
     }
     public function lists(){
@@ -61,6 +66,9 @@ class CategoryController extends Controller {
     	$Category=D('Category');
     	$categories = $Category->get_child_categories($cate_id);
     	$this->categories=$categories;
+    	$onecategory=$Category->get_one_category($cate_id);
+    	$onecategory['cate_name']=empty($onecategory['cate_name'])?'根':$onecategory['cate_name'];
+    	$this->title=$onecategory['cate_name'].'分类列表';
     	//echo $Moxing->getLastSql();
     	$this->display('lists');
     }
