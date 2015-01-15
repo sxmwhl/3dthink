@@ -77,6 +77,14 @@ body{
 	position: relative;
 	overflow: hidden;
 }
+.carousel .item2 {
+	margin-right: 50px;
+	margin-left: 100px;
+	float: left;
+	margin-bottom: 40px;
+	position: relative;
+	overflow: hidden;
+}
 .carousel .item:nth-child(3), .carousel .item:nth-child(6), .carousel .item:nth-child(9), .carousel .item:nth-child(12) , .carousel .item:nth-child(15)  {
 	margin-right: 0px;
 }
@@ -97,6 +105,37 @@ body{
 	-ms-transition: all ease 0.5s;
 	-o-transition: all ease 0.5s;
 	transition: all ease 0.5s;
+}
+.carousel .item2 img {
+	padding: 20px;
+	background-image: url(../images/debut_light.png);
+	float: left;
+	width: 280px;
+	height: 200px;
+	display: block;
+	position: relative;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	opacity: 1;
+}
+.carousel .item2 x3d {
+	padding: 20px;
+	background-image: url(../images/debut_light.png);
+	float: left;
+	width: 280px;
+	height: 200px;
+	display: block;
+	position: relative;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	opacity: 1;
+}
+.carousel .item2 h2 {
+	margin-top:5px;
+	font-size:16px;
+	text-align: center;
 }
 .carousel .item .item-background {
 	float: left;

@@ -145,4 +145,19 @@ class FormController extends Controller {
     	header("Location:".__MODULE__."/index/model?f=".$inputs['folder']);
     	//$this->display('public:jump');
     }
+    public function preview(){
+    	$md5=I('f');
+    	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
+    	{
+    		$this->display("Public:404");
+    		exit();
+    	}
+    	$Moxing=M('Moxing','think_');
+    	$where="folder='".$md5."'";
+    	$model_show=$Moxing->where($where)->find();
+    	$model_show['hl_on']=$model_show['hl_on']==0?"false":"true";
+    	$model_show['dl_on']=$model_show['dl_on']==0?"false":"true";
+    	$this->model=$model_show;
+    	$this->display('preview');
+    }
 }

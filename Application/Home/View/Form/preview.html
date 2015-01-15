@@ -1,0 +1,43 @@
+<include file="Public:header" />
+<script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
+<link rel='stylesheet' type='text/css' href='__BCS_PUBLIC__/css/x3dom.css' />
+</head>
+<body>
+<input type='radio' name='model' id='modelcategory'/>
+<input type='radio' name='model' id='hide'/>
+<div id='content'>
+  <label id='slider' class='modelcategory' for='modelcategory'>更多模型</label>
+  <label id='slider' class='hide' for='hide'>收起侧栏</label>
+</div>
+<aside class="modelcategory">
+  <div class="InfoContainer">
+<include file="Public:moreModel" />
+</aside>
+<div class="wrap">
+  <include file="Public:logo" />
+  <div class="carousel">
+    <div class='item2'>
+    <img src='__BCS_UPLOAD__/{$model.folder}/preview.{$model.preview_ext}' alt='{$model.title}' />
+    <h2>模型预览图</h2>
+    </div>
+    <div class='item2'>
+    	<x3d> 
+    <scene dopickpass="true" pickmode="idBuf" bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
+      <navigationInfo id="head" headlight='{$model.hl_on}' type='"EXAMINE"'></navigationInfo>
+      <directionalLight id="directional" on="{$model.dl_on}"></directionalLight>
+      <Viewpoint id='viewpoint' description='Default Viewpoint' position='{$model.vp_position}' orientation='{$model.vp_orientation}'></Viewpoint>
+        <background topurl="" righturl="" lefturl="" fronturl="" bottomurl="" backurl="__BCS_PUBLIC__/images/low_contrast_linen.png" skyangle="" groundangle="" groundcolor="" transparency="1.0" skycolor="0 0 0">
+      </background>
+      <Environment id="gamma" gammaCorrectionDefault="linear"></Environment>
+       <Inline nameSpaceName="s" mapDEFToID="true" url="__BCS_UPLOAD__/{$model.folder}/model.x3d"> </Inline>
+</scene> 
+</x3d>
+<h2>实际模型（点击模型后，按下A键）</h2>
+    </div>  
+    <div class="clear"></div>
+  </div>
+</div>
+
+<include file="Public:footer" />
+</body>
+</html>
