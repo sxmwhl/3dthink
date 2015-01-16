@@ -162,17 +162,43 @@ class FormController extends Controller {
     	$this->display('preview');
     }
     public function change(){
+    	$inputs=I('post.');
     	$upload = new \Think\Upload();// 实例化上传类
     	$upload->maxSize = 3145728 ;// 设置附件上传大小
     	$upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
     	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
     	$upload->autoSub  = false;
-    	$upload->savePath = 'upload/'; // 设置附件上传（子）目录
+    	$upload->savePath = 'upload/'.$inputs['folder'].'/'; // 设置附件上传（子）目录
     	// 上传文件
     	$info = $upload->upload();
     	if(!$info) {// 上传错误提示错误信息
     		$this->error($upload->getError());
     	}else{// 上传成功 获取上传文件信息
+    		echo '模型缩略图上传成功！<br/>';
+    		$preview_path=__ROOT__.'Public/upload/'.$inputs['folder'];
+    		foreach ($info as $file){
+    		if ($file['key']!='preview')exit('非法输入文件！');
+    		$old_preview=$preview_path.'/preview.'.$inputs['preview_ext'];
+    		$new_preview_1=$preview_path.'/'.$file['savename'];
+    		$new_preview_2=$preview_path.'/preview.'.$file['ext'];
+    		$result = @unlink ($old_preview);
+    		if(!$result)exit("无法删除原模型缩略图，请重试。");
+    		echo '原模型缩略图删除成功！<br/>';
+    		$rename_ok=rename($new_preview_1, $new_preview_2);
+    		if(!$rename_ok)exit("重命名失败。");
+    		$Moxing=D("Moxing");
+    		$data['preview_ext']=$file['ext'];
+    		if (!$Moxing->create($data,2)){ // 创建数据对象
+    			// 如果创建失败 表示验证没有通过 输出错误提示信息
+    			exit($Moxing->getError());
+    		}else{
+    			$where="folder='".$inputs['folder']."'";
+    			$Moxing->where($where)->save();
+    			echo '数据更新成功！<br/>';
+    		}
+    		}
     	}
+    	echo '3秒后跳转至模型信息修改界面...<br/>';
+    	header("refresh:3;url=modify?f=".$inputs['folder']);
     }
 }

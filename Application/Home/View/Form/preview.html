@@ -21,7 +21,7 @@
 				<img
 					src='__BCS_UPLOAD__/{$model.folder}/preview.{$model.preview_ext}'
 					alt='{$model.title}' />
-				<h2>模型预览图</h2>
+				<h2>模型缩略图</h2>
 			</div>
 			<div class='item2'>
 				<x3d> <scene dopickpass="true" pickmode="idBuf"
@@ -47,6 +47,7 @@
 				<h1>更换模型缩略图</h1>
 				<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
 				<input type="hidden" name="folder" value="{$model.folder}"/>
+				<input type="hidden" name="preview_ext" value="{$model.preview_ext}"/>
 				<input type='text' name='textfield' id='textfield2'
 				class='formclass-input' placeholder="必选" /> 
 				<input name="preview" type="file" value="浏览"
