@@ -56,41 +56,9 @@
 					display : '模型分类未选择',
 					rules : 'greater_than[-1]'
 				}, {
-					name : 'creator',
-					display : '创作者',
-					rules : 'max_length[30]|is_key'
-				}, {
-					name : 'email',
-					display : '邮箱地址',
-					rules : 'valid_email'
-				}, {
-					name : 'vp_x',
-					display : '位置x',
-					rules : 'decimal|max_length[6]'	
-				}, {
-					name : 'vp_y',
-					display : '位置y',
-					rules : 'max_length[6]'
-				}, {
-					name : 'vp_z',
-					display : '位置z',
-					rules : 'max_length[6]'
-				}, {
-					name : 'vp_d_x',
-					display : '方向x',
-					rules : 'max_length[6]'
-				}, {
-					name : 'vp_d_y',
-					display : '方向y',
-					rules : 'max_length[6]'
-				}, {
-					name : 'vp_d_z',
-					display : '方向z',
-					rules : 'max_length[6]'
-				}, {
-					name : 'vp_d_a',
-					display : '方向a',
-					rules : 'max_length[6]'
+					name : 'cate_order',
+					display : '分类排序',
+					rules : 'greater_than[-1]|is_natural'
 				} ],
 				function(errors, evt) {
 					if (errors.length > 0) {

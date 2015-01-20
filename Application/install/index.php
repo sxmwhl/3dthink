@@ -1,27 +1,14 @@
 <?php
 header("Content-Type: text/html;charset=utf-8"); 
 $con= new mysqli("localhost","root","");
-// Create database
-if ($con->query("drop database if exists `3dshare`")){
-	echo "database delete";
-}else {
-	echo "delete error";
-}
-if ($con->query("CREATE DATABASE if not exists `3dshare` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"))
-  {
-  echo "Database created";
-  }
-else
-  {
-  echo "Error creating database: " . mysql_error();
-  }
-// Create table in 3dshare database
 $con->select_db("3dshare");
 $sqls = "
-CREATE TABLE think_moxing 
+DROP TABLE IF EXISTS `think_moxing`;
+CREATE TABLE think_moxing
 (
 id int unsigned NOT NULL AUTO_INCREMENT, 
 PRIMARY KEY(id),
+uid int unsigned NOT NULL DEFAULT '0',
 title varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci ,
 description varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci ,
 preview_ext varchar(4),
@@ -39,6 +26,7 @@ vp_orientation varchar(40),
 ip_upload varchar(15),
 ip_last_modify varchar(15)
 );
+DROP TABLE IF EXISTS `think_category`;
 CREATE TABLE think_category 
 (
   `cate_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -54,7 +42,24 @@ CREATE TABLE think_category
   `cate_postcount` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`cate_id`),
   KEY `root_id` (`root_id`)
-);";
+);
+DROP TABLE IF EXISTS `think_member`;
+CREATE TABLE `think_member` (
+  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `nickname` char(16) NOT NULL DEFAULT '' COMMENT '昵称',
+  `sex` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '性别',
+  `birthday` date NOT NULL DEFAULT '0000-00-00' COMMENT '生日',
+  `qq` char(10) NOT NULL DEFAULT '' COMMENT 'qq号',
+  `score` mediumint(8) NOT NULL DEFAULT '0' COMMENT '用户积分',
+  `login` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录次数',
+  `reg_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '注册IP',
+  `reg_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '注册时间',
+  `last_login_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '最后登录IP',
+  `last_login_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后登录时间',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '会员状态',
+  PRIMARY KEY (`uid`),
+  KEY `status` (`status`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='会员表';";
 if ($con->multi_query($sqls))
 {
 	echo "数据库安装完毕！！！";
