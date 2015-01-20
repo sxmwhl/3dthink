@@ -161,12 +161,5 @@ class FormController extends Controller {
     	//echo $Moxing->getLastSql(); //最后运行sql语句
     	header("Location:".__MODULE__."/index/model?f=".$inputs['folder']);
     	//$this->display('public:jump');
-    }
-    public function createbucket(){
-    	$Bcs=D('Bcs');
-    	//$Bcs->create_bucket(x3dfiless);
-    	$result=$Bcs->copy_object('x3dfile','54acbf29946d8.x3d','x3dfile','model.x3d');
-    	print $result;
-    }
-    
+    }    
 }

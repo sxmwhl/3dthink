@@ -180,9 +180,11 @@ class FormController extends Controller {
     		if ($file['key']!='preview')exit('非法输入文件！');
     		$old_preview=$preview_path.'/preview.'.$inputs['preview_ext'];
     		$new_preview_1=$preview_path.'/'.$file['savename'];
-    		$new_preview_2=$preview_path.'/preview.'.$file['ext'];
-    		$result = @unlink ($old_preview);
-    		if(!$result)exit("无法删除原模型缩略图，请重试。");
+    		$new_preview_2=$preview_path.'/preview.'.$file['ext'];		
+    		if(file_exists($old_preview)){
+    			$result = @unlink ($old_preview);
+    			if(!$result)exit("无法删除原模型缩略图，请重试。");
+    		}  		
     		echo '原模型缩略图删除成功！<br/>';
     		$rename_ok=rename($new_preview_1, $new_preview_2);
     		if(!$rename_ok)exit("重命名失败。");

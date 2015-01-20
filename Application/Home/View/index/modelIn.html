@@ -12,29 +12,10 @@
       <Viewpoint id='viewpoint' description='Default Viewpoint' position='{$model.vp_position}' orientation='{$model.vp_orientation}'></Viewpoint>
         <background topurl="" righturl="" lefturl="" fronturl="" bottomurl="" backurl="" skyangle="" groundangle="" groundcolor="" transparency="1.0" skycolor="0 0 0">
       </background>
-      <Environment id="gamma" gammaCorrectionDefault="linear"></Environment>
-      
-      <Billboard axisOfRotation='0,0,0' bboxCenter='0,0,0' bboxSize='-1,-1,-1' render='true'>
-      <transform translation='3 5 0'> 
-      <shape>
-      <appearance> 
-        <material diffuseColor='0 0 1'></material> 
-        </appearance> 
-        <Text ccw='true' length='10' lit='true' maxExtent='0.0' solid='true' string='A键-模型适应窗口' ></Text>
-      </shape>
-      </transform>
-      </Billboard>
-      
+      <Environment id="gamma" gammaCorrectionDefault="linear"></Environment>      
         <Inline id="inline" nameSpaceName="s" mapDEFToID="true" url="__BCS_UPLOAD__/{$model.folder}/model.x3d"> </Inline>
 </scene> 
-</x3d>
-<script type="text/javascript" charset="utf-8">
-		x3dom.runtime.ready = function() {
-			var e = document.getElementById("model"); 
-			setTimeout(function() { e.runtime.showAll(); }, 5000);		
-        };		
-
-</script>	
+</x3d>	
 </body>
 </html>
 
