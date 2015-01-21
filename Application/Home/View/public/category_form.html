@@ -40,7 +40,7 @@
 		var validator = new FormValidator(
 				'category_form',
 				[ {
-					name : 'cate_name"',
+					name : 'cate_name',
 					display : '分类名称',
 					rules : 'required|max_length[50]|is_key'
 				}, {
@@ -54,7 +54,7 @@
 				}, {
 					name : 'root_id',
 					display : '模型分类未选择',
-					rules : 'greater_than[-1]'
+					rules : 'greater_than[-1]|required'
 				}, {
 					name : 'cate_order',
 					display : '分类排序',

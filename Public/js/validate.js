@@ -14,7 +14,7 @@
 
     var defaults = {
         messages: {
-            required: '%s 是必须的。',
+            required: '%s 是必须填写的。',
             matches: '%s 与  %s 不匹配。',
             "default": '%s 还是默认值，请修改。',
             valid_email: '%s 格式不正确。',
