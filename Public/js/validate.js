@@ -26,7 +26,7 @@
             less_than: '%s 必须小于  %s。',
             alpha: '%s 必须是英文字母。',
             alpha_numeric: '%s 只能为数字和英文字母。',
-            alpha_dash: '%s 只能为数字、英文字母和下划线。',
+            alpha_dash: '%s 只能为数字、英文字母和_。',
             numeric: '%s 只能为数字。',
             integer: '%s 只能为整数。',
             decimal: '%s 数值不正确。',

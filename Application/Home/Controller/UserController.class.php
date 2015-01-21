@@ -23,12 +23,15 @@ class UserController extends Controller {
 
 	/* 注册页面 */
 	public function register($username = '', $password = '', $repassword = '', $email = '', $verify = ''){
-        if(!C('USER_ALLOW_REGISTER')){
+		
+		if(!C('USER_ALLOW_REGISTER')){
             $this->error('注册已关闭');
         }
+       
 		if(IS_POST){ //注册用户
+			
 			/* 检测验证码 */
-			if(!check_verify($verify)){
+			if(!$this->check_verify($verify)){
 				$this->error('验证码输入错误！');
 			}
 
@@ -36,12 +39,14 @@ class UserController extends Controller {
 			if($password != $repassword){
 				$this->error('密码和重复密码不一致！');
 			}			
-
+			exit ('注册成功');
 			/* 调用注册接口注册用户 */
             $User = new UserApi;
 			$uid = $User->register($username, $password, $email);
+			
 			if(0 < $uid){ //注册成功
 				//TODO: 发送验证邮件
+				
 				$this->success('注册成功！',U('login'));
 			} else { //注册失败，显示错误信息
 				$this->error($this->showRegError($uid));
