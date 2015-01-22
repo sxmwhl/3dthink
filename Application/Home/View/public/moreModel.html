@@ -1,4 +1,11 @@
 <div class="InfoContainer">
+<div class="login txt-lt">
+<if condition="is_login()">
+欢迎：{:get_username()} | <a href="{:U('User/logout')}">退出</a>
+<else/>
+<a href='__ROOT__/index.php/home/user/login'>登陆</a> | <a href='__ROOT__/index.php/home/user/register'>注册</a>
+</if>
+</div>
 	<div id="Name" class="InfoBlack">模型搜索</div>
 	<form id="form" name="search" action="__MODULE__/index/search" method="post"
 		class="shortform">

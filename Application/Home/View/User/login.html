@@ -52,35 +52,39 @@
 				function(errors, evt) {
 					if (errors.length > 0) {
 						var errorString = '';
-
 						for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
 							errorString += errors[i].message + '<br />';
 						}
 						$("#error").html(errorString);
 						if (evt && evt.preventDefault) {
-							evt.preventDefault();
-						} else if (event) {
-							event.returnValue = false;
-						}
+					        evt.preventDefault();				        
+					    } else if (event) {
+					        event.returnValue = false;
+					    }
 					} else {
 						var self = $("form");
-						$.post(self.attr("action"), self.serialize(), success,
-								"json");
+						alert (self.serialize());
+						$.post(self.attr("action"),self.serialize(),success,"json");
 						function success(data) {
 							if (data.status) {
+								
 								window.location.href = data.url;
 							} else {
 								self.find("#error").text(data.info);
 								//刷新验证码
 								$(".verify").click();
 								if (evt && evt.preventDefault) {
-									evt.preventDefault();
-								} else if (event) {
-									event.returnValue = false;
-								}
+							        evt.preventDefault();				        
+							    } else if (event) {
+							        event.returnValue = false;
+							    }
 							}
 						}
-						
+						if (evt && evt.preventDefault) {
+					        evt.preventDefault();				        
+					    } else if (event) {
+					        event.returnValue = false;
+					    }						
 					}
 
 				});

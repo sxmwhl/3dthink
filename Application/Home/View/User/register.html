@@ -27,6 +27,7 @@
 	.ajaxStop(function(){
 		$("input:submit").removeClass("log-in").attr("disabled", false);
 	});
+
 	var validator = new FormValidator(
 			'upload_form',
 			[ {
@@ -65,24 +66,28 @@
 				    }
 				}else{
 				var self = $("form");
-	    		$.post(self.attr("action"), self.serialize(), success, "json");	    		
+	    		$.post(self.attr("action"), self.serialize(), success, "json");
 	    		function success(data){
 	    			if(data.status){
 	    				window.location.href = data.url;
 	    			} else {
 	    				self.find("#error").text(data.info);
 	    				//刷新验证码
-	    				$(".verify").click();
+	    				$(".verify").click();	   
 	    				if (evt && evt.preventDefault) {
 	    			        evt.preventDefault();				        
 	    			    } else if (event) {
 	    			        event.returnValue = false;
 	    			    }
 	    			}
-	    		}
-	    		
+	    		}	    		
+	    		if (evt && evt.preventDefault) {
+			        evt.preventDefault();				        
+			    } else if (event) {
+			        event.returnValue = false;
+			    }
 			}				
-			});			
+			});	
 	</script>
 </body>
 </html>

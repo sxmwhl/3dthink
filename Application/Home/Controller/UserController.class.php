@@ -14,7 +14,7 @@ use Think\Controller;
  * 用户控制器
  * 包括用户中心，用户登录及注册
  */
-class UserController extends Controller {
+class UserController extends HomeController {
 
 	/* 用户中心首页 */
 	public function index(){
@@ -39,7 +39,6 @@ class UserController extends Controller {
 			if($password != $repassword){
 				$this->error('密码和重复密码不一致！');
 			}			
-			exit ('注册成功');
 			/* 调用注册接口注册用户 */
             $User = new UserApi;
 			$uid = $User->register($username, $password, $email);
@@ -59,22 +58,27 @@ class UserController extends Controller {
 
 	/* 登录页面 */
 	public function login($username = '', $password = '', $verify = ''){
+		
 		if(IS_POST){ //登录验证
+			
 			/* 检测验证码 */
 			if(!$this->check_verify($verify)){
 				$this->error('验证码输入错误！');
 			}
-
+			
 			/* 调用UC登录接口登录 */
 			$user = new UserApi;
 			$uid = $user->login($username, $password);
+			
 			if(0 < $uid){ //UC登录成功
 				/* 登录用户 */
-				$Member = D('Member');
-				if($Member->login($uid)){ //登录用户
+				$Mb = D('Member');
+				$ok=$Mb->login($uid);				
+				if($ok){ //登录用户
 					//TODO:跳转到登录前页面
 					$this->success('登录成功！',U('Home/Index/index'));
 				} else {
+					$this->error("member 登陆出错");
 					$this->error($Member->getError());
 				}
 
@@ -110,6 +114,7 @@ class UserController extends Controller {
 	}
 	/*验证验证码*/
 	function check_verify($code, $id = 1){
+		ob_clean();
 		$verify = new \Think\Verify();
 		return $verify->check($code, $id);
 	}

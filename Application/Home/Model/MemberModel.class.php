@@ -3,6 +3,7 @@ namespace Home\Model;
 use Think\Model;
 use User\Api\UserApi;
 class MemberModel extends Model {
+	public $ok=0;
 	protected $tablePrefix = 'think_';
 	protected $_auto = array(
 			array('login', 0, self::MODEL_INSERT),
@@ -39,8 +40,8 @@ class MemberModel extends Model {
 		/* 登录用户 */
 		$this->autoLogin($user);
 	
-		//记录行为
-		action_log('user_login', 'member', $uid, $uid);
+		//记录行为TODO:
+		//action_log('user_login', 'member', $uid, $uid);
 	
 		return true;
 	}
