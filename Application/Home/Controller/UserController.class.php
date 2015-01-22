@@ -23,7 +23,7 @@ class UserController extends HomeController {
 
 	/* 注册页面 */
 	public function register($username = '', $password = '', $repassword = '', $email = '', $verify = ''){
-		
+		$this->title="新用户注册";
 		if(!C('USER_ALLOW_REGISTER')){
             $this->error('注册已关闭');
         }
@@ -58,9 +58,8 @@ class UserController extends HomeController {
 
 	/* 登录页面 */
 	public function login($username = '', $password = '', $verify = ''){
-		
-		if(IS_POST){ //登录验证
-			
+		$this->title="登陆";
+		if(IS_POST){ //登录验证			
 			/* 检测验证码 */
 			if(!$this->check_verify($verify)){
 				$this->error('验证码输入错误！');
@@ -147,6 +146,7 @@ class UserController extends HomeController {
      * @author huajie <banhuajie@163.com>
      */
     public function profile(){
+    	$this->title="用户信息";
 		if ( !is_login() ) {
 			$this->error( '您还没有登陆',U('User/login') );
 		}
