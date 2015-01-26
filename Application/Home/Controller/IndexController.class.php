@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
-    	$Moxing=M('Moxing','think_');
+    	$Moxing=M('Moxing');
     	$list1 = $Moxing->where('sign=0')->order('views desc')->limit(6)->select();
     	$list2 = $Moxing->where('sign=0')->order('time_update desc')->limit(6)->select();
     	$this->models1=$list1;
@@ -25,7 +25,7 @@ class IndexController extends Controller {
     		exit();
     	}
     	$where="folder='".$md5."'";
-    	$Moxing=M('Moxing','think_');
+    	$Moxing=M('Moxing');
     	$data=$Moxing->where($where)->find();
     	$allow_sep='180';
     	if(!isset($_SESSION['post_sep']))$_SESSION['post_sep']=time();
@@ -45,7 +45,7 @@ class IndexController extends Controller {
     	$this->display('model');
     }
     public function modelIn(){
-    	$Moxing=M('Moxing','think_');
+    	$Moxing=M('Moxing');
     	$md5=I('f');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
@@ -65,7 +65,7 @@ class IndexController extends Controller {
     	$Category=D('Category');
     	$list3=$Category->get_child_categories(0);
     	$this->categories=$list3;
-    	$Moxing=M('Moxing','think_');
+    	$Moxing=M('Moxing');
     	$keywords=I('keywords');
     	$map['_string'] = "concat (title,description) like '%".$keywords."%'";
     	$list = $Moxing->where($map)->select();

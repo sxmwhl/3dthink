@@ -302,22 +302,12 @@ aside{
 	-webkit-transition: 0.2s ease-out;
 	z-index: 300;
 }
-aside.modelinfo {
-	z-index: 300;
-}
-aside.modelcategory {
-	z-index: 301;
-}
-
-
 body>aside>h2 {
 	color: #FFF;
 	text-align: center;
 	font-weight: normal;
 	padding: 10px;
 }
-
-
 *:focus {
 	outline: none;
 }

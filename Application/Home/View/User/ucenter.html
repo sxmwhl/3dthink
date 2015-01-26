@@ -1,0 +1,57 @@
+<include file="Public:header" />
+<script type='text/javascript' src='__BCS_PUBLIC__/css/x3dom.js'></script>
+<link rel='stylesheet' type='text/css' href='__BCS_PUBLIC__/css/x3dom.css' />
+</head>
+<body>
+	<input type='radio' name='model' id='modelinfo' />
+	<input type='radio' name='model' id='modelcategory' />
+	<input type='radio' name='model' id='hide' />
+<div id='content'>
+		<a id='slider' class='home' href='__ROOT__/'>返回首页</a> <label
+			id='slider' class='modelinfo' for='modelinfo'>会员中心</label> <label
+			id='slider' class='modelcategory' for='modelcategory'>更多模型</label> <label
+			id='slider' class='hide' for='hide'>收起侧栏</label>
+	</div>
+<aside class="modelcategory">
+<include file="Public:moreModel" />
+</aside>
+<aside class="modelinfo">
+	<div class="InfoContainer">
+		<div id="Name" class="InfoBlack">{:get_username()}</div>
+		<div class="InfoOrange">
+			<div class="InfoDesc">分享的模型</div>
+			<div id="Place" class="InfoValue">{$model['description']}</div>
+		</div>
+		<div class="InfoOrange">
+			<div class="InfoDesc">创作的模型</div>
+			<div id="Place" class="InfoValue">
+				<a href='__ROOT__/' class='title' title='分类名称'>首页</a>
+			</div>
+		</div>
+		<div class="InfoOrange">
+			<div class="InfoDesc">会员信息</div>
+			<div id="Date" class="InfoValue">
+			
+			</div>
+		</div>		
+	</div>
+	</aside>
+<div class="wrap">
+  <include file="Public:logo" />
+  <div class="carousel">
+    <volist name="models" id="vo">
+    <div class='item'>
+    <img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
+    <div class='item-background'></div>
+    <a href='__MODULE__/index/model?f={$vo.folder}' class='title' title='模型名称'>模型名称：{$vo.title}</a>
+    <a href='__MODULE__/index/model?f={$vo.folder}' class='creator' title='作者'>创作者：{$vo.creator}</a>
+    <a href='__MODULE__/index/model?f={$vo.folder}' class='time' title='浏览次数'>浏览次数：{$vo.views} 次</a>
+    </div>
+    </volist>
+    <div class="clear"></div>
+  </div>
+</div>
+
+<include file="Public:footer" />
+</body>
+</html>
