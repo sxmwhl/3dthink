@@ -26,6 +26,7 @@ vp_orientation varchar(40),
 ip_upload varchar(15),
 ip_last_modify varchar(15)
 );
+		
 DROP TABLE IF EXISTS `think_category`;
 CREATE TABLE think_category 
 (

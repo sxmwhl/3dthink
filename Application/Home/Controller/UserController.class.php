@@ -157,5 +157,16 @@ class UserController extends HomeController {
         $this->display();
 
     }
-
+    public function diy(){
+    	$this->title="模型组建";
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}
+    	$uid = is_login();
+    	$Moxing=M('Moxing');
+    	$list=$Moxing->where('uid='.$uid)->select();
+    	$this->models=$list;
+    	$this->display();
+    
+    }
 }

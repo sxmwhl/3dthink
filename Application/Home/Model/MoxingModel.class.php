@@ -20,7 +20,6 @@ class MoxingModel extends Model {
 			array('title','未命名',1),
 			array('description','尚无描述',1),
 			array('category','0',1),
-			array('creator','佚名',1),
 			array('sign','0',1),
 			array('views','1',1),			
 			array('hl_on','1',1),

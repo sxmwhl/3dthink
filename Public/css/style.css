@@ -495,7 +495,6 @@ input.formclass-input, input.formclass-file, textarea.formclass-input, select.fo
   font-weight: bold;
   color: white;
   text-align: center;
-  text-shadow: 0 -1px rgba(0, 0, 0, 0.4);
 }
 .formclass > h2 {
   margin-bottom: 10px;

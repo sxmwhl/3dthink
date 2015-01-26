@@ -67,6 +67,13 @@ class FormController extends Controller {
     		$inputs['folder']=$model_md5_empty;
     		$inputs['preview_ext']=$preview_ext_empty;
     		$inputs['time_update']=date('Y-m-d H:i:s',time());
+    		if(is_login()){
+    			$inputs['uid'] = is_login();
+    			$inputs['creator']=get_username($inputs['uid']);
+    		}  else {
+    			$inputs['uid'] = 1;
+    			$inputs['creator']='佚名';
+    		}  		
     		$inputs['ip_upload']=get_client_ip();
     		if (!$Moxing->create($inputs)){ // 创建数据对象
     			// 如果创建失败 表示验证没有通过 输出错误提示信息
