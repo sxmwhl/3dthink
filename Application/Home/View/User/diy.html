@@ -53,7 +53,8 @@
 	<div class="InfoContainer">
 		<form id="form" name="modify_form" action="__URL__/save" method="post"
 			onkeydown="if(event.keyCode==13)return false;" class="shortform">
-			<h1>基本信息</h1>
+			<h1>diy模型</h1>
+			<button>插入模型</button>
 			<h2>模型名称*：</h2>
 			<input type="text" name="title" id="title" value="{$model.title}"
 				class="formclass-input" />
@@ -117,19 +118,32 @@
 
 	<x3d id="model"> <scene dopickpass="true" pickmode="idBuf"
 		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
-	<Viewpoint id='viewpoint' description='Default Viewpoint'
-		position='{$model.vp_position}' orientation='{$model.vp_orientation}'></Viewpoint>
+	<Viewpoint bind='false' centerOfRotation='0,0,0' description='""' fieldOfView='0.785398' isActive='false' metadata='X3DMetadataObject' orientation='0,0,0,1' position='0,0,10' zFar='-1' zFar='-1' zNear='-1' zNear='-1' ></Viewpoint>
 	<navigationInfo id="head" headlight='{$model.hl_on}' type='"EXAMINE"'></navigationInfo>
 	<directionalLight id="directional" direction='0 0 -1'
 		on='{$model.dl_on}' intensity='1' shadowIntensity='0.0' color='0 0 0'></directionalLight>
-	<background topurl="" righturl="" lefturl="" fronturl="" bottomurl=""
-		backurl="" skyangle="" groundangle="" groundcolor=""
-		transparency="1.0" skycolor="0 0 0"> </background> <Environment
-		id="gamma" gammaCorrectionDefault="linear"></Environment> 
-		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='0.001,0.001,0.001' scaleOrientation='0,0,1,0' translation='0,0,0' >
-		<Inline
-		nameSpaceName="s" mapDEFToID="true"
-		url="__BCS_UPLOAD__/8ae828b10682241d64dd002f1bfeef3f/model.x3d"> </Inline> </Transform>
+	<background topurl="__BCS_PUBLIC__/images/background/horizon_2_top.jpg" righturl="__BCS_PUBLIC__/images/background/horizon_2_right.jpg" lefturl="__BCS_PUBLIC__/images/background/horizon_2_left.jpg" fronturl="__BCS_PUBLIC__/images/background/horizon_2_front.jpg" bottomurl="__BCS_PUBLIC__/images/background/horizon_2_bottom.jpg"
+		backurl="__BCS_PUBLIC__/images/background/horizon_2_back.jpg" skyangle="" groundangle="" groundcolor=""
+		transparency="1.0" skycolor="0 0 0"> </background> 
+		<Environment id="gamma" gammaCorrectionDefault="linear"></Environment> 
+		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0' >
+		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
+		</Transform>
+		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='2,0,0' >
+		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
+		</Transform>
+		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='4,0,0' >
+		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
+		</Transform>
+		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,2,0' >
+		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
+		</Transform>
+		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,4,0' >
+		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
+		</Transform>
+		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,0,2' >
+		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/e75997bf6ada6a4e9c23619a71cda196/model.x3d"> </Inline>
+		</Transform>
 		</scene> </x3d>
 
 	<script>
