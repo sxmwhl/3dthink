@@ -6,13 +6,10 @@
 <a href='__ROOT__/index.php/home/user/login'>登陆</a> | <a href='__ROOT__/index.php/home/user/register'>注册</a>
 </if>
 </div>
-	<div id="Name" class="InfoBlack">模型搜索</div>
-	<form id="form" name="search" action="__MODULE__/index/search" method="post"
-		class="shortform">
-		<input type='text' name='keywords' class='formclass-input'
-			placeholder="请输入模型名称" /> 
-			<input type="submit" name="baocun"
-			id="baocun" value="模 型 搜  索" class="formclass-submit shortsubmit" />
+	<form id="searchform" action="__MODULE__/index/search" method="post" role="form" class="form-inline">
+	<label class="sr-only" for="keywords">模型搜索</label>
+		<input type='text' id="keywords" name='keywords' class='form-control input-sm' placeholder="请输入模型名称" />
+		<button type="submit" class="btn btn-default btn-sm">搜 索</button>
 	</form>
 	<h2 id="error"></h2>
 	<div id="Name" class="InfoBlack">模型分类</div>
@@ -38,26 +35,14 @@
 	</div>
 </div>
 <script>
-		var validator = new FormValidator(
-				'search',
-				[ {
-					name : 'keywords',
-					display : '搜索内容',
-					rules : 'required|max_length[50]'				
-				} ],
-				function(errors, evt) {
-					if (errors.length > 0) {
-						var errorString = '';
-
-						for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
-							errorString += errors[i].message + '<br />';
-						}
-						document.getElementById("error").innerHTML = errorString;
-						if (evt && evt.preventDefault) {
-							evt.preventDefault();
-						} else if (event) {
-							event.returnValue = false;
-						}
-					}
-				});
+    $().ready(function() {
+	 $("#searchform").validate({
+		 rules:{
+			 keywords:"required"
+		 },
+		 messages:{
+			 keywords:""
+		 }
+	 });
+	});
 	</script>
