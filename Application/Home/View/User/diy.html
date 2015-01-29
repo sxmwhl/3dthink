@@ -1,52 +1,121 @@
 <include file="Public:header" />
-<script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
 <script type='text/javascript' src='__BCS_PUBLIC__/js/layer.min.js'></script>
-<link rel='stylesheet' type='text/css' href='__BCS_PUBLIC__/css/x3dom.css' />
+<script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
+<script>
+	function addmodel() {
+		var md5Regex=/^([a-fA-F0-9]{32})$/;
+		if(!md5Regex.test($("#md5").val())){
+			$("#error").html("模型代码格式错误！");
+			return false;
+		}
+		
+		$('#myModal').modal('hide');
+		
+	}
+	function clearNoNum(obj) {
+		obj.value = obj.value.replace(/[^\d.]/g, ""); //清除“数字”和“.”以外的字符  
 
+		obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字而不是. 
+
+		obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的.   
+
+		obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace(
+				"$#$", ".");
+	}
+</script>
 </head>
-
 <body class="model_in">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">插入模型</h4>
+      </div>
+      <div class="modal-body">
+       <input type="text" id="md5" name="md5" class="form-control" placeholder="请输入模型代码"/>
+       <div id="error"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" onClick="addmodel()">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
 	<input type='radio' name='model' id='modelcategory' checked="checked" />
-	<input type='radio' name='model' id='hide' />
+	<input type='radio' name='model' id='myhide' />
 	<div id='content'>
 		<a id='slider' class='home' href='__ROOT__/'>返回首页</a> <label
 			id='slider' class='modelcategory' for='modelcategory'>我的家园</label> <label
-			id='slider' class='hide' for='hide'>收起侧栏</label>
+			id='slider' class='myhide' for='myhide'>收起侧栏</label>
 	</div>
 	<aside class="modelcategory margin_left">
-	<div class="InfoContainer">
-<h1>我的家园</h1>
-	</div>
+		<h2>
+			我的家园<small>黎明之城</small>
+		</h2>
+		<p>
+			<button type="button" class="btn btn-default" aria-label="插入模型" data-toggle="modal" data-target="#myModal" data-backdrop="static">
+				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> 插入模型
+			</button>
+			<button type="button" class="btn btn-default">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 删除模型
+			</button>
+		</p>
+		<p>
+			<button type="button" class="btn btn-default" aria-label="插入模型">
+				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+				插入模型
+			</button>
+			<button type="button" class="btn btn-default">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				删除模型
+			</button>
+		</p>
 	</aside>
 
 	<x3d id="model"> <scene dopickpass="true" pickmode="idBuf"
 		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
-	<Viewpoint bind='false' centerOfRotation='0,0,0' description='""' fieldOfView='0.785398' isActive='false' metadata='X3DMetadataObject' orientation='0,0,0,1' position='0,0,10' zFar='-1' zFar='-1' zNear='-1' zNear='-1' ></Viewpoint>
-	<navigationInfo id="head" headlight='{$model.hl_on}' type='"EXAMINE"'></navigationInfo>
-	<directionalLight id="directional" direction='0 0 -1'
-		on='{$model.dl_on}' intensity='1' shadowIntensity='0.0' color='0 0 0'></directionalLight>
-	<background topurl="__BCS_PUBLIC__/images/background/horizon_2_top.jpg" righturl="__BCS_PUBLIC__/images/background/horizon_2_right.jpg" lefturl="__BCS_PUBLIC__/images/background/horizon_2_left.jpg" fronturl="__BCS_PUBLIC__/images/background/horizon_2_front.jpg" bottomurl="__BCS_PUBLIC__/images/background/horizon_2_bottom.jpg"
-		backurl="__BCS_PUBLIC__/images/background/horizon_2_back.jpg" skyangle="" groundangle="" groundcolor=""
-		transparency="1.0" skycolor="0 0 0"> </background> 
-		<Environment id="gamma" gammaCorrectionDefault="linear"></Environment> 
-		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0' >
-		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
-		</Transform>
-		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='2,0,0' >
-		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
-		</Transform>
-		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='4,0,0' >
-		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
-		</Transform>
-		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,2,0' >
-		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
-		</Transform>
-		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,4,0' >
-		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d"> </Inline> 
-		</Transform>
-		<Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,0,2' >
-		<Inline	nameSpaceName="s" mapDEFToID="true"	url="__BCS_UPLOAD__/e75997bf6ada6a4e9c23619a71cda196/model.x3d"> </Inline>
-		</Transform>
-		</scene> </x3d>	
+	<Viewpoint bind='false' centerOfRotation='0,0,0' description='""'
+		fieldOfView='0.785398' isActive='false' metadata='X3DMetadataObject'
+		orientation='0,0,0,1' position='0,0,10' zFar='-1' zFar='-1' zNear='-1'
+		zNear='-1'></Viewpoint> <navigationInfo id="head"
+		headlight='{$model.hl_on}' type='"EXAMINE"'></navigationInfo> <directionalLight
+		id="directional" direction='0 0 -1' on='{$model.dl_on}' intensity='1'
+		shadowIntensity='0.0' color='0 0 0'></directionalLight> <background
+		topurl="__BCS_PUBLIC__/images/background/horizon_2_top.jpg"
+		righturl="__BCS_PUBLIC__/images/background/horizon_2_right.jpg"
+		lefturl="__BCS_PUBLIC__/images/background/horizon_2_left.jpg"
+		fronturl="__BCS_PUBLIC__/images/background/horizon_2_front.jpg"
+		bottomurl="__BCS_PUBLIC__/images/background/horizon_2_bottom.jpg"
+		backurl="__BCS_PUBLIC__/images/background/horizon_2_back.jpg"
+		skyangle="" groundangle="" groundcolor="" transparency="1.0"
+		skycolor="0 0 0"> </background> <Environment id="gamma"
+		gammaCorrectionDefault="linear"></Environment> <Transform
+		bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true'
+		rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'> <Inline
+		nameSpaceName="s" mapDEFToID="true"
+		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
+	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
+		render='true' rotation='0,0,1,0' scale='1,1,1' translation='2,0,0'>
+	<Inline nameSpaceName="s" mapDEFToID="true"
+		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
+	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
+		render='true' rotation='0,0,1,0' scale='1,1,1' translation='4,0,0'>
+	<Inline nameSpaceName="s" mapDEFToID="true"
+		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
+	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
+		render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,2,0'>
+	<Inline nameSpaceName="s" mapDEFToID="true"
+		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
+	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
+		render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,4,0'>
+	<Inline nameSpaceName="s" mapDEFToID="true"
+		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
+	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
+		render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,0,2'>
+	<Inline nameSpaceName="s" mapDEFToID="true"
+		url="__BCS_UPLOAD__/e75997bf6ada6a4e9c23619a71cda196/model.x3d">
+	</Inline> </Transform> </scene> </x3d>
 </body>
 </html>

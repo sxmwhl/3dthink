@@ -37,6 +37,7 @@
             valid_credit_card: '%s 必须为信用卡号。',
             is_file_type: '%s 只能为  %s 格式。',
             valid_url: '%s 必须为URL地址。',
+            is_md5: '%s 不只是正确的模型代码。',
             is_key: '%s 格式错误，只能为汉字、英文字母、数字和_。'
         },
         callback: function(errors) {
@@ -62,6 +63,7 @@
         base64Regex = /[^a-zA-Z0-9\/\+=]/i,
         numericDashRegex = /^[\d\-\s]+$/,
         urlRegex = /^((http|https):\/\/(\w+:{0,1}\w*@)?(\S+)|)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/,
+        md5Regex=/^([a-fA-F0-9]{32})$/,
         keyRegex = /^[\w\d\u4e00-\u9fff]+(,[\w\d\u4e00-\u9fff]+)*$/;
 
     /*
@@ -487,6 +489,9 @@
         },
         is_key: function(field) {
             return (keyRegex.test(field.value));
+        },
+        is_md5: function(field) {
+            return (md5Regex.test(field.value));
         },
 
         valid_credit_card: function(field){
