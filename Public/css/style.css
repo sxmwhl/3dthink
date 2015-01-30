@@ -2,7 +2,7 @@
 @charset "utf-8";
 /* start editing from here */
 a{text-decoration:none;}
-#error{color:red;margin:0;padding:0;}
+.error{color:#a94442;}
 .log-in{color:red;}
 .txt-rt{text-align:right;}/* text align right */
 .txt-lt{text-align:left;}/* text align left */
@@ -38,6 +38,18 @@ body.model_in{
 	margin: 0 auto;
 	width: 1024px;
 }
+.mg-top20{
+	margin-top:20px;
+}
+.mg-top10{
+	margin-top:10px;
+}
+.mg-bottom20{
+	margin-bottom:20px;
+}
+.mg-bottom10{
+	margin-bottom:10px;
+}
 
 body{
 	font-family: Arial, Helvetica, sans-serif;
@@ -51,22 +63,12 @@ body{
 .logo span {
 	font-size: 20px;
 }
-/*
-.carousel {
-	padding-bottom: 10px;
-	font-size: 20px;
-	color: #ff8000;
-}*/
+
 .item {
-	margin-left:5px;
-	float: left;
-	margin-bottom: 40px;
+	margin:28px auto;
+	width:280px;
 	position: relative;
 	overflow: hidden;
-}
-.margin_r_l{
-	margin-right: 50px;
-	margin-left: 100px;
 }
 .item img {
 	padding: 20px;
@@ -204,7 +206,9 @@ body{
 	color: #666633;
 }
 .footer {
-	margin: 10px 0;
+	margin-top:35px;
+	margin-bottom:20px;
+	text-align:center;
 }
 .copy {
 	margin: 20px auto;
@@ -405,7 +409,7 @@ input.formclass-input, input.formclass-file, textarea.formclass-input, select.fo
 .formclass {
   margin: 50px auto;
   padding: 18px 20px;
-  width: 400px;
+  width: 50%;
   background: #3f65b7;
   background-clip: padding-box;
   border: 1px solid #172b4e;

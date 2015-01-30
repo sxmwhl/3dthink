@@ -50,7 +50,7 @@
 	</div>
 	<aside class="modelcategory margin_left">
 	<div class="container-fluid" >
-		<form id="form" name="modify_form" action="__URL__/save" method="post"
+		<form id="modify_form" name="modify_form" action="__URL__/save" method="post"
 			onkeydown="if(event.keyCode==13)return false;" role="form">
 			<h3>基本信息</h3>
 			<div class="form-group">
@@ -77,38 +77,68 @@
             </div>
             <div class="form-group">
                  <label for="email">E-mail：</label>
-                 <input name="email" type="text" id="email" value="{$model.email}" class="form-control" />
-            </div>			
+                 <input name="email" type="email" id="email" value="{$model.email}" class="form-control" />
+            </div>
+            		
 			<h3>灯光信息（可选）</h3>
+			<div class="checkbox">
 			<label>
-				头顶灯光：开启:<input name="hl_on" type="checkbox" onchange="change()" id="HL" value="1" {$model.hl_on_checked} />
+				<input name="hl_on" type="checkbox" onchange="change()" id="HL" value="1" {$model.hl_on_checked} />头顶灯光
 			</label>
 			<label>
-				平行光： 开启 <input name="dl_on" type="checkbox" id="DL" value="1"	onchange="change()" {$model.dl_on_checked}/>
+				<input name="dl_on" type="checkbox" id="DL" value="1"	onchange="change()" {$model.dl_on_checked}/>平行光
 			</label>
-			<h3>视角信息（可选）</h3>
-			<h2>位置：（改变Z值可以拉近或远离模型）</h2>
-			X <input name="vp_x" type="text" id="vp_x" value="{$model.vp_x}"
-				size="3" onchange="change()" onkeyup="clearNoNum(this)" /> Y <input
-				name="vp_y" type="text" id="vp_y" value="{$model.vp_y}" size="3"
-				onchange="change()" onkeyup="clearNoNum(this)" /> Z <input
-				name="vp_z" type="text" id="vp_z" value="{$model.vp_z}" size="3"
-				onchange="change()" onkeyup="clearNoNum(this)" />
-			<h2>方向：</h2>
-			X <input name="vp_d_x" type="text" id="vp_d_x"
-				value="{$model.vp_d_x}" size="3" onchange="change()"
-				onkeyup="clearNoNum(this)" /> Y <input name="vp_d_y" type="text"
-				id="vp_d_y" value="{$model.vp_d_y}" size="3" onchange="change()"
-				onkeyup="clearNoNum(this)" /> Z <input name="vp_d_z" type="text"
-				id="vp_d_z" value="{$model.vp_d_z}" size="3" onchange="change()"
-				onkeyup="clearNoNum(this)" /> A <input name="vp_d_a" type="text"
-				id="vp_d_a" value="{$model.vp_d_a}" size="3" onchange="change()"
-				onkeyup="clearNoNum(this)" />
-			<h2>您的IP地址：{$model.ip_last_modify} 在保存后被记录。</h2>
-			<input type="submit" name="baocun" id="baocun" value="保存模型信息"
-				class="formclass-submit shortsubmit" />
-				<h2 id="error"></h2>
+			</div>
+			
+			<h3>视角信息（可选）</h3>			
+			<h6><strong>位置：（改变Z值可以拉近或远离模型）</strong></h6>
+			<div class="form-group">
+              <div class="input-group">
+                   <label class="sr-only" for="vp_x">X</label>
+                   <div class="input-group-addon">X</div>
+                   <input name="vp_x" type="text" id="vp_x" value="{$model.vp_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            
+              <div class="input-group">
+                   <label class="sr-only" for="vp_x">Y</label>
+                   <div class="input-group-addon">Y</div>
+                   <input name="vp_y" type="text" id="vp_y" value="{$model.vp_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            
+              <div class="input-group">
+                   <label class="sr-only" for="vp_x">Z</label>
+                   <div class="input-group-addon">Z</div>
+                   <input name="vp_z" type="text" id="vp_z" value="{$model.vp_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            </div>
+
+			<h6><strong>方向：</strong></h6>
+			<div class="form-group">
+			  <div class="input-group">
+                   <label class="sr-only" for="vp_d_x">X</label>
+                   <div class="input-group-addon">X</div>
+                   <input name="vp_d_x" type="text" id="vp_d_x" value="{$model.vp_d_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+              <div class="input-group">
+                   <label class="sr-only" for="vp_d_y">Y</label>
+                   <div class="input-group-addon">Y</div>
+                   <input name="vp_d_y" type="text" id="vp_d_y" value="{$model.vp_d_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+              <div class="input-group">
+                   <label class="sr-only" for="vp_d_z">Z</label>
+                   <div class="input-group-addon">Z</div>
+                   <input name="vp_d_z" type="text" id="vp_d_z" value="{$model.vp_d_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+              <div class="input-group">
+                   <label class="sr-only" for="vp_d_a">A</label>
+                   <div class="input-group-addon">A</div>
+                   <input name="vp_d_a" type="text" id="vp_d_a" value="{$model.vp_d_a}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>			
+			</div>
+			<p class="text-warning">您的IP地址：{$model.ip_last_modify} 在保存后被记录。</p>
+			<button type="submit" class="btn btn-primary">保存模型信息</button>
 		</form>
+		<br/>
 		<a href="__URL__/preview?f={$model.folder}"><img
 			src="__BCS_UPLOAD__/{$model.folder}/preview.{$model.preview_ext}"
 			width="280" height="200" title="点击修改模型缩略图" alt="点击修改模型缩略图" /></a>
@@ -130,72 +160,91 @@
 		url="__BCS_UPLOAD__/{$model.folder}/model.x3d"> </Inline> </scene> </x3d>
 
 	<script>
-		var validator = new FormValidator(
-				'modify_form',
-				[ {
-					name : 'title',
-					display : '模型名称',
-					rules : 'required|max_length[50]'
-				}, {
-					name : 'description',
-					display : '模型描述',
-					rules : 'required|max_length[300]'
-				}, {
-					name : 'category',
-					display : '模型分类未选择',
-					rules : 'greater_than[0]'
-				}, {
-					name : 'creator',
-					display : '创作者',
-					rules : 'max_length[30]'
-				}, {
-					name : 'email',
-					display : '邮箱地址',
-					rules : 'valid_email'
-				}, {
-					name : 'vp_x',
-					display : '位置x',
-					rules : 'decimal|max_length[6]'	
-				}, {
-					name : 'vp_y',
-					display : '位置y',
-					rules : 'decimal|max_length[6]'
-				}, {
-					name : 'vp_z',
-					display : '位置z',
-					rules : 'decimal|max_length[6]'
-				}, {
-					name : 'vp_d_x',
-					display : '方向x',
-					rules : 'decimal|max_length[6]'
-				}, {
-					name : 'vp_d_y',
-					display : '方向y',
-					rules : 'decimal|max_length[6]'
-				}, {
-					name : 'vp_d_z',
-					display : '方向z',
-					rules : 'decimal|max_length[6]'
-				}, {
-					name : 'vp_d_a',
-					display : '方向a',
-					rules : 'decimal|max_length[6]'
-				} ],
-				function(errors, evt) {
-					if (errors.length > 0) {
-						var errorString = '';
-
-						for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
-							errorString += errors[i].message + '<br />';
-						}
-						document.getElementById("error").innerHTML = errorString;
-						if (evt && evt.preventDefault) {
-							evt.preventDefault();
-						} else if (event) {
-							event.returnValue = false;
-						}
-					}
-				});
+    $().ready(function() {
+   	 $("#modify_form").validate({
+   		 rules:{
+   			 title:{
+   				required:true,
+   				maxlength:50
+   			 },
+   			 description:{
+   				 required:true,
+   				 maxlength:300,
+   			     minlength:4
+   			 },
+   			 category:{
+   				 required:true,
+   				 min:0
+   			 },
+   			 creator:{
+   				 maxlength:30
+   			 },
+   			 email:{
+   				 email:true
+   			 },
+   			 vp_x:{
+   				 required:true,
+   				 number:true,
+   				 maxlength:6
+   			 },
+   			vp_y:{
+  				 required:true,
+  				 number:true,
+  				 maxlength:6
+  			 },
+  			vp_z:{
+  				 required:true,
+  				 number:true,
+  				 maxlength:6
+  			 },
+  			vp_d_x:{
+  				 required:true,
+  				 number:true,
+  				 maxlength:6
+  			 },
+  			vp_d_y:{
+ 				 required:true,
+ 				 number:true,
+ 				 maxlength:6
+ 			 },
+ 			vp_d_z:{
+ 				 required:true,
+ 				 number:true,
+ 				 maxlength:6
+ 			 },
+ 			vp_d_a:{
+ 				 required:true,
+ 				 number:true,
+ 				 maxlength:6
+ 			 }
+   		 },
+   		 messages:{
+   			 title:{
+   				 required:"标题是必须的！",
+   				maxlength:"标题过长！"
+   			 }
+   		 }
+   	 });
+   	});
+    jQuery.extend(jQuery.validator.messages, {
+        required: "必选字段",
+    	remote: "请修正该字段",
+    	email: "请输入正确格式的电子邮件",
+    	url: "请输入合法的网址",
+    	date: "请输入合法的日期",
+    	dateISO: "请输入合法的日期 (ISO).",
+    	number: "请输入合法的数字",
+    	digits: "只能输入整数",
+    	creditcard: "请输入合法的信用卡号",
+    	equalTo: "请再次输入相同的值",
+    	accept: "请输入拥有合法后缀名的字符串",
+    	maxlength: jQuery.validator.format("请输入一个 长度最多是 {0} 的字符串"),
+    	minlength: jQuery.validator.format("请输入一个 长度最少是 {0} 的字符串"),
+    	rangelength: jQuery.validator.format("请输入 一个长度介于 {0} 和 {1} 之间的字符串"),
+    	range: jQuery.validator.format("请输入一个介于 {0} 和 {1} 之间的值"),
+    	max: jQuery.validator.format("请输入一个最大为{0} 的值"),
+    	min: jQuery.validator.format("请输入一个最小为{0} 的值")
+    });
 	</script>
 </body>
 </html>

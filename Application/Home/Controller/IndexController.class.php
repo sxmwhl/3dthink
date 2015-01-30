@@ -4,8 +4,8 @@ use Think\Controller;
 class IndexController extends Controller {
     public function index(){
     	$Moxing=M('Moxing');
-    	$list1 = $Moxing->where('sign=0')->order('views desc')->limit(6)->select();
-    	$list2 = $Moxing->where('sign=0')->order('time_update desc')->limit(6)->select();
+    	$list1 = $Moxing->where('sign=0')->order('views desc')->limit(8)->select();
+    	$list2 = $Moxing->where('sign=0')->order('time_update desc')->limit(8)->select();
     	$this->models1=$list1;
     	$this->models2=$list2;
     	//echo $Moxing->getLastSql();
