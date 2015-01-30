@@ -12,57 +12,83 @@
 	</div>
 
 	<aside class="modelcategory">
-	<include file="Public:moreModel" />
+		<include file="Public:moreModel" />
 	</aside>
 
 	<aside class="modelinfo">
-	<div class="InfoContainer">
-		<div id="Name" class="InfoBlack">{$model['title']}</div>
-		<div class="InfoOrange">
-			<div class="InfoDesc">模型描述</div>
-			<div id="Place" class="InfoValue">{$model['description']}</div>
-		</div>
-		<div class="InfoOrange">
-			<div class="InfoDesc">模型分类</div>
-			<div id="Place" class="InfoValue">
-				<a href='__ROOT__/' class='title' title='分类名称'>首页</a>/
-				<volist name="category_path" id="vo"> <a
-					href='__MODULE__/category?cate={$vo.cate_id}' class='title'
-					title='分类名称'>{$vo.cate_name}</a>/ </volist>
-			</div>
-		</div>
-		<div class="InfoOrange">
-			<div class="InfoDesc">创作者</div>
-			<div id="Date" class="InfoValue">
-				<?php echo $model['creator']; ?>
-			</div>
-		</div>
-		<div class="InfoOrange">
-			<div class="InfoDesc">E-mail</div>
-			<div id="Artist" class="InfoValue">
-				<?php echo $model['email']; ?>
-			</div>
-		</div>
-		<div class="InfoOrange">
-			<div class="InfoDesc">更新时间</div>
-			<div id="Material" class="InfoValue">
-				<?php echo $model['time_update']; ?>
-			</div>
-		</div>
-		<div class="InfoOrange">
-			<div class="InfoDesc">浏览次数</div>
-			<div id="Number" class="InfoValue">
-				<?php echo $model['views']; ?>
-			</div>
-		</div>
-		<div class="InfoOrange">
-			<div class="InfoDesc">预览图片</div>
-			<div id="Location" class="InfoValue">
-			<a href="__MODULE__/form/preview?f={$model['folder']}"> <img class="w280h200" src="__BCS_UPLOAD__/{$model['folder']}/preview.{$model['preview_ext']}" alt=" {$model['title']}" /></a>				
-			</div>
-		</div>
-		<a href="__MODULE__/form/modify?f={$model['folder']}&cate={$model['category']}" target="_parent"><div class="button blue">修改信息</div></a>
-	</div>
+		<div class="container-fluid">
+		<div class="row">
+			<table class="table  table-striped table-hover">
+				<caption>
+					<h3>{$model['title']}</h3>
+				</caption>
+				<tr align ="left">
+					<th scope="col"><strong>模型描述</strong></th>
+				</tr>
+				<tr align ="left">
+					<td>{$model['description']}</td>
+				</tr>
+				<tr align ="left">
+					<td><strong>模型分类</strong></td>
+				</tr>
+				<tr align ="left">
+					<td><a href='__ROOT__/' class='title' title='分类名称'>首页</a>/ <volist
+							name="category_path" id="vo"> <a
+							href='__MODULE__/category?cate={$vo.cate_id}' class='title'
+							title='分类名称'>{$vo.cate_name}</a>/ </volist></td>
+				</tr>
+				<tr align ="left">
+					<td><strong>创作者</strong></td>
+				</tr>
+				<tr align ="left">
+					<td><p>
+							<?php echo $model['creator']; ?>
+						</p></td>
+				</tr>
+				<tr align ="left">
+					<td><strong>E-mail</strong></td>
+				</tr>
+				<tr align ="left">
+					<td><p>
+							<?php echo $model['email']; ?>
+						</p></td>
+				</tr>
+				<tr align ="left">
+					<td><strong>更新时间</strong></td>
+				</tr>
+				<tr align ="left">
+					<td><p>
+							<?php echo $model['time_update']; ?>
+						</p></td>
+				</tr>
+				<tr align ="left">
+					<td><strong>浏览次数</strong></td>
+				</tr>
+				<tr align ="left">
+					<td><p>
+							<?php echo $model['views']; ?>
+						</p></td>
+				</tr>
+				<tr align ="left">
+					<td><strong>预览图片</strong></td>
+				</tr>
+				<tr align ="left">
+					<td><p>
+							<a href="__MODULE__/form/preview?f={$model['folder']}"> <img
+								class="w280h200"
+								src="__BCS_UPLOAD__/{$model['folder']}/preview.{$model['preview_ext']}"
+								alt=" {$model['title']}" /></a>
+						</p></td>
+				</tr>
+				<tr align ="left">
+					<td><p>
+							<a class="btn btn-primary"
+								href="__MODULE__/form/modify?f={$model['folder']}&cate={$model['category']}"
+								target="_parent">修改信息</a>
+						</p></td>
+				</tr>
+			</table>
+		</div></div>
 	</aside>
 	<iframe id="Content3D" class="Content3D"
 		src="__URL__/modelIn?f=<?php echo $model['folder']; ?>" scrolling="no"

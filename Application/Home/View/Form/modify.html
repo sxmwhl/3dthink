@@ -49,43 +49,44 @@
 			id='slider' class='myhide' for='myhide'>收起侧栏</label>
 	</div>
 	<aside class="modelcategory margin_left">
-	<div class="InfoContainer">
+	<div class="container-fluid" >
 		<form id="form" name="modify_form" action="__URL__/save" method="post"
-			onkeydown="if(event.keyCode==13)return false;" class="shortform">
-			<h1>基本信息</h1>
-			<h2>模型名称*：</h2>
-			<input type="text" name="title" id="title" value="{$model.title}"
-				class="formclass-input" />
-			<h2>模型描述*：</h2>
-			<textarea name="description" id="description" cols="32" rows="5">{$model.description}</textarea>
-			<h2>
-				模型分类*：（若无合适分类，<a target='_blank' href='__MODULE__/category/add'>点击添加</a>）
-			</h2>
-			<select name="category" id="category">
+			onkeydown="if(event.keyCode==13)return false;" role="form">
+			<h3>基本信息</h3>
+			<div class="form-group">
+                 <label for="title">模型名称*：</label>
+                 <input type="text" name="title" id="title" value="{$model.title}" class="form-control" />
+            </div>
+            <div class="form-group">
+                 <label for="description">模型描述*：</label>
+                 <textarea name="description" id="description" class="form-control">{$model.description}</textarea>
+            </div>
+            <div class="form-group">
+                 <label for="category">模型分类*：（若无合适分类，<a target='_blank' href='__MODULE__/category/add'>点击添加</a>）</label>
+                 <select name="category" id="category" class="form-control">
 				<option value="0">请选择分类</option> {$category_option}
 			</select> 
+            </div>
 			<input type="hidden" name="preview_ext" value="{$model.preview_ext}" />
 			<input type="hidden" name="folder" value="{$model.folder}" /> 
 			<input type="hidden" name="old_category" value="{$model.old_category}" /> 
-			<input
-				type="hidden" name="ip_last_modify" value="{$model.ip_last_modify}" />
-			<h2>创作者：</h2>
-			<input name="creator" type="text" id="creator" size="10"
-				value="{$model.creator}" class="formclass-input" />
-			<h2>E-mail：</h2>
-			<input name="email" type="text" id="email" size="20"
-				value="{$model.email}" class="formclass-input" />
-			<h1>灯光信息（可选）</h1>
-			<h2>
-				头顶灯光：开启:<input name="hl_on" type="checkbox" onchange="change()"
-					id="HL" value="1" {$model.hl_on_checked} />
-			</h2>
-
-			<h2>
-				平行光： 开启 <input name="dl_on" type="checkbox" id="DL" value="1"
-					onchange="change()" {$model.dl_on_checked}/>
-			</h2>
-			<h1>视角信息（可选）</h1>
+			<input type="hidden" name="ip_last_modify" value="{$model.ip_last_modify}" />
+			<div class="form-group">
+                 <label for="creator">创作者：</label>
+                 <input name="creator" type="text" id="creator" value="{$model.creator}" class="form-control" />
+            </div>
+            <div class="form-group">
+                 <label for="email">E-mail：</label>
+                 <input name="email" type="text" id="email" value="{$model.email}" class="form-control" />
+            </div>			
+			<h3>灯光信息（可选）</h3>
+			<label>
+				头顶灯光：开启:<input name="hl_on" type="checkbox" onchange="change()" id="HL" value="1" {$model.hl_on_checked} />
+			</label>
+			<label>
+				平行光： 开启 <input name="dl_on" type="checkbox" id="DL" value="1"	onchange="change()" {$model.dl_on_checked}/>
+			</label>
+			<h3>视角信息（可选）</h3>
 			<h2>位置：（改变Z值可以拉近或远离模型）</h2>
 			X <input name="vp_x" type="text" id="vp_x" value="{$model.vp_x}"
 				size="3" onchange="change()" onkeyup="clearNoNum(this)" /> Y <input

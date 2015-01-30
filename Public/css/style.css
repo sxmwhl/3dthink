@@ -23,8 +23,8 @@ img{max-width:100%;display: block;}
 /*model_in.php*/
 body.model_in{
 	background-color: transparent;
+	background-image:url(../images/low_contrast_linen.png);
 }
-
 #model
 {
 	width: 100%;
@@ -40,12 +40,9 @@ body.model_in{
 }
 
 body{
-	color: #333;
-	background-image:url(../images/low_contrast_linen.png);
-	font-family: Arial, Helvetica, sans-serif;/* 'Anaheim', sans-serif;*/
+	font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-  color: #ffffff;
 }
 .logo {
 	margin: 100px auto 65px auto;
@@ -53,16 +50,15 @@ body{
 }
 .logo span {
 	font-size: 20px;
-	color: #E4E4E4;
 }
-
+/*
 .carousel {
 	padding-bottom: 10px;
 	font-size: 20px;
 	color: #ff8000;
-}
-.carousel .item {
-	margin-right: 31px;
+}*/
+.item {
+	margin-left:5px;
 	float: left;
 	margin-bottom: 40px;
 	position: relative;
@@ -72,12 +68,9 @@ body{
 	margin-right: 50px;
 	margin-left: 100px;
 }
-.carousel .item:nth-child(3), .carousel .item:nth-child(6), .carousel .item:nth-child(9), .carousel .item:nth-child(12) , .carousel .item:nth-child(15)  {
-	margin-right: 0px;
-}
-.carousel .item img {
+.item img {
 	padding: 20px;
-	background-image: url(../images/debut_light.png);
+	background-color:#F89F00;
 	float: left;
 	width: 280px;
 	height: 200px;
@@ -93,7 +86,7 @@ body{
 	-o-transition: all ease 0.5s;
 	transition: all ease 0.5s;
 }
-.carousel .item x3d {
+.item x3d {
 	padding: 20px;
 	background-image: url(../images/debut_light.png);
 	float: left;
@@ -106,7 +99,7 @@ body{
 	left: 0;
 	opacity: 1;
 }
-.carousel .item .item-background {
+.item .item-background {
 	float: left;
 	position: absolute;
 	width: 100%;
@@ -120,7 +113,7 @@ body{
 	-o-transition: all ease 0.8s;
 	transition: all ease 0.8s;
 }
-.carousel .item .creator {
+.item .creator {
 	position: absolute;
 	display: block;
 	z-index: 3;
@@ -138,7 +131,7 @@ body{
 	opacity: 0;
 	padding: 0 10px;
 }
-.carousel .item .time {
+.item .time {
 	position: absolute;
 	display: block;
 	z-index: 3;
@@ -156,7 +149,7 @@ body{
 	opacity: 0;
 	padding: 0 10px;
 }
-.carousel .item .title {
+.item .title {
 	position: absolute;
 	display: block;
 	z-index: 3;
@@ -174,7 +167,7 @@ body{
 	opacity: 0;
 	padding: 0 10px;
 }
-.carousel .item:hover img {
+.item:hover img {
 	-moz-transform: scale(2);
 	-webkit-transform: scale(2);
 	-o-transform: scale(2);
@@ -183,19 +176,19 @@ body{
  filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=2, M12=-0, M21=0, M22=2);
 	opacity: 0;
 }
-.carousel .item:hover .item-background {
+.item:hover .item-background {
 	opacity: 1;
 }
-.carousel .item:hover .creator {
+.item:hover .creator {
 	opacity: 1;
 	top: 50%;
 }
-.carousel .item:hover .time {
+.item:hover .time {
 	opacity: 1;
 	top: 60%;
 }
 
-.carousel .item:hover .title {
+.item:hover .title {
 	opacity: 1;
 	top: 35%;
 }
@@ -215,26 +208,20 @@ body{
 }
 .copy {
 	margin: 20px auto;
-	color: #fff;
 	text-align:center;
 }
-.copy a {
-	color: #F89F00;
-}
-.copy a:hover {
-	color: #666633;
-}
+
 
 /*model.php*/
 input#modelcategory{ display:none; }
-input#modelcategory:checked ~ aside.modelcategory{ left:0px; }
-input#modelcategory:checked ~ #content{ padding-left:320px; }
+input#modelcategory:checked ~ aside.modelcategory{ left:0; }
+input#modelcategory:checked ~ #content{ padding-left:25%; }
 input#modelcategory:checked ~ #content > label.myhide{ display:block; }
 input#modelcategory:checked ~ #content > label.modelcategory{ background: #666633; }
 
 input#modelinfo{ display:none; }
-input#modelinfo:checked ~ aside.modelinfo{ left:0px; }
-input#modelinfo:checked ~ #content{ padding-left:320px; }
+input#modelinfo:checked ~ aside.modelinfo{ left:0; }
+input#modelinfo:checked ~ #content{ padding-left:25%; }
 input#modelinfo:checked ~ #content > label.myhide{ display:block; }
 input#modelinfo:checked ~ #content > label.modelinfo{ background: #666633; }
 input#myhide{ display:none; }
@@ -242,7 +229,7 @@ input#myhide{ display:none; }
 #content {
 	position: fixed;
 	top: 10%;
-	left: px;
+	left: 0;
 	z-index:300;
 }
 #slider {
@@ -277,9 +264,9 @@ aside{
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	left: -320px;
-	width: 320px;
-	background: #F89F00;
+	left: -25%;
+	width: 25%;
+	background: #ffffff;
 	transition: 0.2s ease-out;
 	-webkit-transition: 0.2s ease-out;
 	z-index: 300;
@@ -431,6 +418,7 @@ input.formclass-input, input.formclass-file, textarea.formclass-input, select.fo
   -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 2px 10px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 2px 10px rgba(0, 0, 0, 0.5);
   position:relative;
+  color:#ffffff;
 }
 .verify{
 	margin-bottom:20px;

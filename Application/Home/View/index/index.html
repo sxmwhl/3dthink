@@ -11,20 +11,23 @@
 <aside class="modelcategory">
 <include file="Public:moreModel" />
 </aside>
-<div class="wrap">
+<div class="container-fluid" align="center">
   <include file="Public:logo" />
-  <div class="carousel">
-    <volist name="models1" id="vo">
-    <div class='item'>
+  <div class="row">
+  <volist name="models1" id="vo">
+  	<div class="col-md-3 column">
+  	<div class='item'>
     <img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
     <div class='item-background'></div>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='title' title='模型名称'>模型名称：{$vo.title}</a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='creator' title='作者'>创作者：{$vo.creator}</a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='time' title='浏览次数'>浏览次数：{$vo.views} 次</a>
     </div>
-    </volist>
-    
+	</div>
+  </volist>
+
     <volist name="models2" id="vo">
+    <div class="col-md-3 column">
     <div class='item'>
     <img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
     <div class='item-background'></div>
@@ -32,10 +35,11 @@
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='creator' title='作者'>创作者：{$vo.creator}</a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='time' title='更新时间'>更新时间：{$vo.time_update}</a>
     </div>
+    </div>
     </volist>
+    </div>
     <div class="clear"></div>
   </div>
-</div>
 
 <include file="Public:footer" />
 </body>
