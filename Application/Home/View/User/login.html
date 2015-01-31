@@ -1,19 +1,18 @@
 <include file="Public:header" />
-<script type="text/javascript"
-	src="__BCS_PUBLIC__/js/jquery-2.1.3.min.js"></script>
 </head>
 <body>
-	<div class="wrap">
+	<div class="container-fluid">
 		<include file="Public:logo" />
+		<div class="row">
 		<form method="post" action="__SELF__" class="formclass width300"
-			name="upload_form" id="form">
-			<h1>3D ANT</h1>
+			name="upload_form" id="form" role="form">
+			<h3>用户登录</h3>
 			<input type='text' name='username' id='username'
-				class='formclass-input' placeholder="请输入用户名" /> 
+				class='formclass-input' placeholder="请输入用户名" required /> 
 				<input type='password' name='password' id='password' class='formclass-input'
-				placeholder="密码" /> 
+				placeholder="密码" required/> 
 				<input type='text' name='verify' id='verify'
-				class='formclass-input' placeholder="输入下方验证码" /> 
+				class='formclass-input' placeholder="输入下方验证码" required/> 
 				<div  align="center"><img
 				class="verify" alt="点击切换" title="点击切换" src="__URL__/verify"
 				style="cursor: pointer;"
@@ -23,70 +22,36 @@
 			<p class="formclass-help">
 				<a href="index.html">忘记密码？</a> | <a href="__URL__/register">注册新用户</a>
 			</p>
-			<p id="error"></p>
+			<p class="error"></p>
 		</form>
-
+</div>
 		<include file="Public:footer" />
 	</div>
 	<script>
+	$("#form").validate({
+		submitHandler: function(form) {			
+			var self = $("#form");
+			//提交表单，正确直接跳转，错误返回验证码错误
+			$.post(self.attr("action"),self.serialize(),success,"json");
+			function success(data) {
+				if (data.status) {					
+					window.location.href = data.url;
+				} else {
+					//显示验证码错误信息
+					self.find(".error").text(data.info);
+					//刷新验证码
+					$(".verify").click();
+					return false;
+				}
+			}
+			return false;
+			  }
+	});
 		$(document).ajaxStart(function() {
 			$("input:submit").addClass("log-in").attr("disabled", true);
 		}).ajaxStop(function() {
 			$("input:submit").removeClass("log-in").attr("disabled", false);
 		});
-		var validator = new FormValidator(
-				'upload_form',
-				[ {
-					name : 'username',
-					display : '用户名',
-					rules : 'required|alpha_dash'
-				}, {
-					name : 'password',
-					display : '密码',
-					rules : 'required'
-				}, {
-					name : 'verify',
-					display : '验证码',
-					rules : 'required'
-				} ],
-				function(errors, evt) {
-					if (errors.length > 0) {
-						var errorString = '';
-						for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
-							errorString += errors[i].message + '<br />';
-						}
-						$("#error").html(errorString);
-						if (evt && evt.preventDefault) {
-					        evt.preventDefault();				        
-					    } else if (event) {
-					        event.returnValue = false;
-					    }
-					} else {
-						var self = $("form");
-						$.post(self.attr("action"),self.serialize(),success,"json");
-						function success(data) {
-							if (data.status) {
-								
-								window.location.href = data.url;
-							} else {
-								self.find("#error").text(data.info);
-								//刷新验证码
-								$(".verify").click();
-								if (evt && evt.preventDefault) {
-							        evt.preventDefault();				        
-							    } else if (event) {
-							        event.returnValue = false;
-							    }
-							}
-						}
-						if (evt && evt.preventDefault) {
-					        evt.preventDefault();				        
-					    } else if (event) {
-					        event.returnValue = false;
-					    }						
-					}
-
-				});
 	</script>
 </body>
 </html>
