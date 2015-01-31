@@ -1,23 +1,24 @@
 <include file="Public:header" />
+<script type='text/javascript' src='__BCS_PUBLIC__/js/additional-methods.min.js'></script>
 </head>
 <body>
 	<div class="container-fluid">
 		<include file="Public:logo" />
 		<div class="row">
-		<form method="post" action="__URL__/upload" enctype="multipart/form-data" class="formclass  width300" name="upload_form" role="form">
+		<form method="post" action="__URL__/upload" enctype="multipart/form-data" class="formclass  width300" name="upload_form" id="upload_form" role="form">
 		<h3>分享您的模型...</h3>
 			<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
 			<div class="form-group">
-                 <label for="modelinput">模型文件*:(x3d)</label>
-                 <input id="modelinput" name="model" type="file" value="浏览" accept="model/x3d+xml" class="form-control" />
+                 <label for="model">模型文件*:(x3d)</label>
+                 <input id="model" name="model" type="file" value="浏览" accept="model/x3d+xml" class="form-control" />
             </div>
             <div class="form-group">
-                 <label for="picinput">模型缩略图*:(jpg/png/gif)</label>
-                 <input id="picinput" name="preview" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg"	class="form-control"/>
+                 <label for="preview">模型缩略图*:(jpg/png/gif)</label>
+                 <input id="preview" name="preview" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg"	class="form-control"/>
             </div>
             <div class="form-group">
-                 <label for="picinput">贴图文件:(jpg/png/gif)</label>
-                 <input id="textureinput" name="texture" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg" class="form-control"/>
+                 <label for="texture">贴图文件:(jpg/png/gif)</label>
+                 <input id="texture" name="texture" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg" class="form-control"/>
                  <p>请确保模型的贴图文件位于texture/文件夹。</p>
             </div>			
 			<button type="submit" class="btn btn-default" >上 传</button>
@@ -28,36 +29,32 @@
 		</div>
 	</div>
 	<script>
-		var validator = new FormValidator(
-				'upload_form',
-				[ {
-					name : 'model',
-					display : '模型',
-					rules : 'required|is_file_type[x3d]'
-				}, {
-					name : 'preview',
-					display : '缩略图',
-					rules : 'required|is_file_type[gif,png,jpg,jepg]'
-				}, {
-					name : 'texture',
-					display : '贴图',
-					rules : 'is_file_type[gif,png,jpg,jepg]'
-				} ],
-				function(errors, evt) {
-					if (errors.length > 0) {
-						var errorString = '';
-
-						for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
-							errorString += errors[i].message + '<br />';
-						}
-						document.getElementById("error").innerHTML=errorString;
-					    if (evt && evt.preventDefault) {
-					        evt.preventDefault();
-					    } else if (event) {
-					        event.returnValue = false;
-					    }
-					}					
-				});
+	$("#upload_form").validate({
+  		 rules:{
+  			 preview:{
+  				required:true,
+  				accept:"image/*"
+  			 },
+  			 texture:{
+  				 accept:"image/*"
+  			 },
+  			 model:{
+  				required:true,
+  				 accept:"model/x3d*"
+  			 }
+  		 },
+  		 messages:{
+  			 preview:{
+  				 accept:"缩略图文件格式不正确！"
+  			 },
+  			texture:{
+ 				 accept:"贴图文件格式不正确！"
+ 			 },
+ 			model:{
+ 				 accept:"模型文件格式不正确！"
+ 			 }
+  		 }
+  	 });
 	</script>
 </body>
 </html>

@@ -50,18 +50,23 @@ body.model_in{
 .mg-bottom10{
 	margin-bottom:10px;
 }
+.mg-left20{
+	margin-left:20px;
+}
+.mg-left10{
+	margin-left:10px;
+}
+.mg-right20{
+	margin-right:20px;
+}
+.mg-right10{
+	margin-right:10px;
+}
 
 body{
 	font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-}
-.logo {
-	margin: 100px auto 65px auto;
-	width: 246px;
-}
-.logo span {
-	font-size: 20px;
 }
 
 .item {

@@ -1,47 +1,45 @@
 <include file="Public:header" />
 <script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
 <script>
-	function addmodel() {
+$(document).ready(function(){
+	$("#ok").click(function(){
+
 		var md5Regex=/^([a-fA-F0-9]{32})$/;
-		if(!md5Regex.test($("#md5").val())){
-			$("#error").html("模型代码格式错误！");
+		if(!md5Regex.test($("#md5").val())){			
+			$("#md5").val("模型代码格式错误！");
 			return false;
 		}
-		
+		$('scene').append("<Inline nameSpaceName='s' mapDEFToID='true'url='__BCS_UPLOAD__/e75997bf6ada6a4e9c23619a71cda196/model.x3d'></Inline>");	
 		$('#myModal').modal('hide');
-		
-	}
-	function clearNoNum(obj) {
-		obj.value = obj.value.replace(/[^\d.]/g, ""); //清除“数字”和“.”以外的字符  
-
-		obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字而不是. 
-
-		obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的.   
-
-		obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace(
-				"$#$", ".");
-	}
+	});
+	});
+	
 </script>
 </head>
 <body class="model_in">
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">插入模型</h4>
-      </div>
-      <div class="modal-body">
-       <input type="text" id="md5" name="md5" class="form-control" placeholder="请输入模型代码"/>
-       <div id="error"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" onClick="addmodel()">确定</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">插入模型</h4>
+				</div>
+				<div class="modal-body">
+					<input type="text" id="md5" name="md5" class="form-control"
+						placeholder="请输入模型代码" />
+					<div id="error"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button id="ok" type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<input type='radio' name='model' id='modelcategory' checked="checked" />
 	<input type='radio' name='model' id='myhide' />
 	<div id='content'>
@@ -54,11 +52,14 @@
 			我的家园<small>黎明之城</small>
 		</h2>
 		<p>
-			<button type="button" class="btn btn-default" aria-label="插入模型" data-toggle="modal" data-target="#myModal" data-backdrop="static">
-				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> 插入模型
+			<button type="button" class="btn btn-default" aria-label="插入模型"
+				data-toggle="modal" data-target="#myModal" data-backdrop="static">
+				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+				插入模型
 			</button>
 			<button type="button" class="btn btn-default">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 删除模型
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				删除模型
 			</button>
 		</p>
 		<p>
@@ -95,26 +96,6 @@
 		rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'> <Inline
 		nameSpaceName="s" mapDEFToID="true"
 		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
-	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
-		render='true' rotation='0,0,1,0' scale='1,1,1' translation='2,0,0'>
-	<Inline nameSpaceName="s" mapDEFToID="true"
-		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
-	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
-		render='true' rotation='0,0,1,0' scale='1,1,1' translation='4,0,0'>
-	<Inline nameSpaceName="s" mapDEFToID="true"
-		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
-	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
-		render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,2,0'>
-	<Inline nameSpaceName="s" mapDEFToID="true"
-		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
-	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
-		render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,4,0'>
-	<Inline nameSpaceName="s" mapDEFToID="true"
-		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
-	</Inline> </Transform> <Transform bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0'
-		render='true' rotation='0,0,1,0' scale='1,1,1' translation='0,0,2'>
-	<Inline nameSpaceName="s" mapDEFToID="true"
-		url="__BCS_UPLOAD__/e75997bf6ada6a4e9c23619a71cda196/model.x3d">
 	</Inline> </Transform> </scene> </x3d>
 </body>
 </html>
