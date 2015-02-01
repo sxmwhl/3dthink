@@ -6,13 +6,13 @@ var pickID;
 function selectmodel(tsf)
 {
 	pickID=$(tsf).attr("id");
-	$(tsf).attr("scale", "10,10,10");
+	$(".info").text(pickID);
 }
 function groupClick(event)
 {
 	var info=event.hitPnt;
-	$("#info").text(info[0]);
-	alert(info[0]);
+	var xyz="X:"+info[0]+"<br/>Y:"+info[1]+"<br/>Z:"+info[2];
+	$("#xyz").html(xyz);
 }
 function deletemodel(){
 	if(pickID==null){
@@ -73,14 +73,14 @@ $(document).ready(function(){
 			id='slider' class='modelcategory' for='modelcategory'>我的家园</label> <label
 			id='slider' class='myhide' for='myhide'>收起侧栏</label>
 	</div>
-	<aside class="modelcategory margin_left">
-	<div class="container-fluid">
-		<div class="row">
-		<h2>
+	<aside class="modelcategory">
+	<div class="container-fluid mg-left10">	
+	<div class="row">
+		<h3>
 			我的家园<small>黎明之城</small>
-		</h2>
-		</div>
-		<div class="row">
+		</h3>
+		<h4>模型引入</h4>
+		
 			<button type="button" class="btn btn-default" aria-label="插入模型"
 				data-toggle="modal" data-target="#addmodel" data-backdrop="static">
 				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
@@ -93,19 +93,76 @@ $(document).ready(function(){
 			<button type="button" class="btn btn-danger" id="emptymodel" onclick="emptymodel()">
 				<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
 				清空模型
-			</button>
+			</button>		
+		<h4>模型调整（当前选择模型：<small class="info"></small>）</h4>
+		<h6><strong>位置：</strong></h6>
 		</div>
-		<div class="row">
-		<div class="input-group input-sm">
-		<label class="input-group-addon" for="vp_x">X</label>
-        <input type="text" max="10000" min="-10000" step="100" class="form-control" id="vp_x"/>
-        <label class="input-group-addon" for="vp_x">X</label>
-        <input type="text" max="10000" min="-10000" step="100" class="form-control" id="vp_x"/>
-        <label class="input-group-addon" for="vp_x">X</label>
-        <input type="text" max="10000" min="-10000" step="100" class="form-control" id="vp_x"/>
-        </div></div>
-		<p id="info"></p>
-		</div>
+		<form id="modify_form" name="diy_form" action="__URL__/save" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">
+		<div class="form-group">
+              <div class="input-group">
+                   <label class="sr-only" for="vp_x">X</label>
+                   <div class="input-group-addon">X</div>
+                   <input name="vp_x" type="text" id="vp_x" value="{$model.vp_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            
+              <div class="input-group">
+                   <label class="sr-only" for="vp_x">Y</label>
+                   <div class="input-group-addon">Y</div>
+                   <input name="vp_y" type="text" id="vp_y" value="{$model.vp_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            
+              <div class="input-group">
+                   <label class="sr-only" for="vp_x">Z</label>
+                   <div class="input-group-addon">Z</div>
+                   <input name="vp_z" type="text" id="vp_z" value="{$model.vp_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+          </div>
+          <h6><strong>旋转：</strong></h6>
+		<div class="form-group">
+			  <div class="input-group">
+                   <label class="sr-only" for="vp_d_x">X</label>
+                   <div class="input-group-addon">X</div>
+                   <input name="vp_d_x" type="text" id="vp_d_x" value="{$model.vp_d_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+              <div class="input-group">
+                   <label class="sr-only" for="vp_d_y">Y</label>
+                   <div class="input-group-addon">Y</div>
+                   <input name="vp_d_y" type="text" id="vp_d_y" value="{$model.vp_d_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+              <div class="input-group">
+                   <label class="sr-only" for="vp_d_z">Z</label>
+                   <div class="input-group-addon">Z</div>
+                   <input name="vp_d_z" type="text" id="vp_d_z" value="{$model.vp_d_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+              <div class="input-group">
+                   <label class="sr-only" for="vp_d_a">A</label>
+                   <div class="input-group-addon">A</div>
+                   <input name="vp_d_a" type="text" id="vp_d_a" value="{$model.vp_d_a}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>			
+			</div>
+			<h6><strong>放缩比例：</strong></h6>
+			<div class="form-group">
+              <div class="input-group">
+                   <label class="sr-only" for="vp_x">长</label>
+                   <div class="input-group-addon">长</div>
+                   <input name="vp_x" type="text" id="vp_x" value="{$model.vp_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            
+              <div class="input-group">
+                   <label class="sr-only" for="vp_x">宽</label>
+                   <div class="input-group-addon">宽</div>
+                   <input name="vp_y" type="text" id="vp_y" value="{$model.vp_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            
+              <div class="input-group">
+                   <label class="sr-only" for="vp_x">高</label>
+                   <div class="input-group-addon">高</div>
+                   <input name="vp_z" type="text" id="vp_z" value="{$model.vp_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+          </div>
+		<div id="xyz"></div>
+		</form>
+	</div>
 	</aside>
 
 	<x3d id="model"> <scene dopickpass="true" pickmode="idBuf"
