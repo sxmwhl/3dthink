@@ -1,23 +1,49 @@
 <include file="Public:header" />
 <script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
 <script>
+var tsfNum;
+var pickID;
+function selectmodel(tsf)
+{
+	pickID=$(tsf).attr("id");
+	$(tsf).attr("scale", "10,10,10");
+}
+function groupClick(event)
+{
+	var info=event.hitPnt;
+	$("#info").text(info[0]);
+	alert(info[0]);
+}
+function deletemodel(){
+	if(pickID==null){
+		alert("请点击选择要删除的模型！");
+	}
+	var selector="transform#"+pickID;
+	$(selector).remove();	
+}
+function emptymodel(){
+	confirm("确定移除所以模型？");
+	$("group").empty();	
+}
 $(document).ready(function(){
-	$("#ok").click(function(){
-
-		var md5Regex=/^([a-fA-F0-9]{32})$/;
-		if(!md5Regex.test($("#md5").val())){			
-			$("#md5").val("模型代码格式错误！");
-			return false;
-		}
-		$('scene').append("<Inline nameSpaceName='s' mapDEFToID='true'url='__BCS_UPLOAD__/e75997bf6ada6a4e9c23619a71cda196/model.x3d'></Inline>");	
-		$('#myModal').modal('hide');
+   tsfNum=0;
+	  $("button#okbt").click(function(){
+		  var daimaRegex=/^([a-fA-F0-9]{32})$/;
+		  var daima=$("#daima").val();
+		  if(!daimaRegex.test(daima)){			
+				$("#daima").val("模型代码格式错误!!");
+				return false;
+			}
+		  var str="<transform id='s"+tsfNum+"' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><Inline nameSpaceName='in' mapDEFToID='true' url='__BCS_UPLOAD__/"+daima+"/model.x3d'></Inline></transform>";
+			$('group').append(str);	
+			tsfNum++;
+			$('#addmodel').modal('hide');
+	  });	  
 	});
-	});
-	
 </script>
 </head>
 <body class="model_in">
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="addmodel" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -29,13 +55,13 @@ $(document).ready(function(){
 					<h4 class="modal-title" id="myModalLabel">插入模型</h4>
 				</div>
 				<div class="modal-body">
-					<input type="text" id="md5" name="md5" class="form-control"
+					<input type="text" id="daima" name="daima" class="form-control"
 						placeholder="请输入模型代码" />
 					<div id="error"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="ok" type="button" class="btn btn-primary">确定</button>
+					<button id="okbt" type="button" class="btn btn-primary">确定</button>
 				</div>
 			</div>
 		</div>
@@ -48,54 +74,59 @@ $(document).ready(function(){
 			id='slider' class='myhide' for='myhide'>收起侧栏</label>
 	</div>
 	<aside class="modelcategory margin_left">
+	<div class="container-fluid">
+		<div class="row">
 		<h2>
 			我的家园<small>黎明之城</small>
 		</h2>
-		<p>
+		</div>
+		<div class="row">
 			<button type="button" class="btn btn-default" aria-label="插入模型"
-				data-toggle="modal" data-target="#myModal" data-backdrop="static">
+				data-toggle="modal" data-target="#addmodel" data-backdrop="static">
 				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
 				插入模型
 			</button>
-			<button type="button" class="btn btn-default">
+			<button type="button" class="btn btn-default" id="deletemodel" onclick="deletemodel()">
 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				删除模型
 			</button>
-		</p>
-		<p>
-			<button type="button" class="btn btn-default" aria-label="插入模型">
-				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-				插入模型
+			<button type="button" class="btn btn-danger" id="emptymodel" onclick="emptymodel()">
+				<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+				清空模型
 			</button>
-			<button type="button" class="btn btn-default">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-				删除模型
-			</button>
-		</p>
+		</div>
+		<div class="row">
+		<div class="input-group input-sm">
+		<label class="input-group-addon" for="vp_x">X</label>
+        <input type="text" max="10000" min="-10000" step="100" class="form-control" id="vp_x"/>
+        <label class="input-group-addon" for="vp_x">X</label>
+        <input type="text" max="10000" min="-10000" step="100" class="form-control" id="vp_x"/>
+        <label class="input-group-addon" for="vp_x">X</label>
+        <input type="text" max="10000" min="-10000" step="100" class="form-control" id="vp_x"/>
+        </div></div>
+		<p id="info"></p>
+		</div>
 	</aside>
 
 	<x3d id="model"> <scene dopickpass="true" pickmode="idBuf"
 		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
-	<Viewpoint bind='false' centerOfRotation='0,0,0' description='""'
-		fieldOfView='0.785398' isActive='false' metadata='X3DMetadataObject'
-		orientation='0,0,0,1' position='0,0,10' zFar='-1' zFar='-1' zNear='-1'
-		zNear='-1'></Viewpoint> <navigationInfo id="head"
-		headlight='{$model.hl_on}' type='"EXAMINE"'></navigationInfo> <directionalLight
-		id="directional" direction='0 0 -1' on='{$model.dl_on}' intensity='1'
-		shadowIntensity='0.0' color='0 0 0'></directionalLight> <background
+	<Viewpoint bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,100'></Viewpoint> 
+	<navigationInfo id="head" headlight='true' type='"EXAMINE"'></navigationInfo> 
+	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
+	<background
 		topurl="__BCS_PUBLIC__/images/background/horizon_2_top.jpg"
 		righturl="__BCS_PUBLIC__/images/background/horizon_2_right.jpg"
 		lefturl="__BCS_PUBLIC__/images/background/horizon_2_left.jpg"
 		fronturl="__BCS_PUBLIC__/images/background/horizon_2_front.jpg"
 		bottomurl="__BCS_PUBLIC__/images/background/horizon_2_bottom.jpg"
 		backurl="__BCS_PUBLIC__/images/background/horizon_2_back.jpg"
-		skyangle="" groundangle="" groundcolor="" transparency="1.0"
-		skycolor="0 0 0"> </background> <Environment id="gamma"
-		gammaCorrectionDefault="linear"></Environment> <Transform
-		bboxCenter='0,0,0' bboxSize='-1,-1,-1' center='0,0,0' render='true'
-		rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'> <Inline
-		nameSpaceName="s" mapDEFToID="true"
-		url="__BCS_UPLOAD__/f23482cd6cac4bf7ece62323a0c794ed/model.x3d">
-	</Inline> </Transform> </scene> </x3d>
+		skyangle="1.57" groundangle="1.57" groundcolor="" transparency="1.0"
+		skycolor="0 0 0"> </background> 
+		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>		
+	<group onclick="groupClick(event)">
+	
+	</group>
+	</scene>
+	</x3d>
 </body>
 </html>
