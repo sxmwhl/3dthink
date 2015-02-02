@@ -3,30 +3,109 @@
 <script>
 var tsfNum;
 var pickID;
+var tsf_selector;
+function set_pickid(id){
+	pickID=id;
+	tsf_selector="transform#"+pickID;
+}
+function form_disable(){
+	$("[onchange='change()']").attr("disabled","disabled");
+	$("#point_sphere").attr("render","false");
+}
+function form_enable(){
+	$(":disabled").removeAttr("disabled");
+	$("#point_sphere").attr("render","true");
+}
+function set_form(){
+	if(!pickID){		
+		form_disable();
+		$(":disabled").val("");
+	}
+	form_enable();
+	$(".info").text(pickID);
+	var ts=$(tsf_selector).attr("translation").split(",");
+	$("#ts_x").val(ts[0]);
+	$("#ts_y").val(ts[1]);
+	$("#ts_z").val(ts[2]);
+	var rt=$(tsf_selector).attr("rotation").split(",");
+	$("#rt_x").val(rt[0]);
+	$("#rt_y").val(rt[1]);
+	$("#rt_z").val(rt[2]);
+	$("#rt_a").val(rt[3]);
+	var sc=$(tsf_selector).attr("scale").split(",");
+	$("#sc_x").val(sc[0]);
+	$("#sc_y").val(sc[1]);
+	$("#sc_z").val(sc[2]);	
+}
 function selectmodel(tsf)
 {
-	pickID=$(tsf).attr("id");
-	$(".info").text(pickID);
+	set_pickid($(tsf).attr("id"));
+	set_form();
+}
+function change(){
+	if(!pickID){
+		alert("请选择模型后，再调整参数！");
+		return false;
+	}
+	var dou=",";
+	var ts_string=$("#ts_x").val()+dou+$("#ts_y").val()+dou+$("#ts_z").val();
+	$(tsf_selector).attr("translation",ts_string);
+	var rt_string=$("#rt_x").val()+dou+$("#rt_y").val()+dou+$("#rt_z").val()+dou+$("#rt_a").val();
+	$(tsf_selector).attr("rotation",rt_string);
+	var sc_string=$("#sc_x").val()+dou+$("#sc_y").val()+dou+$("#sc_z").val();
+	$(tsf_selector).attr("scale",sc_string);
+}
+function change_point(){
+	var radius=$("#radius").val();
+	var sc=radius+","+radius+","+radius;
+	$("#marker").attr("scale",sc);
 }
 function groupClick(event)
 {
 	var info=event.hitPnt;
+	$('#marker').attr('translation', info);
 	var xyz="X:"+info[0]+"<br/>Y:"+info[1]+"<br/>Z:"+info[2];
 	$("#xyz").html(xyz);
 }
 function deletemodel(){
-	if(pickID==null){
+	if(!pickID){
 		alert("请点击选择要删除的模型！");
+		return false;
 	}
-	var selector="transform#"+pickID;
-	$(selector).remove();	
+	if (!confirm("确定删除模型"+pickID+"？")){
+		return false;
+	}	
+	var result=$(tsf_selector).remove();	
+	if(result.attr("id")==null){
+		alert("模型"+pickID+"已不存在！");
+		return false;
+	}
+	pickID=null;
+	set_form();
+	//TODO:删除后变更表格状态
 }
 function emptymodel(){
-	confirm("确定移除所以模型？");
+	if(!confirm("确定移除所以模型？")){
+		return false;
+	}
 	$("group").empty();	
+	tsfNum=0;
+	pickID=null;
+	set_form();
+}
+function clearNoNum(obj) {
+	obj.value = obj.value.replace(/[^\d.-]/g, ""); //清除“数字”和“.”以外的字符  
+
+	obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字而不是. 
+
+	obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的.   
+
+	obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace(
+			"$#$", ".");
 }
 $(document).ready(function(){
    tsfNum=0;
+   form_disable();
 	  $("button#okbt").click(function(){
 		  var daimaRegex=/^([a-fA-F0-9]{32})$/;
 		  var daima=$("#daima").val();
@@ -36,6 +115,9 @@ $(document).ready(function(){
 			}
 		  var str="<transform id='s"+tsfNum+"' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><Inline nameSpaceName='in' mapDEFToID='true' url='__BCS_UPLOAD__/"+daima+"/model.x3d'></Inline></transform>";
 			$('group').append(str);	
+			set_pickid("s"+tsfNum);				
+			set_form();
+			$("#point_sphere").attr("render","false");
 			tsfNum++;
 			$('#addmodel').modal('hide');
 	  });	  
@@ -93,73 +175,83 @@ $(document).ready(function(){
 			<button type="button" class="btn btn-danger" id="emptymodel" onclick="emptymodel()">
 				<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
 				清空模型
-			</button>		
+			</button>	
+	</div>
+		<form id="diy_form" name="diy_form" action="__URL__/save" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">	
 		<h4>模型调整（当前选择模型：<small class="info"></small>）</h4>
 		<h6><strong>位置：</strong></h6>
-		</div>
-		<form id="modify_form" name="diy_form" action="__URL__/save" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">
+		
+		
 		<div class="form-group">
               <div class="input-group">
-                   <label class="sr-only" for="vp_x">X</label>
+                   <label class="sr-only" for="ts_x">X</label>
                    <div class="input-group-addon">X</div>
-                   <input name="vp_x" type="text" id="vp_x" value="{$model.vp_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="ts_x" type="text" id="ts_x" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
             
               <div class="input-group">
-                   <label class="sr-only" for="vp_x">Y</label>
+                   <label class="sr-only" for="ts_x">Y</label>
                    <div class="input-group-addon">Y</div>
-                   <input name="vp_y" type="text" id="vp_y" value="{$model.vp_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="ts_y" type="text" id="ts_y" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
             
               <div class="input-group">
-                   <label class="sr-only" for="vp_x">Z</label>
+                   <label class="sr-only" for="ts_x">Z</label>
                    <div class="input-group-addon">Z</div>
-                   <input name="vp_z" type="text" id="vp_z" value="{$model.vp_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="ts_z" type="text" id="ts_z" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
           </div>
           <h6><strong>旋转：</strong></h6>
 		<div class="form-group">
 			  <div class="input-group">
-                   <label class="sr-only" for="vp_d_x">X</label>
+                   <label class="sr-only" for="rt_x">X</label>
                    <div class="input-group-addon">X</div>
-                   <input name="vp_d_x" type="text" id="vp_d_x" value="{$model.vp_d_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="rt_x" type="text" id="rt_x" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
               <div class="input-group">
-                   <label class="sr-only" for="vp_d_y">Y</label>
+                   <label class="sr-only" for="rt_y">Y</label>
                    <div class="input-group-addon">Y</div>
-                   <input name="vp_d_y" type="text" id="vp_d_y" value="{$model.vp_d_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="rt_y" type="text" id="rt_y" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
               <div class="input-group">
-                   <label class="sr-only" for="vp_d_z">Z</label>
+                   <label class="sr-only" for="rt_z">Z</label>
                    <div class="input-group-addon">Z</div>
-                   <input name="vp_d_z" type="text" id="vp_d_z" value="{$model.vp_d_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="rt_z" type="text" id="rt_z" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
               <div class="input-group">
-                   <label class="sr-only" for="vp_d_a">A</label>
+                   <label class="sr-only" for="rt_a">A</label>
                    <div class="input-group-addon">A</div>
-                   <input name="vp_d_a" type="text" id="vp_d_a" value="{$model.vp_d_a}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="rt_a" type="text" id="rt_a" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>			
 			</div>
 			<h6><strong>放缩比例：</strong></h6>
 			<div class="form-group">
               <div class="input-group">
-                   <label class="sr-only" for="vp_x">长</label>
+                   <label class="sr-only" for="sc_x">长</label>
                    <div class="input-group-addon">长</div>
-                   <input name="vp_x" type="text" id="vp_x" value="{$model.vp_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="sc_x" type="text" id="sc_x" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
             
               <div class="input-group">
-                   <label class="sr-only" for="vp_x">宽</label>
+                   <label class="sr-only" for="sc_y">宽</label>
                    <div class="input-group-addon">宽</div>
-                   <input name="vp_y" type="text" id="vp_y" value="{$model.vp_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="sc_y" type="text" id="sc_y" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
             
               <div class="input-group">
-                   <label class="sr-only" for="vp_x">高</label>
+                   <label class="sr-only" for="sc_z">高</label>
                    <div class="input-group-addon">高</div>
-                   <input name="vp_z" type="text" id="vp_z" value="{$model.vp_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="sc_z" type="text" id="sc_z" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
           </div>
+          <h6><strong>点球大小：</strong></h6>
+			<div class="form-group">
+			<div class="input-group">
+                   <label class="sr-only" for="sc_z">点球大小</label>
+                   <div class="input-group-addon">半径</div>
+                   <input name="radius" type="text" id="radius" value="" onchange="change_point()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            </div>
 		<div id="xyz"></div>
 		</form>
 	</div>
@@ -168,7 +260,7 @@ $(document).ready(function(){
 	<x3d id="model"> <scene dopickpass="true" pickmode="idBuf"
 		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
 	<Viewpoint bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,100'></Viewpoint> 
-	<navigationInfo id="head" headlight='true' type='"EXAMINE"'></navigationInfo> 
+	<navigationInfo id="head" headlight='true' type='"EXAMINE" "ANY"'></navigationInfo> 
 	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
 	<background
 		topurl="__BCS_PUBLIC__/images/background/horizon_2_top.jpg"
@@ -179,7 +271,16 @@ $(document).ready(function(){
 		backurl="__BCS_PUBLIC__/images/background/horizon_2_back.jpg"
 		skyangle="1.57" groundangle="1.57" groundcolor="" transparency="1.0"
 		skycolor="0 0 0"> </background> 
-		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>		
+		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>
+		<Transform id="marker" scale="1,1,1" translation="0,0,0">
+            <Shape id="point_sphere" render="false">
+                <Appearance>
+                    <Material diffuseColor="#FFD966"></Material>
+                </Appearance>
+                <Sphere></Sphere>
+            </Shape>
+        </Transform>
+	
 	<group onclick="groupClick(event)">
 	
 	</group>
