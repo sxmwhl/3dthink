@@ -129,6 +129,7 @@ function addmodel(lujing){
 		$('group').append(str);	
 		set_pickid("s"+tsfNum);				
 		set_form();
+		$("shape#point_sphere").attr("render","false");
 		tsfNum++;
 		$('#addmodel').modal('hide');
 }

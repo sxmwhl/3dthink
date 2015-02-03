@@ -9,9 +9,6 @@ $(document).ready(function(){
 	   var lujing='__BCS_UPLOAD__';
 	   addmodel(lujing);
    });  
-   $("#mydiy").click(function(event){
-	   groupClick(event);
-   });
 });
 </script>
 </head>
@@ -28,9 +25,9 @@ $(document).ready(function(){
 					<h4 class="modal-title" id="myModalLabel">插入模型</h4>
 				</div>
 				<div class="modal-body">
-					<input type="text" id="daima" name="daima" class="form-control"
-						placeholder="请输入模型代码" />
-					<div id="error"></div>
+				<label for="daima">请输入模型代码</label>
+					<input type="text" id="daima" name="daima" class="form-control" placeholder="请输入模型代码" />
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -172,7 +169,7 @@ $(document).ready(function(){
             </Shape>
         </Transform>
 	
-	<group id="mydiy">
+	<group id="mydiy" onclick="groupClick(event)">
 	
 	</group>
 	</scene>
