@@ -126,7 +126,7 @@ function addmodel(lujing){
 			return false;
 		}
 	  var str="<transform id='s"+tsfNum+"' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><Inline nameSpaceName='in' mapDEFToID='true' url='"+lujing+"/"+daima+"/model.x3d'></Inline></transform>";
-		$('group').append(str);	
+		$('group#mydiy').append(str);	
 		set_pickid("s"+tsfNum);				
 		set_form();
 		$("shape#point_sphere").attr("render","false");

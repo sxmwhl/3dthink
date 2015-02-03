@@ -1,6 +1,5 @@
 <include file="Public:header" />
 <script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
-<script type='text/javascript' src='__BCS_PUBLIC__/js/sxm.js'></script>
 <script>
 $(document).ready(function(){
    tsfNum=0;
@@ -8,7 +7,19 @@ $(document).ready(function(){
    $("button#okbt").click(function(){
 	   var lujing='__BCS_UPLOAD__';
 	   addmodel(lujing);
-   });  
+   });
+   $("button#showmodellist").click(function(){
+	   $("ul.list-group").empty();
+	   $('group#mydiy').children().each(function(){
+		   var str="<li class='list-group-item'>"+$(this).attr('id')+"</li>";
+		   $("ul.list-group").append(str);
+		   //alert($(this).attr("id"));
+	   });
+	   //$(".list-group-item").text($('group#mydiy').children().length);
+	   //$('group#mydiy').children().length;
+	   //return false;
+   });
+   
 });
 </script>
 </head>
@@ -36,13 +47,55 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="showmodel" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">已插入模型列表</h4>
+				</div>
+				<div class="modal-body">
+					<ul class="list-group">
+						<li class="list-group-item">Cras justo odio</li>
+						<li class="list-group-item">Dapibus ac facilisis in</li>
+						<li class="list-group-item">Morbi leo risus</li>
+						<li class="list-group-item">Porta ac consectetur ac</li>
+						<li class="list-group-item">Vestibulum at eros</li>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button id="okclose" type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type='radio' name='model' id='modelinfo' />
 	<input type='radio' name='model' id='modelcategory' checked="checked" />
 	<input type='radio' name='model' id='myhide' />
 	<div id='content'>
-		<a id='slider' class='home' href='__ROOT__/'>返回首页</a> <label
-			id='slider' class='modelcategory' for='modelcategory'>我的家园</label> <label
-			id='slider' class='myhide' for='myhide'>收起侧栏</label>
+		<a id='slider' class='home' href='__ROOT__/'>返回首页</a>
+		<label	id='slider' class='modelcategory' for='modelcategory'>我的家园</label> 
+		<label id='slider' class='modelinfo' for='modelinfo'>辅助信息</label>		
+		<label	id='slider' class='myhide' for='myhide'>收起侧栏</label>
 	</div>
+	<aside class="modelinfo">
+	<div class="container-fluid mg-left10">
+	<div class="row">
+	<h3>辅助信息</h3>
+	<button id="showmodellist" type="button" class="btn btn-default" aria-label="插入模型"
+				data-toggle="modal" data-target="#showmodel" data-backdrop="static">
+				<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+				显示已插入模型
+			</button>
+	</div>
+	
+	</div>
+	</aside>
 	<aside class="modelcategory">
 	<div class="container-fluid mg-left10">	
 	<div class="row">
