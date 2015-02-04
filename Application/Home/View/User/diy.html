@@ -4,34 +4,37 @@
 $(document).ready(function(){
    tsfNum=0;
    form_disable();
-   $("button#okbt").click(function(){
+   $("button#addModelOkBt").click(function(){
 	   var lujing='__BCS_UPLOAD__';
 	   addmodel(lujing);
    });
-   $("button#showmodellist").click(function(){
-	   $("table#modellist").empty();
+   $("button#saveBt").click(function(){
+	   var domTree=$("group#mydiy").html();
+	   alert(domTree);
+	   $("code#codeShow").text(domTree);
+   });
+   $("button#modelListOkBt").click(function(){
+	   $('#modelListModal').modal('hide');
+   });
+   $("button#modelListBt").click(function(){
+	   $("table#modelListTable").empty();
 	   $('group#mydiy').children().each(function(){
 		   var id=$(this).attr("id");
 		   var description=$(this).attr("description");
-		   var select="<button id='"+id+"' type='button' class='btn btn-default' aria-label='选择'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></button>";
-		   var deletemodel="<button type='button' class='btn btn-default' aria-label='删除'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>";
+		   var select="<button id='s"+id+"' type='button' class='btn btn-default btn-xs' aria-label='选择'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></button>";
+		   var deletemodel="<button id='d"+id+"' type='button' class='btn btn-default btn-xs' aria-label='删除'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>";
 		   var tag=$(this).attr("tag");
 		   var str="<tr><td>"+id+"</td><td>"+description+"</td><td>"+select+"</td><td>"+deletemodel+"</td><td>"+tag+"</td></tr>";
-		   $("table#modellist").append(str);
-		   $("button#"+id).attr("onclick","list_select_model('"+id+"')");
-		   $("button#"+id).attr("onclick","list_delete_model('"+id+"')");
-		   //alert($(this).attr("id"));
-	   });
-	   //$(".list-group-item").text($('group#mydiy').children().length);
-	   //$('group#mydiy').children().length;
-	   //return false;
-   });
-   
+		   $("table#modelListTable").append(str);
+		   $("button#s"+id).attr("onclick","list_select_model('"+id+"')");
+		   $("button#d"+id).attr("onclick","list_delete_model('"+id+"')");
+	   });	   
+   });   
 });
 </script>
 </head>
 <body class="model_in">
-	<div class="modal fade" id="addmodel" tabindex="-1" role="dialog"
+	<div class="modal fade" id="addModelModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -51,17 +54,17 @@ $(document).ready(function(){
 						<button id="sphere" type="button" class="btn btn-default"  onclick="insert_shape('sphere')"><img src="__BCS_PUBLIC__/images/Sphere.gif"></button>
 						<button id="cone" type="button" class="btn btn-default" onclick="insert_shape('cone')"><img src="__BCS_PUBLIC__/images/Cone.gif"></button>
 						<button id="cylinder" type="button" class="btn btn-default" onclick="insert_shape('cylinder')"><img src="__BCS_PUBLIC__/images/Cylinder.gif"></button>
+						<button id="text" type="button" class="btn btn-default" onclick="insert_shape('text')"><img src="__BCS_PUBLIC__/images/Text.gif"></button>
 					</div>
-
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="okbt" type="button" class="btn btn-primary">确定</button>
+					<button id="addModelOkBt" type="button" class="btn btn-primary">确定</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="showmodel" tabindex="-1" role="dialog"
+	<div class="modal fade" id="modelListModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -82,13 +85,36 @@ $(document).ready(function(){
 							<td>来源</td>
 						</tr>
 					</table>
-					<table id="modellist" class="table table-striped">
+					<table id="modelListTable" class="table table-striped">
 						
 					</table>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="okclose" type="button" class="btn btn-primary">确定</button>
+					<button id="modelListOkBt" type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="domTree" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Dom树</h4>
+				</div>
+				<div class="modal-body">
+				<code id="codeShow">
+				
+				</code>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button id="modelListOkBt" type="button" class="btn btn-primary">确定</button>
 				</div>
 			</div>
 		</div>
@@ -105,25 +131,31 @@ $(document).ready(function(){
 	<aside class="modelinfo">
 	<div class="container-fluid mg-left10">
 	<include file="Public:userCenter" />
-	<div class="row">
-	<h3>辅助信息</h3>
-	<button id="showmodellist" type="button" class="btn btn-default" aria-label="插入模型"
-				data-toggle="modal" data-target="#showmodel" data-backdrop="static">
-				<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-				显示已插入模型
-			</button>	
-	</div>
-	  <form role="form">
+			<div class="row">
+				<h3>辅助信息</h3>
+				<button id="modelListBt" type="button" class="btn btn-default"
+					aria-label="插入模型" data-toggle="modal" data-target="#modelListModal"
+					data-backdrop="static">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					显示已插入模型
+				</button>
+				<button id="saveBt" type="button" class="btn btn-default"
+					aria-label="插入模型" data-toggle="modal" data-target="#domTree"
+					data-backdrop="static">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					保存
+				</button>
+			</div>
+			<form role="form">
 	   <h6><strong>点球大小：</strong></h6>
 			<div class="form-group">
 			<div class="input-group">
                    <label class="sr-only" for="sc_z">点球大小</label>
                    <div class="input-group-addon">半径</div>
-                   <input name="radius" type="text" id="radius" value="" onchange="change_point_sphere()" onkeyup="clearNoNum(this)" class="form-control" placeholder="1"/>
+                   <input name="radius" type="text" id="radius" value="" onchange="change_point_sphere()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
             </div>
        </form>
-
 	</div>
 	</aside>
 	<aside class="modelcategory">
@@ -136,7 +168,7 @@ $(document).ready(function(){
 		<h4>模型引入</h4>
 		
 			<button type="button" class="btn btn-default" aria-label="插入模型"
-				data-toggle="modal" data-target="#addmodel" data-backdrop="static">
+				data-toggle="modal" data-target="#addModelModal" data-backdrop="static">
 				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
 				插入模型
 			</button>
@@ -151,22 +183,18 @@ $(document).ready(function(){
 	</div>
 		<form id="diy_form" name="diy_form" action="__URL__/save" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">	
 		<h4>模型调整（当前选择模型：<small class="info"></small>）</h4>
-		<h6><strong>位置：</strong></h6>
-		
-		
+		<h6><strong>位置：</strong></h6>		
 		<div class="form-group">
               <div class="input-group">
                    <label class="sr-only" for="ts_x">X</label>
                    <div class="input-group-addon">X</div>
                    <input name="ts_x" type="text" id="ts_x" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
-              </div>
-            
+              </div>            
               <div class="input-group">
                    <label class="sr-only" for="ts_x">Y</label>
                    <div class="input-group-addon">Y</div>
                    <input name="ts_y" type="text" id="ts_y" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
-              </div>
-            
+              </div>            
               <div class="input-group">
                    <label class="sr-only" for="ts_x">Z</label>
                    <div class="input-group-addon">Z</div>
@@ -224,7 +252,7 @@ $(document).ready(function(){
 
 	<x3d id="model"> <scene dopickpass="true" pickmode="idBuf"
 		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
-	<Viewpoint bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,100'></Viewpoint> 
+	<Viewpoint bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,50'></Viewpoint> 
 	<navigationInfo id="head" headlight='true' type='"EXAMINE" "ANY"'></navigationInfo> 
 	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
 	<background
@@ -237,15 +265,14 @@ $(document).ready(function(){
 		skyangle="1.57" groundangle="1.57" groundcolor="" transparency="1.0"
 		skycolor="0 0 0"> </background> 
 		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>
-		<Transform id="marker" scale="1,1,1" translation="0,0,0">
+		<Transform id="marker" scale="0.5,0.5,0.5" translation="0,0,0">
             <Shape id="point_sphere" render="false">
                 <Appearance>
                     <Material diffuseColor="#FFD966"></Material>
                 </Appearance>
                 <Sphere></Sphere>
             </Shape>
-        </Transform>
-	
+        </Transform>	
 	<group id="mydiy" onclick="groupClick(event)">
 	
 	</group>

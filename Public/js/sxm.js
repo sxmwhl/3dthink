@@ -25,15 +25,15 @@ function set_pickid(id){
 	tsf_selector="transform#"+pickID;
 }
 function form_disable(){	
-	$("[onchange='change()']").attr("disabled","disabled");	
+	$("[onchange='change()']").attr("disabled","disabled");
+	$("input#radius").attr("disabled","disabled");
 	$("shape#point_sphere").attr("render","false");
 }
 function form_enable(){
 	$(":disabled").removeAttr("disabled");
 	$("#point_sphere").attr("render","true");
 }
-function set_form(){
-	
+function set_form(){	
 	if(!pickID){		
 		form_disable();	
 		$(":disabled").val("");
@@ -55,17 +55,17 @@ function set_form(){
 	$("#sc_x").val(sc[0]);
 	$("#sc_y").val(sc[1]);
 	$("#sc_z").val(sc[2]);	
+	var pointRadius=$("transform#marker").attr("scale").split(",");
+	$("input#radius").val(pointRadius[0]);
 }
-function selectmodel(tsf)
-{
+function selectmodel(tsf){
 	set_pickid($(tsf).attr("id"));
 	set_form();
 }
-function list_select_model(id)
-{
+function list_select_model(id){
 	set_pickid(id);
 	set_form();
-	$('#showmodel').modal('hide');
+	$('#modelListModal').modal('hide');
 }
 function change(){
 	if(!pickID){
@@ -85,8 +85,7 @@ function change_point_sphere(){
 	var sc=radius+","+radius+","+radius;
 	$("#marker").attr("scale",sc);
 }
-function groupClick(event)
-{
+function groupClick(event){
 	var info=event.hitPnt;
 	$('#marker').attr('translation', info);
 	var x=Math.round(info[0]*1000)/1000;
@@ -111,6 +110,11 @@ function deletemodel(){
 	pickID=null;
 	set_form();
 	//TODO:删除后变更表格状态
+}
+function list_delete_model(id){
+	set_pickid(id);
+	deletemodel();
+	$('#modelListModal').modal('hide');
 }
 function emptymodel(){
 	if(!confirm("确定移除所以模型？")){
@@ -139,16 +143,25 @@ function addmodel(lujing){
 		set_pickid("s"+tsfNum);				
 		set_form();
 		$("shape#point_sphere").attr("render","false");
-		tsfNum++;
-		$('#addmodel').modal('hide');
+		tsfNum +=1;
+		$('#addModelModal').modal('hide');
 }
 function insert_shape(shape){
 	var color=Math.random()+","+Math.random()+","+Math.random();
-	var str="<transform id='s"+tsfNum+"' tag='basic' description='暂无描述' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+"></"+shape+"></shape></transform>";
+	var str="<transform id='s"+tsfNum+"' tag='basic' description='暂无描述' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+" id='g"+tsfNum+"'></"+shape+"></shape></transform>";
 	$('group#mydiy').append(str);
+	if(shape==="text"){
+		var str=prompt("请输入文字内容：（50字以内）","");
+		if(str.length>50){
+			alert("输入文字内容过长！");
+			return false;
+		}
+		$("text#g"+tsfNum).attr("string",str);
+		$("text#g"+tsfNum).attr("solid","false");
+	}
 	set_pickid("s"+tsfNum);				
 	set_form();
 	$("shape#point_sphere").attr("render","false");
-	tsfNum++;
-	$('#addmodel').modal('hide');
+	tsfNum +=1;
+	$('#addModelModal').modal('hide');
 }
