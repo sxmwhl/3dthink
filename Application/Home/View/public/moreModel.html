@@ -1,11 +1,5 @@
 <div class="container-fluid mg-left10">
-<div class="row">
-<if condition="is_login()">
-欢迎：{:get_username()} | <a href="{:U('User/ucenter')}">会员中心</a> | <a href="{:U('User/logout')}">退出</a>
-<else/>
-<a href='__ROOT__/index.php/home/user/login'>登陆</a> | <a href='__ROOT__/index.php/home/user/register'>注册</a>
-</if>
-</div>
+<include file="Public:userCenter" />
 <div class="row">
 <form id="searchform" action="__MODULE__/index/search" method="post" class="navbar-form navbar-left" role="search">
   <div class="form-group">
@@ -28,9 +22,9 @@
 </volist>
 </ul>
 </div>
-<div class="row">
+<div class="row" align="center">
 <br/>
-<a class="btn btn-primary" href="__MODULE__/form" role="button">分享模型</a>
+<a class="btn btn-primary" href="__MODULE__/form">分 享 模 型</a>
 </div>
 <include file="Public:footer" />
 </div>

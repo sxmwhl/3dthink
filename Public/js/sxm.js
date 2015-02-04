@@ -61,6 +61,12 @@ function selectmodel(tsf)
 	set_pickid($(tsf).attr("id"));
 	set_form();
 }
+function list_select_model(id)
+{
+	set_pickid(id);
+	set_form();
+	$('#showmodel').modal('hide');
+}
 function change(){
 	if(!pickID){
 		alert("请选择模型后，再调整参数！");
@@ -74,7 +80,7 @@ function change(){
 	var sc_string=$("#sc_x").val()+dou+$("#sc_y").val()+dou+$("#sc_z").val();
 	$(tsf_selector).attr("scale",sc_string);
 }
-function change_point(){
+function change_point_sphere(){
 	var radius=$("#radius").val();
 	var sc=radius+","+radius+","+radius;
 	$("#marker").attr("scale",sc);
@@ -83,7 +89,10 @@ function groupClick(event)
 {
 	var info=event.hitPnt;
 	$('#marker').attr('translation', info);
-	var xyz="X:"+info[0]+"<br/>Y:"+info[1]+"<br/>Z:"+info[2];
+	var x=Math.round(info[0]*1000)/1000;
+	var y=Math.round(info[1]*1000)/1000;
+	var z=Math.round(info[2]*1000)/1000;
+	var xyz="X:"+x+"<br/>Y:"+y+"<br/>Z:"+z;
 	$("#xyz").html(xyz);
 }
 function deletemodel(){
@@ -125,11 +134,21 @@ function addmodel(lujing){
 			$("#daima").val("模型代码格式错误!!");
 			return false;
 		}
-	  var str="<transform id='s"+tsfNum+"' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><Inline nameSpaceName='in' mapDEFToID='true' url='"+lujing+"/"+daima+"/model.x3d'></Inline></transform>";
+	  var str="<transform id='s"+tsfNum+"' tag='shared' description='暂无描述' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><Inline nameSpaceName='in' mapDEFToID='true' url='"+lujing+"/"+daima+"/model.x3d'></Inline></transform>";
 		$('group#mydiy').append(str);	
 		set_pickid("s"+tsfNum);				
 		set_form();
 		$("shape#point_sphere").attr("render","false");
 		tsfNum++;
 		$('#addmodel').modal('hide');
+}
+function insert_shape(shape){
+	var color=Math.random()+","+Math.random()+","+Math.random();
+	var str="<transform id='s"+tsfNum+"' tag='basic' description='暂无描述' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+"></"+shape+"></shape></transform>";
+	$('group#mydiy').append(str);
+	set_pickid("s"+tsfNum);				
+	set_form();
+	$("shape#point_sphere").attr("render","false");
+	tsfNum++;
+	$('#addmodel').modal('hide');
 }
