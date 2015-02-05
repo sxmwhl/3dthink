@@ -17,9 +17,25 @@ jQuery.extend(jQuery.validator.messages, {
     	max: jQuery.validator.format("请输入一个最大为{0} 的值"),
     	min: jQuery.validator.format("请输入一个最小为{0} 的值")
     });
-var tsfNum;
-var pickID;
-var tsf_selector;
+var tsfNum=0;
+var pickID="";
+var tsf_selector="";
+function show_model_list(){
+	$("tr#title").nextAll("tr").remove();
+	   $('group#3dant_diy').children().each(function(){
+		   $(this).children().each(function(){
+			   var id=$(this).attr("id");
+			   var description=$(this).attr("description");
+			   var select="<button id='s"+id+"' type='button' class='btn btn-default btn-xs' aria-label='选择'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></button>";
+			   var deletemodel="<button id='d"+id+"' type='button' class='btn btn-default btn-xs' aria-label='删除'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>";
+			   var tag=$(this).attr("tag");
+			   var str="<tr><td>"+id+"</td><td>"+description+"</td><td>"+select+"</td><td>"+deletemodel+"</td><td>"+tag+"</td></tr>";
+			   $("tr#title").after(str);
+			   $("button#s"+id).attr("onclick","list_select_model('"+id+"')");
+			   $("button#d"+id).attr("onclick","list_delete_model('"+id+"')");
+		   });		   
+	   });
+}
 function set_pickid(id){
 	pickID=id;
 	tsf_selector="transform#"+pickID;
@@ -107,7 +123,7 @@ function deletemodel(){
 		alert("模型"+pickID+"已不存在！");
 		return false;
 	}
-	pickID=null;
+	pickID="";
 	set_form();
 	//TODO:删除后变更表格状态
 }
@@ -122,7 +138,7 @@ function emptymodel(){
 	}
 	$("group").empty();	
 	tsfNum=0;
-	pickID=null;
+	pickID="";
 	set_form();
 }
 function clearNoNum(obj) {
@@ -138,8 +154,8 @@ function addmodel(lujing){
 			$("#daima").val("模型代码格式错误!!");
 			return false;
 		}
-	  var str="<transform id='s"+tsfNum+"' tag='shared' description='暂无描述' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><Inline nameSpaceName='in' mapDEFToID='true' url='"+lujing+"/"+daima+"/model.x3d'></Inline></transform>";
-		$('group#mydiy').append(str);	
+	  var str="<transform id='s"+tsfNum+"' tag='shared' description='暂无描述' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><Inline nameSpaceName='in' tag='3dant_inline' mapDEFToID='true' url='"+lujing+"/"+daima+"/model.x3d'></Inline></transform>";
+		$('group#3dant_shared').append(str);	
 		set_pickid("s"+tsfNum);				
 		set_form();
 		$("shape#point_sphere").attr("render","false");
@@ -149,13 +165,13 @@ function addmodel(lujing){
 function insert_shape(shape){
 	var color=Math.random()+","+Math.random()+","+Math.random();
 	var str="<transform id='s"+tsfNum+"' tag='basic' description='暂无描述' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+" id='g"+tsfNum+"'></"+shape+"></shape></transform>";
-	$('group#mydiy').append(str);
+	$('group#3dant_basic').append(str);
 	if(shape==="text"){
 		var str=prompt("请输入文字内容：（50字以内）","");
 		if(str.length>50){
 			alert("输入文字内容过长！");
 			return false;
-		}
+		}//todo 如果为空
 		$("text#g"+tsfNum).attr("string",str);
 		$("text#g"+tsfNum).attr("solid","false");
 	}

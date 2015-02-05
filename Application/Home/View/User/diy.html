@@ -1,35 +1,31 @@
 <include file="Public:header" />
 <script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
+<script type='text/javascript' src='__BCS_PUBLIC__/js/jquery.json.min.js'></script>
 <script>
 $(document).ready(function(){
-   tsfNum=0;
    form_disable();
    $("button#addModelOkBt").click(function(){
 	   var lujing='__BCS_UPLOAD__';
 	   addmodel(lujing);
    });
    $("button#saveBt").click(function(){
-	   var domTree=$("group#mydiy").html();
-	   alert(domTree);
-	   $("code#codeShow").text(domTree);
+	   var obj=new Object();
+	   $("[tag='3dant_inline']").children().remove();
+	   obj.shared=$("group#3dant_shared").html();
+	   obj.basic=$("group#3dant_basic").html();
+	   obj.internet=$("group#3dant_internet").html();
+	   obj.id=1;
+	   obj.uid=2;
+	   
+	   var str=$.toJSON(obj);
+	   var obj2=eval("(" + str + ")");
+	   alert(obj2.shared);
+	   
    });
    $("button#modelListOkBt").click(function(){
 	   $('#modelListModal').modal('hide');
    });
-   $("button#modelListBt").click(function(){
-	   $("table#modelListTable").empty();
-	   $('group#mydiy').children().each(function(){
-		   var id=$(this).attr("id");
-		   var description=$(this).attr("description");
-		   var select="<button id='s"+id+"' type='button' class='btn btn-default btn-xs' aria-label='选择'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></button>";
-		   var deletemodel="<button id='d"+id+"' type='button' class='btn btn-default btn-xs' aria-label='删除'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>";
-		   var tag=$(this).attr("tag");
-		   var str="<tr><td>"+id+"</td><td>"+description+"</td><td>"+select+"</td><td>"+deletemodel+"</td><td>"+tag+"</td></tr>";
-		   $("table#modelListTable").append(str);
-		   $("button#s"+id).attr("onclick","list_select_model('"+id+"')");
-		   $("button#d"+id).attr("onclick","list_delete_model('"+id+"')");
-	   });	   
-   });   
+   $("button#modelListBt").click(show_model_list);   
 });
 </script>
 </head>
@@ -76,18 +72,15 @@ $(document).ready(function(){
 					<h4 class="modal-title" id="myModalLabel">已插入模型列表</h4>
 				</div>
 				<div class="modal-body">
-				<table id="title" class="table">
-						<tr class="success">
+				<table id="modelListTable" class="table table-striped">
+						<tr id="title" class="success">
 							<td>ID</td>
 							<td>名称</td>
 							<td>选择</td>
 							<td>删除</td>
 							<td>来源</td>
-						</tr>
-					</table>
-					<table id="modelListTable" class="table table-striped">
-						
-					</table>
+						</tr>						
+				</table>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -273,8 +266,13 @@ $(document).ready(function(){
                 <Sphere></Sphere>
             </Shape>
         </Transform>	
-	<group id="mydiy" onclick="groupClick(event)">
-	
+	<group id="3dant_diy" onclick="groupClick(event)">
+	<group id="3dant_shared">
+	</group>
+	<group id="3dant_basic">
+	</group>
+	<group id="3dant_internet">
+	</group>	
 	</group>
 	</scene>
 	</x3d>
