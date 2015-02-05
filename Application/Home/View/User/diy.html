@@ -4,6 +4,7 @@
 <script>
 $(document).ready(function(){
    form_disable();
+   tsfNum=get_max_id();
    $("button#addModelOkBt").click(function(){
 	   var lujing='__BCS_UPLOAD__';
 	   addmodel(lujing);
@@ -25,7 +26,8 @@ $(document).ready(function(){
    $("button#modelListOkBt").click(function(){
 	   $('#modelListModal').modal('hide');
    });
-   $("button#modelListBt").click(show_model_list);   
+   $("button#modelListBt").click(show_model_list);
+   $("button#saveOkBt").click(get_max_id);
 });
 </script>
 </head>
@@ -107,7 +109,7 @@ $(document).ready(function(){
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="modelListOkBt" type="button" class="btn btn-primary">确定</button>
+					<button id="saveOkBt" type="button" class="btn btn-primary">确定</button>
 				</div>
 			</div>
 		</div>
@@ -176,8 +178,15 @@ $(document).ready(function(){
 	</div>
 		<form id="diy_form" name="diy_form" action="__URL__/save" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">	
 		<h4>模型调整（当前选择模型：<small class="info"></small>）</h4>
-		<h6><strong>位置：</strong></h6>		
 		<div class="form-group">
+		<h6><strong>模型名称：</strong></h6>
+		<div class="input-group">
+                   <label class="sr-only" for="ts_x">模型名称</label>
+                   <div class="input-group-addon">名称</div>
+                   <input name="title" type="text" id="title" value="" onchange="change()" class="form-control" />
+        </div>
+		<h6><strong>位置：</strong></h6>		
+		
               <div class="input-group">
                    <label class="sr-only" for="ts_x">X</label>
                    <div class="input-group-addon">X</div>

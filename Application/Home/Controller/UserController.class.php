@@ -169,7 +169,8 @@ class UserController extends HomeController {
     	$this->display();
     
     }
-    public function save(){
+    public function save_diy(){
+    	
     	echo ("保存我的家园");
     }
 }
