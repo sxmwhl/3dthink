@@ -1,20 +1,20 @@
 <include file="Public:header" />
 </head>
 <body>
-	<div class="wrap">
+	<div class="container-fluid">
 		<include file="Public:logo" />
-		<form name="category_form" method="post" action="__URL__/update"
-	class="formclass longform">
-		<h1>编 辑 分 类</h1>
-	<table width="100%" border="0" cellspacing="1" cellpadding="0">
-		<tr>
-			<th>所属分类：</th>
-			<td><select name="root_id_a" id="root_id" class="sel" disabled="disabled"><option
+		<div class="row">
+		<form name="category_form" method="post" action="__URL__/update" class="formclass">
+		<h3>编 辑 分 类</h3>
+		<div class="form-group">
+		<label for="root_id_a">所属分类：</label>
+			<select name="root_id_a" id="root_id" class="form-control" disabled="disabled"><option
 						value="0">作为顶级分类</option>{$category_option}
-			</select><a href="__URL__/lists"> 分类编辑</a></td>
+			</select>
 			<input name="root_id" id="root_id" value="{$onecategory.root_id}" type="hidden" />
-		</tr>		
+		
 		<include file="Public:category_form" />
+	</div>
 		<include file="Public:footer" />
 	</div>
 </body>
