@@ -11,10 +11,10 @@ $(document).ready(function(){
    });
    $("button#saveBt").click(function(){
 	   var obj=new Object();
-	   $("[tag='3dant_inline']").children().remove();
-	   obj.shared=$("group#3dant_shared").html();
-	   obj.basic=$("group#3dant_basic").html();
-	   obj.internet=$("group#3dant_internet").html();
+	   $("[tag='cn_3dant_inline']").children().remove();
+	   obj.shared=$("group#cn_3dant_shared").html();
+	   obj.basic=$("group#cn_3dant_basic").html();
+	   obj.internet=$("group#cn_3dant_internet").html();
 	   obj.id=1;
 	   obj.uid=2;
 	   
@@ -126,7 +126,7 @@ $(document).ready(function(){
 	<aside class="modelinfo">
 	<div class="container-fluid mg-left10">
 	<include file="Public:userCenter" />
-			<div class="row">
+
 				<h3>辅助信息</h3>
 				<button id="modelListBt" type="button" class="btn btn-default"
 					aria-label="插入模型" data-toggle="modal" data-target="#modelListModal"
@@ -140,17 +140,23 @@ $(document).ready(function(){
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					保存
 				</button>
-			</div>
-			<form role="form">
-	   <h6><strong>点球大小：</strong></h6>
-			<div class="form-group">
-			<div class="input-group">
-                   <label class="sr-only" for="sc_z">点球大小</label>
-                   <div class="input-group-addon">半径</div>
+
+	        <h6><strong>点球半径：</strong></h6>
+                   <label class="sr-only" for="radius">点球大小</label>
                    <input name="radius" type="text" id="radius" value="" onchange="change_point_sphere()" onkeyup="clearNoNum(this)" class="form-control" />
-              </div>
-            </div>
-       </form>
+            <h6><strong>更换场景：</strong></h6>
+			<select onchange="change_background(this)" class="form-control">
+				<option value="1">草地</option>
+				<option value="2">戈壁</option>
+				<option value="3">海洋</option>
+				<option value="4">冰原</option>
+				<option value="5">晚霞</option>
+				<option value="6">沙滩</option>
+				<option value="7">星空</option>
+				<option value="8">纯色（蓝）</option>
+				<option value="9">纯色（黑）</option>
+			</select>
+			
 	</div>
 	</aside>
 	<aside class="modelcategory">
@@ -246,9 +252,28 @@ $(document).ready(function(){
                    <input name="sc_z" type="text" id="sc_z" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
           </div>
-         
-		<div id="xyz"></div>
-		</form>
+          <div id="color" class="form-group hidden">
+          <h6><strong>模型颜色：</strong></h6>
+              <div class="input-group">
+                   <label class="sr-only" for="color_r">R</label>
+                   <div class="input-group-addon">R</div>
+                   <input name="color_r" type="text" id="color_r" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            
+              <div class="input-group">
+                   <label class="sr-only" for="color_g">G</label>
+                   <div class="input-group-addon">G</div>
+                   <input name="color_g" type="text" id="color_g" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>
+            
+              <div class="input-group">
+                   <label class="sr-only" for="color_b">B</label>
+                   <div class="input-group-addon">B</div>
+                   <input name="color_b" type="text" id="color_b" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+              </div>          
+          </div>
+          <div id="xyz"></div>		
+		</form>		
 	</div>
 	</aside>
 
@@ -264,8 +289,8 @@ $(document).ready(function(){
 		fronturl="__BCS_PUBLIC__/images/background/horizon_2_front.jpg"
 		bottomurl="__BCS_PUBLIC__/images/background/horizon_2_bottom.jpg"
 		backurl="__BCS_PUBLIC__/images/background/horizon_2_back.jpg"
-		skyangle="1.57" groundangle="1.57" groundcolor="" transparency="1.0"
-		skycolor="0 0 0"> </background> 
+		skyangle="1.57" groundangle="1.57" groundcolor="1,0,0" transparency="1.0"
+		skycolor="0,0,0"> </background> 
 		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>
 		<Transform id="marker" scale="0.5,0.5,0.5" translation="0,0,0">
             <Shape id="point_sphere" render="false">
@@ -275,12 +300,12 @@ $(document).ready(function(){
                 <Sphere></Sphere>
             </Shape>
         </Transform>	
-	<group id="3dant_diy" onclick="groupClick(event)">
-	<group id="3dant_shared">
+	<group id="cn_3dant_diy" onclick="groupClick(event)">
+	<group id="cn_3dant_shared">
 	</group>
-	<group id="3dant_basic">
+	<group id="cn_3dant_basic">
 	</group>
-	<group id="3dant_internet">
+	<group id="cn_3dant_internet">
 	</group>	
 	</group>
 	</scene>
