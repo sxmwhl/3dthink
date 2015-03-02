@@ -8,7 +8,7 @@ class FormController extends Controller {
     }
     public function upload(){
     	$upload = new \Think\Upload();// 实例化上传类
-    	$upload->maxSize = 3145728 ;// 设置附件上传大小
+    	$upload->maxSize = 104857600 ;// 设置附件上传大小
     	$upload->exts = array('jpg', 'gif', 'png', 'jpeg','x3d');// 设置附件上传类型    	
     	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
     	$upload->autoSub  = false;
@@ -27,6 +27,7 @@ class FormController extends Controller {
     				$where_md5="folder='".$file['md5']."'";
     				$result_check=$Moxing_check->where($where_md5)->find();
    				if(!empty($result_check)){
+   					//TODO:删除刚上传的已存在模型
     					exit("该模型已被上传过！<a target='_blank' href='".__MODULE__."/index/model?f=".$file['md5']."'>点击查看</a>");
     				}
     				$model_savename_empty=$file['savename'];

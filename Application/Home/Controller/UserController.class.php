@@ -170,7 +170,10 @@ class UserController extends HomeController {
     
     }
     public function save_diy(){
-    	
-    	echo ("保存我的家园");
+    	$data=array(
+    		'status' => 0,
+    		'message' => "ajax ok!" 		
+    	);
+    	echo json_encode($data);
     }
 }

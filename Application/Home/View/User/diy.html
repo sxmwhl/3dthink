@@ -19,9 +19,12 @@ $(document).ready(function(){
 	   obj.uid=2;
 	   
 	   var str=$.toJSON(obj);
-	   var obj2=eval("(" + str + ")");
-	   alert(obj2.shared);
-	   
+	   //var obj2=eval("(" + str + ")");
+	   //alert(obj2.shared);
+	   $.post(__URL__/save_diy,str,success,"json");
+	   function success(data){
+		   alert("333");
+	   }
    });
    $("button#modelListOkBt").click(function(){
 	   $('#modelListModal').modal('hide');
