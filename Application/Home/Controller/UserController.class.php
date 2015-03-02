@@ -170,10 +170,15 @@ class UserController extends HomeController {
     
     }
     public function save_diy(){
-    	$data=array(
-    		'status' => 0,
-    		'message' => "ajax ok!" 		
-    	);
+    	$data=I('post.');
+    	$Diy=D('Diy');
+    	if (!$Diy->create($data,2)){ // 创建数据对象
+    		// 如果创建失败 表示验证没有通过 输出错误提示信息
+    		exit($Diy->getError());
+    	}else{
+    		$id=$Diy->add();
+    		if($id==false) echo("添加错误状态") ;
+    	}
     	echo json_encode($data);
     }
 }

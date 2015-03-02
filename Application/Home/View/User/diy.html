@@ -15,15 +15,14 @@ $(document).ready(function(){
 	   obj.shared=$("group#cn_3dant_shared").html();
 	   obj.basic=$("group#cn_3dant_basic").html();
 	   obj.internet=$("group#cn_3dant_internet").html();
-	   obj.id=1;
-	   obj.uid=2;
-	   
+	   obj.title="家园";
+	   obj.uid=2;	   
 	   var str=$.toJSON(obj);
-	   //var obj2=eval("(" + str + ")");
+	   var obj2=eval("(" + str + ")");
 	   //alert(obj2.shared);
-	   $.post(__URL__/save_diy,str,success,"json");
+	   $.post("__URL__/save_diy",obj,success,"json");
 	   function success(data){
-		   alert("333");
+		   alert(data.shared);
 	   }
    });
    $("button#modelListOkBt").click(function(){
