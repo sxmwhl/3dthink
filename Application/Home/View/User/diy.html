@@ -1,6 +1,5 @@
 <include file="Public:header" />
 <script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
-<script type='text/javascript' src='__BCS_PUBLIC__/js/jquery.json.min.js'></script>
 <script>
 $(document).ready(function(){
    form_disable();
@@ -16,10 +15,7 @@ $(document).ready(function(){
 	   obj.basic=$("group#cn_3dant_basic").html();
 	   obj.internet=$("group#cn_3dant_internet").html();
 	   obj.title="家园";
-	   obj.uid=2;	   
-	   var str=$.toJSON(obj);
-	   var obj2=eval("(" + str + ")");
-	   //alert(obj2.shared);
+	   obj.uid={$uid};
 	   $.post("__URL__/save_diy",obj,success,"json");
 	   function success(data){
 		   alert(data.shared);

@@ -165,12 +165,16 @@ class UserController extends HomeController {
     	$uid = is_login();
     	$Moxing=M('Moxing');
     	$list=$Moxing->where('uid='.$uid)->select();
+    	$this->uid=$uid;
     	$this->models=$list;
     	$this->display();
     
     }
     public function save_diy(){
     	$data=I('post.');
+    	$data['shared']=htmlspecialchars_decode($data['shared']);
+    	$data['basic']=htmlspecialchars_decode($data['basic']);
+    	$data['basic']=strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text>');
     	$Diy=D('Diy');
     	if (!$Diy->create($data,2)){ // 创建数据对象
     		// 如果创建失败 表示验证没有通过 输出错误提示信息

@@ -3,6 +3,7 @@ header("Content-Type: text/html;charset=utf-8");
 $con= new mysqli("localhost","root","");
 $con->select_db("3dshare");
 $sqls = "
+SET NAMES UTF8;
 DROP TABLE IF EXISTS `think_moxing`;
 CREATE TABLE think_moxing
 (
@@ -90,6 +91,8 @@ CREATE TABLE `think_diy` (
   `shared` text NOT NULL DEFAULT '' COMMENT '分享的模型',
   `basic` text NOT NULL DEFAULT '' COMMENT '分享的模型',
   `internet` text NOT NULL DEFAULT '' COMMENT '分享的模型',
+  `views` mediumint unsigned NOT NULL DEFAULT 0 COMMENT '浏览次数',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '家园状态',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='DIY表';";
