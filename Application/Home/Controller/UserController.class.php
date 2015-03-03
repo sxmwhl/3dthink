@@ -173,6 +173,7 @@ class UserController extends HomeController {
     public function save_diy(){
     	$data=I('post.');
     	$data['shared']=htmlspecialchars_decode($data['shared']);
+    	$data['shared']=strip_tags($data['shared'],'<transform><inline>');
     	$data['basic']=htmlspecialchars_decode($data['basic']);
     	$data['basic']=strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text>');
     	$Diy=D('Diy');
@@ -180,8 +181,9 @@ class UserController extends HomeController {
     		// 如果创建失败 表示验证没有通过 输出错误提示信息
     		exit($Diy->getError());
     	}else{
-    		$id=$Diy->add();
-    		if($id==false) echo("添加错误状态") ;
+    		$where="uid='".$data['uid']."'";
+    		$id=$Diy->where($where)->save();
+    		if($id==false) echo("添加错误状态");
     	}
     	echo json_encode($data);
     }
