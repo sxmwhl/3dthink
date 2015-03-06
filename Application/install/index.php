@@ -88,11 +88,12 @@ CREATE TABLE `think_diy` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'DIY ID',
   `uid` int(10) unsigned NOT NULL DEFAULT '0'COMMENT '用户 ID',
   `title` char(100) NOT NULL DEFAULT '' COMMENT '名称',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '名称',
   `shared` text NOT NULL DEFAULT '' COMMENT '分享的模型',
   `basic` text NOT NULL DEFAULT '' COMMENT '分享的模型',
   `internet` text NOT NULL DEFAULT '' COMMENT '分享的模型',
   `views` mediumint unsigned NOT NULL DEFAULT 0 COMMENT '浏览次数',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '家园状态',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '家园状态，0关闭，1开启公开，2开启不公开',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='DIY表';";

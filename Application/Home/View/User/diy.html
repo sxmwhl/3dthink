@@ -14,9 +14,8 @@ $(document).ready(function(){
 	   obj.shared=$("group#cn_3dant_shared").html();
 	   obj.basic=$("group#cn_3dant_basic").html();
 	   obj.internet=$("group#cn_3dant_internet").html();
-	   obj.title="家园";
-	   obj.uid={$uid};
-	   $.post("__URL__/save_diy",obj,success,"json");
+	   obj.uid={$diy['uid']};
+	   $.post("__URL__/saveDiy",obj,success,"json");
 	   function success(data){
 		   alert(data.shared);
 	   }
@@ -145,7 +144,7 @@ $(document).ready(function(){
             <h6><strong>更换场景：</strong></h6>
 			<select onchange="change_background(this)" class="form-control">
 				<option value="1">草地</option>
-				<option value="2">戈壁</option>
+				<option value="2" selected="selected">戈壁</option>
 				<option value="3">海洋</option>
 				<option value="4">冰原</option>
 				<option value="5">晚霞</option>
@@ -162,7 +161,7 @@ $(document).ready(function(){
 	<include file="Public:userCenter" />
 	<div class="row">
 		<h3>
-			我的家园<small>黎明之城</small>
+			{$diy['title']}<small>我的家园</small>
 		</h3>
 		<h4>模型引入</h4>
 		
@@ -300,10 +299,13 @@ $(document).ready(function(){
         </Transform>	
 	<group id="cn_3dant_diy" onclick="groupClick(event)">
 	<group id="cn_3dant_shared">
+	{$diy['shared']}
 	</group>
 	<group id="cn_3dant_basic">
+	{$diy['basic']}
 	</group>
 	<group id="cn_3dant_internet">
+	{$diy['internet']}
 	</group>	
 	</group>
 	</scene>

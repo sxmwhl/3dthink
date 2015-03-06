@@ -163,14 +163,37 @@ class UserController extends HomeController {
     		$this->error( '您还没有登陆',U('User/login') );
     	}
     	$uid = is_login();
-    	$Moxing=M('Moxing');
-    	$list=$Moxing->where('uid='.$uid)->select();
-    	$this->uid=$uid;
-    	$this->models=$list;
+    	$Diy=M('Diy');
+    	$list=$Diy->where('uid='.$uid)->find();
+    	if($list===NULL||$list===false){
+    		$this->display('enableDiy');
+    		exit();
+    	}   
+    	$Diy=M('Diy');
+    	$list=$Diy->where('uid='.$uid)->find();
+    	$this->diy=$list;
     	$this->display();
     
     }
-    public function save_diy(){
+    public function enableDiy(){
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}
+    	$data=I('post.');
+    	if($data['status']!==2)$data['status']=1;
+    	$data['uid']=is_login();
+    	$Diy=D('Diy');
+    	if (!$Diy->create($data,1)){ // 创建数据对象
+    		// 如果创建失败 表示验证没有通过 输出错误提示信息
+    		exit($Diy->getError());
+    	}else{
+    		$id=$Diy->add();
+    		//echo $Diy->getLastSql();
+    		if(!$id) exit("开启我的家园失败！");
+    	}
+    	$this->display('diy');
+    }
+    public function saveDiy(){
     	$data=I('post.');
     	$data['shared']=htmlspecialchars_decode($data['shared']);
     	$data['shared']=strip_tags($data['shared'],'<transform><inline>');
