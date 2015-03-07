@@ -9,9 +9,11 @@ $(document).ready(function(){
 	   addmodel(lujing);
    });
    $("button#saveBt").click(function(){
+	   var sharedHtml=$("group#cn_3dant_shared").html();
 	   var obj=new Object();
-	   $("[tag='cn_3dant_inline']").children().remove();
+	   $("[tag='cn_3dant_inline']").empty();
 	   obj.shared=$("group#cn_3dant_shared").html();
+	   $("group#cn_3dant_shared").html(sharedHtml);
 	   obj.basic=$("group#cn_3dant_basic").html();
 	   obj.internet=$("group#cn_3dant_internet").html();
 	   obj.uid={$diy['uid']};
@@ -289,10 +291,10 @@ $(document).ready(function(){
 		skyangle="1.57" groundangle="1.57" groundcolor="1,0,0" transparency="1.0"
 		skycolor="0,0,0"> </background> 
 		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>
-		<Transform id="marker" scale="0.5,0.5,0.5" translation="0,0,0">
+		<Transform id="marker" scale="0.2,0.2,0.2" translation="0,0,0">
             <Shape id="point_sphere" render="false">
                 <Appearance>
-                    <Material diffuseColor="#FFD966"></Material>
+                    <Material diffuseColor="#FFD966" transparency="0.15"></Material>
                 </Appearance>
                 <Sphere></Sphere>
             </Shape>

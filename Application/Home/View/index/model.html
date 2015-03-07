@@ -41,50 +41,47 @@
 					<td><strong>模型代码</strong></td>
 				</tr>
 				<tr align ="left">
-					<td><?php echo $model['folder']; ?></td>
+					<td>{$model['folder']}</td>
 				</tr>
 				<tr align ="left">
 					<td><strong>创作者</strong></td>
 				</tr>
 				<tr align ="left">
-					<td><p>
-							<?php echo $model['creator']; ?>
-						</p></td>
+					<td>
+							{$model['creator']}
+						</td>
 				</tr>
 				<tr align ="left">
 					<td><strong>E-mail</strong></td>
 				</tr>
 				<tr align ="left">
-					<td><p>
-							<?php echo $model['email']; ?>
-						</p></td>
+					<td>{$model['email']}
+						</td>
 				</tr>
 				<tr align ="left">
 					<td><strong>更新时间</strong></td>
 				</tr>
 				<tr align ="left">
-					<td><p>
-							<?php echo $model['time_update']; ?>
-						</p></td>
+					<td>
+							{$model['time_update']}
+						</td>
 				</tr>
 				<tr align ="left">
 					<td><strong>浏览次数</strong></td>
 				</tr>
 				<tr align ="left">
-					<td><p>
-							<?php echo $model['views']; ?>
-						</p></td>
+					<td>{$model['views']}</td>
 				</tr>
 				<tr align ="left">
 					<td><strong>预览图片</strong></td>
 				</tr>
 				<tr align ="left">
-					<td><p>
+					<td>
 							<a href="__MODULE__/form/preview?f={$model['folder']}"> <img
 								class="w280h200"
 								src="__BCS_UPLOAD__/{$model['folder']}/preview.{$model['preview_ext']}"
 								alt=" {$model['title']}" /></a>
-						</p></td>
+						</td>
 				</tr>
 				<tr align ="left">
 					<td><p>
