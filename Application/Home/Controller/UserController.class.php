@@ -191,7 +191,8 @@ class UserController extends HomeController {
     		//echo $Diy->getLastSql();
     		if(!$id) exit("开启我的家园失败！");
     	}
-    	$this->display('diy');
+    	$this->success('开启我的家园成功！', 'diy');
+    	//$this->display('diy');
     }
     public function saveDiy(){
     	$data=I('post.');

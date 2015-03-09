@@ -3,6 +3,7 @@ header("Content-Type: text/html;charset=utf-8");
 $con= new mysqli("qdm111421528.my3w.com","qdm111421528","sxm206350482");
 $con->select_db("qdm111421528_db");
 $sqls = "
+SET NAMES UTF8;
 DROP TABLE IF EXISTS `think_moxing`;
 CREATE TABLE think_moxing
 (
@@ -80,7 +81,22 @@ CREATE TABLE `think_member` (
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '会员状态',
   PRIMARY KEY (`uid`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='会员表';";
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='会员表';
+		
+DROP TABLE IF EXISTS `think_diy`;
+CREATE TABLE `think_diy` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'DIY ID',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0'COMMENT '用户 ID',
+  `title` char(100) NOT NULL DEFAULT '' COMMENT '名称',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '名称',
+  `shared` text NOT NULL DEFAULT '' COMMENT '分享的模型',
+  `basic` text NOT NULL DEFAULT '' COMMENT '分享的模型',
+  `internet` text NOT NULL DEFAULT '' COMMENT '分享的模型',
+  `views` mediumint unsigned NOT NULL DEFAULT 0 COMMENT '浏览次数',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '家园状态，0关闭，1开启公开，2开启不公开',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='DIY表';";
 if ($con->multi_query($sqls))
 {
 	echo "数据库安装完毕！！！";
