@@ -8,19 +8,11 @@
 		<form method="post" action="__URL__/upload" enctype="multipart/form-data" class="formclass  width300" name="upload_form" id="upload_form" role="form">
 		<h3>分享您的模型...</h3>
 			<div class="form-group">
-                 <label for="model">模型文件*:(x3d)</label>
+			<label for="model">模型文件：（.x3d 小于3M）</label>                 
                  <input id="model" name="model" type="file" value="浏览" accept="model/x3d+xml" class="form-control" />
-            </div>
-            <div class="form-group">
-                 <label for="preview">模型缩略图*:(jpg/png/gif)</label>
-                 <input id="preview" name="preview" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg" class="form-control"/>
-            </div>
-            <div class="form-group">
-                 <label for="texture">贴图文件:(jpg/png/gif)</label>
-                 <input id="texture" name="texture" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg" class="form-control"/>
-                 <p>请确保模型的贴图文件位于texture/文件夹。</p>
+            <label for="model">注意：请确保模型的贴图文件位于texture/文件夹下。</label>
             </div>			
-			<button type="submit" class="btn btn-default" >上 传</button>
+			<button type="submit" class="btn btn-default" >确认分享</button>
 		</form>
 		</div>
 		<div class="row">
@@ -29,26 +21,13 @@
 	</div>
 	<script>
 	$("#upload_form").validate({
-  		 rules:{
-  			 preview:{
-  				required:true,
-  				accept:"image/*"
-  			 },
-  			 texture:{
-  				 accept:"image/*"
-  			 },
+  		 rules:{  			 
   			 model:{
   				required:true,
   				 accept:"model/x3d*"
   			 }
   		 },
-  		 messages:{
-  			 preview:{
-  				 accept:"缩略图文件格式不正确！"
-  			 },
-  			texture:{
- 				 accept:"贴图文件格式不正确！"
- 			 },
+  		 messages:{  			
  			model:{
  				 accept:"模型文件格式不正确！"
  			 }

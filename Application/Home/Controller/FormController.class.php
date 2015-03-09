@@ -8,73 +8,35 @@ class FormController extends Controller {
     }
     public function upload(){
     	$upload = new \Think\Upload();// 实例化上传类
-    	$upload->maxSize = 104857600 ;// 设置附件上传大小
-    	$upload->exts = array('jpg', 'gif', 'png', 'jpeg','x3d');// 设置附件上传类型    	
+    	$upload->maxSize = 3145728 ;// 设置附件上传大小
+    	$upload->exts = array('x3d');// 设置附件上传类型    	
     	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
     	$upload->autoSub  = false;
     	$upload->savePath = 'upload/'; // 设置附件上传（子）目录
     	// 上传文件
-    	$info = $upload->upload();
+    	$info = $upload->uploadOne($_FILES['model']);
     	if(!$info) {// 上传错误提示错误信息
     		$this->error($upload->getError());
     	}else{// 上传成功 获取上传文件信息
-    		foreach($info as $file){    
-    			if ($file['key']=='model'){
-    				//是否为x3d格式
-    				if($file['ext']!="x3d"&&$file['ext']!="X3D")exit(模型格式不正确！);
-    				//>>>添加判断MD5是否重复 超链接需修改##############################
-    				$Moxing_check=M('Moxing','think_');
-    				$where_md5="folder='".$file['md5']."'";
-    				$result_check=$Moxing_check->where($where_md5)->find();
-   				if(!empty($result_check)){
-   					//TODO:删除刚上传的已存在模型
-    					exit("该模型已被上传过！<a target='_blank' href='".__MODULE__."/index/model?f=".$file['md5']."'>点击查看</a>");
-    				}
-    				$model_savename_empty=$file['savename'];
-    				$model_md5_empty=$file['md5'];  				
-    			}
-    			if ($file['key']=='preview'){
-    				$preview_savename_empty=$file['savename'];
-    				$preview_ext_empty=$file['ext'];
-    			}	
-    			if ($file['key']=='texture'){
-    				$texture_name_empty=$file['name'];
-    				$texture_savename_empty=$file['savename'];    				
-    			}		
-    		//	$string=implode(',',$file);
-    		//	echo $string;
-    		//	echo $file['key'].'';
-    		}
-    		if(empty($model_savename_empty))exit("分享模型失败，请确认模型文件是否正确！");    		
-    		if(empty($preview_savename_empty))exit("分享模型失败，请确认缩略图文件是否正确！");
-    		$uploadPath=__ROOT__.'Public/upload/';
-    		$movePath=$uploadPath.$model_md5_empty.'/';
+    		$savePath=__ROOT__.'Public/'.$info['savepath'];
+    		$movePath=$savePath.$info['md5'].'/';
+    		$Moxing_check=M('Moxing');
+    		$where_md5="folder='".$info['md5']."'";
+    		$result_check=$Moxing_check->where($where_md5)->find();
+    		if(!empty($result_check)){
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error('模型已上传过！',__MODULE__.'/index/model?f='.$info['md5'],3);  			
+    		}    		
     		if(!file_exists($movePath)){
     		mkdir($movePath) or exit('创建路径失败，请重试！');
     		}
-    		$rename_model_ok=rename($uploadPath.$model_savename_empty, $movePath.'model.x3d');
-    		$rename_preview_ok=rename($uploadPath.$preview_savename_empty, $movePath.'preview.'.$preview_ext_empty);
-    		if(!empty($texture_name_empty)){
-    			if(!file_exists($movePath.'texture/')){
-    				mkdir($movePath.'texture/') or exit('创建路径失败，请重试！');
-    			}
-    			$rename_texture_ok=rename($uploadPath.$texture_savename_empty, $movePath.'texture/'.$texture_name_empty);
-    			if(!$rename_texture_ok)exit("系统出错，请重试！1");
-    		}
+    		$rename_model_ok=rename($savePath.$info['savename'], $movePath.'model.x3d');
+    		$copy_preview_ok=copy(__ROOT__.'Public/images/preview.png',$movePath.'preview.png');
     		//echo $rename_model_ok;
-    		if(!$rename_model_ok)exit("系统出错，请重试！2");
-    		if(!$rename_preview_ok)exit("系统出错，请重试！3");
+    		if(!$rename_model_ok)$this->error("系统出错，请重试！");
     		$Moxing=D('Moxing');
-    		$inputs['folder']=$model_md5_empty;
-    		$inputs['preview_ext']=$preview_ext_empty;
-    		$inputs['time_update']=date('Y-m-d H:i:s',time());
-    		if(is_login()){
-    			$inputs['uid'] = is_login();
-    			$inputs['creator']=get_username($inputs['uid']);
-    		}  else {
-    			$inputs['uid'] = 1;
-    			$inputs['creator']='佚名';
-    		}  		
+    		$inputs['folder']=$info['md5'];
+    		$inputs['time_update']=date('Y-m-d H:i:s',time());  		
     		$inputs['ip_upload']=get_client_ip();
     		if (!$Moxing->create($inputs)){ // 创建数据对象
     			// 如果创建失败 表示验证没有通过 输出错误提示信息
@@ -82,12 +44,11 @@ class FormController extends Controller {
     			 
     		}else{
     			// 验证通过 写入新增数据
-    			$Moxing->add();    			 
-    		}
-    		header("refresh:3;url=modify?f=".$model_md5_empty);
-    		echo '模型上传成功，请稍等...<br>三秒后自动跳转至预览页面，请对模型信息进行完善...';
-    		//#################上传完毕#######################    		
-    	}	
+    			$result_add=$Moxing->add();
+    			if(!$result_add)$this->error('模型分享失败！');    			 
+    		}		
+    	}
+    	$this->success('模型分享成功','modify?f='.$info['md5']);
     }
     public function modify(){   
     	$md5=I('f');

@@ -3,7 +3,7 @@
 <script>
 $(document).ready(function(){
    form_disable();
-   tsfNum=get_max_id();
+   tsfNum=get_max_id()+1;
    $("button#addModelOkBt").click(function(){
 	   var lujing='__BCS_UPLOAD__';
 	   addmodel(lujing);

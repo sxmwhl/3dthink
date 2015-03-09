@@ -26,6 +26,7 @@ class MoxingModel extends Model {
 			array('dl_on','0',1),			
 			array('vp_position','0,0,10',1),
 			array('vp_orientation','0,0,0,1',1),
+			array('preview_ext','png',1),
 
 	);
 	public function  __construct(){
