@@ -78,7 +78,7 @@
 						backurl="__BCS_PUBLIC__/images/low_contrast_linen.png" skyangle=""
 						groundangle="" groundcolor="" transparency="1.0" skycolor="0 0 0">
 					</background> <Environment id="gamma" gammaCorrectionDefault="linear"></Environment>
-					<Inline nameSpaceName="s" mapDEFToID="true"
+					<Inline id="inline" nameSpaceName="s" mapDEFToID="true"
 						url="__BCS_UPLOAD__/{$model.folder}/model.x3d"> </Inline> </scene> </x3d>					
 				</div>
 				<p class="text-center">实际模型（点击模型后，按下A键）</p>
@@ -102,12 +102,18 @@
 	</div>
 	<include file="Public:footer" />
 	<script type="text/javascript" charset="utf-8">
-		x3dom.runtime.ready = function() {
-			var e = document.getElementById("canvas");
-			setTimeout(function() {
-				e.runtime.showAll();
-			}, 3000);
-		};
+	x3dom.runtime.ready = function() {
+		var e = document.getElementById("canvas");
+		var str="";
+		$("#inline").load(function(){
+			e.runtime.showAll();
+			$("inline").find("*").filter("imagetexture,movietexture").filter("[url]").each(function(){					
+				str=str+"<option>"+$(this).attr("url")+"</option>";
+			});
+			$("select#used").html(str);
+			$("button").removeAttr("disabled");
+		});
+	};	
 	</script>
 </body>
 </html>
