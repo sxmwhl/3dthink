@@ -145,9 +145,9 @@ $(document).ready(function(){
                    <input name="radius" type="text" id="radius" value="" onchange="change_point_sphere()" onkeyup="clearNoNum(this)" class="form-control" />
             <h6><strong>更换场景：</strong></h6>
 			<select onchange="change_background(this)" class="form-control">
-				<option value="0">蓝天</option>
+				<option value="0" selected="selected">蓝天</option>
 				<option value="1">草地</option>
-				<option value="2" selected="selected">戈壁</option>
+				<option value="2">戈壁</option>
 				<option value="3">海洋</option>
 				<option value="4">冰原</option>
 				<option value="5">晚霞</option>
@@ -283,12 +283,12 @@ $(document).ready(function(){
 	<navigationInfo id="head" headlight='true' type='"EXAMINE" "ANY"'></navigationInfo> 
 	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
 	<background
-		topurl="__BCS_PUBLIC__/images/background/horizon_2_top.jpg"
-		righturl="__BCS_PUBLIC__/images/background/horizon_2_right.jpg"
-		lefturl="__BCS_PUBLIC__/images/background/horizon_2_left.jpg"
-		fronturl="__BCS_PUBLIC__/images/background/horizon_2_front.jpg"
-		bottomurl="__BCS_PUBLIC__/images/background/horizon_2_bottom.jpg"
-		backurl="__BCS_PUBLIC__/images/background/horizon_2_back.jpg"
+		topurl="__BCS_PUBLIC__/images/background/horizon_0_top.jpg"
+		righturl="__BCS_PUBLIC__/images/background/horizon_0_right.jpg"
+		lefturl="__BCS_PUBLIC__/images/background/horizon_0_left.jpg"
+		fronturl="__BCS_PUBLIC__/images/background/horizon_0_front.jpg"
+		bottomurl="__BCS_PUBLIC__/images/background/horizon_0_bottom.jpg"
+		backurl="__BCS_PUBLIC__/images/background/horizon_0_back.jpg"
 		skyangle="1.57" groundangle="1.57" groundcolor="1,0,0" transparency="1.0"
 		skycolor="0,0,0"> </background> 
 		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>

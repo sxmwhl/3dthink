@@ -32,6 +32,7 @@ class FormController extends Controller {
     		}
     		$rename_model_ok=rename($savePath.$info['savename'], $movePath.'model.x3d');
     		$copy_preview_ok=copy(__ROOT__.'Public/images/preview.png',$movePath.'preview.png');
+    		mkdir($movePath.'texture/') or exit('创建路径失败，请重试！');
     		//echo $rename_model_ok;
     		if(!$rename_model_ok)$this->error("系统出错，请重试！");
     		$Moxing=D('Moxing');
@@ -121,14 +122,50 @@ class FormController extends Controller {
     		$this->display("Public:404");
     		exit();
     	}
-    	$Moxing=M('Moxing','think_');
+    	$Moxing=M('Moxing');
     	$where="folder='".$md5."'";
     	$model_show=$Moxing->where($where)->find();
     	$model_show['hl_on']=$model_show['hl_on']==0?"false":"true";
     	$model_show['dl_on']=$model_show['dl_on']==0?"false":"true";
     	$this->model=$model_show;
-    	$this->title="更换模型".$model_show['title']."缩略图";
+    	$this->title="更换模型《".$model_show['title']."》的缩略图";
     	$this->display('preview');
+    }
+    public function texture(){
+    	$md5=I('t');
+    	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
+    	{
+    		$this->display("Public:404");
+    		exit();
+    	}
+    	$Moxing=M('Moxing');
+    	$where="folder='".$md5."'";
+    	$model_show=$Moxing->where($where)->find();
+    	$model_show['hl_on']=$model_show['hl_on']==0?"false":"true";
+    	$model_show['dl_on']=$model_show['dl_on']==0?"false":"true";
+    	$this->model=$model_show;
+    	$texture_list=scandir(__ROOT__.'Public/upload/'.$md5.'/texture/');
+    	$this->textureList=$texture_list;
+    	$this->title="上传模型《".$model_show['title']."》的贴图";
+    	$this->display('texture');
+    }
+    public function textureSave(){
+    	$md5=I('t');
+    	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
+    	{
+    		$this->display("Public:404");
+    		exit();
+    	}
+    	$Moxing=M('Moxing');
+    	$where="folder='".$md5."'";
+    	$model_show=$Moxing->where($where)->find();
+    	$model_show['hl_on']=$model_show['hl_on']==0?"false":"true";
+    	$model_show['dl_on']=$model_show['dl_on']==0?"false":"true";
+    	$this->model=$model_show;
+    	$texture_list=scandir(__ROOT__.'Public/upload/'.$md5.'/texture/');
+    	$this->textureList=$texture_list;
+    	$this->title="上传模型《".$model_show['title']."》的贴图";
+    	$this->display('texture');
     }
     public function change(){
     	$inputs=I('post.');
