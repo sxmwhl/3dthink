@@ -134,7 +134,9 @@
 			</div>
 			<p class="text-warning">您的IP地址：{$model.ip_last_modify} 在保存后被记录。</p>
 			<button type="submit" class="btn btn-primary">保存模型信息</button>
-			<a class="btn btn-default" href="__URL__/texture?t={$model.folder}" role="button">上传贴图</a>
+			<a disabled id="imagetexture" class="btn btn-default" href="__URL__/texture?t={$model.folder}" role="button">上传贴图</a>
+			<a disabled id="movie" class="btn btn-default" href="__URL__/movie?t={$model.folder}" role="button">上传视频</a>
+			<a disabled id="audioclip" class="btn btn-default" href="__URL__/audioclip?t={$model.folder}" role="button">上传音频</a>
 		</form>
 		<br/>
 		<a href="__URL__/preview?f={$model.folder}"><img
@@ -153,12 +155,10 @@
 	<background topurl="" righturl="" lefturl="" fronturl="" bottomurl=""
 		backurl="" skyangle="" groundangle="" groundcolor=""
 		transparency="1.0" skycolor="0 0 0"> </background> <Environment
-		id="gamma" gammaCorrectionDefault="linear"></Environment> <Inline
-		nameSpaceName="s" mapDEFToID="true"
+		id="gamma" gammaCorrectionDefault="linear"></Environment> <Inline id="inline" nameSpaceName="s" mapDEFToID="true"
 		url="__BCS_UPLOAD__/{$model.folder}/model.x3d"> </Inline> </scene> </x3d>
 
-	<script>
-    $().ready(function() {
+	<script>    
    	 $("#modify_form").validate({
    		 rules:{
    			 title:{
@@ -223,7 +223,16 @@
    			 }
    		 }
    	 });
-   	});
+    x3dom.runtime.ready = function() {
+    $("#inline").load(function(){
+    	var imagetexture = $("inline").find("*").filter("imagetexture").is("[url]");
+    	var movietexture = $("inline").find("*").filter("movietexture").is("[url]");
+    	var audioclip = $("inline").find("*").filter("audioclip").is("[url]");
+    	if(imagetexture)$('a#imagetexture').removeAttr("disabled");
+    	if(movietexture)$('a#movie').removeAttr("disabled");
+    	if(audioclip)$('a#audioclip').removeAttr("disabled");
+      });
+    }
 	</script>
 </body>
 </html>

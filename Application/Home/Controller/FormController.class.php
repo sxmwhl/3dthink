@@ -9,7 +9,8 @@ class FormController extends Controller {
     public function upload(){
     	$upload = new \Think\Upload();// 实例化上传类
     	$upload->maxSize = 3145728 ;// 设置附件上传大小
-    	$upload->exts = array('x3d');// 设置附件上传类型    	
+    	$upload->exts = array('x3d');// 设置附件上传类型   
+    	//$upload->mimes = array('application/xml','text/html','model/x3d+xml');
     	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
     	$upload->autoSub  = false;
     	$upload->savePath = 'upload/'; // 设置附件上传（子）目录
@@ -34,7 +35,10 @@ class FormController extends Controller {
     		$copy_preview_ok=copy(__ROOT__.'Public/images/preview.png',$movePath.'preview.png');
     		mkdir($movePath.'texture/') or exit('创建路径失败，请重试！');
     		//echo $rename_model_ok;
-    		if(!$rename_model_ok)$this->error("系统出错，请重试！");
+    		if(!$rename_model_ok){
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error("系统出错，请重试！");
+    		}
     		$Moxing=D('Moxing');
     		$inputs['folder']=$info['md5'];
     		$inputs['time_update']=date('Y-m-d H:i:s',time());  		
@@ -49,10 +53,11 @@ class FormController extends Controller {
     			if(!$result_add)$this->error('模型分享失败！');    			 
     		}		
     	}
+    	
     	$this->success('模型分享成功','modify?f='.$info['md5']);
     }
     public function modify(){   
-    	$md5=I('f');
+    	$md5=I('get.f/s');
     	$cate=I('cate');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
@@ -132,7 +137,7 @@ class FormController extends Controller {
     	$this->display('preview');
     }
     public function texture(){
-    	$md5=I('t');
+    	$md5=I('get.t/s');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
     		$this->display("Public:404");
@@ -150,22 +155,49 @@ class FormController extends Controller {
     	$this->display('texture');
     }
     public function textureSave(){
-    	$md5=I('t');
+    	$md5=I('get.t/s');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
     		$this->display("Public:404");
     		exit();
     	}
-    	$Moxing=M('Moxing');
-    	$where="folder='".$md5."'";
-    	$model_show=$Moxing->where($where)->find();
-    	$model_show['hl_on']=$model_show['hl_on']==0?"false":"true";
-    	$model_show['dl_on']=$model_show['dl_on']==0?"false":"true";
-    	$this->model=$model_show;
-    	$texture_list=scandir(__ROOT__.'Public/upload/'.$md5.'/texture/');
-    	$this->textureList=$texture_list;
-    	$this->title="上传模型《".$model_show['title']."》的贴图";
-    	$this->display('texture');
+    	$texture_exist=I('post.texture_exist/s');
+    	$texture_num=I('post.texture_num/d');
+    	$upload = new \Think\Upload();// 实例化上传类
+    	$upload->maxSize = 1048576 ;// 设置附件上传大小
+    	$upload->exts = array('jpg','gif','png','jpeg');// 设置附件上传类型
+    	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
+    	$upload->autoSub  = false;
+    	$upload->savePath = 'upload/'; // 设置附件上传（子）目录
+    	// 上传文件
+    	$info = $upload->uploadOne($_FILES['texture']);
+    	if(!$info) {// 上传错误提示错误信息
+    		$this->error($upload->getError());
+    	}else{
+    		$savePath=__ROOT__."Public/upload/";
+    		$movePath=$savePath.$md5."/texture/";
+    		if(!strstr($texture_exist,$info['name'])){
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error('上传文件名与选择的模型使用的贴图不一致','texture?t='.$md5 ,'5');
+    		}
+    		$texture_exist_list=scandir(__ROOT__.'Public/upload/'.$md5.'/texture/');
+    		$texture_exist_num=count($texture_exist_list)-2;
+    		if($texture_exist_num>=$texture_num||$texture_exist_num>=20){
+    			if(!in_array($info['name'], $texture_exist_list)){
+    				$result_delete = @unlink ($savePath.$info['savename']);
+    				$this->error('上传的贴图文件数量超过使用数量,或超过限制数量20！','texture?t='.$md5 ,'5');
+    			}
+    		}
+    		if(!file_exists($movePath)){
+    			mkdir($movePath) or exit('创建路径失败，请重试！');
+    		}
+    		$rename_model_ok=rename($savePath.$info['savename'], $movePath.$info['name']);
+    		if(!$rename_model_ok){
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error('上传的贴图文件失败，请重试！','texture?t='.$md5 ,'5');
+    		}
+    	}
+    	$this->success('上传贴图成功','texture?t='.$md5);
     }
     public function change(){
     	$inputs=I('post.');
