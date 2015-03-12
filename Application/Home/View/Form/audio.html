@@ -15,10 +15,10 @@
 	<div class="container-fluid">
 		<include file="Public:logo" />
 		<div class="row">
-		<form name="texture_form" id="texture_form" method="post" action="__URL__/textureSave?t={$model.folder}" class="formclass" enctype="multipart/form-data">
-		<h3>添加/更换模型贴图</h3>
+		<form name="texture_form" id="texture_form" method="post" action="__URL__/audioSave?t={$model.folder}" class="formclass" enctype="multipart/form-data">
+		<h3>添加/更换模型音频文件</h3>
 		<div class="form-group">
-		<label for="texture_exist">已上传贴图：</label>
+		<label for="texture_exist">已上传贴图/视频/音频文件：</label>
 		<select multiple class="form-control">
 		<foreach name="textureList" item="vo" >
 		<switch name="key" >
@@ -30,13 +30,13 @@
 		</select>		
 		</div>
 		<div class="form-group">
-		<label for="texture_exist">模型中使用的贴图：(点击选择要上传的贴图)</label>
+		<label for="texture_exist">模型中使用的贴图/视频/音频文件：(点击选择要上传的音频文件)</label>
 		<select name="texture_exist" multiple class="form-control" id="used">		
 		</select>		
 		</div>
 		<div class="form-group">
-		<label for="texture">上传贴图文件：（jpg/png/gif/jpeg 小于1M）已上传同名贴图将被覆盖</label>
-		<input name="texture" id="texture" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg" class="form-control"/>
+		<label for="texture">上传贴图文件：（wav/mps/ogg 小于1M）已上传同名音频文件将被覆盖</label>
+		<input name="texture" id="texture" type="file" value="浏览" accept="audio/mpeg,audio/ogg,audio/x-wav" class="form-control"/>
 		
 		</div>
 		<button disabled type="submit" class="btn btn-default">上传贴图</button>
@@ -70,7 +70,7 @@
   		 rules:{
   			 texture:{
   				 required:true,
-  				accept:"image/*"
+  				accept:"audio/*"
   			 },
   			 texture_exist:{
   				 required:true,
@@ -78,10 +78,10 @@
   		 },
   		 messages:{
   			 texture:{
-  				 accept:"缩略图文件格式不正确！"
+  				 accept:"音频文件格式不正确！"
   			 },
   			 texture_exist:{
-  				 required:"必须选择要上传的贴图！"
+  				 required:"必须选择要上传的音频文件！"
   			 }
   		 }
   	 });

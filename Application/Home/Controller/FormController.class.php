@@ -10,12 +10,13 @@ class FormController extends Controller {
     	$upload = new \Think\Upload();// 实例化上传类
     	$upload->maxSize = 3145728 ;// 设置附件上传大小
     	$upload->exts = array('x3d');// 设置附件上传类型   
-    	//$upload->mimes = array('application/xml','text/html','model/x3d+xml');
+    	$upload->mimes = array('application/xml','text/html','model/x3d+xml');
     	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
     	$upload->autoSub  = false;
     	$upload->savePath = 'upload/'; // 设置附件上传（子）目录
     	// 上传文件
     	$info = $upload->uploadOne($_FILES['model']);
+    	//exit($info['type']);
     	if(!$info) {// 上传错误提示错误信息
     		$this->error($upload->getError());
     	}else{// 上传成功 获取上传文件信息
@@ -138,6 +139,7 @@ class FormController extends Controller {
     }
     public function texture(){
     	$md5=I('get.t/s');
+    	$type=I('get.n/s');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
     		$this->display("Public:404");
@@ -152,7 +154,19 @@ class FormController extends Controller {
     	$texture_list=scandir(__ROOT__.'Public/upload/'.$md5.'/texture/');
     	$this->textureList=$texture_list;
     	$this->title="上传模型《".$model_show['title']."》的贴图";
-    	$this->display('texture');
+    	switch ($type){
+    		case "image":
+    			$this->display('texture');
+    			break;
+    		case "movie":
+    			$this->display('movie');
+    			break;
+    		case "audio":
+    			$this->display('audio');
+    			break;
+    		default:
+    			$this->display('texture');
+    	}    	
     }
     public function textureSave(){
     	$md5=I('get.t/s');
@@ -178,14 +192,14 @@ class FormController extends Controller {
     		$movePath=$savePath.$md5."/texture/";
     		if(!strstr($texture_exist,$info['name'])){
     			$result_delete = @unlink ($savePath.$info['savename']);
-    			$this->error('上传文件名与选择的模型使用的贴图不一致','texture?t='.$md5 ,'5');
+    			$this->error('上传文件名与选择的不一致','texture?t='.$md5 ,'5');
     		}
     		$texture_exist_list=scandir(__ROOT__.'Public/upload/'.$md5.'/texture/');
     		$texture_exist_num=count($texture_exist_list)-2;
     		if($texture_exist_num>=$texture_num||$texture_exist_num>=20){
     			if(!in_array($info['name'], $texture_exist_list)){
     				$result_delete = @unlink ($savePath.$info['savename']);
-    				$this->error('上传的贴图文件数量超过使用数量,或超过限制数量20！','texture?t='.$md5 ,'5');
+    				$this->error('上传的贴图文件数量过多！','texture?t='.$md5 ,'5');
     			}
     		}
     		if(!file_exists($movePath)){
@@ -194,10 +208,100 @@ class FormController extends Controller {
     		$rename_model_ok=rename($savePath.$info['savename'], $movePath.$info['name']);
     		if(!$rename_model_ok){
     			$result_delete = @unlink ($savePath.$info['savename']);
-    			$this->error('上传的贴图文件失败，请重试！','texture?t='.$md5 ,'5');
+    			$this->error('上传贴图文件失败，请重试！','texture?t='.$md5 ,'5');
     		}
     	}
     	$this->success('上传贴图成功','texture?t='.$md5);
+    }
+    public function movieSave(){
+    	$md5=I('get.t/s');
+    	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
+    	{
+    		$this->display("Public:404");
+    		exit();
+    	}
+    	$texture_exist=I('post.texture_exist/s');
+    	$texture_num=I('post.texture_num/d');
+    	$upload = new \Think\Upload();// 实例化上传类
+    	$upload->maxSize = 3145728;// 设置附件上传大小
+    	$upload->exts = array('mp4','ogv');// 设置附件上传类型
+    	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
+    	$upload->autoSub  = false;
+    	$upload->savePath = 'upload/'; // 设置附件上传（子）目录
+    	// 上传文件
+    	$info = $upload->uploadOne($_FILES['texture']);
+    	if(!$info) {// 上传错误提示错误信息
+    		$this->error($upload->getError());
+    	}else{
+    		$savePath=__ROOT__."Public/upload/";
+    		$movePath=$savePath.$md5."/texture/";
+    		if(!strstr($texture_exist,$info['name'])){
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error('上传文件名与选择的不一致','texture?t='.$md5 ,'5');
+    		}
+    		$texture_exist_list=scandir(__ROOT__.'Public/upload/'.$md5.'/texture/');
+    		$texture_exist_num=count($texture_exist_list)-2;
+    		if($texture_exist_num>=$texture_num||$texture_exist_num>=20){
+    			if(!in_array($info['name'], $texture_exist_list)){
+    				$result_delete = @unlink ($savePath.$info['savename']);
+    				$this->error('上传的视频文件数量过多！','texture?t='.$md5 ,'5');
+    			}
+    		}
+    		if(!file_exists($movePath)){
+    			mkdir($movePath) or exit('创建路径失败，请重试！');
+    		}
+    		$rename_model_ok=rename($savePath.$info['savename'], $movePath.$info['name']);
+    		if(!$rename_model_ok){
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error('上传视频文件失败，请重试！','texture?t='.$md5 ,'5');
+    		}
+    	}
+    	$this->success('上传视频文件成功','texture?t='.$md5);
+    }
+    public function audioSave(){
+    	$md5=I('get.t/s');
+    	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
+    	{
+    		$this->display("Public:404");
+    		exit();
+    	}
+    	$texture_exist=I('post.texture_exist/s');
+    	$texture_num=I('post.texture_num/d');
+    	$upload = new \Think\Upload();// 实例化上传类
+    	$upload->maxSize = 3145728;// 设置附件上传大小
+    	$upload->exts = array('wav','mp3','ogg');// 设置附件上传类型
+    	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
+    	$upload->autoSub  = false;
+    	$upload->savePath = 'upload/'; // 设置附件上传（子）目录
+    	// 上传文件
+    	$info = $upload->uploadOne($_FILES['texture']);
+    	if(!$info) {// 上传错误提示错误信息
+    		$this->error($upload->getError());
+    	}else{
+    		$savePath=__ROOT__."Public/upload/";
+    		$movePath=$savePath.$md5."/texture/";
+    		if(!strstr($texture_exist,$info['name'])){
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error('上传文件名与选择的不一致！','texture?t='.$md5 ,'5');
+    		}
+    		$texture_exist_list=scandir(__ROOT__.'Public/upload/'.$md5.'/texture/');
+    		$texture_exist_num=count($texture_exist_list)-2;
+    		if($texture_exist_num>=$texture_num||$texture_exist_num>=20){
+    			if(!in_array($info['name'], $texture_exist_list)){
+    				$result_delete = @unlink ($savePath.$info['savename']);
+    				$this->error('上传的音频文件数量过多！','texture?t='.$md5 ,'5');
+    			}
+    		}
+    		if(!file_exists($movePath)){
+    			mkdir($movePath) or exit('创建路径失败，请重试！');
+    		}
+    		$rename_model_ok=rename($savePath.$info['savename'], $movePath.$info['name']);
+    		if(!$rename_model_ok){
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error('上传的音频文件失败，请重试！','texture?t='.$md5 ,'5');
+    		}
+    	}
+    	$this->success('上传音频文件成功','texture?t='.$md5);
     }
     public function change(){
     	$inputs=I('post.');

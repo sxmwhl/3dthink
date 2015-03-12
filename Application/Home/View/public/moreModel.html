@@ -20,6 +20,8 @@
 <volist name="categories" id="vo" empty="暂无子分类。">
   <li role="presentation"><a href='__MODULE__/category?cate={$vo.cate_id}'>{$vo.cate_name}</a></li>
 </volist>
+<empty name="category_path"><li role="presentation"><a href='__MODULE__/category?cate=0'>未分类</a></li></empty>
+
 </ul>
 </div>
 <div class="row" align="center">

@@ -15,10 +15,10 @@
 	<div class="container-fluid">
 		<include file="Public:logo" />
 		<div class="row">
-		<form name="texture_form" id="texture_form" method="post" action="__URL__/textureSave?t={$model.folder}" class="formclass" enctype="multipart/form-data">
+		<form name="texture_form" id="texture_form" method="post" action="__URL__/movieSave?t={$model.folder}" class="formclass" enctype="multipart/form-data">
 		<h3>添加/更换视频文件</h3>
 		<div class="form-group">
-		<label for="texture_exist">已上传视频文件：</label>
+		<label for="texture_exist">已上传的贴图/视频/音频文件：</label>
 		<select multiple class="form-control">
 		<foreach name="textureList" item="vo" >
 		<switch name="key" >
@@ -35,8 +35,8 @@
 		</select>		
 		</div>
 		<div class="form-group">
-		<label for="texture">上传视频文件：（mp4/ogv 小于3M）已上传同名贴图将被覆盖</label>
-		<input name="texture" id="texture" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg" class="form-control"/>
+		<label for="texture">上传视频文件：（mp4/ogv 小于3M）已上传同名视频文件将被覆盖</label>
+		<input name="texture" id="texture" type="file" value="浏览" accept="video/mp4,video/ogg" class="form-control"/>
 		
 		</div>
 		<button disabled type="submit" class="btn btn-default">上传贴图</button>
@@ -70,7 +70,7 @@
   		 rules:{
   			 texture:{
   				 required:true,
-  				accept:"image/*"
+  				accept:"video/*"
   			 },
   			 texture_exist:{
   				 required:true,
@@ -91,7 +91,7 @@
 			var i=0;
 			$("#inline").load(function(){
 				e.runtime.showAll();
-				$("inline").find("*").filter("imagetexture").filter("[url]").each(function(){
+				$("inline").find("*").filter("movietexture,imagetexture,audioclip").filter("[url]").each(function(){
 					str=str+"<option value="+$(this).attr("url")+">"+$(this).attr("url")+"</option>";
 					i+=1;
 				});

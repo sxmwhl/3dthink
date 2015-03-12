@@ -15,8 +15,8 @@ class CategoryController extends Controller {
     	$Moxing=D('Moxing');
     	$moxings = $Moxing->get_category_moxings($cate_id);
     	$this->moxings=$moxings;
-    	$title=empty($cate_name['cate_name'])?'根':$cate_name['cate_name'];
-    	$this->title=$title.'分类下模型及子分类';
+    	$title=empty($cate_name['cate_name'])?'未':$cate_name['cate_name'];
+    	$this->title=$title.'分类模型及子分类';
     	$this->display();
     }
     public function add(){

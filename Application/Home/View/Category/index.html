@@ -15,8 +15,11 @@
 <include file="Public:logo" />
     <div class="row text-right">
 	<h4 class="white">分类路径：<a href='__ROOT__/' class='title' title='分类名称'>首页</a>/
+	<empty name="category_path"><a href='__MODULE__/category?cate=0' class='title'>未分类</a>/</empty>
 <volist name="category_path" id="vo">
-<a href='__MODULE__/category?cate={$vo.cate_id}' class='title'>{$vo.cate_name}</a>/
+<a href='__MODULE__/category?cate={$vo.cate_id}' class='title'>
+{$vo.cate_name}
+</a>/
 </volist>----直接归属该分类的模型如下：
 </h4>
 </div>
