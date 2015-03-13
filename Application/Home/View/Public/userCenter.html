@@ -1,6 +1,6 @@
 <div class="row">
 <if condition="is_login()">
-欢迎：{:get_username()} | <a href="{:U('User/ucenter')}">会员中心</a> | <a href="{:U('User/logout')}">退出</a>
+欢迎：{:get_username()} | <a target="_blank" href="{:U('User/ucenter')}">会员中心</a> | <a href="{:U('User/logout')}">退出</a>
 <else/>
 <a href='__ROOT__/index.php/home/user/login'>登陆</a> | <a href='__ROOT__/index.php/home/user/register'>注册</a>
 </if>

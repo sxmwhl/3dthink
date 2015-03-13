@@ -19,14 +19,17 @@ $(document).ready(function(){
 	   obj.uid={$diy['uid']};
 	   $.post("__URL__/saveDiy",obj,success,"json");
 	   function success(data){
-		   alert(data.shared);
+		   alert("保存成功！");
 	   }
    });
    $("button#modelListOkBt").click(function(){
 	   $('#modelListModal').modal('hide');
    });
    $("button#modelListBt").click(show_model_list);
-   $("button#saveOkBt").click(get_max_id);
+   $("button#saveOkBt").click(function(){
+	   $('#modelListModal').modal('hide');
+   });
+   $("button#screenShotBt").click(screenShot);
 });
 </script>
 </head>
@@ -90,29 +93,6 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="domTree" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Dom树</h4>
-				</div>
-				<div class="modal-body">
-				<code id="codeShow">
-				
-				</code>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="saveOkBt" type="button" class="btn btn-primary">确定</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<input type='radio' name='model' id='modelinfo' />
 	<input type='radio' name='model' id='modelcategory' checked="checked" />
 	<input type='radio' name='model' id='myhide' />
@@ -133,14 +113,16 @@ $(document).ready(function(){
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					显示已插入模型
 				</button>
-				<button id="saveBt" type="button" class="btn btn-default"
-					aria-label="插入模型" data-toggle="modal" data-target="#domTree"
-					data-backdrop="static">
+				<button id="saveBt" type="button" class="btn btn-default">
 					<span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
 					保存
 				</button>
+			<button id="screenShotBt" type="button" class="btn btn-default">
+				<span class="glyphicon glyphicon-scissors" aria-hidden="true"> </span>
+				 截图
+			</button>
 
-	        <h6><strong>点球半径：</strong></h6>
+			<h6><strong>点球半径：</strong></h6>
                    <label class="sr-only" for="radius">点球大小</label>
                    <input name="radius" type="text" id="radius" value="" onchange="change_point_sphere()" onkeyup="clearNoNum(this)" class="form-control" />
             <h6><strong>更换场景：</strong></h6>
@@ -156,6 +138,18 @@ $(document).ready(function(){
 				<option value="8">纯色（蓝）</option>
 				<option value="9">纯色（黑）</option>
 			</select>
+			<h6><strong>上家园传缩略图：</strong></h6>
+			<form action="__URL__/diySave" method="post" role="form" class="navbar-form navbar-left" enctype="multipart/form-data">
+				<div class="form-group">
+					<label class="sr-only" for="preview">上家园传缩略图</label>
+					<div class="input-group">
+						<input type="file" name="preview" class="form-control" /> <span
+							class="input-group-btn">
+							<button class="btn btn-default" type="submit">上传</button>
+						</span>
+					</div>
+				</div>
+			</form>
 			
 	</div>
 	</aside>

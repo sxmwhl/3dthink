@@ -12,6 +12,9 @@ class IndexController extends Controller {
     	$Category=D('Category');
     	$list3=$Category->get_child_categories(0);
     	$this->categories=$list3;
+    	$Diy=M('Diy');
+    	$list4=$Diy->where('status=1')->order('views desc')->limit(8)->select();
+    	$this->diys=$list4;
     	$this->title='首页';
     	$this->keywords='模型分享,3d模型,web3d,x3d模型,三维网站,三维模型';
     	$this->display();
