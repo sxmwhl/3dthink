@@ -252,3 +252,9 @@ function change_background(self){
 	$("background").attr("righturl",righturl);
 	$("background").attr("lefturl",lefturl);
 }
+function screenShot(x3dID){
+	var imgUrl = document
+	.getElementById(x3dID).runtime
+	.getScreenshot();
+	return imgUrl;
+}

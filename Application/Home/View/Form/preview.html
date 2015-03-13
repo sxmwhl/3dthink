@@ -22,9 +22,7 @@
 								"click",
 								function() {
 									//Get data url from the runtime
-									var imgUrl = document
-											.getElementById("canvas").runtime
-											.getScreenshot();
+									var imgUrl = screenShot("canvas");
 									$('#preview').attr("src", imgUrl);
 									$('#download').attr("href", imgUrl);
 									$('#download').attr("download",

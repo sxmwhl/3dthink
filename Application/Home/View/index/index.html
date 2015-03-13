@@ -41,16 +41,15 @@
     </div>
     </volist>
     </div>
-<div class="row bg-info"><h3><span style="color:green" class="glyphicon glyphicon-leaf" aria-hidden="true"></span> <strong> 热 门 diy</strong></h3></div>
+<div class="row bg-info"><h3><span style="color:blue" class="glyphicon glyphicon-globe" aria-hidden="true"></span> <strong> 热 门 DIY</strong></h3></div>
 <div class="row">
     <volist name="diys" id="vo">
     <div class="col-md-3">
     <div class='item'>
-    <img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}' />
+    <img src='__BCS_UPLOAD__/diy/{$vo.uid}/preview.png' alt='{$vo.title}' />
     <div class='item-background'></div>
-    <a href='__CONTROLLER__/model?f={$vo.folder}' class='title' title='模型名称'>模型名称：{$vo.title}</a>
-    <a href='__CONTROLLER__/model?f={$vo.folder}' class='creator' title='作者'>创作者：{$vo.creator}</a>
-    <a href='__CONTROLLER__/model?f={$vo.folder}' class='time' title='更新时间'>更新时间：{$vo.time_update}</a>
+    <a href='__CONTROLLER__/diy?u={$vo.uid}' class='title' title='模型名称'>DIY名称：{$vo.title}</a>
+    <a href='__CONTROLLER__/diy?u={$vo.uid}' class='time' title='更新时间'>浏览次数：{$vo.views}</a>
     </div>
     </div>
     </volist>
