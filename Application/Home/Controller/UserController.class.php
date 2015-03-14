@@ -164,13 +164,13 @@ class UserController extends HomeController {
     	}
     	$uid = is_login();
     	$Diy=M('Diy');
-    	$list=$Diy->where('uid='.$uid)->find();
+    	$map['uid']=array('eq',$uid);
+    	$map['status']=array('gt',0);
+    	$list=$Diy->where($map)->find();
     	if($list===NULL||$list===false){
     		$this->display('enableDiy');
     		exit();
-    	}   
-    	$Diy=M('Diy');
-    	$list=$Diy->where('uid='.$uid)->find();
+    	}
     	$this->diy=$list;
     	$this->display();
     
@@ -191,6 +191,13 @@ class UserController extends HomeController {
     		//echo $Diy->getLastSql();
     		if(!$id) exit("开启我的家园失败！");
     	}
+    	$oldname = __ROOT__."Public/images/preview.png";
+    	$newPath = __ROOT__."Public/diy/".$data['uid']."/";
+    	if(!file_exists($newPath)){
+    		mkdir($newPath) or exit('创建路径失败，请重试！');
+    	}    	
+    	$newname=$newPath."/preview.png";
+    	copy($oldname, $newname);
     	$this->success('开启我的家园成功！', 'diy');
     	//$this->display('diy');
     }

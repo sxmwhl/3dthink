@@ -32,7 +32,11 @@ $(document).ready(function(){
    $("button#screenShotBt").click(function(){
 	   var imgUrl=screenShot("model");
 	   $("#screen_shot").attr("src",imgUrl);
-	   
+	   $('#screenShotOkBt').attr("href", imgUrl);
+	   $('#screenShotOkBt').attr("download", "screenShot.png");	   
+   });
+   $("#screenShotOkBt").click(function(){
+	   $("#screenShotModal").modal('hide');
    });
 });
 </script>
@@ -106,7 +110,7 @@ $(document).ready(function(){
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">已插入模型列表</h4>
+					<h4 class="modal-title" id="myModalLabel">DIY截图</h4>
 				</div>
 				<div class="modal-body">
 					<div class='item'>
@@ -120,7 +124,8 @@ $(document).ready(function(){
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
-					<button id="screenShotOkBt" type="button" class="btn btn-primary">保存</button>
+					<a id="screenShotOkBt" class="btn btn-primary" href="#" role="button">保存</a>
+					
 				</div>
 			</div>
 		</div>
@@ -172,7 +177,9 @@ $(document).ready(function(){
 				<option value="8">纯色（蓝）</option>
 				<option value="9">纯色（黑）</option>
 			</select>
-			<h6><strong>上家园传缩略图：</strong></h6>
+			<h6><strong>DIY缩略图：(可点击上方的截图按钮，保存截图再上传更新缩略图)</strong></h6>
+			<img class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/preview.png"
+								alt=" {$model['title']}" />
 			<form action="__URL__/diySave" method="post" role="form" class="navbar-form navbar-left" enctype="multipart/form-data">
 				<div class="form-group">
 					<label class="sr-only" for="preview">上家园传缩略图</label>
