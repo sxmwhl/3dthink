@@ -1,5 +1,6 @@
 <include file="Public:header" />
 <script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
+<script type='text/javascript' src='__BCS_PUBLIC__/js/additional-methods.min.js'></script>
 <script>
 $(document).ready(function(){
    form_disable();
@@ -18,8 +19,8 @@ $(document).ready(function(){
 	   obj.internet=$("group#cn_3dant_internet").html();
 	   obj.uid={$diy['uid']};
 	   $.post("__URL__/saveDiy",obj,success,"json");
-	   function success(data){
-		   alert("保存成功！");
+	   function success(data){		   
+		   alert(data.message);
 	   }
    });
    $("button#modelListOkBt").click(function(){
@@ -37,6 +38,33 @@ $(document).ready(function(){
    });
    $("#screenShotOkBt").click(function(){
 	   $("#screenShotModal").modal('hide');
+   });
+   $("#diy_preview_form").validate({
+	   rules:{
+		   diy_preview:{
+			   accept:'image/*',
+		   },
+	   },
+	   messages:{
+		   diy_preview:{
+			   accept:"缩略图文件格式不正确！"
+		   }
+	   },
+	   submitHandler: function(form) {
+		   var self = $("#diy_preview_form");
+		   $.post(self.attr("action"),self.serialize(),success);
+		   function success(data){
+			   if(data.status){
+				   alert(data.message);
+				   var url=$(".w280h200").attr("url");
+				   $(".w280h200").attr("url",url+Math.random());
+				   return false;
+			   }else{
+				   alert(data.message);
+				   return false;
+			   }
+		   }		   
+	   }
    });
 });
 </script>
@@ -177,14 +205,14 @@ $(document).ready(function(){
 				<option value="8">纯色（蓝）</option>
 				<option value="9">纯色（黑）</option>
 			</select>
-			<h6><strong>DIY缩略图：(可点击上方的截图按钮，保存截图再上传更新缩略图)</strong></h6>
+			<h6><strong>DIY缩略图：(可截图->保存->选择->上传更新缩略图)</strong></h6>
 			<img class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/preview.png"
 								alt=" {$model['title']}" />
-			<form action="__URL__/diySave" method="post" role="form" class="navbar-form navbar-left" enctype="multipart/form-data">
+			<form name="diy_preview_form" id="diy_preview_form" action="__URL__/diyPreviewSave" method="post" role="form" class="navbar-form navbar-left" enctype="multipart/form-data">
 				<div class="form-group">
 					<label class="sr-only" for="preview">上家园传缩略图</label>
 					<div class="input-group">
-						<input type="file" name="preview" class="form-control" /> <span
+						<input type="file" name="diy_preview" class="form-control" /> <span
 							class="input-group-btn">
 							<button class="btn btn-default" type="submit">上传</button>
 						</span>

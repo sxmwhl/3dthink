@@ -146,7 +146,7 @@ class UserController extends HomeController {
      * @author 石小明 <sxm@3dant.cn>
      */
     public function ucenter(){
-    	$this->title="用户中心";
+    	
 		if ( !is_login() ) {
 			$this->error( '您还没有登陆',U('User/login') );
 		}
@@ -154,11 +154,11 @@ class UserController extends HomeController {
         $Moxing=M('Moxing');
         $list=$Moxing->where('uid='.$uid)->select();
         $this->models=$list;
+        $this->title="用户中心";
         $this->display();
 
     }
-    public function diy(){
-    	$this->title="模型组建";
+    public function diy(){    	
     	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
     	}
@@ -171,6 +171,7 @@ class UserController extends HomeController {
     		$this->display('enableDiy');
     		exit();
     	}
+    	$this->title="模型组建";
     	$this->diy=$list;
     	$this->display();
     
@@ -202,6 +203,9 @@ class UserController extends HomeController {
     	//$this->display('diy');
     }
     public function saveDiy(){
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}
     	$data=I('post.');
     	$data['shared']=htmlspecialchars_decode($data['shared']);
     	$data['shared']=strip_tags($data['shared'],'<transform><inline>');
@@ -210,12 +214,47 @@ class UserController extends HomeController {
     	$Diy=D('Diy');
     	if (!$Diy->create($data,2)){ // 创建数据对象
     		// 如果创建失败 表示验证没有通过 输出错误提示信息
-    		exit($Diy->getError());
+    		$info['status']=false;
+    		$info['message']=$Diy->getError();
+    		exit(json_encode($info));
     	}else{
     		$where="uid='".$data['uid']."'";
     		$id=$Diy->where($where)->save();
-    		if($id==false) echo("添加错误状态");
+    		if($id==false) {
+    			$info['status']=false;
+    			$info['message']="保存失败，请重试！";
+    			exit(json_encode($info));
+    		}else {
+    			$info['status']=true;
+    			$info['message']="保存成功！";
+    		}    		
     	}
-    	echo json_encode($data);
+    	exit(json_encode($info));
+    }
+    public function diyPreviewSave(){
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}
+    	$uid=is_login();
+    	$upload = new \Think\Upload();// 实例化上传类
+    	$upload->maxSize = 1048576 ;// 设置附件上传大小
+    	$upload->exts = array('jpg','gif','png','jpeg');// 设置附件上传类型
+    	$upload->rootPath = __ROOT__.'Public/diy/'; // 设置附件上传根目录
+    	$upload->autoSub  = true;
+    	$upload->subName = "is_login"; // 设置附件上传（子）目录
+    	$upload->saveName = "preview";
+    	$upload->replace = true;
+    	$upload->saveExt = "png";
+    	// 上传文件
+    	$info = $upload->uploadOne($_FILES['diy_preview']);
+    	if(!$info) {// 上传错误提示错误信息
+    		$data['status']=false;
+    		$data['message']="更新失败，请重试！";
+    		echo (json_encode($data));
+    	}else{
+    		$data['status']=true;
+    		$data['message']="更新成功！";
+    		echo (json_encode($data));    		
+    	}
     }
 }
