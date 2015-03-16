@@ -49,21 +49,6 @@ $(document).ready(function(){
 		   diy_preview:{
 			   accept:"缩略图文件格式不正确！"
 		   }
-	   },
-	   submitHandler: function(form) {
-		   var self = $("#diy_preview_form");
-		   $.post(self.attr("action"),self.serialize(),success);
-		   function success(data){
-			   if(data.status){
-				   alert(data.message);
-				   var url=$(".w280h200").attr("url");
-				   $(".w280h200").attr("url",url+Math.random());
-				   return false;
-			   }else{
-				   alert(data.message);
-				   return false;
-			   }
-		   }		   
 	   }
    });
 });
