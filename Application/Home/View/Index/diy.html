@@ -20,81 +20,54 @@
 		<div class="row">
 			<table class="table  table-striped table-hover">
 				<caption>
-					<h3>{$model['title']}</h3>
+					<h3>{$diy['title']}</h3>
 				</caption>
 				<tr align ="left">
 					<th scope="col"><strong>模型描述</strong></th>
 				</tr>
 				<tr align ="left">
-					<td>{$model['description']}</td>
+					<td>{$diy['description']}</td>
 				</tr>
-				<tr align ="left">
-					<td><strong>模型分类</strong></td>
-				</tr>
-				<tr align ="left">
-					<td><a href='__ROOT__/' class='title' title='分类名称'>首页</a>/ <volist
-							name="category_path" id="vo"> <a
-							href='__MODULE__/category?cate={$vo.cate_id}' class='title'
-							title='分类名称'>{$vo.cate_name}</a>/ </volist></td>
-				</tr>
-				<tr align ="left">
-					<td><strong>模型代码</strong></td>
-				</tr>
-				<tr align ="left">
-					<td>{$model['folder']}</td>
-				</tr>
+				
+				
 				<tr align ="left">
 					<td><strong>创作者</strong></td>
 				</tr>
 				<tr align ="left">
 					<td>
-							{$model['creator']}
+							{$diy['creator']}
 						</td>
 				</tr>
-				<tr align ="left">
-					<td><strong>E-mail</strong></td>
-				</tr>
-				<tr align ="left">
-					<td>{$model['email']}
-						</td>
-				</tr>
+				
 				<tr align ="left">
 					<td><strong>更新时间</strong></td>
 				</tr>
 				<tr align ="left">
 					<td>
-							{$model['time_update']}
+							{$diy['time_update']}
 						</td>
 				</tr>
 				<tr align ="left">
 					<td><strong>浏览次数</strong></td>
 				</tr>
 				<tr align ="left">
-					<td>{$model['views']}</td>
+					<td>{$diy['views']}</td>
 				</tr>
 				<tr align ="left">
-					<td><strong>预览图片（点击更换）</strong></td>
+					<td><strong>预览图片</strong></td>
 				</tr>
 				<tr align ="left">
 					<td>
-							<a href="__MODULE__/form/preview?f={$model['folder']}"> <img
-								class="w280h200"
-								src="__BCS_UPLOAD__/{$model['folder']}/preview.{$model['preview_ext']}"
-								alt=" {$model['title']}" /></a>
+							 <img
+								class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/preview.png"
+								alt=" {$diy['title']}" />
 						</td>
-				</tr>
-				<tr align ="left">
-					<td><p>
-							<a class="btn btn-primary"
-								href="__MODULE__/form/modify?f={$model['folder']}&cate={$model['category']}"
-								target="_parent">修改信息</a>
-						</p></td>
 				</tr>
 			</table>
 		</div></div>
 	</aside>
 	<iframe id="Content3D" class="Content3D"
-		src="__URL__/modelIn?f=<?php echo $model['folder']; ?>" scrolling="no"
+		src="__URL__/diyIn?u={$diy['uid']}" scrolling="no"
 		marginheight="0" marginwidth="0" frameborder="0"></iframe>
 </body>
 </html>

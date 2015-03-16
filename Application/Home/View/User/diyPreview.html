@@ -1,0 +1,136 @@
+<include file="Public:header" />
+<script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
+<script type='text/javascript' src='__BCS_PUBLIC__/js/additional-methods.min.js'></script>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(
+			function() {
+				//Every time the user clicks on the 'take screenhot' button
+				$("#upload_form").validate({
+			   		 rules:{
+			   			 preview:{
+			   				accept:"image/*",
+			   			 },
+			   		 },
+			   		 messages:{
+			   			 preview:{
+			   				 accept:"缩略图文件格式不正确！"
+			   			 }
+			   		 }
+			   	 });
+				$("#btnTakeScreenshot")
+						.on(
+								"click",
+								function() {
+									//Get data url from the runtime
+									var imgUrl = screenShot("canvas");
+									$('#preview').attr("src", imgUrl);
+									$('#download').attr("href", imgUrl);
+									$('#download').attr("download",
+											"screenshot.png");
+									$('#preview_name').html("右侧截图，点击下载后上传");
+									$("#preview_name").css("color","red");
+								});				
+			});
+</script>
+
+</head>
+<body>
+	<input type='radio' name='model' id='modelcategory' />
+	<input type='radio' name='model' id='myhide' />
+	<div id='content'>
+		<label id='slider' class='modelcategory' for='modelcategory'>更多模型</label>
+		<label id='slider' class='myhide' for='myhide'>收起侧栏</label>
+	</div>
+	<aside class="modelcategory">
+		<include file="Public:moreModel" />
+	</aside>
+	<div class="container-fluid">
+		<include file="Public:logo" />
+		<div class="row">
+			<div class="col-md-6" align="center">
+				<div class='item'>
+					<img id='preview'
+						src='__BCS_PUBLIC__/diy/{$diy.uid}/preview.png'
+						alt='{$diy.title}' />
+					<div class='item-background'></div>
+					<a href='__MODULE__/User/diy' class='title'
+						title='模型名称'>DIY名称：{$diy.title}</a> <a
+						href='__MODULE__/User/diy' class='creator'
+						title='作者'>浏览次数：{$diy.views}</a>
+				</div>
+				<p id="preview_name" class="text-center">模型缩略图</p>
+			</div>
+			<div class="col-md-6">
+				<div class='item'>
+					<x3d id='canvas'> <scene dopickpass="true" pickmode="idBuf"
+		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
+	<Viewpoint bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,50'></Viewpoint> 
+	<navigationInfo id="head" headlight='true' type='"EXAMINE" "ANY"'></navigationInfo> 
+	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
+	<background
+		topurl="__BCS_PUBLIC__/images/background/horizon_0_top.jpg"
+		righturl="__BCS_PUBLIC__/images/background/horizon_0_right.jpg"
+		lefturl="__BCS_PUBLIC__/images/background/horizon_0_left.jpg"
+		fronturl="__BCS_PUBLIC__/images/background/horizon_0_front.jpg"
+		bottomurl="__BCS_PUBLIC__/images/background/horizon_0_bottom.jpg"
+		backurl="__BCS_PUBLIC__/images/background/horizon_0_back.jpg"
+		skyangle="1.57" groundangle="1.57" groundcolor="1,0,0" transparency="1.0"
+		skycolor="0,0,0"> </background> 
+		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>
+		<Transform id="marker" scale="0.2,0.2,0.2" translation="0,0,0">
+            <Shape id="point_sphere" render="false">
+                <Appearance>
+                    <Material diffuseColor="#FFD966" transparency="0.15"></Material>
+                </Appearance>
+                <Sphere></Sphere>
+            </Shape>
+        </Transform>	
+	<group id="cn_3dant_diy" onclick="groupClick(event)">
+	<group id="cn_3dant_shared">
+	{$diy['shared']}
+	</group>
+	<group id="cn_3dant_basic">
+	{$diy['basic']}
+	</group>
+	<group id="cn_3dant_internet">
+	{$diy['internet']}
+	</group>	
+	</group>
+	</scene> </x3d>					
+				</div>
+				<p class="text-center">实际模型（点击模型后，按下A键）</p>
+			</div>
+		</div>
+
+		<div class="row text-center mg-top20">
+		<form method="post" action="__URL__/diyPreviewSave"	enctype="multipart/form-data" class="form-inline" role="form" name="upload_form" id="upload_form">			
+			<input type="hidden" name="MAX_FILE_SIZE" value="10485760" /> 
+			<input type="hidden" name="folder" value="{$model.folder}" />
+			<input type="hidden" name="preview_ext" value="{$model.preview_ext}" />
+			<div class="form-group">
+			<label for="preview">更换模型缩略图（可<a href="#" id="btnTakeScreenshot">截取</a>右侧模型图>>
+			<a href="#"	id="download">下载</a>）
+			</label>			
+			<input name="preview" id="preview" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg" class="form-control"/>
+			<button type="submit" class="btn btn-primary">上传缩略图</button>
+			</div>
+		</form>
+		</div>
+	</div>
+	<include file="Public:footer" />
+	<script type="text/javascript" charset="utf-8">
+	x3dom.runtime.ready = function() {
+		var e = document.getElementById("canvas");
+		var str="";
+		$("inline").load(function(){
+			e.runtime.showAll();
+			$("inline").find("*").filter("imagetexture,movietexture").filter("[url]").each(function(){					
+				str=str+"<option>"+$(this).attr("url")+"</option>";
+			});
+			$("select#used").html(str);
+			$("button").removeAttr("disabled");
+		});
+	};	
+	</script>
+</body>
+</html>

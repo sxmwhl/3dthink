@@ -231,6 +231,17 @@ class UserController extends HomeController {
     	}
     	exit(json_encode($info));
     }
+    public function diyPreview(){
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}
+    	$uid=is_login();
+    	$Diy=M('Diy');
+    	$result=$Diy->where("uid=".$uid)->find();
+    	$this->diy=$result;
+    	$this->title="更换DIY《".$result['title']."》的缩略图";
+    	$this->display();
+    }
     public function diyPreviewSave(){
     	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
@@ -238,23 +249,19 @@ class UserController extends HomeController {
     	$uid=is_login();
     	$upload = new \Think\Upload();// 实例化上传类
     	$upload->maxSize = 1048576 ;// 设置附件上传大小
-    	$upload->exts = array('jpg','gif','png','jpeg');// 设置附件上传类型
-    	$upload->rootPath = __ROOT__.'Public/diy/'; // 设置附件上传根目录
-    	$upload->autoSub  = true;
-    	$upload->subName = "is_login"; // 设置附件上传（子）目录
-    	$upload->saveName = "preview";
+    	$upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+    	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
+    	$upload->autoSub  = false;
+    	$upload->savePath = 'diy/'.$uid.'/'; // 设置附件上传（子）目录
     	$upload->replace = true;
-    	$upload->saveExt = "png";
+    	$upload->saveName = 'preview';
+    	$upload->saveExt = 'png';
     	// 上传文件
-    	$info = $upload->uploadOne($_FILES['diy_preview']);
+    	$info = $upload->uploadOne($_FILES['preview']);
     	if(!$info) {// 上传错误提示错误信息
-    		$data['status']=false;
-    		$data['message']="更新失败，请重试！";
-    		echo (json_encode($data));
-    	}else{
-    		$data['status']=true;
-    		$data['message']="更新成功！";
-    		echo (json_encode($data));    		
+    		$this->error($upload->getError());
+    	}else{// 上传成功 获取上传文件信息
+    		$this->success('更换成功！','diy');
     	}
     }
 }

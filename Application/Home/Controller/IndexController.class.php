@@ -48,13 +48,13 @@ class IndexController extends Controller {
     	$this->display('model');
     }
     public function modelIn(){
-    	$Moxing=M('Moxing');
     	$md5=I('f');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
     		$this->display("Public:404");
     		exit();
     	}
+    	$Moxing=M('Moxing');
     	$where="folder='".$md5."'";
     	$data=$Moxing->where($where)->find();
     	$data['hl_on']=$data['hl_on']==0?"false":"true";
@@ -77,5 +77,20 @@ class IndexController extends Controller {
     	$this->title=$keywords.' 搜索结果';
     	//echo $Moxing->getLastSql();
     	$this->display('search');
+    }
+    public function diy(){
+    	$uid=I('u',0,'int');
+    	$Diy=M('Diy');
+    	$list=$Diy->where("uid=".$uid)->find();
+    	$this->diy=$list;
+    	$this->title="DIY模型《".$list['title']."》";  
+    	$this->display();  	
+    }
+    public function diyIn(){
+    	$uid=I('u',0,'int');
+    	$Diy=M('Diy');
+    	$list=$Diy->where("uid=".$uid)->find();
+    	$this->diy=$list;
+    	$this->display();
     }
 }
