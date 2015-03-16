@@ -102,14 +102,8 @@
 	<script type="text/javascript" charset="utf-8">
 	x3dom.runtime.ready = function() {
 		var e = document.getElementById("canvas");
-		var str="";
-		$("#inline").load(function(){
+		$("inline").load(function(){
 			e.runtime.showAll();
-			$("inline").find("*").filter("imagetexture,movietexture").filter("[url]").each(function(){					
-				str=str+"<option>"+$(this).attr("url")+"</option>";
-			});
-			$("select#used").html(str);
-			$("button").removeAttr("disabled");
 		});
 	};	
 	</script>
