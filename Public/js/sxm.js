@@ -258,7 +258,3 @@ function screenShot(x3dID){
 	.getScreenshot();
 	return imgUrl;
 }
-function showAll(x3dID){
-	var e = document.getElementById(x3dID);
-	e.runtime.showAll();
-}

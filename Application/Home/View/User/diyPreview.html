@@ -30,7 +30,6 @@
 									$('#preview_name').html("右侧截图，点击下载后上传");
 									$("#preview_name").css("color","red");
 								});	
-				
 			});
 </script>
 
@@ -120,15 +119,21 @@
 	</div>
 	<include file="Public:footer" />
 	<script type="text/javascript" charset="utf-8">
-	x3dom.runtime.ready = function() {
-		$("inline").each(function(){
-			var e = document.getElementById('canvas');
-			$(this).load(function(){
+	x3dom.runtime.ready = function() {	
+		var e = document.getElementById("canvas");
+		$("[tag='cn_3dant_inline']").first().load(function(){	
+			$(this).attr("onload","showAll()");
+			setTimeout(function(){
 				e.runtime.showAll();
-			});
-			
+			},1000);			
 		});
-	}
+		$("[tag='cn_3dant_inline']").last().load(function(){	
+			$(this).attr("onload","showAll()");
+			setTimeout(function(){
+				e.runtime.showAll();
+			},1000);			
+		});
+	};
 	</script>
 </body>
 </html>
