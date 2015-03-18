@@ -1,36 +1,29 @@
 <include file="Public:header" />
 <script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
 <script type='text/javascript' src='__BCS_PUBLIC__/js/additional-methods.min.js'></script>
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(
-			function() {
-				//Every time the user clicks on the 'take screenhot' button
-				$("#upload_form").validate({
-			   		 rules:{
-			   			 preview:{
-			   				accept:"image/*",
-			   			 },
-			   		 },
-			   		 messages:{
-			   			 preview:{
-			   				 accept:"缩略图文件格式不正确！"
-			   			 }
-			   		 }
-			   	 });
-				$("#btnTakeScreenshot")
-						.on(
-								"click",
-								function() {
-									//Get data url from the runtime
-									var imgUrl = screenShot("canvas");
-									$('#preview').attr("src", imgUrl);
-									$('#download').attr("href", imgUrl);
-									$('#download').attr("download",
-											"screenshot.png");
-									$('#preview_name').html("右侧截图，点击下载后上传");
-									$("#preview_name").css("color","red");
-								});				
-			});
+<script>
+	$(document).ready(function(){				
+	$("#btnTakeScreenshot").click(function(){
+			var imgUrl=screenShot("x3d_canvas");
+			$("#preview_img").attr("src", imgUrl);
+			$("#download").attr("href", imgUrl);
+			$("#download").attr("download", "screenshot.png");
+			$("#preview_name").html("右侧截图，点击下载后上传");
+			$("#preview_name").css("color", "red");
+		});
+		$("#upload_form").validate({
+			rules : {
+				preview : {
+					accept : "image/*",
+				},
+			},
+			messages : {
+				preview : {
+					accept : "缩略图文件格式不正确！"
+				}
+			}
+		});
+	});
 </script>
 
 </head>
@@ -49,7 +42,7 @@
 		<div class="row">
 			<div class="col-md-6" align="center">
 				<div class='item'>
-					<img id='preview'
+					<img id='preview_img'
 						src='__BCS_UPLOAD__/{$model.folder}/preview.{$model.preview_ext}'
 						alt='{$model.title}' />
 					<div class='item-background'></div>
@@ -64,7 +57,7 @@
 			</div>
 			<div class="col-md-6">
 				<div class='item'>
-					<x3d id='canvas'> <scene dopickpass="true" pickmode="idBuf"
+					<x3d id='x3d_canvas'> <scene dopickpass="true" pickmode="idBuf"
 						bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
 					<navigationInfo id="head" headlight='{$model.hl_on}'
 						type='"EXAMINE"'></navigationInfo> <directionalLight
@@ -89,8 +82,13 @@
 			<input type="hidden" name="folder" value="{$model.folder}" />
 			<input type="hidden" name="preview_ext" value="{$model.preview_ext}" />
 			<div class="form-group">
-			<label for="preview">更换模型缩略图（可<a href="#" id="btnTakeScreenshot">截取</a>右侧模型图>>
-			<a href="#"	id="download">下载</a>）
+			<label for="preview">更换模型缩略图（可
+			<button id="btnTakeScreenshot" type="button" class="btn btn-primary btn-xs">
+  <span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> 截取
+</button>右侧模型图>>
+			<a id="download" class="btn btn-primary btn-xs" role="button">
+  <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> 下载
+</a>）
 			</label>			
 			<input name="preview" id="preview" type="file" value="浏览" accept="image/png,image/gif,image/jpeg,image/pjpeg" class="form-control"/>
 			<button type="submit" class="btn btn-primary">上传缩略图</button>

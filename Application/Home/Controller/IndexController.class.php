@@ -79,11 +79,19 @@ class IndexController extends Controller {
     	$this->display('search');
     }
     public function diy(){
+    	session_start();
+    	$allow_sep='180';
     	$uid=I('u',0,'int');
     	$Diy=M('Diy');
-    	$list=$Diy->where("uid=".$uid)->find();
-    	$this->diy=$list;
-    	$this->title="DIY模型《".$list['title']."》";  
+    	$data=$Diy->where("uid=".$uid)->find();
+    	if(!isset($_SESSION['post_sep']))$_SESSION['post_sep']=time();
+    	if(time() - $_SESSION['post_sep'] > $allow_sep)$_SESSION['post_sep']=time();
+    	if($_SESSION['post_sep']==time()){
+    		$Diy->views=$data['views']+1;
+    		$Diy->where('uid='.$uid)->save();
+    	}    	
+    	$this->diy=$data;
+    	$this->title="DIY模型《".$data['title']."》";  
     	$this->display();  	
     }
     public function diyIn(){
