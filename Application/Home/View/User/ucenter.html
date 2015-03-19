@@ -22,9 +22,6 @@
 			<h3>{:get_username()} <small>欢迎回来</small></h3>
 			</div>
 			<div class="row">
-			<h4><a href="__URL__/ucenter">分享的模型</a></h4>
-			</div>
-			<div class="row">
 			<h4>
 				<a href="__URL__/diy">我的家园</a>
 			</h4>
@@ -45,21 +42,25 @@
 	<div class="container-fluid">
 		<include file="Public:logo" />
 		<div class="row">
-			<volist name="models" id="vo">
+			<volist name="diys" id="vo">
 			<div class="col-md-3">
 				<div class='item'>
-					<img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}'
+					<img src='__BCS_PUBLIC__/diy/{$vo.uid}/preview.png'
 						alt='{$vo.title}' />
 					<div class='item-background'></div>
-					<a href='__MODULE__/index/model?f={$vo.folder}' class='title'
-						title='模型名称'>模型名称：{$vo.title}</a> <a
-						href='__MODULE__/index/model?f={$vo.folder}' class='creator'
-						title='作者'>创作者：{$vo.creator}</a> <a
-						href='__MODULE__/index/model?f={$vo.folder}' class='time'
-						title='浏览次数'>浏览次数：{$vo.views} 次</a>
+					<a href='__CONTROLLER__/diy?u={$vo.uid}' class='title' title='模型名称'>DIY名称：{$vo.title}</a>
+					<a href='__CONTROLLER__/diy?u={$vo.uid}' class='time' title='更新时间'>浏览次数：{$vo.views}</a>
 				</div>
 			</div>
 			</volist>
+			<div class="col-md-3">
+			<div class='item'>
+					<img src='__BCS_PUBLIC__/images/add.png'
+						alt='添加diy' />
+					<div class='item-background'></div>
+					<a href='__CONTROLLER__/enableDiy?u={$vo.uid}' class='title'>点击添加DIY</a>
+				</div>
+			</div>
 		</div>
 	</div>
 

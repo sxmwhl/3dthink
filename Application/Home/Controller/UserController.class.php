@@ -145,15 +145,14 @@ class UserController extends HomeController {
      * 用户中心
      * @author 石小明 <sxm@3dant.cn>
      */
-    public function ucenter(){
-    	
+    public function ucenter(){    	
 		if ( !is_login() ) {
 			$this->error( '您还没有登陆',U('User/login') );
 		}
         $uid = is_login();
-        $Moxing=M('Moxing');
-        $list=$Moxing->where('uid='.$uid)->select();
-        $this->models=$list;
+        $Diy=M('Diy');
+        $list=$Diy->where('uid='.$uid)->select();
+        $this->diys=$list;
         $this->title="用户中心";
         $this->display();
 
