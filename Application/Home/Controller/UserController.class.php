@@ -162,18 +162,30 @@ class UserController extends HomeController {
     		$this->error( '您还没有登陆',U('User/login') );
     	}
     	$uid = is_login();
+    	$id=I('get.id/d');
     	$Diy=M('Diy');
     	$map['uid']=array('eq',$uid);
     	$map['status']=array('gt',0);
     	$list=$Diy->where($map)->find();
     	if($list===NULL||$list===false){
-    		$this->display('enableDiy');
-    		exit();
+    		$this->error('尚未开启DIY','/addDiy');
+    	}
+    	$map['id']=array('eq',$id);
+    	$list=$Diy->where($map)->find();
+    	if($list===NULL||$list===false){
+    		$this->error('该DIY不存在！');
     	}
     	$this->title="模型组建";
     	$this->diy=$list;
     	$this->display();
     
+    }
+    public function addDiy(){
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}
+    	$this->title="开启DIY";
+    	$this->display();
     }
     public function enableDiy(){
     	if ( !is_login() ) {
@@ -189,16 +201,16 @@ class UserController extends HomeController {
     	}else{
     		$id=$Diy->add();
     		//echo $Diy->getLastSql();
-    		if(!$id) exit("开启我的家园失败！");
+    		if(!$id) exit("添加DIY失败！");
     	}
     	$oldname = __ROOT__."Public/images/preview.png";
-    	$newPath = __ROOT__."Public/diy/".$data['uid']."/";
+    	$newPath = __ROOT__."Public/diy/".$data['uid']."/".$id."/";
     	if(!file_exists($newPath)){
     		mkdir($newPath) or exit('创建路径失败，请重试！');
     	}    	
     	$newname=$newPath."/preview.png";
     	copy($oldname, $newname);
-    	$this->success('开启我的家园成功！', 'diy');
+    	$this->success('开启我的家园成功！', 'diy?id='.$id);
     	//$this->display('diy');
     }
     public function saveDiy(){
