@@ -28,6 +28,7 @@ class UserController extends HomeController {
 		$list0=$Member->where('uid='.$uid)->find();
 		$Diy=M('Diy');
 		$list=$Diy->where('uid='.$uid)->select();
+		$this->diy_num=count($list);
 		$Moxing=M('Moxing');
 		$list2=$Moxing->where('uid='.$uid)->select();
 		$this->member=$list0;	
@@ -119,6 +120,10 @@ class UserController extends HomeController {
 			$this->redirect('User/login');
 		}
 	}
+	/*修改会员信息*/
+	public function modifyUserInfo(){
+		echo("修改用户信息");
+	}
 
 	/* 验证码，用于登录和注册 */
 	public function verify(){
@@ -159,16 +164,18 @@ class UserController extends HomeController {
     		$this->error( '您还没有登陆',U('User/login') );
     	}
     	$uid = is_login();
-    	$id=I('get.id/d');
+    	$id=I('get.id',0,'int');
     	$Diy=M('Diy');
     	$map['uid']=array('eq',$uid);
     	$map['status']=array('gt',0);
-    	$list=$Diy->where($map)->find();
-    	if($list===NULL||$list===false){
+    	$list1=$Diy->where($map)->find();
+    	if($list1===NULL||$list1===false){
     		$this->error('尚未开启DIY','/addDiy');
     	}
-    	$map['id']=array('eq',$id);
-    	$list=$Diy->where($map)->find();
+    	$map2['uid']=array('eq',$uid);
+    	$map2['status']=array('gt',0);
+    	$map2['id']=array('eq',$id);
+    	$list=$Diy->where($map2)->find();
     	if($list===NULL||$list===false){
     		$this->error('该DIY不存在！');
     	}
@@ -181,6 +188,10 @@ class UserController extends HomeController {
     	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
     	}
+    	$uid=is_login();
+    	$Diy=M('Diy');
+    	$list=$Diy->where('uid='.$uid)->select();
+    	if(count($list)>=8)$this->error('Diy数量已达上限');
     	$this->title="开启DIY";
     	$this->display();
     }
@@ -214,6 +225,7 @@ class UserController extends HomeController {
     	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
     	}
+    	$id=I('get.id',0,'int');
     	$data=I('post.');
     	$data['shared']=htmlspecialchars_decode($data['shared']);
     	$data['shared']=strip_tags($data['shared'],'<transform><inline>');
@@ -226,8 +238,8 @@ class UserController extends HomeController {
     		$info['message']=$Diy->getError();
     		exit(json_encode($info));
     	}else{
-    		$where="uid='".$data['uid']."'";
-    		$id=$Diy->where($where)->save();
+    		$map['id']=array('eq',$id);
+    		$id=$Diy->where($map)->save();
     		if($id==false) {
     			$info['status']=false;
     			$info['message']="保存失败，请重试！";
