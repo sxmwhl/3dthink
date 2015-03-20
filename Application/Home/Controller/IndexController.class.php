@@ -81,23 +81,23 @@ class IndexController extends Controller {
     public function diy(){
     	session_start();
     	$allow_sep='180';
-    	$uid=I('u',0,'int');
+    	$id=I('id',0,'int');
     	$Diy=M('Diy');
-    	$data=$Diy->where("uid=".$uid)->find();
+    	$data=$Diy->where("id=".$id)->find();
     	if(!isset($_SESSION['post_sep']))$_SESSION['post_sep']=time();
     	if(time() - $_SESSION['post_sep'] > $allow_sep)$_SESSION['post_sep']=time();
     	if($_SESSION['post_sep']==time()){
     		$Diy->views=$data['views']+1;
-    		$Diy->where('uid='.$uid)->save();
+    		$Diy->where('id='.$id)->save();
     	}    	
     	$this->diy=$data;
     	$this->title="DIY模型《".$data['title']."》";  
     	$this->display();  	
     }
     public function diyIn(){
-    	$uid=I('u',0,'int');
+    	$id=I('id',0,'int');
     	$Diy=M('Diy');
-    	$list=$Diy->where("uid=".$uid)->find();
+    	$list=$Diy->where("id=".$id)->find();
     	$this->diy=$list;
     	$this->display();
     }

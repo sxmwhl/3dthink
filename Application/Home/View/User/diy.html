@@ -18,7 +18,7 @@ $(document).ready(function(){
 	   obj.basic=$("group#cn_3dant_basic").html();
 	   obj.internet=$("group#cn_3dant_internet").html();
 	   obj.uid={$diy['uid']};
-	   $.post("__URL__/saveDiy",obj,success,"json");
+	   $.post("__URL__/saveDiy?id={$diy.id}",obj,success,"json");
 	   function success(data){		   
 		   alert(data.message);
 	   }
@@ -125,15 +125,8 @@ $(document).ready(function(){
 					</button>
 					<h4 class="modal-title" id="myModalLabel">DIY截图</h4>
 				</div>
-				<div class="modal-body">
-					<div class='item'>
-						<img id='screen_shot' src=''
-							alt='DIY截图' />
-						<div class='item-background'></div>
-						<a href='__CONTROLLER__/diy?u={$vo.uid}' class='title'
-							title='模型名称'>DIY名称：{$vo.title}</a> <a
-							href='__CONTROLLER__/diy?u={$vo.uid}' class='time' title='更新时间'>浏览次数：{$vo.views}</a>
-					</div>
+				<div class="modal-body">					
+						<img id='screen_shot' src='' alt='DIY截图' />						
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
@@ -191,8 +184,8 @@ $(document).ready(function(){
 				<option value="9">纯色（黑）</option>
 			</select>
 			<h6><strong>DIY缩略图：(点击更换)</strong></h6>
-			<a href="__MODULE__/User/diyPreview">
-			<img class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/preview.png" alt=" {$model['title']}" />	
+			<a href="__MODULE__/User/diyPreview?id={$diy['id']}">
+			<img class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/{$diy['id']}/preview.png" alt=" {$model['title']}" />	
 			</a>		
 	</div>
 	</aside>

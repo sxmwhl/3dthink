@@ -13,8 +13,13 @@
 </aside>
 <div class="container-fluid" align="center">
   <include file="Public:logo" />
-  <div class="row bg-info"><h3><span style="color:red" class="glyphicon glyphicon-fire" aria-hidden="true"></span> <strong>热 门 模 型</strong></h3></div>
-  <div class="row">
+		<div class="row bg-info">
+			<h3>
+				<span style="color: red" class="glyphicon glyphicon-fire"
+					aria-hidden="true"></span> <strong>热 门 模 型</strong>
+			</h3>
+		</div>
+		<div class="row">
   <volist name="models1" id="vo">
   	<div class="col-md-3">
   	<div class='item'>
@@ -46,10 +51,10 @@
     <volist name="diys" id="vo">
     <div class="col-md-3">
     <div class='item'>
-    <img src='__BCS_PUBLIC__/diy/{$vo.uid}/preview.png' alt='{$vo.title}' />
+    <img src='__BCS_PUBLIC__/diy/{$vo.uid}/{$vo.id}/preview.png' alt='{$vo.title}' />
     <div class='item-background'></div>
-    <a href='__CONTROLLER__/diy?u={$vo.uid}' class='title' title='模型名称'>DIY名称：{$vo.title}</a>
-    <a href='__CONTROLLER__/diy?u={$vo.uid}' class='time' title='更新时间'>浏览次数：{$vo.views}</a>
+    <a href='__CONTROLLER__/diy?id={$vo.id}' class='title' title='模型名称'>DIY名称：{$vo.title}</a>
+    <a href='__CONTROLLER__/diy?id={$vo.id}' class='time' title='浏览次数'>浏览次数：{$vo.views}</a>
     </div>
     </div>
     </volist>

@@ -18,7 +18,24 @@ class UserController extends HomeController {
 
 	/* 用户中心首页 */
 	public function index(){
-		
+		if ( !is_login() ) {
+			$this->error( '您还没有登陆',U('User/login') );
+		}
+		$uid = is_login();
+		$User=new UserApi();
+		$info=$User->info($uid);
+		$Member=M('Member');
+		$list0=$Member->where('uid='.$uid)->find();
+		$Diy=M('Diy');
+		$list=$Diy->where('uid='.$uid)->select();
+		$Moxing=M('Moxing');
+		$list2=$Moxing->where('uid='.$uid)->select();
+		$this->member=$list0;	
+		$this->user=$info;
+		$this->diys=$list;
+		$this->moxings=$list2;
+		$this->title="用户中心";
+		$this->display();
 	}
 
 	/* 注册页面 */
@@ -63,12 +80,10 @@ class UserController extends HomeController {
 			/* 检测验证码 */
 			if(!$this->check_verify($verify)){
 				$this->error('验证码输入错误！');
-			}
-			
+			}			
 			/* 调用UC登录接口登录 */
 			$user = new UserApi;
-			$uid = $user->login($username, $password);
-			
+			$uid = $user->login($username, $password);			
 			if(0 < $uid){ //UC登录成功
 				/* 登录用户 */
 				$Mb = D('Member');
@@ -139,24 +154,6 @@ class UserController extends HomeController {
 		}
 		return $error;
 	}
-
-
-    /**
-     * 用户中心
-     * @author 石小明 <sxm@3dant.cn>
-     */
-    public function ucenter(){    	
-		if ( !is_login() ) {
-			$this->error( '您还没有登陆',U('User/login') );
-		}
-        $uid = is_login();
-        $Diy=M('Diy');
-        $list=$Diy->where('uid='.$uid)->select();
-        $this->diys=$list;
-        $this->title="用户中心";
-        $this->display();
-
-    }
     public function diy(){    	
     	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
@@ -246,9 +243,11 @@ class UserController extends HomeController {
     	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
     	}
+    	$id=I('get.id',0,'int');
     	$uid=is_login();
     	$Diy=M('Diy');
-    	$result=$Diy->where("uid=".$uid)->find();
+    	$result=$Diy->where("id=".$id)->find();
+    	if($result['uid']!==$uid)$this->error("无权编辑此DIY");
     	$this->diy=$result;
     	$this->title="更换DIY《".$result['title']."》的缩略图";
     	$this->display();
@@ -258,12 +257,16 @@ class UserController extends HomeController {
     		$this->error( '您还没有登陆',U('User/login') );
     	}
     	$uid=is_login();
+    	$id=I('get.id',0,'int');
+    	$Diy=M('Diy');
+    	$result=$Diy->where('id='.$id)->find();
+    	if($uid!==$result['uid'])$this->error("无权编辑此DIY");
     	$upload = new \Think\Upload();// 实例化上传类
     	$upload->maxSize = 1048576 ;// 设置附件上传大小
     	$upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
     	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
     	$upload->autoSub  = false;
-    	$upload->savePath = 'diy/'.$uid.'/'; // 设置附件上传（子）目录
+    	$upload->savePath = 'diy/'.$uid.'/'.$id.'/'; // 设置附件上传（子）目录
     	$upload->replace = true;
     	$upload->saveName = 'preview';
     	$upload->saveExt = 'png';
@@ -272,7 +275,7 @@ class UserController extends HomeController {
     	if(!$info) {// 上传错误提示错误信息
     		$this->error($upload->getError());
     	}else{// 上传成功 获取上传文件信息
-    		$this->success('更换成功！','diy');
+    		$this->success('更换成功！','diy?id='.$id);
     	}
     }
 }

@@ -2,11 +2,17 @@
 namespace Home\Controller;
 use Think\Controller;
 class FormController extends Controller {
-    public function index(){
+	public function _before_index(){
+	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}
+	}
+    public function index(){    	
       $this->title='分型您的模型';
       $this->display();
     }
     public function upload(){
+    	$uid=is_login();
     	$upload = new \Think\Upload();// 实例化上传类
     	$upload->maxSize = 3145728 ;// 设置附件上传大小
     	$upload->exts = array('x3d');// 设置附件上传类型   
@@ -44,6 +50,7 @@ class FormController extends Controller {
     		$inputs['folder']=$info['md5'];
     		$inputs['time_update']=date('Y-m-d H:i:s',time());  		
     		$inputs['ip_upload']=get_client_ip();
+    		$inputs['uid']=$uid;
     		if (!$Moxing->create($inputs)){ // 创建数据对象
     			// 如果创建失败 表示验证没有通过 输出错误提示信息
     			exit($Moxing->getError());

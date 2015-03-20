@@ -59,7 +59,7 @@
 				<tr align ="left">
 					<td>
 							 <img
-								class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/preview.png"
+								class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/{$diy['id']}/preview.png"
 								alt=" {$diy['title']}" />
 						</td>
 				</tr>
@@ -67,7 +67,7 @@
 		</div></div>
 	</aside>
 	<iframe id="Content3D" class="Content3D"
-		src="__URL__/diyIn?u={$diy['uid']}" scrolling="no"
+		src="__URL__/diyIn?id={$diy['id']}" scrolling="no"
 		marginheight="0" marginwidth="0" frameborder="0"></iframe>
 </body>
 </html>

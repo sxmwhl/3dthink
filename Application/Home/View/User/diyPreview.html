@@ -50,12 +50,12 @@
 			<div class="col-md-6" align="center">
 				<div class='item'>
 					<img id='preview'
-						src='__BCS_PUBLIC__/diy/{$diy.uid}/preview.png'
+						src='__BCS_PUBLIC__/diy/{$diy.uid}/{$diy.id}/preview.png'
 						alt='{$diy.title}' />
 					<div class='item-background'></div>
-					<a href='__MODULE__/User/diy' class='title'
+					<a href='__MODULE__/User/diy?id={$diy.id}' class='title'
 						title='模型名称'>DIY名称：{$diy.title}</a> <a
-						href='__MODULE__/User/diy' class='creator'
+						href='__MODULE__/User/diy?id={$diy.id}' class='creator'
 						title='作者'>浏览次数：{$diy.views}</a>
 				</div>
 				<p id="preview_name" class="text-center">模型缩略图</p>
@@ -103,7 +103,7 @@
 		</div>
 
 		<div class="row text-center mg-top20">
-		<form method="post" action="__URL__/diyPreviewSave"	enctype="multipart/form-data" class="form-inline" role="form" name="upload_form" id="upload_form">			
+		<form method="post" action="__URL__/diyPreviewSave?id={$diy.id}"	enctype="multipart/form-data" class="form-inline" role="form" name="upload_form" id="upload_form">			
 			<input type="hidden" name="MAX_FILE_SIZE" value="10485760" /> 
 			<input type="hidden" name="folder" value="{$model.folder}" />
 			<input type="hidden" name="preview_ext" value="{$model.preview_ext}" />

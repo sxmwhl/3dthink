@@ -96,5 +96,4 @@ class UserApi extends Api{
         }
         return $return;
     }
-
 }
