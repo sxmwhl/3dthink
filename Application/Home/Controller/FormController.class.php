@@ -1,5 +1,6 @@
 <?php
 namespace Home\Controller;
+use User\Api\UserApi;
 use Think\Controller;
 class FormController extends Controller {
 	public function _before_index(){
@@ -51,6 +52,10 @@ class FormController extends Controller {
     		$inputs['time_update']=date('Y-m-d H:i:s',time());  		
     		$inputs['ip_upload']=get_client_ip();
     		$inputs['uid']=$uid;
+    		$User=new UserApi();
+    		$user_info=$User->info($uid);
+    		$inputs['creator']=$user_info[1];
+    		$inputs['email']=$user_info[2];
     		if (!$Moxing->create($inputs)){ // 创建数据对象
     			// 如果创建失败 表示验证没有通过 输出错误提示信息
     			exit($Moxing->getError());
@@ -75,7 +80,7 @@ class FormController extends Controller {
     	$Category=D('Category');
     	$category_option = $Category->get_category_option(0,$cate,0);
     	$this->category_option=$category_option;
-    	$Moxing=M('Moxing','think_');
+    	$Moxing=M('Moxing');
     	$where="folder='".$md5."'";
     	$model_show=$Moxing->where($where)->find();
     	$array1=explode(',',$model_show['vp_position']);

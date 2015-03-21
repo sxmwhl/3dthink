@@ -67,7 +67,8 @@
 					<img src='__BCS_PUBLIC__/diy/{$vo.uid}/{$vo.id}/preview.png' alt='{$vo.title}' />
 					<div class='item-background'></div>
 					<a href='__CONTROLLER__/diy?id={$vo.id}' class='title' title='模型名称'>DIY名称：{$vo.title}</a>
-					<a href='__CONTROLLER__/diy?id={$vo.id}' class='time' title='更新时间'>浏览次数：{$vo.views}</a>
+					<a href='__CONTROLLER__/diy?id={$vo.id}' class='creator' title='浏览次数'>浏览次数：{$vo.views}</a>
+					<a href='__CONTROLLER__/deleteDiy?id={$vo.id}' class='time' title='删除Diy'><span class="label label-default">删除</span></a>
 				</div>
 			</div>
 			</volist>

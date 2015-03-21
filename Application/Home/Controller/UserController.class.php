@@ -31,7 +31,10 @@ class UserController extends HomeController {
 		$this->diy_num=count($list);
 		$Moxing=M('Moxing');
 		$list2=$Moxing->where('uid='.$uid)->select();
-		$this->member=$list0;	
+		$this->member=$list0;
+		$Category=D('Category');
+		$list3=$Category->get_child_categories(0);
+		$this->categories=$list3;
 		$this->user=$info;
 		$this->diys=$list;
 		$this->moxings=$list2;
@@ -178,7 +181,7 @@ class UserController extends HomeController {
     	$list=$Diy->where($map2)->find();
     	if($list===NULL||$list===false){
     		$this->error('该DIY不存在！');
-    	}
+    	}  	
     	$this->title="模型组建";
     	$this->diy=$list;
     	$this->display();
@@ -194,6 +197,22 @@ class UserController extends HomeController {
     	if(count($list)>=8)$this->error('Diy数量已达上限');
     	$this->title="开启DIY";
     	$this->display();
+    }
+    public function deleteDiy(){
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}
+    	$id=I('get.id',0,'int');
+    	$uid=is_login();
+    	$Diy=M('Diy');
+    	$result1=$Diy->where('id='.$id)->find();
+    	if($result1['uid']!==$uid)$this->error('无权删除此DIY！');
+    	$result2=$Diy->where('id='.$id)->delete();
+    	if($result2!==1)$this->error('删除错误!');
+    	$dir=__ROOT__.'Public/diy/'.$uid.'/'.$id;
+    	$result3 = deldir($dir);
+    	if($result3===false)$this->error('数据删除，预览图片尚未删除！');
+    	$this->success('删除成功！');   	
     }
     public function enableDiy(){
     	if ( !is_login() ) {
