@@ -30,42 +30,30 @@
 <a class="btn btn-default" href="__URL__/lists" role="button"> 分类列表</a>
 </form>
 <script>
-		var validator = new FormValidator(
-				'category_form',
-				[ {
-					name : 'cate_name',
-					display : '分类名称',
-					rules : 'required|max_length[50]|is_key'
-				}, {
-					name : 'cate_keywords',
-					display : '关键词',
-					rules : 'required|max_length[50]|is_key'
-				}, {
-					name : 'cate_description',
-					display : '分类描述',
-					rules : 'required|max_length[300]'
-				}, {
-					name : 'root_id',
-					display : '模型分类未选择',
-					rules : 'greater_than[-1]|required'
-				}, {
-					name : 'cate_order',
-					display : '分类排序',
-					rules : 'greater_than[-1]|is_natural'
-				} ],
-				function(errors, evt) {
-					if (errors.length > 0) {
-						var errorString = '';
-
-						for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
-							errorString += errors[i].message + '<br />';
-						}
-						document.getElementById("error").innerHTML = errorString;
-						if (evt && evt.preventDefault) {
-							evt.preventDefault();
-						} else if (event) {
-							event.returnValue = false;
-						}
-					}
-				});
-	</script>
+	$(document).ready(function() {
+		$("#category_form").validate({
+			rules : {
+				cate_name : {
+					required : true,
+					maxlength : 50,
+				},
+				cate_keywords : {
+					required : true,
+					maxlength : 50
+				},
+				cate_description : {
+					required : true,
+					maxlength : 300,
+				},
+				root_id : {
+					required : true,
+					min : 0,
+				},
+				cate_order : {
+					min : 0,
+					digits : true,
+				}
+			}			
+		});
+	});
+</script>

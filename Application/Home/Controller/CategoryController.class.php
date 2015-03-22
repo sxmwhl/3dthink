@@ -33,9 +33,9 @@ class CategoryController extends Controller {
     	$cate_id=I('cate');
     	$Category=D('Category');
     	$row=$Category->get_one_category($cate_id);
-    	if ($row['cate_postcount']!=0)exit('此分类下含有模型，无法删除！');
-    	if ($row['cate_childcount']!=0)exit('此分类下含有子类，无法删除！');
-    	if($Category->delete($cate_id)!=1)exit('删除分类出差，请重试！');
+    	if ($row['cate_postcount']!=0)$this->error('此分类下含有模型，无法删除！');
+    	if ($row['cate_childcount']!=0)$this->error('此分类下含有子类，无法删除！');
+    	if($Category->delete($cate_id)!=1)$this->error('删除分类出差，请重试！');
     	$row2=$Category->get_one_category($row['root_id']);
     	if ($row2['cate_childcount']>0){
     		$cate_childcount=$row2['cate_childcount']-1;
@@ -65,10 +65,12 @@ class CategoryController extends Controller {
     	if(empty($cate_id))$cate_id=0;
     	$Category=D('Category');
     	$categories = $Category->get_child_categories($cate_id);
+    	$this->cate_id=$cate_id;
     	$this->categories=$categories;
     	$onecategory=$Category->get_one_category($cate_id);
     	$onecategory['cate_name']=empty($onecategory['cate_name'])?'根':$onecategory['cate_name'];
     	$this->title=$onecategory['cate_name'].'分类列表';
+    	$this->root_id=$onecategory['root_id'];
     	//echo $Moxing->getLastSql();
     	$this->display('lists');
     }

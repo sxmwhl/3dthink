@@ -4,16 +4,14 @@
 	<div class="container-fluid">
 		<include file="Public:logo" />
 		<div class="row">
-		<form name="category_form" method="post" action="__URL__/save" class="formclass">
+		<form id="category_form" name="category_form" method="post" action="__URL__/save" class="formclass">
 			<h3>添 加 分 类</h3>
 				<div class="form-group">
-					<label for="root_id_a">所属分类：</label> <select
-						name="root_id_a" id="root_id_a" class="form-control"<notempty
-							name="cate_id">disabled="disabled"</notempty>>
+					<label for="root_id">所属分类：</label> <select
+						name="root_id" id="root_id" class="form-control">
 						<option value="0">作为顶级分类</option>{$category_option}
 					</select>
-					<notempty name="cate_id"> <input name="root_id"
-						id="root_id" value="{$cate_id}" type="hidden" /> </notempty>
+					
 				</div>
 
 				<include file="Public:category_form" />
