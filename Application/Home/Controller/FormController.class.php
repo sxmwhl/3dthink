@@ -39,14 +39,12 @@ class FormController extends Controller {
     		if(!file_exists($movePath)){
     		mkdir($movePath) or exit('创建路径失败，请重试！');
     		}
-    		$rename_model_ok=rename($savePath.$info['savename'], $movePath.'model.x3d');
+    		if(!check_x3d_document($savePath.$info['savename'], $movePath.'model.x3d')){
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error('模型文件有误！');
+    		}
     		$copy_preview_ok=copy(__ROOT__.'Public/images/preview.png',$movePath.'preview.png');
     		mkdir($movePath.'texture/') or exit('创建路径失败，请重试！');
-    		//echo $rename_model_ok;
-    		if(!$rename_model_ok){
-    			$result_delete = @unlink ($savePath.$info['savename']);
-    			$this->error("系统出错，请重试！");
-    		}
     		$Moxing=D('Moxing');
     		$inputs['folder']=$info['md5'];
     		$inputs['time_update']=date('Y-m-d H:i:s',time());  		
@@ -58,13 +56,12 @@ class FormController extends Controller {
     		$inputs['email']=$user_info[2];
     		if (!$Moxing->create($inputs)){ // 创建数据对象
     			// 如果创建失败 表示验证没有通过 输出错误提示信息
-    			exit($Moxing->getError());
-    			 
+    			exit($Moxing->getError());    			 
     		}else{
     			// 验证通过 写入新增数据
     			$result_add=$Moxing->add();
     			if(!$result_add)$this->error('模型分享失败！');    			 
-    		}		
+    		}
     	}
     	
     	$this->success('模型分享成功','modify?f='.$info['md5']);

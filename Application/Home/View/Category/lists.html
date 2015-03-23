@@ -49,14 +49,7 @@
 		$(document).ready(function(){	
 			$("[tag='delete']").click(function(){
 				var r = confirm("确认删除该分类？");
-				if (r==true)
-			    {
-			    return true;
-			    }
-			  else
-			    {
-			    return false;
-			    }
+				return r;
 			});
 		});
 		</script>
