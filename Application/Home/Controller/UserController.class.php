@@ -250,6 +250,8 @@ class UserController extends HomeController {
     	$data['shared']=strip_tags($data['shared'],'<transform><inline>');
     	$data['basic']=htmlspecialchars_decode($data['basic']);
     	$data['basic']=strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text>');
+    	$data['basic']=preg_replace( "@>(.*?)<@is", ">\n<", $data['basic'] );
+    	$data['time_update']=time();
     	$Diy=D('Diy');
     	if (!$Diy->create($data,2)){ // 创建数据对象
     		// 如果创建失败 表示验证没有通过 输出错误提示信息

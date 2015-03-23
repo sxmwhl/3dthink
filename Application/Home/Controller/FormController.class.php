@@ -142,6 +142,9 @@ class FormController extends Controller {
     	$model_show=$Moxing->where($where)->find();
     	$model_show['hl_on']=$model_show['hl_on']==0?"false":"true";
     	$model_show['dl_on']=$model_show['dl_on']==0?"false":"true";
+    	$Category=D('Category');
+    	$list3=$Category->get_child_categories(0);
+    	$this->categories=$list3;
     	$this->model=$model_show;
     	$this->title="更换模型《".$model_show['title']."》的缩略图";
     	$this->display('preview');
@@ -161,6 +164,9 @@ class FormController extends Controller {
     	$model_show['dl_on']=$model_show['dl_on']==0?"false":"true";
     	$this->model=$model_show;
     	$texture_list=scandir(__ROOT__.'Public/upload/'.$md5.'/texture/');
+    	$Category=D('Category');
+    	$list3=$Category->get_child_categories(0);
+    	$this->categories=$list3;
     	$this->textureList=$texture_list;
     	$this->title="上传模型《".$model_show['title']."》的贴图";
     	switch ($type){

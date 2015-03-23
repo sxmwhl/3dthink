@@ -84,12 +84,18 @@ class IndexController extends Controller {
     	$id=I('id',0,'int');
     	$Diy=M('Diy');
     	$data=$Diy->where("id=".$id)->find();
+    	$Member=M('Member');
+    	$data2=$Member->where('uid='.$data['uid'])->find();    	
     	if(!isset($_SESSION['post_sep']))$_SESSION['post_sep']=time();
     	if(time() - $_SESSION['post_sep'] > $allow_sep)$_SESSION['post_sep']=time();
     	if($_SESSION['post_sep']==time()){
     		$Diy->views=$data['views']+1;
     		$Diy->where('id='.$id)->save();
-    	}    	
+    	} 
+    	$Category=D('Category');
+    	$list3=$Category->get_child_categories(0);
+    	$this->categories=$list3;
+    	$this->user=$data2;   	
     	$this->diy=$data;
     	$this->title="DIY模型《".$data['title']."》";  
     	$this->display();  	

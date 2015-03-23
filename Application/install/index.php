@@ -94,6 +94,7 @@ CREATE TABLE `think_diy` (
   `internet` text NOT NULL DEFAULT '' COMMENT '分享的模型',
   `views` mediumint unsigned NOT NULL DEFAULT 0 COMMENT '浏览次数',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '家园状态，0关闭，1开启公开，2开启不公开',
+  `time_update` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后登录时间',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='DIY表';";
