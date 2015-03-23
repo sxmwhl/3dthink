@@ -33,10 +33,21 @@ x3d#CoordinateAxes {
     width: 150px;
     height: 150px;
     border: none;
+    z-index:0;
 
 	/*
     border: 1px solid #79B7E7;
-    */}
+    */
+}
+.x3dCover{
+	position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 150px;
+    height: 150px;
+    border: none;
+    z-index:1;
+}
 x3d#model
 {
 	position: absolute;
