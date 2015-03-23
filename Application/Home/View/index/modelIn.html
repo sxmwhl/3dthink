@@ -3,17 +3,61 @@
 
 </head>
 <body class="model_in">
-	<x3d id="model"> 
-    <scene dopickpass="true" pickmode="idBuf" bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
-      <navigationInfo id="head" headlight='{$model.hl_on}' type='"EXAMINE"'></navigationInfo>
-      <directionalLight id="directional" on="{$model.dl_on}"></directionalLight>
-      <Viewpoint id='viewpoint' description='Default Viewpoint' position='{$model.vp_position}' orientation='{$model.vp_orientation}'></Viewpoint>
-        <background topurl="" righturl="" lefturl="" fronturl="" bottomurl="" backurl="" skyangle="" groundangle="" groundcolor="" transparency="1.0" skycolor="0 0 0">
-      </background>
-      <Environment id="gamma" gammaCorrectionDefault="linear"></Environment>      
-        <Inline id="inline" nameSpaceName="s" mapDEFToID="true" url="__BCS_UPLOAD__/{$model.folder}/model.x3d"> </Inline>
-</scene> 
-</x3d>	
+	<x3d id="model"> <scene dopickpass="true" pickmode="idBuf"
+		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
+	<navigationInfo id="head" headlight='{$model.hl_on}' type='"EXAMINE"'></navigationInfo>
+	<directionalLight id="directional" on="{$model.dl_on}"></directionalLight>
+	<Viewpoint id='viewpoint' description='Default Viewpoint'
+		position='{$model.vp_position}' orientation='{$model.vp_orientation}'></Viewpoint>
+	<background topurl="" righturl="" lefturl="" fronturl="" bottomurl=""
+		backurl="" skyangle="" groundangle="" groundcolor=""
+		transparency="1.0" skycolor="0 0 0"> </background> <Environment
+		id="gamma" gammaCorrectionDefault="linear"></Environment> 
+		<Transform id="inline_trs">
+		<Inline
+		id="inline" nameSpaceName="s" mapDEFToID="true"
+		url="__BCS_UPLOAD__/{$model.folder}/model.x3d" onload="mainInit();"> </Inline> 
+		</Transform>
+		</scene> </x3d>
+	<x3d id='CoordinateAxes' showStat='false' showLog='false'> <scene
+		id="helper_scene" dopickpass="false"> <viewpoint id="coordinateAxesViewpoint"
+		centerOfRotation='0 0 0' position='0 0 3'></viewpoint> <Inline
+		mapDEFToID="true" nameSpaceName="CoordinateAxes"
+		url="__BCS_PUBLIC__/images/x3d/CoordinateAxes.x3d"></Inline> </scene> </x3d>
+	<script type="text/javascript">
+	function mainInit(){
+		mod_sceneGraph.initSceneGraph();		
+	};
+	var mod_sceneGraph = (function () {
+		var publicRet = {};
+		var viewFunc1 = function (evt) {
+			pos = evt.position;
+			rot = evt.orientation;
+			mat = evt.matrix;
+			//document.getElementById('coordinateAxesViewpoint').setAttribute( 'position', pos.x+' '+pos.y+' '+pos.z);
+			document.getElementById('CoordinateAxes__CoordinateAxes').setAttribute('position', 0 + ' ' + 0 + ' ' + 0);
+			document.getElementById('CoordinateAxes__CoordinateAxes').setAttribute('rotation', rot[0].x + ' ' + rot[0].y + ' ' + rot[0].z + ' ' + rot[1]);
+
+			//x3dom.debug.logInfo('position: ' + pos.x+' '+pos.y+' '+pos.z +'\n' + 'orientation: ' + rot[0].x+' '+rot[0].y+' '+rot[0].z+' '+rot[1]);
+		};
+		var viewFunc2 = function (evt) {
+			pos = evt.position;
+			rot = evt.orientation;
+			mat = evt.matrix;
+			//document.getElementById('coordinateAxesViewpoint').setAttribute( 'position', pos.x+' '+pos.y+' '+pos.z);
+			//document.getElementById('inline_trs').setAttribute('position', 0 + ' ' + 0 + ' ' + 0);
+			document.getElementById('inline_trs').setAttribute('rotation', rot[0].x + ' ' + rot[0].y + ' ' + rot[0].z + ' ' + rot[1]);
+
+			//x3dom.debug.logInfo('position: ' + pos.x+' '+pos.y+' '+pos.z +'\n' + 'orientation: ' + rot[0].x+' '+rot[0].y+' '+rot[0].z+' '+rot[1]);
+		};
+		publicRet.initSceneGraph = function () {
+			// delegate rotation of the viewpoint to the coordinate axis
+			document.getElementById('viewpoint').addEventListener('viewpointChanged', viewFunc1, false);
+			document.getElementById('coordinateAxesViewpoint').addEventListener('viewpointChanged', viewFunc2, false);
+		};
+		return publicRet;
+	})();
+	</script>
 </body>
 </html>
 
