@@ -22,6 +22,7 @@ var tsfNum=0;
 var pickID="";
 var last_pick_id="";
 var tsf_selector="";
+var pickInfo;
 var viewFunc = function(evt) {
 	pos = evt.position;
 	rot = evt.orientation;
@@ -38,6 +39,16 @@ var viewFunc = function(evt) {
 	// x3dom.debug.logInfo('position: ' + pos.x+' '+pos.y+' '+pos.z +'\n' +
 	// 'orientation: ' + rot[0].x+' '+rot[0].y+' '+rot[0].z+' '+rot[1]);
 };	
+function rotate(viewpointId,transformId){
+	var viewFunc2 = function(evt) {
+		pos = evt.position;
+		rot = evt.orientation;
+		mat = evt.matrix;
+		$("#"+transformId).attr('position', 0 + ',' + 0 + ',' + 0);
+		$("#"+transformId).attr('rotation', rot[0].x + ',' + rot[0].y + ',' + rot[0].z + ',' + rot[1]);
+	}
+	document.getElementById(viewpointId).addEventListener('viewpointChanged', viewFunc2, true);
+}
 function get_max_id(){
 	var i = 0;
 	var id="";
@@ -163,11 +174,12 @@ function change_point_sphere(){
 	$("#marker").attr("scale",sc);
 }
 function groupClick(event){
-	var info=event.hitPnt;
-	$('#marker').attr('translation', info);
-	var x=Math.round(info[0]*1000)/1000;
-	var y=Math.round(info[1]*1000)/1000;
-	var z=Math.round(info[2]*1000)/1000;
+	pickInfo=event.hitPnt;
+	$('#marker').attr('translation', pickInfo);
+	var x=Math.round(pickInfo[0]*1000)/1000;
+	var y=Math.round(pickInfo[1]*1000)/1000;
+	var z=Math.round(pickInfo[2]*1000)/1000;
+	pickInfo=x+','+y+','+z;
 	var xyz="X:"+x+"<br/>Y:"+y+"<br/>Z:"+z;
 	$("#xyz").html(xyz);
 }
@@ -193,22 +205,7 @@ function moveModel(){
 		alert("请点击选择要删除的模型！");
 		return false;
 	}
-	//调用点击位置
-	$("#"+last_pick_id).attr("position",);
-	/*
-	var a =new Array();
-	a[0]=pickID;
-	a[1]=true;
-	return a;
-    
-	var result=$(tsf_selector).remove();	
-	if(result.attr("id")==null){
-		alert("模型"+pickID+"已不存在！");
-		return false;
-	}
-	pickID="";
-	set_form();*/
-	//TODO:删除后变更表格状态
+	$("#"+last_pick_id).attr("translation",pickInfo);
 }
 function list_delete_model(id){
 	set_pickid(id);

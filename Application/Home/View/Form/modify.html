@@ -150,7 +150,13 @@
 		transparency="1.0" skycolor="0 0 0"> </background> <Environment
 		id="gamma" gammaCorrectionDefault="linear"></Environment> <Inline id="inline" nameSpaceName="s" mapDEFToID="true"
 		url="__BCS_UPLOAD__/{$model.folder}/model.x3d"> </Inline> </scene> </x3d>
-
+<x3d id='CoordinateAxes' showStat='false' showLog='false'> <scene
+		id="helper_scene" dopickpass="false"> <viewpoint id="coordinateAxesViewpoint"
+		centerOfRotation='0 0 0' position='0 0 3'></viewpoint> <Inline
+		mapDEFToID="true" nameSpaceName="CoordinateAxes"
+		url="__BCS_PUBLIC__/images/x3d/CoordinateAxes.x3d"></Inline> </scene> </x3d>
+	<div class="x3dCover">	
+	</div>
 	<script>    
    	 $("#modify_form").validate({
    		 rules:{
@@ -224,6 +230,7 @@
     	if(imagetexture)$('a#imagetexture').removeAttr("disabled");
     	if(movietexture)$('a#movie').removeAttr("disabled");
     	if(audioclip)$('a#audioclip').removeAttr("disabled");
+    	rotate("viewpoint","CoordinateAxes__CoordinateAxes");
       });
     }
 	</script>
