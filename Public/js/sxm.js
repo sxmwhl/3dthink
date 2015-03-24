@@ -20,7 +20,24 @@ jQuery.extend(jQuery.validator.messages, {
     });
 var tsfNum=0;
 var pickID="";
+var last_pick_id="";
 var tsf_selector="";
+var viewFunc = function(evt) {
+	pos = evt.position;
+	rot = evt.orientation;
+	mat = evt.matrix;
+	x=Math.round(rot[0].x*1000)/1000;
+	y=Math.round(rot[0].y*1000)/1000;
+	z=Math.round(rot[0].z*1000)/1000;
+	a=Math.round(rot[1]*1000)/1000;
+	// document.getElementById('coordinateAxesViewpoint').setAttribute(
+	// 'position', pos.x+' '+pos.y+' '+pos.z);
+	$("#" + pickID).attr('position', 0 + ',' + 0 + ',' + 0);
+	$("#" + pickID).attr('rotation', x + ',' + y + ',' + z + ',' + a);
+	set_form();	
+	// x3dom.debug.logInfo('position: ' + pos.x+' '+pos.y+' '+pos.z +'\n' +
+	// 'orientation: ' + rot[0].x+' '+rot[0].y+' '+rot[0].z+' '+rot[1]);
+};	
 function get_max_id(){
 	var i = 0;
 	var id="";
@@ -61,8 +78,10 @@ function show_model_list(){
 	   $("tr#title").after(endStr);
 }
 function set_pickid(id){
+	last_pick_id=pickID;
 	pickID=id;
 	tsf_selector="transform#"+pickID;
+	document.getElementById("coordinateAxesViewpoint").addEventListener('viewpointChanged', viewFunc, true);
 }
 function form_disable(){	
 	$("[onchange='change()']").attr("disabled","disabled");
@@ -113,8 +132,8 @@ function selectmodel(tsf){
 		$("div#color").attr("class","form-group show");
 	}else{
 		$("div#color").attr("class","form-group hidden");
-	}
-	set_form();
+	}	
+	set_form();	
 }
 function list_select_model(id){
 	set_pickid(id);
@@ -169,6 +188,28 @@ function deletemodel(){
 	set_form();
 	//TODO:删除后变更表格状态
 }
+function moveModel(){
+	if(!last_pick_id){
+		alert("请点击选择要删除的模型！");
+		return false;
+	}
+	//调用点击位置
+	$("#"+last_pick_id).attr("position",);
+	/*
+	var a =new Array();
+	a[0]=pickID;
+	a[1]=true;
+	return a;
+    
+	var result=$(tsf_selector).remove();	
+	if(result.attr("id")==null){
+		alert("模型"+pickID+"已不存在！");
+		return false;
+	}
+	pickID="";
+	set_form();*/
+	//TODO:删除后变更表格状态
+}
 function list_delete_model(id){
 	set_pickid(id);
 	deletemodel();
@@ -198,7 +239,7 @@ function addmodel(lujing){
 			$("#daima").val("模型代码格式错误!!");
 			return false;
 		}
-	  var str="<transform id='s"+tsfNum+"' tag='shared' description='未命名' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><Inline nameSpaceName='in' tag='cn_3dant_inline' mapDEFToID='true' url='"+lujing+"/"+daima+"/model.x3d'></Inline></transform>";
+	  var str="<transform id='s"+tsfNum+"' tag='shared' description='未命名' onMouseDown='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><Inline nameSpaceName='in' tag='cn_3dant_inline' mapDEFToID='true' url='"+lujing+"/"+daima+"/model.x3d'></Inline></transform>";
 		$('group#cn_3dant_shared').append(str);	
 		set_pickid("s"+tsfNum);				
 		set_form();
@@ -213,7 +254,7 @@ function insert_shape(shape){
 		return num;
 	}
 	var color=get_num()+","+get_num()+","+get_num();
-	var str="<transform id='s"+tsfNum+"' tag='basic' description='未命名' onclick='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+" id='g"+tsfNum+"'></"+shape+"></shape></transform>";
+	var str="<transform id='s"+tsfNum+"' tag='basic' description='未命名' onMouseDown='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+" id='g"+tsfNum+"'></"+shape+"></shape></transform>";
 	$('group#cn_3dant_basic').append(str);
 	if(shape==="text"){
 		var str=prompt("请输入文字内容：（50字以内）","");

@@ -24,42 +24,12 @@
 		centerOfRotation='0 0 0' position='0 0 3'></viewpoint> <Inline
 		mapDEFToID="true" nameSpaceName="CoordinateAxes"
 		url="__BCS_PUBLIC__/images/x3d/CoordinateAxes.x3d"></Inline> </scene> </x3d>
-	<div class="x3dCover">
-	
+	<div class="x3dCover">	
 	</div>
 	<script type="text/javascript">
 	function mainInit(){
-		mod_sceneGraph.initSceneGraph();		
-	};
-	var mod_sceneGraph = (function () {
-		var publicRet = {};
-		var viewFunc1 = function (evt) {
-			pos = evt.position;
-			rot = evt.orientation;
-			mat = evt.matrix;
-			//document.getElementById('coordinateAxesViewpoint').setAttribute( 'position', pos.x+' '+pos.y+' '+pos.z);
-			document.getElementById('CoordinateAxes__CoordinateAxes').setAttribute('position', 0 + ' ' + 0 + ' ' + 0);
-			document.getElementById('CoordinateAxes__CoordinateAxes').setAttribute('rotation', rot[0].x + ' ' + rot[0].y + ' ' + rot[0].z + ' ' + rot[1]);
-
-			//x3dom.debug.logInfo('position: ' + pos.x+' '+pos.y+' '+pos.z +'\n' + 'orientation: ' + rot[0].x+' '+rot[0].y+' '+rot[0].z+' '+rot[1]);
-		};
-		var viewFunc2 = function (evt) {
-			pos = evt.position;
-			rot = evt.orientation;
-			mat = evt.matrix;
-			//document.getElementById('coordinateAxesViewpoint').setAttribute( 'position', pos.x+' '+pos.y+' '+pos.z);
-			//document.getElementById('inline_trs').setAttribute('position', 0 + ' ' + 0 + ' ' + 0);
-			document.getElementById('inline_trs').setAttribute('rotation', rot[0].x + ' ' + rot[0].y + ' ' + rot[0].z + ' ' + rot[1]);
-
-			//x3dom.debug.logInfo('position: ' + pos.x+' '+pos.y+' '+pos.z +'\n' + 'orientation: ' + rot[0].x+' '+rot[0].y+' '+rot[0].z+' '+rot[1]);
-		};
-		publicRet.initSceneGraph = function () {
-			// delegate rotation of the viewpoint to the coordinate axis
-			document.getElementById('viewpoint').addEventListener('viewpointChanged', viewFunc1, false);
-			document.getElementById('coordinateAxesViewpoint').addEventListener('viewpointChanged', viewFunc2, false);
-		};
-		return publicRet;
-	})();
+		rotate("viewpoint","CoordinateAxes__CoordinateAxes");		
+	};	
 	</script>
 </body>
 </html>

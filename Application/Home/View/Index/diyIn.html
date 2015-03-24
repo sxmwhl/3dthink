@@ -6,7 +6,7 @@
 	<x3d id="model"> 
     <scene dopickpass="true" pickmode="idBuf"
 		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
-	<Viewpoint bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,50'></Viewpoint> 
+	<Viewpoint id="viewpoint" bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,50'></Viewpoint> 
 	<navigationInfo id="head" headlight='true' type='"EXAMINE" "ANY"'></navigationInfo> 
 	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
 	<background
@@ -40,6 +40,19 @@
 	</group>
 	</scene> 
 </x3d>	
+<x3d id='CoordinateAxes' showStat='false' showLog='false'> <scene
+		id="helper_scene" dopickpass="false"> <viewpoint id="coordinateAxesViewpoint"
+		centerOfRotation='0 0 0' position='0 0 3'></viewpoint> <Inline
+		mapDEFToID="true" nameSpaceName="CoordinateAxes"
+		url="__BCS_PUBLIC__/images/x3d/CoordinateAxes.x3d"></Inline> </scene> </x3d>
+	<div class="x3dCover">	
+	</div>
+<script type="text/javascript">
+x3dom.runtime.ready=function(){
+	rotate("viewpoint","CoordinateAxes__CoordinateAxes");	
+	//mod_sceneGraph.initSceneGraph();		
+	};	
+</script>
 </body>
 </html>
 

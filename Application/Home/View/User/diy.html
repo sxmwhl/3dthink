@@ -38,19 +38,11 @@ $(document).ready(function(){
    });
    $("#screenShotOkBt").click(function(){
 	   $("#screenShotModal").modal('hide');
+   });	
+   $("button#moveBt").click(function(){
+	   moveModel();
    });
-   $("#diy_preview_form").validate({
-	   rules:{
-		   diy_preview:{
-			   accept:'image/*',
-		   },
-	   },
-	   messages:{
-		   diy_preview:{
-			   accept:"缩略图文件格式不正确！"
-		   }
-	   }
-   });
+
 });
 </script>
 </head>
@@ -221,7 +213,12 @@ $(document).ready(function(){
                    <div class="input-group-addon">名称</div>
                    <input name="title" type="text" id="title" value="" onchange="change()" class="form-control" />
         </div>
-		<h6><strong>位置：</strong></h6>		
+		<h6><strong>位置：</strong>
+		<button id="moveBt" type="button" class="btn btn-default btn-xs" aria-label="插入模型">
+				<span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+				移 动
+		</button>
+		</h6>		
 		
               <div class="input-group">
                    <label class="sr-only" for="ts_x">X</label>
@@ -321,7 +318,7 @@ $(document).ready(function(){
 		backurl="__BCS_PUBLIC__/images/background/horizon_0_back.jpg"
 		skyangle="1.57" groundangle="1.57" groundcolor="1,0,0" transparency="1.0"
 		skycolor="0,0,0"> </background> 
-		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>
+		<Environment id="gamma"	gammaCorrectionDefault="linear"></Environment>		
 		<Transform id="marker" scale="0.2,0.2,0.2" translation="0,0,0">
             <Shape id="point_sphere" render="false">
                 <Appearance>
@@ -340,8 +337,13 @@ $(document).ready(function(){
 	<group id="cn_3dant_internet">
 	{$diy['internet']}
 	</group>	
-	</group>
+	</group>	
 	</scene>
 	</x3d>
+	<x3d id='CoordinateAxes' showStat='false' showLog='false'> <scene
+		id="helper_scene" dopickpass="false"> <viewpoint id="coordinateAxesViewpoint"
+		centerOfRotation='0 0 0' position='0 0 3'></viewpoint> <Inline
+		mapDEFToID="true" nameSpaceName="CoordinateAxes"
+		url="__BCS_PUBLIC__/images/x3d/CoordinateAxes.x3d"></Inline> </scene> </x3d>
 </body>
 </html>
