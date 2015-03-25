@@ -245,13 +245,15 @@ function addmodel(lujing){
 		$('#addModelModal').modal('hide');
 }
 function insert_shape(shape){
+	var solid="true";
+	if(shape==="plane")solid="false";
 	function get_num(){
 		var suiji = Math.random();
 		var num = Math.round(suiji*1000)/1000;
 		return num;
 	}
 	var color=get_num()+","+get_num()+","+get_num();
-	var str="<transform id='s"+tsfNum+"' tag='basic' description='未命名' onMouseDown='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+" id='g"+tsfNum+"'></"+shape+"></shape></transform>";
+	var str="<transform id='s"+tsfNum+"' tag='basic' description='未命名' onMouseDown='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+" id='g"+tsfNum+"' solid='"+solid+"'></"+shape+"></shape></transform>";
 	$('group#cn_3dant_basic').append(str);
 	if(shape==="text"){
 		var str=prompt("请输入文字内容：（50字以内）","");

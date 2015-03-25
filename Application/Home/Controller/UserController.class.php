@@ -249,7 +249,7 @@ class UserController extends HomeController {
     	$data['shared']=htmlspecialchars_decode($data['shared']);
     	$data['shared']=strip_tags($data['shared'],'<transform><inline>');
     	$data['basic']=htmlspecialchars_decode($data['basic']);
-    	$data['basic']=strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text>');
+    	$data['basic']=strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text><torus><plane>');
     	$data['basic']=preg_replace( "@>(.*?)<@is", ">\n<", $data['basic'] );
     	$data['time_update']=time();
     	$Diy=D('Diy');
