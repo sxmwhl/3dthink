@@ -24,7 +24,6 @@ img{max-width:100%;display: block;}
 /*model_in.php*/
 body.model_in{
 	background-color: transparent;
-	background-image:url(../images/low_contrast_linen.png);
 }
 x3d#CoordinateAxes {
     position: absolute;

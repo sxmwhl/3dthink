@@ -1,22 +1,27 @@
 <include file="Public:header" />
-<script type='text/javascript' src='__BCS_PUBLIC__/js/x3dom.js'></script>
 <script>
-$(document).ready(function(){	
-$("button#screenShotBt").click(function(){
-	//var e = $("#model", document.frames("Content3D").document);
-	var e = $("#Content3D").contents().find("#model").runtime.getScreenshot();
-	//var e = $(window.frames["Content3D"].document).find("x3d#model").first();
-	alert(e);
-	var imgUrl=e.runtime.getScreenshot();
-	alert(imgUrl);
-	   $("#screen_shot").attr("src",imgUrl);
-	   $('#screenShotOkBt').attr("href", imgUrl);
-	   $('#screenShotOkBt').attr("download", "screenShot.png");	   
-});
-$("#screenShotOkBt").click(function(){
-	   $("#screenShotModal").modal('hide');
-});
-});
+	function parent_change_background(self){
+		$(window.parent.document).contents()
+		.find("#Content3D")[0].contentWindow
+		.iframeChangeBackground(self);
+	}
+	$(document).ready(
+			function() {
+				$("button#screenShotBt").click(
+						function() {
+							var imgUrl = $(window.parent.document).contents()
+									.find("#Content3D")[0].contentWindow
+									.iframeFun("model");							
+							$("#screen_shot").attr("src", imgUrl);
+							$('#screenShotOkBt').attr("href", imgUrl);
+							$('#screenShotOkBt').attr("download",
+									"screenShot.png");
+						});
+				$("#screenShotOkBt").click(function() {
+					$("#screenShotModal").modal('hide');
+				});
+				
+			});
 </script>
 </head>
 <body>
@@ -95,23 +100,39 @@ $("#screenShotOkBt").click(function(){
 					<td>{$diy['views']}</td>
 				</tr>
 				<tr align ="left">
-					<td><strong>预览图片</strong></td>
+					<td><strong>更换背景</strong></td>
+				</tr>
+				<tr align ="left">
+					<td>
+					<select onchange="parent_change_background(this)" class="form-control">
+				<option value="0" selected="selected">蓝天</option>
+				<option value="1">草地</option>
+				<option value="2">戈壁</option>
+				<option value="3">海洋</option>
+				<option value="4">冰原</option>
+				<option value="5">晚霞</option>
+				<option value="6">沙滩</option>
+				<option value="7">星空</option>
+				<option value="8">纯色（白）</option>
+				<option value="9">纯色（黑）</option>
+			</select>
+					</td>
+				</tr>
+				<tr align ="left">
+					<td><strong>预览图片</strong>
+					<button id="screenShotBt" type="button" class="btn btn-primary btn-xs"
+					aria-label="DIY截图" data-toggle="modal" data-target="#screenShotModal"
+					data-backdrop="static">
+				<span class="glyphicon glyphicon-scissors" aria-hidden="true"> </span>
+				 截图
+			</button>
+					</td>
 				</tr>
 				<tr align ="left">
 					<td>
 							 <img
 								class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/{$diy['id']}/preview.png"
 								alt=" {$diy['title']}" />
-						</td>
-				</tr>
-				<tr align ="left">
-					<td>
-			<button id="screenShotBt" type="button" class="btn btn-default"
-					aria-label="DIY截图" data-toggle="modal" data-target="#screenShotModal"
-					data-backdrop="static">
-				<span class="glyphicon glyphicon-scissors" aria-hidden="true"> </span>
-				 截图
-			</button>
 						</td>
 				</tr>
 			</table>
