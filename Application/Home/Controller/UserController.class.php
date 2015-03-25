@@ -341,6 +341,7 @@ class UserController extends HomeController {
     			$this->error($res['info']);
     		}
     	}else{
+    		$this->title="修改密码";
     		$this->display();
     	}
     }

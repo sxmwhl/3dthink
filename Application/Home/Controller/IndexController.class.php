@@ -107,4 +107,23 @@ class IndexController extends Controller {
     	$this->diy=$list;
     	$this->display();
     }
+    public function user(){
+    	$uid=I('id',0,'int');    	
+    	//if($uid===0)$this->error('用户不存在');
+    	$Member=M("Member");
+    	$result=$Member->where('uid='.$uid)->find();
+    	if(!$result)$this->error('用户不存在');
+    	$this->user=$result;
+    	$Diy=M('Diy');
+    	$list=$Diy->where('uid='.$uid)->select();
+    	$this->diys=$list;
+    	$Moxing=M('Moxing');
+    	$list2=$Moxing->where('uid='.$uid)->select();
+    	$this->moxings=$list2;
+    	$Category=D('Category');
+    	$list3=$Category->get_child_categories(0);
+    	$this->categories=$list3;
+    	$this->title=$result['nickname']."的3d模型";
+    	$this->display();
+    }
 }
