@@ -51,11 +51,17 @@
 						id="directional" on="{$model.dl_on}"></directionalLight> <Viewpoint
 						id='viewpoint' description='Default Viewpoint'
 						position='{$model.vp_position}'
-						orientation='{$model.vp_orientation}'></Viewpoint> <background
-						topurl="" righturl="" lefturl="" fronturl="" bottomurl=""
-						backurl="__BCS_PUBLIC__/images/low_contrast_linen.png" skyangle=""
-						groundangle="" groundcolor="" transparency="1.0" skycolor="0 0 0">
-					</background> <Environment id="gamma" gammaCorrectionDefault="linear"></Environment>
+						orientation='{$model.vp_orientation}'></Viewpoint> 
+						<background
+		topurl="__BCS_PUBLIC__/images/background/horizon_0_top.jpg"
+		righturl="__BCS_PUBLIC__/images/background/horizon_0_right.jpg"
+		lefturl="__BCS_PUBLIC__/images/background/horizon_0_left.jpg"
+		fronturl="__BCS_PUBLIC__/images/background/horizon_0_front.jpg"
+		bottomurl="__BCS_PUBLIC__/images/background/horizon_0_bottom.jpg"
+		backurl="__BCS_PUBLIC__/images/background/horizon_0_back.jpg"
+		skyangle="1.57" groundangle="1.57" groundcolor="1,0,0" transparency="1.0"
+		skycolor="0,0,0"> </background>
+					<Environment id="gamma" gammaCorrectionDefault="linear"></Environment>
 					<Inline nameSpaceName="s" mapDEFToID="true" id="inline"
 						url="__BCS_UPLOAD__/{$model.folder}/model.x3d"> </Inline> </scene> </x3d>					
 				</div>

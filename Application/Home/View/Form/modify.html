@@ -127,9 +127,9 @@
 			</div>
 			<p class="text-warning">您的IP地址：{$model.ip_last_modify} 在保存后被记录。</p>
 			<button type="submit" class="btn btn-primary">保存模型信息</button>
-			<a disabled id="imagetexture" class="btn btn-default" href="__URL__/texture?t={$model.folder}&n=image" role="button">上传贴图</a>
-			<a disabled id="movie" class="btn btn-default" href="__URL__/texture?t={$model.folder}&n=movie" role="button">上传视频</a>
-			<a disabled id="audioclip" class="btn btn-default" href="__URL__/texture?t={$model.folder}&n=audio" role="button">上传音频</a>
+			<a disabled target="_blank" id="imagetexture" class="btn btn-default" href="__URL__/texture?t={$model.folder}&n=image" role="button">上传贴图</a>
+			<a disabled target="_blank" id="movie" class="btn btn-default" href="__URL__/texture?t={$model.folder}&n=movie" role="button">上传视频</a>
+			<a disabled target="_blank" id="audioclip" class="btn btn-default" href="__URL__/texture?t={$model.folder}&n=audio" role="button">上传音频</a>
 		</form>
 		<br/>
 		<a href="__URL__/preview?f={$model.folder}"><img
