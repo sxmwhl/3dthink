@@ -1,7 +1,15 @@
 <include file="Public:header" />
 <script type='text/javascript' src='__BCS_PUBLIC__/css/x3dom.js'></script>
-<link rel='stylesheet' type='text/css'
-	href='__BCS_PUBLIC__/css/x3dom.css' />
+<script>
+$(document).ready(function(){
+	$("a.time").attr("onMouseDown","deleteDiy(this)");
+	function deleteDiy(self)){
+		//var str=$(this).attr("id");		
+		var message = confirm("确定删除--");
+		return message;
+	});
+});
+</script>
 </head>
 <body>
 	<input type='radio' name='model' id='modelinfo' />
@@ -68,7 +76,7 @@
 					<div class='item-background'></div>
 					<a href='__CONTROLLER__/diy?id={$vo.id}' class='title' title='模型名称'>DIY名称：{$vo.title}</a>
 					<a href='__CONTROLLER__/diy?id={$vo.id}' class='creator' title='浏览次数'>浏览次数：{$vo.views}</a>
-					<a href='__CONTROLLER__/deleteDiy?id={$vo.id}' class='time' title='删除Diy'><span class="label label-default">删除</span></a>
+					<a id='delete' href='__CONTROLLER__/deleteDiy?id={$vo.id}' class='time' title='删除Diy'><span class="label label-default">删除</span></a>
 				</div>
 			</div>
 			</volist>
