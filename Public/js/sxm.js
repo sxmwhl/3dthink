@@ -130,20 +130,29 @@ function set_form(){
 		$("#color_r").val(color[0]);
 		$("#color_g").val(color[1]);
 		$("#color_b").val(color[2]);
-	}	
+	}
+	if($(tsf_selector).find("torus").length){
+		var torus1 = $(tsf_selector).find("torus").attr("innerradius");
+		var torus2 = $(tsf_selector).find("torus").attr("outerradius");
+		$("input#torus1").val(torus1);
+		$("input#torus2").val(torus2);
+		$("div#torus").attr("class","form-group show");
+	}else{
+		$("div#torus").attr("class","form-group hidden");
+	}
+	var groupId=$(tsf).parent().attr("id");
+	if(groupId==="cn_3dant_basic"){
+		$("div#color").attr("class","form-group show");
+	}else{
+		$("div#color").attr("class","form-group hidden");
+	}
 	var pointRadius=$("transform#marker").attr("scale").split(",");
 	$("input#radius").val(pointRadius[0]);
 	var title=$(tsf_selector).attr("description");
 	$("input#title").val(title);
 }
 function selectmodel(tsf){
-	set_pickid($(tsf).attr("id"));
-	var groupId=$(tsf).parent().attr("id");
-	if(groupId==="cn_3dant_basic"){
-		$("div#color").attr("class","form-group show");
-	}else{
-		$("div#color").attr("class","form-group hidden");
-	}	
+	set_pickid($(tsf).attr("id"));	
 	set_form();	
 }
 function list_select_model(id){
@@ -167,6 +176,10 @@ function change(){
 	$(tsf_selector).attr("description",title);
 	var color_string=$("#color_r").val()+dou+$("#color_g").val()+dou+$("#color_b").val();
 	$(tsf_selector).find("material").attr("diffusecolor",color_string);
+	var torus1=$("input#torus1").val();
+	$(tsf_selector).find("torus").attr("innerradius",torus1);
+	var torus2=$("input#torus2").val();
+	$(tsf_selector).find("torus").attr("outerradius",torus2);
 }
 function change_point_sphere(){
 	var radius=$("#radius").val();
@@ -246,14 +259,16 @@ function addmodel(lujing){
 }
 function insert_shape(shape){
 	var solid="true";
+	var radius="";
 	if(shape==="plane")solid="false";
+	if(shape==="torus")radius="innerradius='0.5' outerradius='1'";
 	function get_num(){
 		var suiji = Math.random();
 		var num = Math.round(suiji*1000)/1000;
 		return num;
 	}
 	var color=get_num()+","+get_num()+","+get_num();
-	var str="<transform id='s"+tsfNum+"' tag='basic' description='未命名' onMouseDown='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+" id='g"+tsfNum+"' solid='"+solid+"'></"+shape+"></shape></transform>";
+	var str="<transform id='s"+tsfNum+"' tag='basic' description='未命名' onMouseDown='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+" id='g"+tsfNum+"' "+radius+" solid='"+solid+"'></"+shape+"></shape></transform>";
 	$('group#cn_3dant_basic').append(str);
 	if(shape==="text"){
 		var str=prompt("请输入文字内容：（50字以内）","");

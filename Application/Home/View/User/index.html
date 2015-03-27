@@ -19,7 +19,7 @@
 			<div class="row">
 			<table class="table  table-striped table-hover">
 				<caption>
-					<h3>{:get_username()} <small>欢迎回来</small></h3>
+					<h3>{:get_username()}<small>欢迎回来</small></h3>
 				</caption>
 				<tr align ="left">
 					<th scope="col"><strong>E-mail：</strong></th>
@@ -66,7 +66,7 @@
 					<div class='item-background'></div>
 					<a href='__CONTROLLER__/diy?id={$vo.id}' class='title' title='模型名称'>DIY名称：{$vo.title}</a>
 					<a href='__CONTROLLER__/diy?id={$vo.id}' class='creator' title='浏览次数'>浏览次数：{$vo.views}</a>
-					<button id="{$vo.id}" class='btn btn-danger time' title='删除Diy'>删除</button>
+					<button id="s{$vo.id}" class='btn btn-danger time' title='删除Diy'>删除</button>
 				</div>
 			</div>
 			</volist>
@@ -117,17 +117,13 @@
 	<include file="Public:footer" />
 	<script>
 	$(document).ready(function(){
-		$(".time").each(function(){
-			//var result = comfirm("确定删除？");
-			if( comfirm("确定删除？")){
-				window.location.href = "__CONTROLLER__/diy?id="+$(this).attr("id");
-			}			
-		});
-	});
-function deleteDiy(ss)){	
-	var message = confirm("确定删除?");
-	return message;
-});
+		$("button").click(function(){
+			if( confirm("确定删除？")){
+				var i = $(this).attr("id").substr(1);
+				window.location.href = "__CONTROLLER__/deleteDiy?id="+i;
+	     	}
+			});			
+		});				
 </script>
 </body>
 </html>
