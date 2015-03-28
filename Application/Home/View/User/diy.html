@@ -41,6 +41,9 @@ $(document).ready(function(){
    $("button#moveBt").click(function(){
 	   moveModel();
    });
+   $("button#showObjectBt").click(function(){
+	   showObject();
+   });
 
 });
 </script>
@@ -96,6 +99,7 @@ $(document).ready(function(){
 							<td>名称</td>
 							<td>选择</td>
 							<td>删除</td>
+							<td>查看</td>
 							<td>来源</td>
 						</tr>						
 				</table>
@@ -208,7 +212,12 @@ $(document).ready(function(){
 		<form id="diy_form" name="diy_form" action="__URL__/save" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">	
 		<h4>模型调整（当前选择模型：<small class="info"></small>）</h4>
 		<div class="form-group">
-		<h6><strong>模型名称：</strong></h6>
+		<h6><strong>模型名称：</strong>
+		<button id="showObjectBt" type="button" class="btn btn-default btn-xs" aria-label="插入模型">
+				<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+				查看当前模型
+		</button>
+		</h6>
 		<div class="input-group">
                    <label class="sr-only" for="ts_x">模型名称</label>
                    <div class="input-group-addon">名称</div>

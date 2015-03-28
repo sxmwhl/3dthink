@@ -76,13 +76,15 @@ function show_model_list(){
 		   $(this).children().each(function(){
 			   var id=$(this).attr("id");
 			   var description=$(this).attr("description");
-			   var select="<button id='s"+id+"' type='button' class='btn btn-default btn-xs' aria-label='选择'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></button>";
-			   var deletemodel="<button id='d"+id+"' type='button' class='btn btn-default btn-xs' aria-label='删除'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>";
+			   var select="<button id='select"+id+"' type='button' class='btn btn-default btn-xs' aria-label='选择'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></button>";
+			   var delete_model="<button id='delete"+id+"' type='button' class='btn btn-default btn-xs' aria-label='删除'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>";
+			   var show_model="<button id='show"+id+"' type='button' class='btn btn-default btn-xs' aria-label='查看'><span class='glyphicon glyphicon-zoom-in' aria-hidden='true'></span></button>";
 			   var tag=$(this).attr("tag");
-			   var str="<tr><td>"+id+"</td><td>"+description+"</td><td>"+select+"</td><td>"+deletemodel+"</td><td>"+tag+"</td></tr>";
+			   var str="<tr><td>"+id+"</td><td>"+description+"</td><td>"+select+"</td><td>"+delete_model+"</td><td>"+show_model+"</td><td>"+tag+"</td></tr>";
 			   $("tr#title").after(str);
-			   $("button#s"+id).attr("onclick","list_select_model('"+id+"')");
-			   $("button#d"+id).attr("onclick","list_delete_model('"+id+"')");			   
+			   $("button#select"+id).attr("onclick","list_select_model('"+id+"')");
+			   $("button#delete"+id).attr("onclick","list_delete_model('"+id+"')");
+			   $("button#show"+id).attr("onclick","list_show_model('"+id+"')");
 			   i += 1;
 		   });		   
 	   });
@@ -162,6 +164,12 @@ function list_select_model(id){
 	set_form();
 	$('#modelListModal').modal('hide');
 }
+function list_show_model(id){
+	set_pickid(id);
+	set_form();
+	showObject();
+	$('#modelListModal').modal('hide');
+}
 function change(){
 	if(!pickID){
 		alert("请选择模型后，再调整参数！");
@@ -217,7 +225,7 @@ function deletemodel(){
 }
 function moveModel(){
 	if(!last_pick_id){
-		alert("请点击选择要删除的模型！");
+		alert("请点击选择要移动的模型和位置！");
 		return false;
 	}
 	$("#"+last_pick_id).attr("translation",pickInfo);
@@ -323,4 +331,13 @@ function screenShot(x3dID){
 	.getElementById(x3dID).runtime
 	.getScreenshot();
 	return imgUrl;
+}
+function showObject(){
+	var model;
+	if($(tsf_selector).find("shape").length){
+		model=$(tsf_selector).find("shape")[0];
+	}else{
+		model=$(tsf_selector).find("inline")[0];
+	}
+	document.getElementById("model").runtime.showObject(model);
 }
