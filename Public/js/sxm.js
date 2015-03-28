@@ -18,11 +18,12 @@ jQuery.extend(jQuery.validator.messages, {
     	max: jQuery.validator.format("请输入一个最大为{0} 的值"),
     	min: jQuery.validator.format("请输入一个最小为{0} 的值")
     });
-var tsfNum=0;
-var pickID="";
-var last_pick_id="";
-var tsf_selector="";
-var pickInfo;
+var tsfNum=0;//最大ID
+var pickID="";//选择的transform的id
+var pickNum=0;//选择的transform的id数字
+var last_pick_id="";//上一次选择的transform的ID
+var tsf_selector="";//transform#pickID
+var pickInfo;//点击位置信息
 var viewFunc = function(evt) {
 	pos = evt.position;
 	rot = evt.orientation;
@@ -91,6 +92,7 @@ function show_model_list(){
 function set_pickid(id){
 	last_pick_id=pickID;
 	pickID=id;
+	pickNum=parseInt(pickID.substr(1));
 	tsf_selector="transform#"+pickID;
 	document.getElementById("coordinateAxesViewpoint").addEventListener('viewpointChanged', viewFunc, true);
 }
@@ -111,7 +113,7 @@ function set_form(){
 		return false;
 	}
 	form_enable();
-	$(".info").text(pickID);
+	$(".info").html(pickID);
 	var ts=$(tsf_selector).attr("translation").split(",");
 	$("#ts_x").val(ts[0]);
 	$("#ts_y").val(ts[1]);
@@ -140,7 +142,7 @@ function set_form(){
 	}else{
 		$("div#torus").attr("class","form-group hidden");
 	}
-	var groupId=$(tsf).parent().attr("id");
+	var groupId=$(tsf_selector).parent().attr("id");
 	if(groupId==="cn_3dant_basic"){
 		$("div#color").attr("class","form-group show");
 	}else{
@@ -276,14 +278,23 @@ function insert_shape(shape){
 			alert("输入文字内容过长！");
 			return false;
 		}//TODO：如果为空
+		if(str.length===0){
+			alert("请输入文字内容！");
+			return false;
+		}
 		$("text#g"+tsfNum).attr("string",str);
 		$("text#g"+tsfNum).attr("solid","false");
 	}
-	set_pickid("s"+tsfNum);				
+	set_pickid("s"+tsfNum);
 	set_form();
 	$("shape#point_sphere").attr("render","false");
 	tsfNum +=1;
+	if(shape==="torus")$(tsf_selector).find("torus").attr({
+		"innerradius":"0.5",
+		"outerradius":"1"
+	});	
 	$('#addModelModal').modal('hide');
+	//if(shape==="torus")$(tsf_selector).attr("translation","0,0,0");
 }
 function change_background(self){
 	var sreg = /_\d_/;
