@@ -230,6 +230,25 @@ function moveModel(){
 	}
 	$("#"+last_pick_id).attr("translation",pickInfo);
 }
+function alignModel(){	
+	if(!last_pick_id){
+		alert("请先后点击选择要对齐的模型！");
+		$('#alignModelModal').modal('hide');
+		return false;
+	}
+	if(last_pick_id=pickID){
+		alert("请先后点击选择要对齐的两个不同的模型！");
+		$('#alignModelModal').modal('hide');
+		return false;
+	}
+	var transform1 = $("#"+pickID).attr("translation").split(",");
+	var transform2 = $("#"+last_pick_id).attr("translation").split(",");
+	if($("input#align_x").is(":checked"))transform2[0]=transform1[0];
+	if($("input#align_y").is(":checked"))transform2[1]=transform1[1];
+	if($("input#align_z").is(":checked"))transform2[2]=transform1[2];
+	$("#"+last_pick_id).attr("translation",transform2.join(","));
+	$('#alignModelModal').modal('hide');
+}
 function list_delete_model(id){
 	set_pickid(id);
 	deletemodel();

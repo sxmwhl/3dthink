@@ -44,6 +44,9 @@ $(document).ready(function(){
    $("button#showObjectBt").click(function(){
 	   showObject();
    });
+   $("button#alignModelOkBt").click(function(){
+	   alignModel();
+   });
 
 });
 </script>
@@ -133,6 +136,33 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="alignModelModal" tabindex="-1" role="dialog"
+		aria-labelledby="DIY截图" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">模型对齐</h4>
+				</div>
+				<div class="modal-body">
+				<h5><strong>请选择要对齐的轴:</strong></h5>
+					<label class="checkbox-inline"> <input id="align_x" type="checkbox"> X
+					</label>
+					<label class="checkbox-inline"> <input id="align_y" type="checkbox"> Y
+					</label>
+					<label class="checkbox-inline"> <input id="align_z" type="checkbox"> Z
+					</label>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+					<button id="alignModelOkBt" type="button" class="btn btn-primary">对齐</button>					
+				</div>
+			</div>
+		</div>
+	</div>
 	<input type='radio' name='model' id='modelinfo' />
 	<input type='radio' name='model' id='modelcategory' checked="checked" />
 	<input type='radio' name='model' id='myhide' />
@@ -193,8 +223,7 @@ $(document).ready(function(){
 		<h3>
 			{$diy['title']}<small>我的家园</small>
 		</h3>
-		<h4>模型引入</h4>
-		
+		<h4>模型引入</h4>		
 			<button type="button" class="btn btn-default" aria-label="插入模型"
 				data-toggle="modal" data-target="#addModelModal" data-backdrop="static">
 				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
@@ -228,6 +257,11 @@ $(document).ready(function(){
 				<span class="glyphicon glyphicon-move" aria-hidden="true"></span>
 				移 动
 		</button>
+		<button type="button" class="btn btn-default btn-xs" aria-label="对齐模型"
+				data-toggle="modal" data-target="#alignModelModal" data-backdrop="static">
+				<span class="glyphicon glyphicon-object-align-vertical" aria-hidden="true"></span>
+				对 齐
+			</button>
 		</h6>		
 		
               <div class="input-group">
