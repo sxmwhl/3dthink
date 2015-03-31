@@ -56,11 +56,14 @@ class FormController extends Controller {
     		$inputs['email']=$user_info[2];
     		if (!$Moxing->create($inputs)){ // 创建数据对象
     			// 如果创建失败 表示验证没有通过 输出错误提示信息
-    			exit($Moxing->getError());    			 
+    			$result_delete = @unlink ($savePath.$info['savename']);
+    			$this->error($Moxing->getError());    			 
     		}else{
     			// 验证通过 写入新增数据
-    			$result_add=$Moxing->add();
-    			if(!$result_add)$this->error('模型分享失败！');    			 
+    			$rename_model_ok=rename($savePath.$info['savename'], $movePath."model.x3d");
+    			if(!$rename_model_ok)$this->error('模型移动失败！');
+    			$result_add=$Moxing->add();    			
+    			if(!$result_add)$this->error('模型分享失败！');     				 
     		}
     	}
     	
