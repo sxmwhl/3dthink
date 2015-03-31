@@ -17,7 +17,7 @@ class FormController extends Controller {
     	$upload = new \Think\Upload();// 实例化上传类
     	$upload->maxSize = 3145728 ;// 设置附件上传大小
     	$upload->exts = array('x3d');// 设置附件上传类型   
-    	$upload->mimes = array('application/xml','text/html','model/x3d+xml');
+    	//$upload->mimes = array('application/xml','text/html','text/xml','model/x3d+xml');
     	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
     	$upload->autoSub  = false;
     	$upload->savePath = 'upload/'; // 设置附件上传（子）目录
@@ -196,7 +196,7 @@ class FormController extends Controller {
     	$texture_exist=I('post.texture_exist/s');
     	$texture_num=I('post.texture_num/d');
     	$upload = new \Think\Upload();// 实例化上传类
-    	$upload->maxSize = 1048576 ;// 设置附件上传大小
+    	$upload->maxSize = 3145728 ;// 设置附件上传大小
     	$upload->exts = array('jpg','gif','png','jpeg');// 设置附件上传类型
     	$upload->rootPath = __ROOT__.'Public/'; // 设置附件上传根目录
     	$upload->autoSub  = false;

@@ -236,7 +236,7 @@ function alignModel(){
 		$('#alignModelModal').modal('hide');
 		return false;
 	}
-	if(last_pick_id=pickID){
+	if(last_pick_id===pickID){
 		alert("请先后点击选择要对齐的两个不同的模型！");
 		$('#alignModelModal').modal('hide');
 		return false;
