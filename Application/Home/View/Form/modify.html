@@ -1,6 +1,6 @@
 <include file="Public:header" />
 <script>
-	function change() {
+	function changeView() {
 		var dou = ",";
 		//头灯 开关
 		var HL_checked = document.__getElementById("HL").checked;
@@ -72,10 +72,10 @@
 			<h3>灯光信息（可选）</h3>
 			<div class="checkbox">
 			<label>
-				<input name="hl_on" type="checkbox" onchange="change()" id="HL" value="1" {$model.hl_on_checked} />头顶灯光
+				<input name="hl_on" type="checkbox" onchange="changeView()" id="HL" value="1" {$model.hl_on_checked} />头顶灯光
 			</label>
 			<label>
-				<input name="dl_on" type="checkbox" id="DL" value="1"	onchange="change()" {$model.dl_on_checked}/>平行光
+				<input name="dl_on" type="checkbox" id="DL" value="1"	onchange="changeView()" {$model.dl_on_checked}/>平行光
 			</label>
 			</div>
 			
@@ -85,19 +85,19 @@
               <div class="input-group">
                    <label class="sr-only" for="vp_x">X</label>
                    <div class="input-group-addon">X</div>
-                   <input name="vp_x" type="text" id="vp_x" value="{$model.vp_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="vp_x" type="text" id="vp_x" value="{$model.vp_x}" onchange="changeView()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
             
               <div class="input-group">
                    <label class="sr-only" for="vp_x">Y</label>
                    <div class="input-group-addon">Y</div>
-                   <input name="vp_y" type="text" id="vp_y" value="{$model.vp_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="vp_y" type="text" id="vp_y" value="{$model.vp_y}" onchange="changeView()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
             
               <div class="input-group">
                    <label class="sr-only" for="vp_x">Z</label>
                    <div class="input-group-addon">Z</div>
-                   <input name="vp_z" type="text" id="vp_z" value="{$model.vp_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="vp_z" type="text" id="vp_z" value="{$model.vp_z}" onchange="changeView()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
             </div>
 
@@ -106,22 +106,22 @@
 			  <div class="input-group">
                    <label class="sr-only" for="vp_d_x">X</label>
                    <div class="input-group-addon">X</div>
-                   <input name="vp_d_x" type="text" id="vp_d_x" value="{$model.vp_d_x}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="vp_d_x" type="text" id="vp_d_x" value="{$model.vp_d_x}" onchange="changeView()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
               <div class="input-group">
                    <label class="sr-only" for="vp_d_y">Y</label>
                    <div class="input-group-addon">Y</div>
-                   <input name="vp_d_y" type="text" id="vp_d_y" value="{$model.vp_d_y}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="vp_d_y" type="text" id="vp_d_y" value="{$model.vp_d_y}" onchange="changeView()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
               <div class="input-group">
                    <label class="sr-only" for="vp_d_z">Z</label>
                    <div class="input-group-addon">Z</div>
-                   <input name="vp_d_z" type="text" id="vp_d_z" value="{$model.vp_d_z}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="vp_d_z" type="text" id="vp_d_z" value="{$model.vp_d_z}" onchange="changeView()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
               <div class="input-group">
                    <label class="sr-only" for="vp_d_a">A</label>
                    <div class="input-group-addon">A</div>
-                   <input name="vp_d_a" type="text" id="vp_d_a" value="{$model.vp_d_a}" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
+                   <input name="vp_d_a" type="text" id="vp_d_a" value="{$model.vp_d_a}" onchange="changeView()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>			
 			</div>
 			<p class="text-warning">您的IP地址：{$model.ip_last_modify} 在保存后被记录。</p>
