@@ -17,6 +17,7 @@ class IndexController extends Controller {
     	$this->diys=$list4;
     	$this->title='首页';
     	$this->keywords='模型分享,3d模型,web3d,x3d模型,三维网站,三维模型';
+    	$this->description='3D蚂蚁是一个专业的提供web3d模型在线合作分享的平台';
     	$this->display();
     }
     public function model(){
@@ -45,6 +46,8 @@ class IndexController extends Controller {
     	$this->categories=$root_category;
     	$this->title=$data['title'].'模型';
     	//echo $Moxing->getLastSql();
+    	$this->keywords='3d模型,x3d模型,'.$data['title'];
+    	$this->description=$data['description'];
     	$this->display('model');
     }
     public function modelIn(){
@@ -62,6 +65,8 @@ class IndexController extends Controller {
     	$this->assign('model',$data);
     	$this->title=$data['title'];
     	//echo $Moxing->getLastSql();
+    	$this->keywords='3d模型,x3d模型,'.$data['title'];
+    	$this->description=$data['description'];
     	$this->display('modelIn');
     }
     public function search(){

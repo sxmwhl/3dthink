@@ -22,6 +22,6 @@ return array(
 				//'__BCS_PUBLIC__' => 'http://bcs.duapp.com/x3dfile/public',
 				'__BCS_PUBLIC__' => __ROOT__.'/Public',
 				/*********本地、远程切换完毕**************/
-				'__SITENAME__' => 'web3d模型分享-3dant.cn',
+				'__SITENAME__' => 'web3d模型分享-3D蚂蚁',
 		),
 );
