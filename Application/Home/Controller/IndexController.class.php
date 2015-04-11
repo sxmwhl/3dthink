@@ -25,12 +25,12 @@ class IndexController extends Controller {
     	$md5=I('f');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
-    		$this->display("Public:404");
-    		exit();
+    		$this->error("无此模型！");   
     	}
     	$where="folder='".$md5."'";
     	$Moxing=M('Moxing');
     	$data=$Moxing->where($where)->find();
+    	if(!$data)$this->error("无此模型！");
     	$allow_sep='180';
     	if(!isset($_SESSION['post_sep']))$_SESSION['post_sep']=time();
     	if(time() - $_SESSION['post_sep'] > $allow_sep)$_SESSION['post_sep']=time();
@@ -54,12 +54,12 @@ class IndexController extends Controller {
     	$md5=I('f');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
-    		$this->display("Public:404");
-    		exit();
+    		$this->error("无此模型！");    		
     	}
     	$Moxing=M('Moxing');
     	$where="folder='".$md5."'";
     	$data=$Moxing->where($where)->find();
+    	if(!$data)$this->error("无此模型！");
     	$data['hl_on']=$data['hl_on']==0?"false":"true";
     	$data['dl_on']=$data['dl_on']==0?"false":"true";
     	$this->assign('model',$data);
@@ -89,6 +89,7 @@ class IndexController extends Controller {
     	$id=I('id',0,'int');
     	$Diy=M('Diy');
     	$data=$Diy->where("id=".$id)->find();
+    	if(!$data)$this->error("无此DIY！");
     	$Member=M('Member');
     	$data2=$Member->where('uid='.$data['uid'])->find();    	
     	if(!isset($_SESSION['post_sep']))$_SESSION['post_sep']=time();
@@ -109,6 +110,7 @@ class IndexController extends Controller {
     	$id=I('id',0,'int');
     	$Diy=M('Diy');
     	$list=$Diy->where("id=".$id)->find();
+    	if(!$list)$this->error("无此DIY！");
     	$this->diy=$list;
     	$this->display();
     }
