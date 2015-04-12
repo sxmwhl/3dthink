@@ -256,7 +256,7 @@ input#myhide{ display:none; }
 #content > label.myhide{ display:none; }
 #content {
 	position: fixed;
-	top: 10%;
+	top: 5%;
 	left: 0;
 	z-index:300;
 }
