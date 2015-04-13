@@ -49,17 +49,15 @@ function parent_change_background(self){
 	<input type='radio' name='model' id='modelinfo' />
 	<input type='radio' name='model' id='modelcategory' />
 	<input type='radio' name='model' id='myhide' />
+	<input type='radio' name='model' id='comment' />
 	<div id='content'>
-		<a id='slider' class='home' href='__ROOT__/'><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> <label
-			id='slider' class='modelinfo' for='modelinfo'><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></label> <label
-			id='slider' class='modelcategory' for='modelcategory'><span class="glyphicon glyphicon-list" aria-hidden="true"></span></label> <label
-			id='slider' class='myhide' for='myhide'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></label>
+		<a id='slider' class='home' href='__ROOT__/'><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> 
+		<label id='slider' class='modelinfo' for='modelinfo'><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></label> 
+			<label id='slider' class='comment' for='comment'><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></label>
+			<label id='slider' class='modelcategory' for='modelcategory'><span class="glyphicon glyphicon-list" aria-hidden="true"></span></label>			
+			<label id='slider' class='myhide' for='myhide'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></label>
+			
 	</div>
-
-	<aside class="modelcategory">
-		<include file="Public:moreModel" />
-	</aside>
-
 	<aside class="modelinfo">
 		<div class="container-fluid">
 		<div class="row">
@@ -163,6 +161,12 @@ function parent_change_background(self){
 				</tr>
 			</table>
 		</div></div>
+	</aside>
+	<aside class="comment">
+		<include file="Public:comment" />
+	</aside>
+	<aside class="modelcategory">
+		<include file="Public:moreModel" />
 	</aside>
 	<iframe id="Content3D" class="Content3D"
 		src="__URL__/modelIn?f=<?php echo $model['folder']; ?>" scrolling="no"

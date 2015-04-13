@@ -247,6 +247,12 @@ input#modelcategory:checked ~ #content{ padding-left:25%; }
 input#modelcategory:checked ~ #content > label.myhide{ display:block; }
 input#modelcategory:checked ~ #content > label.modelcategory{ background: #666633; }
 
+input#comment{ display:none; }
+input#comment:checked ~ aside.comment{ left:0; }
+input#comment:checked ~ #content{ padding-left:25%; }
+input#comment:checked ~ #content > label.myhide{ display:block; }
+input#comment:checked ~ #content > label.comment{ background: #666633; }
+
 input#modelinfo{ display:none; }
 input#modelinfo:checked ~ aside.modelinfo{ left:0; }
 input#modelinfo:checked ~ #content{ padding-left:25%; }
