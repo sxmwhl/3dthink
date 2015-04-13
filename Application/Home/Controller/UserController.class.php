@@ -47,8 +47,7 @@ class UserController extends HomeController {
 		$this->title="新用户注册";
 		if(!C('USER_ALLOW_REGISTER')){
             $this->error('注册已关闭');
-        }
-       
+        }       
 		if(IS_POST){ //注册用户
 			
 			/* 检测验证码 */
@@ -64,9 +63,8 @@ class UserController extends HomeController {
             $User = new UserApi;
 			$uid = $User->register($username, $password, $email);
 			
-			if(0 < $uid){ //注册成功
-				//TODO: 发送验证邮件
-				
+			if(0 < $uid){ //注册成功				
+				//TODO: 发送验证邮件				
 				$this->success('注册成功！',U('login'));
 			} else { //注册失败，显示错误信息
 				$this->error($this->showRegError($uid));
@@ -93,6 +91,17 @@ class UserController extends HomeController {
 				$Mb = D('Member');
 				$ok=$Mb->login($uid);				
 				if($ok){ //登录用户
+					//设置cookie
+					$uid = (string)$uid;
+					$uname = (string)get_username();
+					$expire = "3600";
+					$key = "www3dantcn";
+					$encode_data=array(
+							'uid'=>$uid,
+							'uname'=>$uname,
+							'expire'=>$expire
+					);
+					setcookie('syncuyan', des_encrypt(json_encode($encode_data), $key), time() + 3600, '/', 'www.3dant.cn');
 					//TODO:跳转到登录前页面
 					$this->success('登录成功！',U('Home/Index/index'));
 				} else {
@@ -115,9 +124,10 @@ class UserController extends HomeController {
 	}
 
 	/* 退出登录 */
-	public function logout(){
+	public function logout(){		
 		if(is_login()){
 			D('Member')->logout();
+			setcookie('syncuyan', 'logout', time() + 3600, '/', 'www.3dant.cn');
 			$this->success('退出成功！', U('User/login'));
 		} else {
 			$this->redirect('User/login');
