@@ -34,7 +34,7 @@
 	<input type='radio' name='model' id='myhide' />
 	<div id='content'>
 		<a id='slider' class='home' href='__ROOT__/'><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> <label
-			id='slider' class='modelcategory' for='modelcategory'><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></label> <label
+			id='slider' class='modelcategory' for='modelcategory'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></label> <label
 			id='slider' class='myhide' for='myhide'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></label>
 	</div>
 	<aside class="modelcategory margin_left">
@@ -142,8 +142,7 @@
 	<Viewpoint id='viewpoint' description='Default Viewpoint'
 		position='{$model.vp_position}' orientation='{$model.vp_orientation}'></Viewpoint>
 	<navigationInfo id="head" headlight='{$model.hl_on}' type='"EXAMINE"'></navigationInfo>
-	<directionalLight id="directional" direction='0 0 -1'
-		on='{$model.dl_on}' intensity='1' shadowIntensity='0.0' color='0 0 0'></directionalLight>
+	<directionalLight id="directional" on='{$model.dl_on}'></directionalLight>
 	<background topurl="" righturl="" lefturl="" fronturl="" bottomurl=""
 		backurl="" skyangle="" groundangle="" groundcolor=""
 		transparency="1.0" skycolor="0 0 0"> </background> <Environment

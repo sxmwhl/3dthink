@@ -176,14 +176,17 @@ body{
 	padding: 0 10px;
 }
 .item .title {
+	white-space:nowrap;
+	overflow:hidden;
 	position: absolute;
 	display: block;
 	z-index: 3;
 	text-decoration: none;
 	top: 100%;
 	left: 0;
-	font-size: 18px;
-	color: #FFFFFF;
+	font-size: 14px;
+	color: #ffffff;
+	font-weight:bold;
 	line-height: 18px;
 	-webkit-transition: all ease 1s;
 	-moz-transition: all ease 1s;

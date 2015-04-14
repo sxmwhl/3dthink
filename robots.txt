@@ -1,0 +1,6 @@
+#
+# robots.txt for www.3dant.com
+#
+User-agent: *
+Disallow:
+Sitemap: http://www.3dant.cn/sitemap.xml
