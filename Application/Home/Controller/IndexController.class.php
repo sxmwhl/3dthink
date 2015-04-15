@@ -132,13 +132,5 @@ class IndexController extends Controller {
     	$this->categories=$list3;
     	$this->title=$result['nickname']."的3d模型";
     	$this->display();
-    }
-    public function browserSupport(){
-    	$Category=D('Category');
-    	$list3=$Category->get_child_categories(0);
-    	$this->categories=$list3;
-    	$this->title="浏览器支持";
-    	$this->description="对WebGL支持的浏览器的汇总。";
-    	$this->display();
-    }
+    }    
 }

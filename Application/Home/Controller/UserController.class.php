@@ -250,7 +250,7 @@ class UserController extends HomeController {
     			exit($Diy->getError());
     		}else {
     			$Diy->where('id='.$id)->save();
-    			$this->success('编辑成功！',__SELF__);
+    			$this->success('编辑成功！','index');
     		}    		
     	}    	
     }
