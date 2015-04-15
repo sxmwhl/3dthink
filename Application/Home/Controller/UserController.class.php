@@ -200,13 +200,59 @@ class UserController extends HomeController {
     public function addDiy(){
     	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
+    	}    	
+    	$uid=is_login();
+    	$data=I('post.');
+    	if(!$data){
+    		$Diy=M('Diy');
+    		$list=$Diy->where('uid='.$uid)->select();
+    		if(count($list)>=8)$this->error('Diy数量已达上限');
+    		$this->title="添加DIY";
+    		$this->display();
+    	}else {
+    		if($data['status']!=2)$data['status']=1;
+    		$data['uid']=is_login();
+    		$Diy=D('Diy');
+    		if (!$Diy->create($data,1)){ // 创建数据对象
+    			// 如果创建失败 表示验证没有通过 输出错误提示信息
+    			exit($Diy->getError());
+    		}else{
+    			$id=$Diy->add();
+    			//echo $Diy->getLastSql();
+    			if(!$id) exit("添加DIY失败！");
+    		}
+    		$oldname = __ROOT__."Public/images/preview.png";
+    		$newPath = __ROOT__."Public/diy/".$data['uid']."/".$id."/";
+    		create_dir($newPath) or exit("创建路径失败！");
+    		$newname=$newPath."/preview.png";
+    		copy($oldname, $newname);
+    		$this->success('开启我的家园成功！', 'diy?id='.$id);
+    	}    	
+    }
+    public function editDiy(){
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
     	}
     	$uid=is_login();
-    	$Diy=M('Diy');
-    	$list=$Diy->where('uid='.$uid)->select();
-    	if(count($list)>=8)$this->error('Diy数量已达上限');
-    	$this->title="开启DIY";
-    	$this->display();
+    	$id=I('get.id',0,'int');
+    	if($id===0)$this->error("参数错误！");
+    	$Diy=D('Diy');
+    	$result=$Diy->where('id='.$id)->find();
+    	if($result['uid']!==$uid)$this->error('无权编辑此DIY！');
+    	$data=I('post.');
+    	if(!$data){
+    		$this->diyinfo=$result;
+    		$this->title="修改DIY基本信息";
+    		$this->display();
+    	}else {
+    		if($data['status']!=2)$data['status']=1;
+    		if(!$Diy->create($data,2)){
+    			exit($Diy->getError());
+    		}else {
+    			$Diy->where('id='.$id)->save();
+    			$this->success('编辑成功！',__SELF__);
+    		}    		
+    	}    	
     }
     public function deleteDiy(){
     	if ( !is_login() ) {
@@ -223,33 +269,7 @@ class UserController extends HomeController {
     	$result3 = deldir($dir);
     	if($result3===false)$this->error('数据删除，预览图片尚未删除！');
     	$this->success('删除成功！');   	
-    }
-    public function enableDiy(){
-    	if ( !is_login() ) {
-    		$this->error( '您还没有登陆',U('User/login') );
-    	}
-    	$data=I('post.');
-    	if($data['status']!==2)$data['status']=1;
-    	$data['uid']=is_login();
-    	$Diy=D('Diy');
-    	if (!$Diy->create($data,1)){ // 创建数据对象
-    		// 如果创建失败 表示验证没有通过 输出错误提示信息
-    		exit($Diy->getError());
-    	}else{
-    		$id=$Diy->add();
-    		//echo $Diy->getLastSql();
-    		if(!$id) exit("添加DIY失败！");
-    	}
-    	$oldname = __ROOT__."Public/images/preview.png";
-    	$newPath = __ROOT__."Public/diy/".$data['uid']."/".$id."/";
-    	if(!file_exists($newPath)){
-    		mkdir($newPath) or exit('创建路径失败，请重试！');
-    	}    	
-    	$newname=$newPath."/preview.png";
-    	copy($oldname, $newname);
-    	$this->success('开启我的家园成功！', 'diy?id='.$id);
-    	//$this->display('diy');
-    }
+    }    
     public function saveDiy(){
     	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );

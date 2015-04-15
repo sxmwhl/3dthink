@@ -50,118 +50,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body class="model_in">
-	<div class="modal fade" id="addModelModal" tabindex="-1" role="dialog"
-		aria-labelledby="添加模型" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">插入模型</h4>
-				</div>
-				<div class="modal-body">
-				<label for="daima">已分享的模型:</label>
-					<input type="text" id="daima" name="daima" class="form-control" placeholder="请输入模型代码" />	
-					<h5><strong>基本模型:</strong></h5>
-					<div class="btn-group" role="group" aria-label="添加基本模型">
-						<button id="box" type="button" class="btn btn-default" onclick="insert_shape('box')"><img src="__BCS_PUBLIC__/images/Box.gif"></button>
-						<button id="sphere" type="button" class="btn btn-default"  onclick="insert_shape('sphere')"><img src="__BCS_PUBLIC__/images/Sphere.gif"></button>
-						<button id="cone" type="button" class="btn btn-default" onclick="insert_shape('cone')"><img src="__BCS_PUBLIC__/images/Cone.gif"></button>
-						<button id="cylinder" type="button" class="btn btn-default" onclick="insert_shape('cylinder')"><img src="__BCS_PUBLIC__/images/Cylinder.gif"></button>
-						<button id="text" type="button" class="btn btn-default" onclick="insert_shape('text')"><img src="__BCS_PUBLIC__/images/Text.gif"></button>
-						<button id="torus" type="button" class="btn btn-default" onclick="insert_shape('torus')"><img src="__BCS_PUBLIC__/images/Torus.gif"></button>
-						<button id="plane" type="button" class="btn btn-default" onclick="insert_shape('plane')"><img src="__BCS_PUBLIC__/images/Plane.gif"></button>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="addModelOkBt" type="button" class="btn btn-primary">确定</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="modelListModal" tabindex="-1" role="dialog"
-		aria-labelledby="模型列表" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">已插入模型列表</h4>
-				</div>
-				<div class="modal-body">
-				<table id="modelListTable" class="table table-striped">
-						<tr id="title" class="success">
-							<td>ID</td>
-							<td>名称</td>
-							<td>选择</td>
-							<td>删除</td>
-							<td>查看</td>
-							<td>来源</td>
-						</tr>						
-				</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="modelListOkBt" type="button" class="btn btn-primary">确定</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="screenShotModal" tabindex="-1" role="dialog"
-		aria-labelledby="DIY截图" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">DIY截图</h4>
-				</div>
-				<div class="modal-body">					
-						<img id='screen_shot' src='' alt='DIY截图' />						
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
-					<a id="screenShotOkBt" class="btn btn-primary" href="#" role="button">保存</a>
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="alignModelModal" tabindex="-1" role="dialog"
-		aria-labelledby="DIY截图" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">模型对齐</h4>
-				</div>
-				<div class="modal-body">
-				<h5><strong>请选择要对齐的轴:</strong></h5>
-					<label class="checkbox-inline"> <input id="align_x" type="checkbox"> X
-					</label>
-					<label class="checkbox-inline"> <input id="align_y" type="checkbox"> Y
-					</label>
-					<label class="checkbox-inline"> <input id="align_z" type="checkbox"> Z
-					</label>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
-					<button id="alignModelOkBt" type="button" class="btn btn-primary">对齐</button>					
-				</div>
-			</div>
-		</div>
-	</div>
+<body class="model_in">	
 	<input type='radio' name='model' id='modelinfo' />
 	<input type='radio' name='model' id='modelcategory' checked="checked" />
 	<input type='radio' name='model' id='myhide' />
@@ -220,7 +109,7 @@ $(document).ready(function(){
 	<include file="Public:userCenter" />
 	<div class="row">
 		<h3>
-			{$diy['title']}<small>我的家园</small>
+			{$diy['title']}
 		</h3>
 		<h4>模型引入</h4>		
 			<button type="button" class="btn btn-default" aria-label="插入模型"
@@ -401,6 +290,118 @@ $(document).ready(function(){
 		id="helper_scene" dopickpass="false"> <viewpoint id="coordinateAxesViewpoint"
 		centerOfRotation='0 0 0' position='0 0 20'></viewpoint> <Inline
 		mapDEFToID="true" nameSpaceName="CoordinateAxes"
-		url="__BCS_PUBLIC__/images/x3d/CylinderSensor.x3d"></Inline> </scene> </x3d>
+		url="__BCS_PUBLIC__/images/x3d/CylinderSensor.x3d"></Inline> </scene> 
+	</x3d>
+	<div class="modal fade" id="addModelModal" tabindex="-1" role="dialog"
+		aria-labelledby="添加模型" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">插入模型</h4>
+				</div>
+				<div class="modal-body">
+				<label for="daima">已分享的模型:</label>
+					<input type="text" id="daima" name="daima" class="form-control" placeholder="请输入模型代码" />	
+					<h5><strong>基本模型:</strong></h5>
+					<div class="btn-group" role="group" aria-label="添加基本模型">
+						<button id="box" type="button" class="btn btn-default" onclick="insert_shape('box')"><img src="__BCS_PUBLIC__/images/Box.gif"></button>
+						<button id="sphere" type="button" class="btn btn-default"  onclick="insert_shape('sphere')"><img src="__BCS_PUBLIC__/images/Sphere.gif"></button>
+						<button id="cone" type="button" class="btn btn-default" onclick="insert_shape('cone')"><img src="__BCS_PUBLIC__/images/Cone.gif"></button>
+						<button id="cylinder" type="button" class="btn btn-default" onclick="insert_shape('cylinder')"><img src="__BCS_PUBLIC__/images/Cylinder.gif"></button>
+						<button id="text" type="button" class="btn btn-default" onclick="insert_shape('text')"><img src="__BCS_PUBLIC__/images/Text.gif"></button>
+						<button id="torus" type="button" class="btn btn-default" onclick="insert_shape('torus')"><img src="__BCS_PUBLIC__/images/Torus.gif"></button>
+						<button id="plane" type="button" class="btn btn-default" onclick="insert_shape('plane')"><img src="__BCS_PUBLIC__/images/Plane.gif"></button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button id="addModelOkBt" type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modelListModal" tabindex="-1" role="dialog"
+		aria-labelledby="模型列表" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">已插入模型列表</h4>
+				</div>
+				<div class="modal-body">
+				<table id="modelListTable" class="table table-striped">
+						<tr id="title" class="success">
+							<td>ID</td>
+							<td>名称</td>
+							<td>选择</td>
+							<td>删除</td>
+							<td>查看</td>
+							<td>来源</td>
+						</tr>						
+				</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button id="modelListOkBt" type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="screenShotModal" tabindex="-1" role="dialog"
+		aria-labelledby="DIY截图" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">DIY截图</h4>
+				</div>
+				<div class="modal-body">					
+						<img id='screen_shot' src='' alt='DIY截图' />						
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+					<a id="screenShotOkBt" class="btn btn-primary" href="#" role="button">保存</a>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="alignModelModal" tabindex="-1" role="dialog"
+		aria-labelledby="DIY截图" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">模型对齐</h4>
+				</div>
+				<div class="modal-body">
+				<h5><strong>请选择要对齐的轴:</strong></h5>
+					<label class="checkbox-inline"> <input id="align_x" type="checkbox"> X
+					</label>
+					<label class="checkbox-inline"> <input id="align_y" type="checkbox"> Y
+					</label>
+					<label class="checkbox-inline"> <input id="align_z" type="checkbox"> Z
+					</label>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+					<button id="alignModelOkBt" type="button" class="btn btn-primary">对齐</button>					
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

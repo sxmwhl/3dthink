@@ -4,10 +4,10 @@
 	<div class="container-fluid">
 		<include file="Public:logo" />
 		<div class="row">
-		<form name="category_form" method="post" action="__URL__/enableDiy" class="formclass">
-			<h3>开启我的家园</h3>
+		<form name="add_diy_form" id="add_diy_form" method="post" action="__SELF__" class="formclass">
+			<h3>添加DIY</h3>
 <div class="form-group">
-	<label for="cate_name">家园名称：</label> 
+	<label for="cate_name">DIY名称：</label> 
 	<input name="title" type="text" class="form-control" id="title" size="35" maxlength="50"/>
 </div>
 <div class="checkbox">
@@ -16,14 +16,25 @@
     </label>
 </div>
 <div class="form-group">
-	<label for="cate_description">家园介绍：</label> 
+	<label for="cate_description">DIY介绍：</label> 
 	<textarea name="description" rows="5" class="form-control" id="description"></textarea>
 </div>
 <input type="submit" class="btn btn-primary" value="确 定" /> 
 <input type="reset" class="btn btn-warning" value="重 置" />
 </form>
 	</div>
-				<include file="Public:footer" />
+<include file="Public:footer" />
 	</div>
-</body>
-</html>
+<script>
+$("#add_diy_form").validate({
+  		 rules:{
+  			 title:{
+  				 required:true
+  			 },
+  			 description:{
+  				 required:true
+  			 }
+  		 }
+  	 });
+</script>
+<include file="Public:foot" />

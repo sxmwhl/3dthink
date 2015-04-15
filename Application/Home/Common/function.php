@@ -63,6 +63,9 @@ function deldir($dir) {
 		return false;
 	}
 }
+function create_dir($dir){
+	return is_dir($dir) or (create_dir(dirname($dir)) and mkdir ($dir , 0777));
+}
 function check_x3d_document($filename,$tofilename=""){
 	$files=new \Think\Storage\Driver\File();
 	$contents=$files->read($filename);
