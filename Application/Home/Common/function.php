@@ -41,6 +41,10 @@ function des_decrypt($string, $key) {
 	$result = mb_convert_encoding($result, 'UTF-8', 'GBK');
 	return $result;
 }
+/** *删除目录及目录下文件**
+ @param string $dir 删除目录路径
+ @return bool 返回是否正确删除
+ */
 function deldir($dir) {
 	//先删除目录下的文件：
 	$dh=opendir($dir);
@@ -63,9 +67,18 @@ function deldir($dir) {
 		return false;
 	}
 }
+/** *删除目录及目录下文件**
+@param string $dir 删除目录路径
+@return bool 返回创建结果
+*/
 function create_dir($dir){
 	return is_dir($dir) or (create_dir(dirname($dir)) and mkdir ($dir , 0777));
 }
+/** *删除目录及目录下文件**
+@param string $filename 检测处理的文件名
+@param string $tofilename 处理后文件存放位置
+@return bool 被检测文件是否符合要求
+*/
 function check_x3d_document($filename,$tofilename=""){
 	$files=new \Think\Storage\Driver\File();
 	$contents=$files->read($filename);
@@ -79,4 +92,23 @@ function check_x3d_document($filename,$tofilename=""){
 	$contents=substr($contents, $start);
 	if($tofilename!=="")$files->put($tofilename,$contents);
 	return true;
+}
+/** *删除目录及目录下文件**
+@param string $order 排序字符串，如：1,2,8
+@param array $inResult IN查询结果
+@param array $key IN关键字
+@return array 排序后结果
+*/
+function order_in($order,$inResult,$key){
+	$str = explode(',',$order);
+	$arr = array();
+	for($i=0; $i<count($str); $i++)  {
+		for($j=0; $j<count($inResult); $j++){
+			if($str[$i] == $inResult[$j][$key]){
+				$arr[] = $inResult[$j];
+				break;
+			}
+		}
+	}
+	return $arr;
 }

@@ -40,11 +40,16 @@ class CategoryModel extends Model {
 		$row = null;
 		return $get_one_category;
 	}
+	/*
+	 * 获取父分类别表，cate_id、cate_name
+	 */
 	function get_category_path($cate_id = 0) {
 		$cate = $this->get_one_category ( $cate_id );
 		if (! isset ( $cate ))
 			return '';
-		$category_path = $this->Category->where ( "cate_id IN (" . $cate_id . "," . $cate ['cate_arrparentid'] . ")" )->field ( 'cate_id,cate_name' )->select ();
+		$order= $cate ['cate_arrparentid'] . "," . $cate_id;		
+		$category_path = $this->Category->where ( "cate_id IN (" . $order. ")" )->field ( 'cate_id,cate_name' )->select ();
+		$category_path = order_in($order, $category_path,'cate_id');
 		// $sql = "SELECT cate_id, cate_name FROM ".$DB->table('categories')." WHERE cate_id IN (".$cate_id.','.$cate['cate_arrparentid'].")";
 		// $categories = $DB->fetch_all($sql);
 		return $category_path;

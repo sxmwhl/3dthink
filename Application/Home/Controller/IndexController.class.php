@@ -40,8 +40,8 @@ class IndexController extends Controller {
     	}
     	$this->assign('model',$data);
     	$Category=D('Category');
-    	$category_path=$Category->get_category_path($data['category']);
-    	$this->category_path=$category_path;
+    	//$category_path=$Category->get_category_path($data['category']);
+    	//$this->category_path=$category_path;
     	$root_category=$Category->get_child_categories(0);
     	$this->categories=$root_category;
     	$this->title=$data['title'].'模型';
