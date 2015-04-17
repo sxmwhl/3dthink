@@ -23,5 +23,5 @@ class HelpController extends Controller {
 		$this->title="浏览器支持";
 		$this->description="对WebGL支持的浏览器的汇总。";
 		$this->display();
-	}	
+	}
 }

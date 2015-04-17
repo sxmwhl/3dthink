@@ -71,18 +71,18 @@ class FormController extends Controller {
     }
     public function modify(){   
     	$md5=I('get.f/s');
-    	$cate=I('cate');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
     		$this->display("Public:404");
     		exit();
     	}
-    	$Category=D('Category');
-    	$category_option = $Category->get_category_option(0,$cate,0);
-    	$this->category_option=$category_option;
     	$Moxing=M('Moxing');
     	$where="folder='".$md5."'";
     	$model_show=$Moxing->where($where)->find();
+    	$cate=$model_show['category'];
+    	$Category=D('Category');
+    	$category_option = $Category->get_category_option(0,$cate,0);
+    	$this->category_option=$category_option;    	
     	$array1=explode(',',$model_show['vp_position']);
     	$model_show['vp_x']=$array1[0];
     	$model_show['vp_y']=$array1[1];
