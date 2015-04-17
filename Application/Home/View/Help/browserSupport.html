@@ -1,15 +1,6 @@
 <include file="Public:header" />
 </head>
 <body>
-<input type='radio' name='model' id='modelcategory'/>
-<input type='radio' name='model' id='myhide'/>
-<div id='content'>
-  <label id='slider' class='modelcategory' for='modelcategory'><span class="glyphicon glyphicon-list" aria-hidden="true"></span></label>
-  <label id='slider' class='myhide' for='myhide'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></label>
-</div>
-<aside class="modelcategory">
-<include file="Public:moreModel" />
-</aside>
 <div class="container-fluid" align="center">
   <include file="Public:logo" />
 		<div class="row bg-info">
@@ -104,7 +95,44 @@
   </div>
 </div>
     <div class="clear"></div>
-  </div>
-
-<include file="Public:footer" />
+    <include file="Public:footer" />
+</div>
+<input type='radio' name='model' id='modelcategory'/>
+<input type='radio' name='model' id='comment' />
+<input type='radio' name='model' id='myhide'/>
+<div id='content'>
+  <a id='slider' class='home' href='__ROOT__/'><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+  <label id='slider' class='modelcategory' for='modelcategory'><span class="glyphicon glyphicon-list" aria-hidden="true"></span></label>
+  <label id='slider' class='comment' for='comment'><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></label>
+  <label id='slider' class='myhide' for='myhide'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></label>
+</div>
+<aside class="modelcategory">
+<include file="Public:moreModel" />
+</aside>
+<aside class="comment">
+<include file="Public:comment" />
+</aside>
+	<script>
+		window._bd_share_config = {
+			"common" : {
+				"bdSnsKey" : {},
+				"bdText" : "",
+				"bdMini" : "2",
+				"bdMiniList" : false,
+				"bdPic" : "",
+				"bdStyle" : "1",
+				"bdSize" : "24"
+			},
+			"share" : {},
+			"image" : {
+				"viewList" : [ "qzone", "tsina", "tqq", "renren", "weixin" ],
+				"viewText" : "分享到：",
+				"viewSize" : "16"
+			}
+		};
+		with (document)
+			0[(getElementsByTagName('head')[0] || body)
+					.appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='
+					+ ~(-new Date() / 36e5)];
+	</script>
 <include file="Public:foot" />
