@@ -11,8 +11,8 @@
 	<aside class="modelcategory">
 		<include file="Public:moreModel" />
 	</aside>
-	<div class="container-fluid">
-		<include file="Public:logo" />
+	<include file="Public:logo" />
+	<div class="container-fluid">		
 		<div class="row">
 		<form name="texture_form" id="texture_form" method="post" action="__URL__/audioSave?t={$model.folder}" class="formclass" enctype="multipart/form-data">
 		<h3>添加/更换模型音频文件</h3>
@@ -68,8 +68,9 @@
 		</div>
 		</form>	
 		</div>
-		<include file="Public:footer" />
+		
 	</div>	
+	<include file="Public:footer" />
 	<script>
 	$("#texture_form").validate({
   		 rules:{

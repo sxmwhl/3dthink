@@ -59,10 +59,21 @@ function iframeChangeBackground(self){
 	</h2>
 	</div>
 <script type="text/javascript">
-x3dom.runtime.ready=function(){
-	rotate("viewpoint","CoordinateAxes__CoordinateAxes");	
-	//document.getElementById("coordinateAxesViewpoint").addEventListener('viewpointChanged', viewFunc, true);
-	//mod_sceneGraph.initSceneGraph();		
-	};	
+x3dom.runtime.ready = function() {	
+	var e = document.getElementById("model");
+	$("[tag='cn_3dant_inline']").first().load(function(){	
+		$(this).attr("onload","showAll()");
+		setTimeout(function(){
+			e.runtime.showAll();
+		},1000);			
+	});
+	$("[tag='cn_3dant_inline']").last().load(function(){	
+		$(this).attr("onload","showAll()");
+		setTimeout(function(){
+			e.runtime.showAll();
+		},1000);			
+	});
+	rotate("viewpoint","CoordinateAxes__CoordinateAxes");
+};
 </script>
 <include file="Public:foot" />

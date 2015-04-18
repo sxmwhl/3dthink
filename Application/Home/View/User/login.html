@@ -1,8 +1,8 @@
 <include file="Public:header" />
 </head>
 <body>
-	<div class="container-fluid">
-		<include file="Public:logo" />
+<include file="Public:logo" />
+	<div class="container-fluid">		
 		<div class="row">
 		<form method="post" action="__SELF__" class="formclass width300"
 			name="upload_form" id="form" role="form">
@@ -25,8 +25,9 @@
 			<p class="error"></p>
 		</form>
 </div>
-		<include file="Public:footer" />
+		
 	</div>
+	<include file="Public:footer" />
 	<script>
 	$("#form").validate({
 		submitHandler: function(form) {			
@@ -53,5 +54,4 @@
 			$("input:submit").removeClass("log-in").attr("disabled", false);
 		});
 	</script>
-</body>
-</html>
+<include file="Public:foot" />

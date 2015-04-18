@@ -1,8 +1,8 @@
 <include file="Public:header" />
 </head>
 <body>
-	<div class="container-fluid">
-		<include file="Public:logo" />
+<include file="Public:logo" />
+	<div class="container-fluid">		
 		<div class="row">
 		<form id="category_form" name="category_form" method="post" action="__URL__/save" class="formclass">
 			<h3>添 加 分 类</h3>
@@ -10,13 +10,10 @@
 					<label for="root_id">所属分类：</label> <select
 						name="root_id" id="root_id" class="form-control">
 						<option value="0">作为顶级分类</option>{$category_option}
-					</select>
-					
+					</select>					
 				</div>
-
 				<include file="Public:category_form" />
+	</div>	
 	</div>
-				<include file="Public:footer" />
-	
-	</div>
+<include file="Public:footer" />
 <include file="Public:foot" />
