@@ -24,4 +24,11 @@ class HelpController extends Controller {
 		$this->description="对WebGL支持的浏览器的汇总。";
 		$this->display();
 	}
+	public function about(){
+		$Category=D('Category');
+		$list3=$Category->get_child_categories(0);
+		$this->categories=$list3;
+		$this->title="关于3D蚂蚁";
+		$this->display();
+	}
 }

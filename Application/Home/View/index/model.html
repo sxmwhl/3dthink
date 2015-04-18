@@ -57,15 +57,9 @@ function parent_change_background(self){
 							name="category_path_i" id="vo"> <a
 							href='__MODULE__/category?cate={$vo.cate_id}' class='title'
 							title='分类名称'>{$vo.cate_name}</a>/ </volist></td>
-				</tr>
+				</tr>				
 				<tr align ="left">
-					<td><strong>模型代码</strong></td>
-				</tr>
-				<tr align ="left">
-					<td>{$model['folder']}</td>
-				</tr>
-				<tr align ="left">
-					<td><strong>创作者</strong></td>
+					<td><strong>分享者</strong></td>
 				</tr>
 				<tr align ="left">
 					<td>
@@ -92,6 +86,18 @@ function parent_change_background(self){
 				</tr>
 				<tr align ="left">
 					<td>{$model['views']}</td>
+				</tr>
+				<tr align ="left">
+					<td><strong>模型代码</strong></td>
+				</tr>
+				<tr align ="left">
+					<td>{$model['folder']}</td>
+				</tr>
+				<tr align ="left">
+					<td><strong>模型引用代码</strong></td>
+				</tr>
+				<tr align ="left">
+					<td><input type="text" class="form-control" value="<iframe src='http://www.3dant.cn__URL__/modelIn?f=<?php echo $model['folder']; ?>' allowfullscreen='true' width='500' height='400'></iframe>" ></td>
 				</tr>
 				<tr align ="left">
 					<td><strong>更换背景</strong></td>

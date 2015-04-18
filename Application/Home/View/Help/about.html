@@ -1,0 +1,37 @@
+<include file="Public:header" />
+</head>
+<body>
+<div class="container-fluid">
+  <include file="Public:logo" />
+		<div class="row bg-info" align="center">
+			<h3>
+				<span style="color: orange" class="glyphicon glyphicon-paperclip"
+					aria-hidden="true"></span> <strong>关于3D蚂蚁</strong>
+			</h3>
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1 mg-top20">
+				<p class="lead">3D蚂蚁（www.3dant.cn）是一个全新的网络3D(web3d)模型在线分享、浏览、组建平台。聚集大众力量搭建网络3D世界。</p>
+				<p>在这里您可以分享自己的3D模型，同时利用已分享的模型搭建自己的3D世界。这些分享的模型和和搭建的3D世界可以通过代码在其他网页上引用。这个3D世界可以是动态的、有声有色的。</p>
+				<p>本站基于html5和WebGL技术，需要使用支持这两种技术的浏览器进行浏览，详见<a href="__MODULE__/Help/browserSupport">浏览器支持</a>。</p>
+				<p>3D蚂蚁网站目前由个人运营维护，<strong>寻求合作与支持</strong>，有意者可联系<a target="_blank" href="mailto:sxm@3dant.cn">SXM@3DANT.CN</a>。</p>
+				<p>站内模型皆来源于网络和用户分享，如果您认为哪一模型侵犯到您的作品相关权益，请联系本站进行处理。</p>
+			</div>
+		</div>
+		<include file="Public:footer" />
+ </div>
+<input type='radio' name='model' id='modelcategory'/>
+<input type='radio' name='model' id='myhide'/>
+<div id='content'>
+  <a id='slider' class='home' href='__ROOT__/'><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> 
+  <label id='slider' class='modelcategory' for='modelcategory'><span class="glyphicon glyphicon-list" aria-hidden="true"></span></label>
+  
+  <label id='slider' class='myhide' for='myhide'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></label>
+</div>
+<aside class="modelcategory">
+<include file="Public:moreModel" />
+</aside>
+<aside class="comment">
+<include file="Public:comment" />
+</aside>
+<include file="Public:foot" />
