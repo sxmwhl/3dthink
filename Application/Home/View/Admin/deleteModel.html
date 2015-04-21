@@ -5,7 +5,7 @@
 	<div class="container-fluid">		
 		<div class="row">
 		<form method="post" action="__SELF__" class="formclass width300"
-			name="upload_form" id="form" role="form">
+			name="delete_form" id="delete_form" role="form">
 			<h3>删除模型</h3>
 			<input type='text' name='md5' id='md5'
 				class='formclass-input' placeholder="请输入要删除的模型代码" /> 
@@ -19,7 +19,7 @@
 	</div>
 <include file="Public:footer" />
 	<script>
-	$("#form").validate({
+	$("#delete_form").validate({
 	rules:{
 		md5:{
 			required:true,
@@ -36,5 +36,4 @@
 	}
 	});
 	</script>
-</body>
-</html>
+<include file="Public:foot" />

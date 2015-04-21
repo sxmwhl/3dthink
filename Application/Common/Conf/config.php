@@ -1,6 +1,8 @@
 <?php
 return array(
 	//'配置项'=>'配置值'
+	//管理员ID
+		'USER_ADMINISTRATOR' => 1,
 		//数据库配置信息
 		'USER_ALLOW_REGISTER'   => true, // 用户注册
 		'WEB_SITE_CLOSE'   => true, // 站点开关

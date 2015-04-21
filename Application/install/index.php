@@ -26,7 +26,25 @@ vp_position varchar(30),
 vp_orientation varchar(40),
 ip_upload varchar(15),
 ip_last_modify varchar(15)
-);
+)ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='模型表';
+		
+DROP TABLE IF EXISTS `think_article`;
+CREATE TABLE `think_article` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文档ID',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `title` char(80) NOT NULL DEFAULT '' COMMENT '标题',
+  `category_id` int(10) unsigned NOT NULL COMMENT '所属分类',
+  `description` char(140) NOT NULL DEFAULT '' COMMENT '描述',
+  `content` text NOT NULL COMMENT '文章内容',
+  `display` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '可见性',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `views` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览量',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `status` (`status`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='文章表';
 		
 DROP TABLE IF EXISTS `think_category`;
 CREATE TABLE think_category 

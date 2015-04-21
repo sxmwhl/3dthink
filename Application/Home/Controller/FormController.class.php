@@ -3,7 +3,7 @@ namespace Home\Controller;
 use User\Api\UserApi;
 use Think\Controller;
 class FormController extends Controller {
-	public function _before_index(){
+	protected function _initialize(){
 	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
     	}
@@ -364,28 +364,5 @@ class FormController extends Controller {
     	}
     	echo '3秒后跳转至模型信息修改界面...<br/>';
     	header("refresh:3;url=modify?f=".$inputs['folder']);
-    }
-    public function deleteModel(){
-    	$this->title="删除模型";
-    	$data=I('post.');
-    	if(!$data){
-    		$this->display();
-    		exit();
-    	}
-    	if (!preg_match("/^([a-fA-F0-9]{32})$/", $data['md5']))
-    	{
-    		$this->error("模型代码错误！");
-    	}
-    	if ($data['md5']!==$data['password'])
-    	{
-    		$this->error("删除密码错误！");
-    	}
-    	$Moxing=M('Moxing');
-    	$result=$Moxing->where("folder='".$data['md5']."'")->delete();
-    	if(!$result){
-    		$this->error('无此模型！');    	
-    	}
-    	$result_delete = deldir(__ROOT__."Public/upload/".$data['md5']);
-    	$this->success("删除模型成功！");
-    }
+    }    
 }
