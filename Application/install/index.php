@@ -42,7 +42,6 @@ CREATE TABLE `think_article` (
   `views` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览量',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
   KEY `status` (`status`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='文章表';
 		

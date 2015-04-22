@@ -6,24 +6,22 @@
 	<form method="post" action="__SELF__" name="article_form" id="article_form" role="form">
 		<div class="form-group">
              <label for="title">标题*：</label>
-             <input type="text" name="title" id="title" value="" class="form-control" />
+             <input type="text" name="title" id="title" value="{$article.title}" class="form-control" />
         </div>
         <div class="form-group">
              <label for="description">摘要*：</label>
-             <textarea name="description" id="description" class="form-control"></textarea>
+             <textarea name="description" id="description" class="form-control">{$article.description}</textarea>
         </div>
 		<!-- 加载编辑器的容器 -->
 		<div class="form-group">
 		<strong>文章内容*：</strong>
-		<script id="container" name="content" type="text/plain">此处为文章正文...</script>
+		<script id="container" name="content" type="text/plain">{$article.content|htmlspecialchars_decode}</script>
 		</div>
 		<div class="form-group">
 		<input type="submit" value="提交" class="btn btn-default">
 		</div>
-	</form>		
-	</div>
-	<include file="Public:footer" />
-	<!-- 配置文件 -->
+	</form>
+		<!-- 配置文件 -->
 		<script type="text/javascript" src="__BCS_PUBLIC__/tools/UEditor/ueditor.config.js"></script>
 		<!-- 编辑器源码文件 -->
 		<script type="text/javascript" src="__BCS_PUBLIC__/tools/UEditor/ueditor.all.js"></script>
@@ -31,4 +29,6 @@
 		<script type="text/javascript">
 			var ue = UE.getEditor('container');
 		</script>
+	</div>
+	<include file="Public:footer" />
 <include file="Public:foot" />

@@ -6,6 +6,9 @@ class HelpController extends Controller {
 		$Category=D('Category');
 		$list3=$Category->get_child_categories(0);
 		$this->categories=$list3;
+		$Article=M('Article');
+		$list=$Article->where('display=1')->order('views')->select();
+		$this->articles=$list;
 		$this->title="帮助文档";
 		$this->display();
 	}
@@ -29,6 +32,15 @@ class HelpController extends Controller {
 		$list3=$Category->get_child_categories(0);
 		$this->categories=$list3;
 		$this->title="关于3D蚂蚁";
+		$this->display();
+	}
+	public function article(){
+		$id=I('get.id/d',0);
+		$Article=M('Article');
+		$list=$Article->where('id='.$id)->find();
+		$this->article=$list;
+		$this->title=$list['title'];
+		$this->description=$list['description'];
 		$this->display();
 	}
 }

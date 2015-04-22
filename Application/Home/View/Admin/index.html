@@ -5,57 +5,27 @@
 <div class="container-fluid">  
 		<div class="row bg-info" align="center">
 			<h3>
-				<span style="color: red" class="glyphicon glyphicon-education"
-					aria-hidden="true"></span> <strong>帮 助 文 档</strong>
+				<span style="color: red" class="glyphicon glyphicon-cog"
+					aria-hidden="true"></span> <strong>管 理 平 台</strong>
 			</h3>
 		</div>
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 				<ol>
-					<li><h4><a href="__MODULE__/Admin/deleteModel">删除模型</a></h4></li>
-					<li><h4><a href="__MODULE__/Admin/addArticle">编辑文章</a></h4></li>
-					<li><h4><a href="__MODULE__/Help/navigation">模型浏览操作方法</a></h4></li>
+					<li><strong><a href="__MODULE__/Admin/deleteModel"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span> 删除模型</a></strong></li>
+					<li><strong><a href="__MODULE__/Admin/addArticle"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加文章</a></strong></li>
+					<volist name="articles" id="vo">
+					<li>
+					<strong>
+					<a href="__MODULE__/Help/article?id={$vo.id}">{$vo.title}</a>
+					</strong>----
+					<a href="__MODULE__/Admin/editArticle?id={$vo.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 编辑</a> | 
+					<a href="__MODULE__/Admin/deleteArticle?id={$vo.id}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span> 删除</a>
+					</li>
+					</volist>
 				</ol>
 			</div>
 		</div>		
  </div>
  <include file="Public:footer" />
-<input type='radio' name='model' id='modelcategory'/>
-<input type='radio' name='model' id='comment' />
-<input type='radio' name='model' id='myhide'/>
-<div id='content'>
-  <a id='slider' class='home' href='__ROOT__/'><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> 
-  <label id='slider' class='modelcategory' for='modelcategory'><span class="glyphicon glyphicon-list" aria-hidden="true"></span></label>
-  <label id='slider' class='comment' for='comment'><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></label>
-  <label id='slider' class='myhide' for='myhide'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></label>
-</div>
-<aside class="modelcategory">
-<include file="Public:moreModel" />
-</aside>
-<aside class="comment">
-<include file="Public:comment" />
-</aside>
-	<script>
-		window._bd_share_config = {
-			"common" : {
-				"bdSnsKey" : {},
-				"bdText" : "",
-				"bdMini" : "2",
-				"bdMiniList" : false,
-				"bdPic" : "",
-				"bdStyle" : "1",
-				"bdSize" : "24"
-			},
-			"share" : {},
-			"image" : {
-				"viewList" : [ "qzone", "tsina", "tqq", "renren", "weixin" ],
-				"viewText" : "分享到：",
-				"viewSize" : "16"
-			}
-		};
-		with (document)
-			0[(getElementsByTagName('head')[0] || body)
-					.appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='
-					+ ~(-new Date() / 36e5)];
-	</script>
 <include file="Public:foot" />
