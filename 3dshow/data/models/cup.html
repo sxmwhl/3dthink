@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <title>My first X3DOM page</title>
+        <script type='text/javascript' src='/Public/js/x3dom.js'></script>
+        <link rel='stylesheet' type='text/css' href='/Public/css/x3dom.css'/>
+        <link rel="stylesheet" type="text/css" href="models.css"/>
+        <script>
+            var c = 1;
+            var t;
+            function   getRadioBoxValue(radioName)
+            {
+                var obj = document.getElementsByName(radioName);             //这个是以标签的name来取控件  
+                for (i = 0; i < obj.length; i++) {
+                    if (obj[i].checked) {
+                        return   obj[i].value;
+                    }
+                }
+                return "undefined";
+            }
+            function isover()
+            {
+                var xincolor;
+                var sw = getRadioBoxValue("shuiwen");
+                document.getElementById('s__wdcolor').setAttribute('diffuseColor', '0.9 0.1 0.1');
+                switch (sw) {
+                    case "lengshui":
+                        xincolor = "0 0 1";
+                        wdzhi = "24";
+                        break;
+                    case "wenshui":
+                        xincolor = "1 0.9 0.3";
+                        wdzhi = "52";
+                        break;
+                    case "reshui":
+                        xincolor = "1 0 0";
+                        wdzhi = "75";
+                        break;
+                    case "undefined":
+                        xincolor = "0 0 1";
+                        wdzhi = "24";
+                        break;
+                }
+                document.getElementById('s__wendu').setAttribute('string', wdzhi);
+                if (c % 2 == 1) {
+                    document.getElementById('s__xincolor').setAttribute('diffuseColor', xincolor);
+                } else {
+                    document.getElementById('s__xincolor').setAttribute('diffuseColor', '0.9 0.9 0.9');
+                }
+                c = c + 1;
+                t = setTimeout("isover()", 500);
+            }
+            function isout()
+            {
+                c = 1;
+                document.getElementById('s__xincolor').setAttribute('diffuseColor', '0.9 0.9 0.9');
+                document.getElementById('s__wdcolor').setAttribute('diffuseColor', '0.9 0.9 0.9');
+                clearTimeout(t);
+            }
+        </script>
+    </head>
+    <body>
+        <x3d id="model">
+            <scene dopickpass="true" pickmode="idBuf" bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
+                <background topurl="" righturl="" lefturl="" fronturl="" bottomurl="" backurl="" skyangle="" groundangle="" groundcolor="" transparency="1.0" skycolor="0 0 0"></background>
+                <Inline nameSpaceName="s" mapDEFToID="true" onmouseover='isover();' onmouseout='isout();' url="cupmodleonly.x3d" />
+            </scene>
+        </x3d>
+        <div id="tools" style="width: 500px;z-index:500;position: absolute;">
+
+            <form id="shuiwenform"><strong>请选择加入爱心杯的水温：</strong>
+                <label>
+                <input type="radio" checked="true" value="lengshui" name="shuiwen"/>
+                冷水
+                </label>
+                
+                <label>
+                <input type="radio" value="wenshui" name="shuiwen"/>
+                温水
+                </label>
+                
+                <label>
+                <input type="radio" value="reshui" name="shuiwen"/>
+                热水
+                </label>
+            </form>
+        </div>
+    </body>
+</html>

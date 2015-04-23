@@ -18,6 +18,25 @@
 		<script id="container" name="content" type="text/plain">{$article.content|htmlspecialchars_decode}</script>
 		</div>
 		<div class="form-group">
+		<switch name="article.display">
+		<case value="1">
+			<label class="radio-inline">
+				<input type="radio" name="display" value="0"/>不公开
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="display" value="1" checked="checked"/>公开
+			</label>
+		</case>
+		<default />
+		    <label class="radio-inline">
+				<input type="radio" name="display" value="0" checked="checked"/>不公开
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="display" value="1"/>公开
+			</label>
+		</switch>
+		</div>
+		<div class="form-group">
 		<input type="submit" value="提交" class="btn btn-default">
 		</div>
 	</form>

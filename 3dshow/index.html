@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>3D产品展示—Web3D中文站</title>
+        <link rel="shortcut icon" href="http://www.3d-coform.eu/x3dom/data/favicon/favicon.ico">
+		<link href="data/css/general.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="data/js/data.js"></script>
+        <script type="text/javascript" src="data/js/functions.js"></script>
+	</head>
+	<body onload="initThumbs();">
+    	<div class="InfoContainer">
+    		<div id="Name" class="InfoBlack">爱心触摸感温杯</div>
+            <div class="InfoOrange">
+            	<div class="InfoDesc">价格</div>
+                <div id="Place" class="InfoValue">80元</div>
+            </div>
+            <div class="InfoOrange">
+            	<div class="InfoDesc">产地</div>
+                <div id="Date" class="InfoValue">江苏</div>
+            </div>
+            <div class="InfoOrange">
+            	<div class="InfoDesc">产品描述</div>
+                <div id="Artist" class="InfoValue">当手与感温杯接触时，杯体会显示杯内水温，水温0～35℃时爱心闪烁蓝光，35～65℃时闪烁橘色，65℃以上时闪烁红光。</div>
+            </div>
+            <div class="InfoOrange">
+            	<div class="InfoDesc">模型操作说明</div>
+                <div id="Material" class="InfoValue">鼠标左键拖拽，可以各个角度旋转查看爱心杯；鼠标停止在爱心杯上，可以使爱心闪烁，并显示当前水温；选择左上方加入水杯的水温，可以使爱心闪烁不同颜色。</div>
+            </div>
+            <div class="InfoOrange">
+            	<div class="InfoDesc">产品型号</div>
+                <div id="Number" class="InfoValue">C.130-1930</div>
+            </div>
+            <div class="InfoOrange">
+            	<div class="InfoDesc">购买地址</div>
+                <div id="Location" class="InfoValue">http://qianxijiameijj.tmall.com/</div>
+            </div>
+        </div>
+        <iframe id="Content3D" class="Content3D" src="data/models/cup.html" scrolling="no" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+        <div id="HoverInfo" class="HoverInfo">爱心触摸感温杯</div>
+        <div class="Slider">
+        	<a class="LeftArrow" href="javascript:prevThumb()"></a>
+        	<a style="background-image: url(&quot;data/thumbs/cup_Over.png&quot;);" id="Thumb0" class="Thumb" href="javascript:clickThumb(0);" onmouseover="mouseOver(0);" onmouseout="mouseOut(0);" onmousemove="mouseMove(event);"></a>
+            <a style="background-image: url(&quot;data/thumbs/null.png&quot;);" id="Thumb1" class="Thumb" href="javascript:clickThumb(1);" onmouseover="mouseOver(1);" onmouseout="mouseOut(1);" onmousemove="mouseMove(event);"></a>
+            <a style="background-image: url(&quot;data/thumbs/null.png&quot;);" id="Thumb2" class="Thumb" href="javascript:clickThumb(2);" onmouseover="mouseOver(2);" onmouseout="mouseOut(2);" onmousemove="mouseMove(event);"></a>
+            <a style="background-image: url(&quot;data/thumbs/null.png&quot;);" id="Thumb3" class="Thumb" href="javascript:clickThumb(3);" onmouseover="mouseOver(3);" onmouseout="mouseOut(3);" onmousemove="mouseMove(event);"></a>
+            <a style="background-image: url(&quot;data/thumbs/null.png&quot;);" id="Thumb4" class="Thumb" href="javascript:clickThumb(4);" onmouseover="mouseOver(4);" onmouseout="mouseOut(4);" onmousemove="mouseMove(event);"></a>
+            <a class="RightArrow" href="javascript:nextThumb()"></a>
+        </div>
+	
+</body></html>

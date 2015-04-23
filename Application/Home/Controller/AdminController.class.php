@@ -10,7 +10,7 @@ class AdminController extends Controller {
 	}
     public function index(){  
     	$Article=M('Article');
-    	$list=$Article->where('display=1')->order('views')->select();
+    	$list=$Article->where('display=1 OR display=0')->order('views')->select();
     	$this->articles=$list;
     	$this->title='管理平台';
     	$this->display();      
