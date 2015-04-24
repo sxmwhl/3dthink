@@ -90,4 +90,19 @@ class AdminController extends Controller {
     	if(!$res)$this->error('更新数据失败！');
     	$this->success('编辑成功！' ,'index');
     }
+    public function users(){
+    	$Member=M('Member');
+    	$list=$Member->select();
+    	$this->users=$list;
+    	$this->title="用户管理";
+    	$this->display();    	
+    }
+    public function deleteUser(){
+    	$id=I('get.id/d',0);
+    	if($id==0)$this->error('参数错误！','index');
+    	$Member=M('Member');
+    	$did=$Member->where('uid='.$id)->delete();
+    	$this->success('删除成功！');
+    	
+    }
 }
