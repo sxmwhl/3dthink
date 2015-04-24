@@ -1,4 +1,3 @@
-/** X3DOM Runtime, http://www.x3dom.org/ 1.6.2-dev - 0d62e05601fe68c9dce5ceb37079801a13198b76 - Fri Dec 5 17:23:14 2014 +0100 */
 if(!Array.forEach){Array.forEach=function(array,fun,thisp){var len=array.length;for(var i=0;i<len;i++){if(i in array){fun.call(thisp,array[i],i,array);}}};}
 if(!Array.map){Array.map=function(array,fun,thisp){var len=array.length;var res=[];for(var i=0;i<len;i++){if(i in array){res[i]=fun.call(thisp,array[i],i,array);}}
 return res;};}

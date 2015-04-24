@@ -8,10 +8,10 @@ var modelData = new Array(  new Array("cup",
 									  "鼠标左键拖拽，可以各个角度旋转查看爱心杯；鼠标停止在爱心杯上，可以使爱心闪烁，并显示当前水温；选择左上方加入水杯的水温，可以使爱心闪烁不同颜色。" ,
 									  "C.130-1930",
 									  "http://qianxijiameijj.tmall.com/",
-									  "http://collections.vam.ac.uk/item/O100186/flask/"
+									  ""
 									  ),
-							new Array("null",
-									  "新产品",
+							new Array("lion",
+									  "木雕拼板狮子",
 									  "无",
 									  "无",
 									  "无",

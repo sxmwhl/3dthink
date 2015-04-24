@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <title>木雕拼盘狮子</title>
+        <script type='text/javascript' src='/Public/js/x3dom.js'></script>
+        <script type='text/javascript' src='/Public/js/jquery-2.1.3.min.js'></script>
+        <script type='text/javascript' src='/Public/js/bootstrap.min.js'></script>
+        <link rel='stylesheet' type='text/css' href='/Public/css/bootstrap.min.css' />
+        <link rel='stylesheet' type='text/css' href='/Public/css/x3dom.css'/>
+        <link rel="stylesheet" type="text/css" href="models.css"/>
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+		var hm = document.createElement("script");
+		hm.src = "//hm.baidu.com/hm.js?6c35b51dea6375850ce07c7228b81bec";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+</head>
+    <body>
+        <x3d id="model">
+            <scene dopickpass="true" pickmode="idBuf" bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
+                <viewpoint bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,500'></viewpoint>
+                <background topurl="" righturl="" lefturl="" fronturl="" bottomurl="" backurl="" skyangle="" groundangle="" groundcolor="" transparency="1.0" skycolor="0 0 0"></background>
+                <inline id="inline" nameSpaceName="s" mapDEFToID="true" onclick="showPart();" url="/Public/upload/d5b5e0c873cb8e01d34fc5d73a0f91bd/model.x3d"></inline>
+            </scene>
+        </x3d>
+        <div id="tools" style="width: 500px;z-index:500;position: absolute;">
+            <button onclick="showPart();" class="btn btn-primary" type="submit">拆分</button>
+            <button onclick="resetModel();" class="btn btn-default" type="submit">拼装</button>
+        </div>
+        <script>
+        var trl = new Array();   
+        var id = new Array(); 
+        var flag = 0;
+        x3dom.runtime.ready = function() {	
+    		//var e = document.getElementById("model");
+    		$("#inline").load(function(){   
+    			var i=0;
+    			$("Transform").each(function(){
+    				id[i]=$(this).attr("id");
+    				trl[i]=$(this).attr("translation");   
+    				i++;
+    			});
+    		});
+    	};
+    	function showPart(){
+    		switch(flag)
+    		{
+    		case 0:
+    			flag=1;
+    			var i = 0;
+        	    (function(){
+        	        if(i>=id.length){
+        	        	flag = 2;
+        	        	return;
+        	        	}
+        	        $("#"+id[i]).attr('translation','0 0 0');
+        	        i++;
+        	        window.setTimeout(arguments.callee,40);
+        	    })();
+    		  break;
+    		case 1:
+    		  alert("机器人工作中...");
+    		  break;
+    		case 2:
+      		  alert("已拆分完毕！");
+      		  break;
+    		default:
+    		  alert("操作错误！");
+    		}    		     		
+    	}
+    	function resetModel(){ 
+    		switch(flag)
+    		{
+    		case 0:
+    			alert("尚未拆分！");
+    		  break;
+    		case 1:
+    		  alert("机器人工作中...");
+    		  break;
+    		case 2:
+    			flag=1;
+    			var i = id.length;
+        	    (function(){
+        	        if(i<0){
+        	    	    flag = 0;
+        	        	return;
+        	        	}
+        	        $("#"+id[i]).attr('translation',trl[i]);
+        	        i--;
+        	        window.setTimeout(arguments.callee,40);
+        	    })(); 
+      		  break;
+    		default:
+    		  alert("操作错误！");
+    		}    		
+    	}
+        </script>
+    </body>
+</html>
