@@ -107,7 +107,7 @@ class AdminController extends Controller {
     public function sitemap(){
     	$content='<?xml version="1.0" encoding="UTF-8"?>'.chr(10);
     	$content.="<urlset>\n";
-    	
+    	//首页、目录、特定网页
     	$data_array=array(
     			array(
     					'loc'=>'http://www.3dant.cn/',
@@ -137,27 +137,41 @@ class AdminController extends Controller {
     					'loc'=>'http://www.3dant.cn/index.php/Home/Help/browserSupport',
     					'priority'=>'0.5',
     					'lastmod'=>date(DATE_W3C),
-    					'changefreq'=>'monthly'
+    					'changefreq'=>'weekly'
     			),
     			array(
     					'loc'=>'http://www.3dant.cn/index.php/Home/Help/navigation',
     					'priority'=>'0.6',
     					'lastmod'=>date(DATE_W3C),
-    					'changefreq'=>'monthly'
+    					'changefreq'=>'weekly'
     			),
     			array(
     					'loc'=>'http://www.3dant.cn/index.php/home/user/login',
     					'priority'=>'0.4',
     					'lastmod'=>date(DATE_W3C),
-    					'changefreq'=>'monthly'
+    					'changefreq'=>'weekly'
     			),
     			array(
     					'loc'=>'http://www.3dant.cn/index.php/home/user/register',
     					'priority'=>'0.4',
     					'lastmod'=>date(DATE_W3C),
-    					'changefreq'=>'monthly'
+    					'changefreq'=>'weekly'
     			)    			
     	);
+    	//模型分类页面
+    	$Category=M('Category');
+    	$list=$Category->select();
+    	foreach ($list as $m){
+    		$data_array=array_merge($data_array,array(
+    				array(
+    						'loc'=>'http://www.3dant.cn/index.php/Home/category?cate='.$m['cate_id'],
+    						'priority'=>'0.8',
+    						'lastmod'=>date(DATE_W3C),
+    						'changefreq'=>'daily'
+    				)
+    		));
+    	}
+    	//模型及模型In页面
     	$Moxing=M('Moxing');
     	$list=$Moxing->select();
     	foreach ($list as $m){
@@ -165,19 +179,20 @@ class AdminController extends Controller {
     				array(
     						'loc'=>'http://www.3dant.cn/index.php/Home/Index/model?f='.$m['folder'],
     						'priority'=>'0.8',
-    						'lastmod'=>date(DATE_W3C,$m['time_update']),
+    						'lastmod'=>date(DATE_W3C,mktime($m['time_update'])),
     						'changefreq'=>'daily'    						    						
     				),
     				array(
     						'loc'=>'http://www.3dant.cn/index.php/Home/Index/modelIn?f='.$m['folder'],
     						'priority'=>'0.5',
-    						'lastmod'=>date(DATE_W3C,$m['time_update']),
+    						'lastmod'=>date(DATE_W3C,mktime($m['time_update'])),
     						'changefreq'=>'daily'
     				)
     		));
     	}
+    	//DIY及DIYIn
     	$Diy=M('Diy');
-    	$list=$Diy->select();
+    	$list=$Diy->where('status=1')->select();
     	foreach ($list as $m){
     		$data_array=array_merge($data_array,array(
     				array(
@@ -194,18 +209,20 @@ class AdminController extends Controller {
     				)
     		));
     	}
-    	$Category=M('Category');
-    	$list=$Category->select();
+    	//帮助文档
+    	$Article=M('Article');
+    	$list=$Article->where('display=1')->select();
     	foreach ($list as $m){
     		$data_array=array_merge($data_array,array(
     				array(
-    						'loc'=>'http://www.3dant.cn/index.php/Home/category?cate='.$m['cate_id'],
+    						'loc'=>'http://www.3dant.cn/index.php/Home/Help/article?id='.$m['id'],
     						'priority'=>'0.8',
-    						'lastmod'=>date(DATE_W3C,$m['time_update']),
-    						'changefreq'=>'weekly'
+    						'lastmod'=>date(DATE_W3C,$m['update_time']),
+    						'changefreq'=>'daily'
     				)
     		));
     	}
+    	//循环输出网址	
     	foreach($data_array as $data){
     		$content.=$this->create_item($data);
     		$i++;

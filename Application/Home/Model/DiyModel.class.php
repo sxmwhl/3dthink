@@ -13,4 +13,7 @@ class DiyModel extends Model {
 			array('views','number','浏览次数格式错误！',2),
 			array('status',array(0,1,2),'状态数值错误！',2,'in'),
 	);	
+	protected $_auto = array(
+			array('time_update', NOW_TIME, self::MODEL_INSERT),
+	);		
 }
