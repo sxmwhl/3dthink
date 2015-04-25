@@ -171,6 +171,19 @@ class AdminController extends Controller {
     				)
     		));
     	}
+    	//用户页面
+    	$Member=M('Member');
+    	$list=$Member->select();
+    	foreach ($list as $m){
+    		$data_array=array_merge($data_array,array(
+    				array(
+    						'loc'=>'http://www.3dant.cn/index.php/Home/Index/user?id='.$m['uid'],
+    						'priority'=>'0.8',
+    						'lastmod'=>date(DATE_W3C,$m['last_login_time']),
+    						'changefreq'=>'daily'
+    				)
+    		));
+    	}
     	//模型及模型In页面
     	$Moxing=M('Moxing');
     	$list=$Moxing->select();
