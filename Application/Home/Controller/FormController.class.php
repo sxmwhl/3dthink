@@ -6,7 +6,7 @@ class FormController extends Controller {
 	protected function _initialize(){
 	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
-    	}
+    	}    
 	}
     public function index(){    	
       $this->title='分型您的模型';
@@ -165,6 +165,7 @@ class FormController extends Controller {
     	$Moxing=M('Moxing');
     	$where="folder='".$md5."'";
     	$model_show=$Moxing->where($where)->find();
+    	if($model_show['creator']!=get_username(is_login()))$this->error("无权修改！");
     	$model_show['hl_on']=$model_show['hl_on']==0?"false":"true";
     	$model_show['dl_on']=$model_show['dl_on']==0?"false":"true";
     	$this->model=$model_show;

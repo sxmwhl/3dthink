@@ -29,7 +29,10 @@
             </scene>
         </x3d>
         <div id="tools" style="width: 500px;z-index:500;position: absolute;">
-            <button onclick="showPart();" class="btn btn-primary" type="submit">拆分</button>
+            <button onclick="showxPart();" class="btn btn-primary" type="submit">X向拆分</button>
+            <button onclick="showyPart();" class="btn btn-primary" type="submit">Y向拆分</button>
+            <button onclick="showzPart();" class="btn btn-primary" type="submit">Z向拆分</button>
+            <button onclick="showPart();" class="btn btn-primary" type="submit">各向拆分</button>
             <button onclick="resetModel();" class="btn btn-default" type="submit">拼装</button>
         </div>
         <script>
@@ -47,6 +50,93 @@
     			});
     		});
     	};
+    	function showzPart(){
+    		switch(flag)
+    		{
+    		case 0:
+    			flag=1;
+    			var i = 0;
+        	    (function(){
+        	        if(i>=id.length){
+        	        	flag = 2;
+        	        	return;
+        	        	}
+        	        var trl1=trl[i].split(' ');
+        	        trl11=10*i+parseFloat(trl1[2]);
+        	        trl2=trl1[0]+' '+trl1[1]+' '+trl11;
+        	        $("#"+id[i]).attr('translation',trl2);
+        	        i++;
+        	        window.setTimeout(arguments.callee,40);
+        	    })();
+    		  break;
+    		case 1:
+    		  alert("机器人工作中...");
+    		  break;
+    		case 2:
+      		  alert("已拆分完毕！");
+      		  break;
+    		default:
+    		  alert("操作错误！");
+    		}    		     		
+    	}
+    	function showyPart(){
+    		switch(flag)
+    		{
+    		case 0:
+    			flag=1;
+    			var i = 0;
+        	    (function(){
+        	        if(i>=id.length){
+        	        	flag = 2;
+        	        	return;
+        	        	}
+        	        var trl1=trl[i].split(' ');
+        	        trl11=10*i+parseFloat(trl1[1]);
+        	        trl2=trl1[0]+' '+trl11+' '+trl1[2];
+        	        $("#"+id[i]).attr('translation',trl2);
+        	        i++;
+        	        window.setTimeout(arguments.callee,40);
+        	    })();
+    		  break;
+    		case 1:
+    		  alert("机器人工作中...");
+    		  break;
+    		case 2:
+      		  alert("已拆分完毕！");
+      		  break;
+    		default:
+    		  alert("操作错误！");
+    		}    		     		
+    	}
+    	function showxPart(){
+    		switch(flag)
+    		{
+    		case 0:
+    			flag=1;
+    			var i = 0;
+        	    (function(){
+        	        if(i>=id.length){
+        	        	flag = 2;
+        	        	return;
+        	        	}
+        	        var trl1=trl[i].split(' ');
+        	        trl11=10*i+parseFloat(trl1[0]);
+        	        trl2=trl11+' '+trl1[1]+' '+trl1[2];
+        	        $("#"+id[i]).attr('translation',trl2);
+        	        i++;
+        	        window.setTimeout(arguments.callee,40);
+        	    })();
+    		  break;
+    		case 1:
+    		  alert("机器人工作中...");
+    		  break;
+    		case 2:
+      		  alert("已拆分完毕！");
+      		  break;
+    		default:
+    		  alert("操作错误！");
+    		}    		     		
+    	}
     	function showPart(){
     		switch(flag)
     		{

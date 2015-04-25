@@ -220,15 +220,19 @@
    			 }
    		 }
    	 });
-    x3dom.runtime.ready = function() {
+    x3dom.runtime.ready = function() {    	
     $("#inline").load(function(){
-    	var imagetexture = $("inline").find("*").filter("imagetexture").is("[url]");
-    	var movietexture = $("inline").find("*").filter("movietexture").is("[url]");
-    	var audioclip = $("inline").find("*").filter("audioclip").is("[url]");
-    	if(imagetexture)$('a#imagetexture').removeAttr("disabled");
-    	if(movietexture)$('a#movie').removeAttr("disabled");
-    	if(audioclip)$('a#audioclip').removeAttr("disabled");
-    	rotate("viewpoint","CoordinateAxes__CoordinateAxes");
+    	var user="{:get_username()}";
+    	var author="{$model.creator}";
+    	if(user==author){
+    		var imagetexture = $("inline").find("*").filter("imagetexture").is("[url]");
+        	var movietexture = $("inline").find("*").filter("movietexture").is("[url]");
+        	var audioclip = $("inline").find("*").filter("audioclip").is("[url]");
+        	if(imagetexture)$('a#imagetexture').removeAttr("disabled");
+        	if(movietexture)$('a#movie').removeAttr("disabled");
+        	if(audioclip)$('a#audioclip').removeAttr("disabled");
+        	rotate("viewpoint","CoordinateAxes__CoordinateAxes");
+    	}    	
       });
     }
 	</script>
