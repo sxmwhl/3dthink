@@ -1,837 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
+<urlset>
 <url>
-  <loc>http://www.3dant.cn/</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/</loc>
+<priority>1.0</priority>
+<lastmod>2015-04-25T19:28:05+08:00</lastmod>
+<changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/home/user/login</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/show/</loc>
+<priority>0.9</priority>
+<lastmod>2015-04-25T19:28:05+08:00</lastmod>
+<changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/home/user/register</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Help/index</loc>
+<priority>0.9</priority>
+<lastmod>2015-04-25T19:28:05+08:00</lastmod>
+<changefreq>daily</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/category?cate=3</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Help/about</loc>
+<priority>0.5</priority>
+<lastmod>2015-04-25T19:28:05+08:00</lastmod>
+<changefreq>daily</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/category?cate=4</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Help/browserSupport</loc>
+<priority>0.5</priority>
+<lastmod>2015-04-25T19:28:05+08:00</lastmod>
+<changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/category?cate=5</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Help/navigation</loc>
+<priority>0.6</priority>
+<lastmod>2015-04-25T19:28:05+08:00</lastmod>
+<changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/category?cate=2</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/home/user/login</loc>
+<priority>0.3</priority>
+<lastmod>2015-04-25T19:28:05+08:00</lastmod>
+<changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/category?cate=0</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/home/user/register</loc>
+<priority>0.3</priority>
+<lastmod>2015-04-25T19:28:05+08:00</lastmod>
+<changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/form</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=3b15559a7db2a4e009c1a83fd4df368c</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=c213bb5241471922bc543abb3e2ab8c2</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=3b15559a7db2a4e009c1a83fd4df368c</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=d16fadaf08f5c0a706f18f3413217e0b</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=801c506ccd6eeb03963f91a37bd0603c</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=ca9a9bf0752c8d657738e079477add21</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=801c506ccd6eeb03963f91a37bd0603c</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=74415813a8a954249d106f6ff0a77098</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=f9b2ec57b9bd480305868ceb5e47a0fa</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=e9a690f183de72eda23f4e8910cc9b0a</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=f9b2ec57b9bd480305868ceb5e47a0fa</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=806b335fc7ff20807d913554476af66a</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=d5b5e0c873cb8e01d34fc5d73a0f91bd</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=5629c40edb2d4f6859fe230c16e6b74e</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=d5b5e0c873cb8e01d34fc5d73a0f91bd</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=5aa3f823cc767deab2071f1bb4fcc0c7</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=7b99408bc6f6954deeb79117647082ab</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=179bf5bb345a4f7e542dc5a04df8bf17</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=7b99408bc6f6954deeb79117647082ab</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=c79990ee8e0f8b979f823ffe1109b2d8</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=e5667074c41c5a584cb5d9d8757c45d6</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=8f3c92b156239d1c7991b71240551fb6</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=e5667074c41c5a584cb5d9d8757c45d6</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=c9d732693113ce7758d7f487594646c3</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=32aa102c3a05eb0f7e9d57bad9dd15e6</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=7fda34a0d3451154a5e59fa58a10d712</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=32aa102c3a05eb0f7e9d57bad9dd15e6</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=aecd172ea7093f4ee403af5b71d19a47</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=09ea7935e8d850e610f7bab00c759c46</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/diy?id=1</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=09ea7935e8d850e610f7bab00c759c46</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/diy?id=2</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=c2ea427429b4e7420979dba9ebd64a6b</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/browserSupport</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=c2ea427429b4e7420979dba9ebd64a6b</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/home/user/index.html</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=dc3ced27eb45f115c4f1c1314dab83b4</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/User/register</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=dc3ced27eb45f115c4f1c1314dab83b4</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/User/login</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=6ebf014c4fe805b2e29eb62b86e28177</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/category?cate=6</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=6ebf014c4fe805b2e29eb62b86e28177</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=c9d732693113ce7758d7f487594646c3</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=cc84249511c9a56f831a25a3b903e077</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=e75997bf6ada6a4e9c23619a71cda196</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=cc84249511c9a56f831a25a3b903e077</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=ca9a9bf0752c8d657738e079477add21</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=fa94cc6bf93a924db399a2c70b908666</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=890b99236b79758e80df8da27fdf9e15</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=fa94cc6bf93a924db399a2c70b908666</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=11a19fe1b2bbc1d479813c5cd1468418</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/model?f=d036024085e0787a406542d01d0d85f6</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=e9a690f183de72eda23f4e8910cc9b0a</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=d036024085e0787a406542d01d0d85f6</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:33:35+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=c213bb5241471922bc543abb3e2ab8c2</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/diy?id=1</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:00:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=5aa3f823cc767deab2071f1bb4fcc0c7</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/Index/diyIn?f=1</loc>
+<priority>0.5</priority>
+<lastmod>1970-01-01T08:00:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=5629c40edb2d4f6859fe230c16e6b74e</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=74415813a8a954249d106f6ff0a77098</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=aecd172ea7093f4ee403af5b71d19a47</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=806b335fc7ff20807d913554476af66a</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=d16fadaf08f5c0a706f18f3413217e0b</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=179bf5bb345a4f7e542dc5a04df8bf17</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=7fda34a0d3451154a5e59fa58a10d712</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=d45cedc34e79732a7bc26248a5cfa602</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/User/login.html</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/user?id=1</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=c213bb5241471922bc543abb3e2ab8c2</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=c213bb5241471922bc543abb3e2ab8c2</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=d16fadaf08f5c0a706f18f3413217e0b</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=d16fadaf08f5c0a706f18f3413217e0b</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/user?id=0</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=ca9a9bf0752c8d657738e079477add21</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=ca9a9bf0752c8d657738e079477add21</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=74415813a8a954249d106f6ff0a77098</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=74415813a8a954249d106f6ff0a77098</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=e9a690f183de72eda23f4e8910cc9b0a</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=e9a690f183de72eda23f4e8910cc9b0a</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=806b335fc7ff20807d913554476af66a</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=806b335fc7ff20807d913554476af66a</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=5629c40edb2d4f6859fe230c16e6b74e</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=5629c40edb2d4f6859fe230c16e6b74e</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=5aa3f823cc767deab2071f1bb4fcc0c7</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=5aa3f823cc767deab2071f1bb4fcc0c7</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=179bf5bb345a4f7e542dc5a04df8bf17</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=179bf5bb345a4f7e542dc5a04df8bf17</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=c79990ee8e0f8b979f823ffe1109b2d8</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=c79990ee8e0f8b979f823ffe1109b2d8</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=8f3c92b156239d1c7991b71240551fb6</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=8f3c92b156239d1c7991b71240551fb6</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=c9d732693113ce7758d7f487594646c3</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=c9d732693113ce7758d7f487594646c3</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=7fda34a0d3451154a5e59fa58a10d712</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=7fda34a0d3451154a5e59fa58a10d712</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=aecd172ea7093f4ee403af5b71d19a47</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=aecd172ea7093f4ee403af5b71d19a47</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/diyIn?id=1</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/diyIn?id=2</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/User/index.html</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=8f3c92b156239d1c7991b71240551fb6</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/index/model?f=c79990ee8e0f8b979f823ffe1109b2d8</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=e75997bf6ada6a4e9c23619a71cda196</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=e75997bf6ada6a4e9c23619a71cda196</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=890b99236b79758e80df8da27fdf9e15</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=890b99236b79758e80df8da27fdf9e15</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=11a19fe1b2bbc1d479813c5cd1468418</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=11a19fe1b2bbc1d479813c5cd1468418</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/form/preview?f=d45cedc34e79732a7bc26248a5cfa602</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/modelIn?f=d45cedc34e79732a7bc26248a5cfa602</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=11a19fe1b2bbc1d479813c5cd1468418</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=e75997bf6ada6a4e9c23619a71cda196</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Index/model?f=d45cedc34e79732a7bc26248a5cfa602</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/category/add</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=c213bb5241471922bc543abb3e2ab8c2&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=c213bb5241471922bc543abb3e2ab8c2&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=c213bb5241471922bc543abb3e2ab8c2&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=c213bb5241471922bc543abb3e2ab8c2</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=d16fadaf08f5c0a706f18f3413217e0b&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=d16fadaf08f5c0a706f18f3413217e0b&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=d16fadaf08f5c0a706f18f3413217e0b&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=d16fadaf08f5c0a706f18f3413217e0b</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=ca9a9bf0752c8d657738e079477add21&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=ca9a9bf0752c8d657738e079477add21&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=ca9a9bf0752c8d657738e079477add21&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=ca9a9bf0752c8d657738e079477add21</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=74415813a8a954249d106f6ff0a77098&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=74415813a8a954249d106f6ff0a77098&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=74415813a8a954249d106f6ff0a77098&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=74415813a8a954249d106f6ff0a77098</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=e9a690f183de72eda23f4e8910cc9b0a&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=e9a690f183de72eda23f4e8910cc9b0a&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=e9a690f183de72eda23f4e8910cc9b0a&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=e9a690f183de72eda23f4e8910cc9b0a</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=806b335fc7ff20807d913554476af66a&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=806b335fc7ff20807d913554476af66a&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=806b335fc7ff20807d913554476af66a&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=806b335fc7ff20807d913554476af66a</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=5629c40edb2d4f6859fe230c16e6b74e&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=5629c40edb2d4f6859fe230c16e6b74e&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=5629c40edb2d4f6859fe230c16e6b74e&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=5629c40edb2d4f6859fe230c16e6b74e</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=5aa3f823cc767deab2071f1bb4fcc0c7&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=5aa3f823cc767deab2071f1bb4fcc0c7&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=5aa3f823cc767deab2071f1bb4fcc0c7&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=5aa3f823cc767deab2071f1bb4fcc0c7</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=179bf5bb345a4f7e542dc5a04df8bf17&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=179bf5bb345a4f7e542dc5a04df8bf17&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=179bf5bb345a4f7e542dc5a04df8bf17&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=179bf5bb345a4f7e542dc5a04df8bf17</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=c79990ee8e0f8b979f823ffe1109b2d8&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=c79990ee8e0f8b979f823ffe1109b2d8&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=c79990ee8e0f8b979f823ffe1109b2d8&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=c79990ee8e0f8b979f823ffe1109b2d8</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=8f3c92b156239d1c7991b71240551fb6&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=8f3c92b156239d1c7991b71240551fb6&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=8f3c92b156239d1c7991b71240551fb6&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=8f3c92b156239d1c7991b71240551fb6</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=c9d732693113ce7758d7f487594646c3&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=c9d732693113ce7758d7f487594646c3&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=c9d732693113ce7758d7f487594646c3&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=c9d732693113ce7758d7f487594646c3</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=7fda34a0d3451154a5e59fa58a10d712&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=7fda34a0d3451154a5e59fa58a10d712&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=7fda34a0d3451154a5e59fa58a10d712&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=7fda34a0d3451154a5e59fa58a10d712</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=aecd172ea7093f4ee403af5b71d19a47&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=aecd172ea7093f4ee403af5b71d19a47&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=aecd172ea7093f4ee403af5b71d19a47&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=aecd172ea7093f4ee403af5b71d19a47</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=e75997bf6ada6a4e9c23619a71cda196&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=e75997bf6ada6a4e9c23619a71cda196&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=e75997bf6ada6a4e9c23619a71cda196&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=e75997bf6ada6a4e9c23619a71cda196</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=890b99236b79758e80df8da27fdf9e15&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=890b99236b79758e80df8da27fdf9e15&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=890b99236b79758e80df8da27fdf9e15&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=890b99236b79758e80df8da27fdf9e15</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=11a19fe1b2bbc1d479813c5cd1468418&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=11a19fe1b2bbc1d479813c5cd1468418&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=11a19fe1b2bbc1d479813c5cd1468418&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=11a19fe1b2bbc1d479813c5cd1468418</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=d45cedc34e79732a7bc26248a5cfa602&amp;n=image</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=d45cedc34e79732a7bc26248a5cfa602&amp;n=movie</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/texture?t=d45cedc34e79732a7bc26248a5cfa602&amp;n=audio</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/preview?f=d45cedc34e79732a7bc26248a5cfa602</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/lists</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=c213bb5241471922bc543abb3e2ab8c2</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=d16fadaf08f5c0a706f18f3413217e0b</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=ca9a9bf0752c8d657738e079477add21</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=74415813a8a954249d106f6ff0a77098</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=e9a690f183de72eda23f4e8910cc9b0a</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=806b335fc7ff20807d913554476af66a</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=5629c40edb2d4f6859fe230c16e6b74e</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=5aa3f823cc767deab2071f1bb4fcc0c7</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=179bf5bb345a4f7e542dc5a04df8bf17</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=c79990ee8e0f8b979f823ffe1109b2d8</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=8f3c92b156239d1c7991b71240551fb6</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=c9d732693113ce7758d7f487594646c3</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=7fda34a0d3451154a5e59fa58a10d712</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=aecd172ea7093f4ee403af5b71d19a47</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=e75997bf6ada6a4e9c23619a71cda196</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=890b99236b79758e80df8da27fdf9e15</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=11a19fe1b2bbc1d479813c5cd1468418</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Form/modify?f=d45cedc34e79732a7bc26248a5cfa602</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/add?cate=0</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/edit?cate=3</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/lists?cate=3</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/del?cate=3</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/edit?cate=4</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/lists?cate=4</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/del?cate=4</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/edit?cate=5</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/lists?cate=5</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/del?cate=5</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/edit?cate=2</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/lists?cate=2</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/del?cate=2</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/add?cate=3</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/lists?cate=0</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/edit?cate=6</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/lists?cate=6</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/del?cate=6</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/add?cate=4</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/add?cate=5</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/add?cate=2</loc>
-  <changefreq>daily</changefreq>
-</url>
-<url>
-  <loc>http://www.3dant.cn/index.php/Home/Category/add?cate=6</loc>
-  <changefreq>daily</changefreq>
+<loc>http://www.3dant.cn/index.php/Home/category?cate=1</loc>
+<priority>0.8</priority>
+<lastmod>1970-01-01T08:00:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
 </url>
 </urlset>
