@@ -106,7 +106,7 @@ class AdminController extends Controller {
     }
     public function sitemap(){
     	$content='<?xml version="1.0" encoding="UTF-8"?>'.chr(10);
-    	$content.="<urlset>\n";
+    	$content.='<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'.chr(10);
     	//首页、目录、特定网页
     	$data_array=array(
     			array(

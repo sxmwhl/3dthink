@@ -7,19 +7,8 @@ $(document).ready(function(){
 	   var lujing='__BCS_UPLOAD__';
 	   addmodel(lujing);
    });
-   $("button#saveBt").click(function(){
-	   var sharedHtml=$("group#cn_3dant_shared").html();
-	   var obj=new Object();
-	   $("[tag='cn_3dant_inline']").empty();
-	   obj.shared=$("group#cn_3dant_shared").html();
-	   $("group#cn_3dant_shared").html(sharedHtml);
-	   obj.basic=$("group#cn_3dant_basic").html();
-	   obj.internet=$("group#cn_3dant_internet").html();
-	   obj.uid={$diy['uid']};
-	   $.post("__URL__/saveDiy?id={$diy.id}",obj,success,"json");
-	   function success(data){		   
-		   alert(data.message);
-	   }
+   $("button#saveBt").click(function(){	      
+		   alert("体验版无法保存！");
    });
    $("button#modelListOkBt").click(function(){
 	   $('#modelListModal').modal('hide');
@@ -98,9 +87,9 @@ $(document).ready(function(){
 				<option value="8">纯色（白）</option>
 				<option value="9">纯色（黑）</option>
 			</select>
-			<h6><strong>DIY缩略图：(点击更换)</strong></h6>
-			<a href="__MODULE__/User/diyPreview?id={$diy['id']}">
-			<img class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/{$diy['id']}/preview.png" alt=" {$model['title']}" />	
+			<h6><strong>DIY缩略图：(点击更换)</strong>体验版无法更换</h6>
+			<a href="#">
+			<img class="w280h200" src="__BCS_PUBLIC__/images/preview.png" title="体验版无法更换缩略图" alt="缩略图" />	
 			</a>		
 	</div>
 	</aside>
@@ -109,7 +98,7 @@ $(document).ready(function(){
 	<include file="Public:userCenter" />
 	<div class="row">
 		<h3>
-			{$diy['title']}
+			模型编辑体验
 		</h3>
 		<h4>模型引入</h4>		
 			<button type="button" class="btn btn-primary" aria-label="插入模型"
@@ -118,19 +107,19 @@ $(document).ready(function(){
 				插入模型
 			</button>
 			<button type="button" class="btn btn-default" id="deletemodel" onclick="deletemodel()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
 				删除模型
 			</button>
-			<button type="button" class="btn btn-danger" id="emptymodel" onclick="emptymodel()">
-				<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+			<button type="button" class="btn btn-default" id="emptymodel" onclick="emptymodel()">
+				<span class="glyphicon glyphicon-remove-sign text-danger" aria-hidden="true"></span>
 				清空模型
 			</button>	
 	</div>
-		<form id="diy_form" name="diy_form" action="__URL__/save" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">	
+		<form id="diy_form" name="diy_form" action="#" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">	
 		<h4>模型调整（当前选择模型：<small class="info"></small>）</h4>
 		<div class="form-group">
 		<h6><strong>模型名称：</strong>
-		<button id="showObjectBt" type="button" class="btn btn-default btn-xs" aria-label="插入模型">
+		<button id="showObjectBt" type="button" class="btn btn-primary btn-xs" aria-label="插入模型">
 				<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
 				查看当前模型
 		</button>
@@ -141,11 +130,11 @@ $(document).ready(function(){
                    <input name="title" type="text" id="title" value="" onchange="change()" class="form-control" />
         </div>
 		<h6><strong>位置：</strong>
-		<button id="moveBt" type="button" class="btn btn-default btn-xs" aria-label="插入模型">
+		<button id="moveBt" type="button" class="btn btn-primary btn-xs" aria-label="插入模型">
 				<span class="glyphicon glyphicon-move" aria-hidden="true"></span>
 				移 动
 		</button>
-		<button type="button" class="btn btn-default btn-xs" aria-label="对齐模型"
+		<button type="button" class="btn btn-primary btn-xs" aria-label="对齐模型"
 				data-toggle="modal" data-target="#alignModelModal" data-backdrop="static">
 				<span class="glyphicon glyphicon-object-align-vertical" aria-hidden="true"></span>
 				对 齐
@@ -168,7 +157,7 @@ $(document).ready(function(){
                    <input name="ts_z" type="text" id="ts_z" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>
           </div>
-          <h6><strong>旋转：</strong></h6>
+          <h6><strong>旋转：（可通过右侧环球旋转模型）</strong></h6>
 		<div class="form-group">
 			  <div class="input-group">
                    <label class="sr-only" for="rt_x">X</label>
@@ -191,7 +180,7 @@ $(document).ready(function(){
                    <input name="rt_a" type="text" id="rt_a" value="" onchange="change()" onkeyup="clearNoNum(this)" class="form-control" />
               </div>			
 			</div>
-			<h6><strong>放缩比例：</strong></h6>
+			<h6><strong>放缩比例：（通过放缩改变模型尺寸）</strong></h6>
 			<div class="form-group">
               <div class="input-group">
                    <label class="sr-only" for="sc_x">x</label>
@@ -212,7 +201,7 @@ $(document).ready(function(){
               </div>
           </div>
           <div id="color" class="form-group hidden">
-          <h6><strong>模型颜色：</strong></h6>
+          <h6><strong>模型颜色：（0，1之间）</strong></h6>
               <div class="input-group">
                    <label class="sr-only" for="color_r">R</label>
                    <div class="input-group-addon">R</div>
@@ -274,14 +263,11 @@ $(document).ready(function(){
             </Shape>
         </Transform>	
 	<group id="cn_3dant_diy" onclick="groupClick(event)">
-	<group id="cn_3dant_shared">
-	{$diy['shared']}
+	<group id="cn_3dant_shared">	
 	</group>
 	<group id="cn_3dant_basic">
-	{$diy['basic']}
 	</group>
 	<group id="cn_3dant_internet">
-	{$diy['internet']}
 	</group>	
 	</group>	
 	</scene>
@@ -304,7 +290,7 @@ $(document).ready(function(){
 					<h4 class="modal-title" id="myModalLabel">插入模型</h4>
 				</div>
 				<div class="modal-body">
-				<label for="daima">已分享的模型:（在模型页面左侧边栏）</label>
+				<label for="daima">本站已分享的模型:（在模型页面左侧边栏）</label>
 					<input type="text" id="daima" name="daima" class="form-control" placeholder="请输入模型代码" />	
 					<h5><strong>基本模型:</strong></h5>
 					<div class="btn-group" role="group" aria-label="添加基本模型">

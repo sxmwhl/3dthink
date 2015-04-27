@@ -19,8 +19,8 @@ class IndexController extends Controller {
     	}
     	$this->diys=$list4;
     	$this->title='首页';
-    	$this->keywords='模型分享,3d模型,web3d,x3d模型,三维网站,三维模型';
-    	$this->description='3D蚂蚁是一个专业的提供web3d模型在线合作分享的平台';
+    	$this->keywords='模型分享,在线3d交互,虚拟现实web3d,x3d模型,三维网站,三维模型';
+    	$this->description='3D蚂蚁是一个全新的网络虚拟现实平台，可实现网络3D(web3d)模型的在线分享、编辑组建、交互，提供专业的在线虚拟现实、产品3D交互展示服务。';
     	$this->display();
     }
     public function model(){
@@ -49,7 +49,7 @@ class IndexController extends Controller {
     	$this->categories=$root_category;
     	$this->title=$data['title'].'模型';
     	//echo $Moxing->getLastSql();
-    	$this->keywords='3d模型,x3d模型,'.$data['title'];
+    	$this->keywords='在线3d交互,虚拟现实,x3d模型,'.$data['title'];
     	$this->description=$data['description'];
     	$this->display('model');
     }
@@ -68,7 +68,7 @@ class IndexController extends Controller {
     	$this->assign('model',$data);
     	$this->title=$data['title'];
     	//echo $Moxing->getLastSql();
-    	$this->keywords='3d模型,x3d模型,'.$data['title'];
+    	$this->keywords='在线3d交互,虚拟现实,x3d模型,'.$data['title'];
     	$this->description=$data['description'];
     	$this->display('modelIn');
     }
@@ -107,6 +107,8 @@ class IndexController extends Controller {
     	$this->user=$data2;   	
     	$this->diy=$data;
     	$this->title="DIY模型《".$data['title']."》";  
+    	$this->keywords=$data['title']."web3d模型,在线3d交互,虚拟现实";
+    	$this->description=$data['description'];
     	$this->display();  	
     }
     public function diyIn(){
@@ -133,7 +135,14 @@ class IndexController extends Controller {
     	$Category=D('Category');
     	$list3=$Category->get_child_categories(0);
     	$this->categories=$list3;
-    	$this->title=$result['nickname']."的3d模型";
+    	$this->title=$result['nickname']."的web3d模型";    	
+    	$this->description=$result['nickname']."分享web3d模型和在线编辑的虚拟世界。";
     	$this->display();
-    }    
+    }
+    public function tryEdit(){
+    	$this->title="web3d模型在线编辑体验页面";
+    	$this->keywords="在线3d交互,虚拟现实,x3d模型,在线编辑3d模型";
+    	$this->description="在线编辑3d模型体验页面，可插入基本模型，已分享模型，在线编辑模型颜色、尺寸、位置。";
+    	$this->display();
+    }
 }

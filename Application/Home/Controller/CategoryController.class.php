@@ -17,6 +17,7 @@ class CategoryController extends Controller {
     	$this->moxings=$moxings;
     	$title=empty($cate_name['cate_name'])?'未':$cate_name['cate_name'];
     	$this->title=$title.'分类模型及子分类';
+    	$this->description=$title.'分类模型下虚拟现实web3d模型。';
     	$this->display();
     }
     public function add(){
@@ -35,7 +36,7 @@ class CategoryController extends Controller {
     	$row=$Category->get_one_category($cate_id);
     	if ($row['cate_postcount']!=0)$this->error('此分类下含有模型，无法删除！');
     	if ($row['cate_childcount']!=0)$this->error('此分类下含有子类，无法删除！');
-    	if($Category->delete($cate_id)!=1)$this->error('删除分类出差，请重试！');
+    	if($Category->delete($cate_id)!=1)$this->error('删除分类出错，请重试！');
     	$row2=$Category->get_one_category($row['root_id']);
     	if ($row2['cate_childcount']>0){
     		$cate_childcount=$row2['cate_childcount']-1;
