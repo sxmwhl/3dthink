@@ -27,4 +27,14 @@ return array(
 				/*********本地、远程切换完毕**************/
 				'__SITENAME__' => '全新的网络虚拟现实平台-3D蚂蚁',
 		),
+		'THINK_EMAIL' => array(		
+				'SMTP_HOST'   => 'smtp.3dant.cn', //SMTP服务器		
+				'SMTP_PORT'   => '465', //SMTP服务器端口		
+				'SMTP_USER'   => 'sxm@3dant.cn', //SMTP服务器用户名		
+				'SMTP_PASS'   => 'Lcx206350482', //SMTP服务器密码		
+				'FROM_EMAIL'  => 'sxm@3dant.cn', //发件人EMAIL		
+				'FROM_NAME'   => '3D蚂蚁工作组', //发件人名称		
+				'REPLY_EMAIL' => '', //回复EMAIL（留空则为发件人EMAIL）		
+				'REPLY_NAME'  => '', //回复名称（留空则为发件人名称）		
+		),
 );

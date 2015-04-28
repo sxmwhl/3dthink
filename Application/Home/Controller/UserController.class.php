@@ -48,8 +48,7 @@ class UserController extends HomeController {
 		if(!C('USER_ALLOW_REGISTER')){
             $this->error('注册已关闭');
         }       
-		if(IS_POST){ //注册用户
-			
+		if(IS_POST){ //注册用户			
 			/* 检测验证码 */
 			if(!$this->check_verify($verify)){
 				$this->error('验证码输入错误！');
@@ -61,19 +60,30 @@ class UserController extends HomeController {
 			}			
 			/* 调用注册接口注册用户 */
             $User = new UserApi;
-			$uid = $User->register($username, $password, $email);
-			
-			if(0 < $uid){ //注册成功				
-				//TODO: 发送验证邮件				
+			$uid = $User->register($username, $password, $email);			
+			if(0 < $uid){ //注册成功
 				$this->success('注册成功！',U('login'));
+				$content='尊敬的<strong>'.$username.'</strong>:<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;恭喜您成功注册成为<strong>3d蚂蚁</strong>会员,以下信息请妥善保管：<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<strong>用户名</strong>：'.$username.'<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<strong>密码</strong>：'.$password."<br/><br/><br/>
+						3D蚂蚁工作组 敬上<br/>
+						http://www.3dant.cn<br/>
+						<a href='http://www.3dant.cn/'><img width='246' height='80' src='http://www.3dant.cn/Public/images/logo.png' alt='3D蚂蚁' title='3D蚂蚁'></a>";
+				$res=think_send_mail($email,'3d蚂蚁工作组', '注册成功！--3d蚂蚁www.3dant.cn',$content);
+				//if($res!==true)$this->error($res);				
+				//TODO: 发送验证邮件					
 			} else { //注册失败，显示错误信息
 				$this->error($this->showRegError($uid));
 			}
-
 		} else { //显示注册表单
 			$this->display();
 		}
 	}
+	public function phpmailer(){
+		
+	}
+	
 
 	/* 登录页面 */
 	public function login($username = '', $password = '', $verify = ''){
