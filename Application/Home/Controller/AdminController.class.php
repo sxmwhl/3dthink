@@ -13,7 +13,7 @@ class AdminController extends Controller {
     	$list=$Article->where('display=1 OR display=0')->order('views')->select();
     	$this->articles=$list;
     	$this->title='管理平台';
-    	$this->display();      
+    	$this->display();  
     }    
     public function deleteModel(){
     	$this->title="删除模型";
@@ -138,6 +138,12 @@ class AdminController extends Controller {
     					'priority'=>'0.5',
     					'lastmod'=>date(DATE_W3C),
     					'changefreq'=>'weekly'
+    			),
+    			array(
+    					'loc'=>'http://www.3dant.cn/index.php/Home/Index/tryEdit',
+    					'priority'=>'0.5',
+    					'lastmod'=>date(DATE_W3C),
+    					'changefreq'=>'daily'
     			),
     			array(
     					'loc'=>'http://www.3dant.cn/index.php/Home/Help/navigation',

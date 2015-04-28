@@ -21,7 +21,7 @@ var modelData = new Array(  new Array("cup",
 									  "无"
 									  ),
 							 new Array("plane",
-									  "飞机模型",
+									  "飞行模拟",
 									  "1200",
 									  "成都",
 									  "该模型可以模拟飞机启动、滑行、加速、起飞动作。",

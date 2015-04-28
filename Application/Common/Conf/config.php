@@ -2,6 +2,7 @@
 return array(
 	//'配置项'=>'配置值'
 	//管理员ID
+		'URL_CASE_INSENSITIVE' => false,
 		'USER_ADMINISTRATOR' => 1,
 		//数据库配置信息
 		'USER_ALLOW_REGISTER'   => true, // 用户注册
