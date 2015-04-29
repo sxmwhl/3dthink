@@ -44,7 +44,7 @@ class UserController extends HomeController {
 
 	/* 注册页面 */
 	public function register($username = '', $password = '', $repassword = '', $email = '', $verify = ''){
-		$this->title="新用户注册";
+		
 		if(!C('USER_ALLOW_REGISTER')){
             $this->error('注册已关闭');
         }       
@@ -62,29 +62,91 @@ class UserController extends HomeController {
             $User = new UserApi;
 			$uid = $User->register($username, $password, $email);			
 			if(0 < $uid){ //注册成功
-				$this->success('注册成功！',U('login'));
-				$content='尊敬的<strong>'.$username.'</strong>:<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;恭喜您成功注册成为<strong>3d蚂蚁</strong>会员,以下信息请妥善保管：<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<strong>用户名</strong>：'.$username.'<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<strong>密码</strong>：'.$password."<br/><br/><br/>
-						3D蚂蚁工作组 敬上<br/>
-						http://www.3dant.cn<br/>
-						<a href='http://www.3dant.cn/'><img width='246' height='80' src='http://www.3dant.cn/Public/images/logo.png' alt='3D蚂蚁' title='3D蚂蚁'></a>";
-				$res=think_send_mail($email,'3d蚂蚁工作组', '注册成功！--3d蚂蚁www.3dant.cn',$content);
-				//if($res!==true)$this->error($res);				
-				//TODO: 发送验证邮件					
+				$value=MD5($username.$uid."www.3Dant.cn");				
+				$url="http://www.3dant.cn/index.php/Home/User/activate?id=".$uid."&code=".$value;
+				$content="亲爱的<strong>".$username."</strong>:<br/>
+						欢迎加入3d蚂蚁网！<br/>
+						请点击下面的连接激活账号完成注册：<br/>
+						<br/>
+						<strong><a target='_blank' href='".$url."'>".$url."</a></strong><br/>
+						<br/>
+						<small>如果无法直接点击访问，请复制粘贴至浏览器地址栏访问。</small><br/>
+						<br/>
+						<a target='_blank' href='http://www.3dant.cn/'>3D蚂蚁</a>工作组 敬上<br/>
+						<small>如果不是你本人操作，请忽略此邮件。此邮件自动生成，请勿回复。</small>";
+				$res=think_send_mail($email,'3d蚂蚁工作组', '激活邮件！--3d蚂蚁www.3dant.cn',$content);
+				if($res!==true)$this->error($res);				
+				//TODO: 发送验证邮件
+				$this->success('注册成功！','activate?u='.$username.'&e='.$email);			
 			} else { //注册失败，显示错误信息
 				$this->error($this->showRegError($uid));
 			}
 		} else { //显示注册表单
+			$this->title="新用户注册";
 			$this->display();
 		}
 	}
-	public function phpmailer(){
+	
+	public function activate(){
+		$username=I('get.u/s','');
+		$email=I('get.e/s','');
+		if($username!="" && $email!=""){
+			$this->flag=1;
+			$this->title="账户激活提示";
+			$this->email=$email;
+			$this->username=$username;
+			$this->display('activate');
+			exit();
+		}
 		
+		$wrong_message="激活参数错误，请确保完整复制粘贴邮件内激活地址！";
+		$uid=I('get.id/d');
+		$code=I('get.code/s');
+		
+		if(!$uid || !$code){
+			$this->flag=0;
+			$this->title="账户激活失败";
+			$this->message=$wrong_message."（错误代码1）";
+			$this->display();
+			exit();
+		}
+		$User = new UserApi;
+		$info=$User->info($uid);
+		if(!is_array($info)){
+			$this->flag=0;
+			$this->title="账户激活失败";
+			$this->message=$wrong_message."（错误代码2）";
+			$this->display();
+			exit();
+		}
+		if((int)$info['status']!=0){
+			$this->flag=0;
+			$this->title="已激活";
+			$this->message="此帐号已激活过，请直接登录！";
+			$this->display();
+			exit();
+		}
+		$code2=MD5($info['username'].$uid."www.3Dant.cn");
+		if ($code2!=$code2){
+			$this->flag=0;
+			$this->title="账户激活失败";
+			$this->message=$wrong_message."（错误代码3）";
+			$this->display();
+			exit();
+		}
+		if(!$User->activate($uid)){
+			$this->flag=0;
+			$this->title="账户激活失败";
+			$this->message=$wrong_message."（错误代码4）";
+			$this->display();
+			exit();
+		}else{
+			$this->success('账户激活成功！','login');
+			exit();
+		}
+		$this->error('参数错误!','__ROOT__');	
 	}
 	
-
 	/* 登录页面 */
 	public function login($username = '', $password = '', $verify = ''){
 		$this->title="登陆";

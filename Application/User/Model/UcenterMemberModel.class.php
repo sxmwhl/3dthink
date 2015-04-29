@@ -52,7 +52,7 @@ class UcenterMemberModel extends Model{
 		array('reg_time', NOW_TIME, self::MODEL_INSERT),
 		array('reg_ip', 'get_client_ip', self::MODEL_INSERT, 'function', 1),
 		array('update_time', NOW_TIME),
-		array('status', 'getStatus', self::MODEL_BOTH, 'callback'),
+		array('status', 'getStatus', self::MODEL_INSERT, 'callback'),
 	);
 
 	/**
@@ -87,7 +87,7 @@ class UcenterMemberModel extends Model{
 	 * @return integer 用户状态
 	 */
 	protected function getStatus(){
-		return true; //TODO: 暂不限制，下一个版本完善
+		return 0; //TODO: 暂不限制，下一个版本完善
 	}
 
 	/**
@@ -174,10 +174,10 @@ class UcenterMemberModel extends Model{
 		}
 
 		$user = $this->where($map)->field('id,username,email,mobile,status')->find();
-		if(is_array($user) && $user['status'] == 1){
+		if(is_array($user)){
 			return array($user['id'], $user['username'], $user['email'], $user['mobile']);
 		} else {
-			return -1; //用户不存在或被禁用
+			return -1; //用户不存在
 		}
 	}
 
@@ -246,6 +246,14 @@ class UcenterMemberModel extends Model{
 		}
 		return false;
 	}
+	/**
+	 * 注册激活
+	 * @param int $uid 用户id
+	 * @return boolean true 激活成功， false 激活失败
+	 */
+	public function activate($uid){		
+		return $this->where('id='.$uid)->setField('status',1);
+	}		
 
 	/**
 	 * 验证用户密码

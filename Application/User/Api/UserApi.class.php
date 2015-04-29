@@ -96,4 +96,12 @@ class UserApi extends Api{
         }
         return $return;
     }
+    /**
+     * 注册激活
+     * @param int $uid 用户id
+     * @return boolean true 激活成功， false 激活失败
+     */
+    public function activate($uid){
+    	return $this->model->activate($uid);
+    }
 }
