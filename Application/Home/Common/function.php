@@ -151,3 +151,12 @@ function think_send_mail($to, $name, $subject = '', $body = '', $attachment = nu
 	}
 	return  $mail->Send() ? true : $mail->ErrorInfo;
 }
+
+/**
+ * 二维码生成函数
+ * 
+ */
+function think_phpqrcode($data,$isfile=FALSE,$level='L',$size=3){
+	vendor("phpqrcode.phpqrcode");
+	return QRcode::png($data, $isfile, $level, $size);
+}

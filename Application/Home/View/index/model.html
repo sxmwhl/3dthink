@@ -47,7 +47,12 @@ function parent_change_background(self){
 					<th scope="col"><strong>模型描述</strong></th>
 				</tr>
 				<tr align ="left">
-					<td>{$model['description']}</td>
+					<td>
+					<p>
+					<img class='img-thumbnail pull-right' title="手机扫描查看模型" id='phpqrcode' width="90" height="90" src="__BCS_PUBLIC__/upload/{$model['folder']}/erweima.png" alt='模型二维码' />
+					</p>
+					<p>{$model['description']}</p>					
+					</td>
 				</tr>
 				<tr align ="left">
 					<td><strong>模型分类</strong></td>

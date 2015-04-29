@@ -24,7 +24,7 @@ class IndexController extends Controller {
     	$this->display();
     }
     public function model(){
-    	session_start();    	  	
+    	session_start();	  	
     	$md5=I('f');
     	if (!preg_match("/^([a-fA-F0-9]{32})$/", $md5))
     	{
@@ -51,6 +51,11 @@ class IndexController extends Controller {
     	//echo $Moxing->getLastSql();
     	$this->keywords='在线3d交互,虚拟现实,x3d模型,'.$data['title'];
     	$this->description=$data['description'];
+    	
+    	$url='http://www.3dant.cn/index.php/Home/Index/model?f='.$data['folder'];
+    	$file=__ROOT__.'Public/upload/'.$data['folder'].'/erweima.png';
+    	think_phpqrcode($url,$file); 
+    	   	
     	$this->display('model');
     }
     public function modelIn(){
@@ -109,6 +114,11 @@ class IndexController extends Controller {
     	$this->title="DIY模型《".$data['title']."》";  
     	$this->keywords=$data['title']."web3d模型,在线3d交互,虚拟现实";
     	$this->description=$data['description'];
+    	
+    	$url='http://www.3dant.cn/index.php/Home/Index/diy?id='.$data['id'];
+    	$file=__ROOT__.'Public/diy/'.$data['uid'].'/'.$data['id'].'/erweima.png';
+    	think_phpqrcode($url,$file);
+    	
     	$this->display();  	
     }
     public function diyIn(){
