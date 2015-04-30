@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class IndexController extends Controller {
+class IndexController extends HomeController {
     public function index(){
     	$Moxing=M('Moxing');
     	$list1 = $Moxing->where('sign=0')->order('views desc')->limit(8)->select();
@@ -21,6 +21,9 @@ class IndexController extends Controller {
     	$this->title='首页';
     	$this->keywords='模型分享,在线3d交互,虚拟现实web3d,x3d模型,三维网站,三维模型';
     	$this->description='3D蚂蚁是一个全新的网络虚拟现实平台，可实现网络3D(web3d)模型的在线分享、编辑组建、交互，提供专业的在线虚拟现实、产品3D交互展示服务。';
+    	
+    	//$this->is_mobile=is_mobile()?1:0;
+    	
     	$this->display();
     }
     public function model(){
@@ -55,6 +58,8 @@ class IndexController extends Controller {
     	$url='http://www.3dant.cn/index.php/Home/Index/model?f='.$data['folder'];
     	$file=__ROOT__.'Public/upload/'.$data['folder'].'/erweima.png';
     	think_phpqrcode($url,$file); 
+    	
+    	//$this->is_mobile=is_mobile()?1:0;
     	   	
     	$this->display('model');
     }
@@ -118,6 +123,8 @@ class IndexController extends Controller {
     	$url='http://www.3dant.cn/index.php/Home/Index/diy?id='.$data['id'];
     	$file=__ROOT__.'Public/diy/'.$data['uid'].'/'.$data['id'].'/erweima.png';
     	think_phpqrcode($url,$file);
+    	
+    	//$this->is_mobile=is_mobile()?1:0;
     	
     	$this->display();  	
     }

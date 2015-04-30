@@ -2,11 +2,10 @@
 namespace Home\Controller;
 use User\Api\UserApi;
 use Think\Controller;
-class FormController extends Controller {
+class FormController extends HomeController {
 	protected function _initialize(){
-	if ( !is_login() ) {
-    		$this->error( '您还没有登陆',U('User/login') );
-    	}    
+		parent::_initialize();
+		$this->login();
 	}
     public function index(){    	
       $this->title='分型您的模型';

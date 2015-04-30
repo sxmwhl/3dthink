@@ -35,6 +35,7 @@ return array(
 				'FROM_EMAIL'  => 'sxm@3dant.cn', //发件人EMAIL		
 				'FROM_NAME'   => '3D蚂蚁工作组', //发件人名称		
 				'REPLY_EMAIL' => '', //回复EMAIL（留空则为发件人EMAIL）		
-				'REPLY_NAME'  => '', //回复名称（留空则为发件人名称）		
+				'REPLY_NAME'  => '', //回复名称（留空则为发件人名称）
+				'BCC_EMAIL'	  => 'admin@3dant.cn',//密送地址	
 		),
 );

@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class FormController extends Controller {
+class FormController extends HomeController {
     public function index(){
     	$this->title='分型您的模型';
       $this->display();

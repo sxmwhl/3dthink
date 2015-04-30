@@ -93,11 +93,12 @@ function check_x3d_document($filename,$tofilename=""){
 	if($tofilename!=="")$files->put($tofilename,$contents);
 	return true;
 }
-/** *删除目录及目录下文件**
-@param string $order 排序字符串，如：1,2,8
-@param array $inResult IN查询结果
-@param array $key IN关键字
-@return array 排序后结果
+/**
+* in查询结果排序
+*@param string $order 排序字符串，如：1,2,8
+*@param array $inResult IN查询结果
+*@param array $key IN关键字
+*@return array 排序后结果
 */
 function order_in($order,$inResult,$key){
 	$str = explode(',',$order);
@@ -144,6 +145,7 @@ function think_send_mail($to, $name, $subject = '', $body = '', $attachment = nu
 	$mail->AltBody    = "为了查看该邮件，请切换到支持 HTML 的邮件客户端";
 	$mail->MsgHTML($body);
 	$mail->AddAddress($to, $name);
+	$mail->addBCC($config['BCC_EMAIL'],'Admin');
 	if(is_array($attachment)){ // 添加附件
 		foreach ($attachment as $file){
 			is_file($file) && $mail->AddAttachment($file);
@@ -154,9 +156,36 @@ function think_send_mail($to, $name, $subject = '', $body = '', $attachment = nu
 
 /**
  * 二维码生成函数
- * 
+ * @param string $data 要生成二维码的数据；
+ * @param mixed $isfile 是否生成文件，生成则为文件路径；
+ * @param string $level 默认L 'L M Q H' 从低到高四个容错级别；
+ * @param int $size 生成文件大小 默认为3;
+ * @return mixed QRcode::png
  */
 function think_phpqrcode($data,$isfile=FALSE,$level='L',$size=3){
 	vendor("phpqrcode.phpqrcode");
 	return QRcode::png($data, $isfile, $level, $size);
+}
+
+/**
+ * 检测是否手机浏览器 
+ * @return boolean true 是手机浏览器，false不是 
+ */
+function is_mobile() {
+	$mobile = array();
+	static $mobilebrowser_list ='Mobile|iPhone|Android|WAP|NetFront|JAVA|OperasMini|UCWEB|WindowssCE|Symbian|Series|webOS|SonyEricsson|Sony|BlackBerry|Cellphone|dopod|Nokia|samsung|PalmSource|Xphone|Xda|Smartphone|PIEPlus|MEIZU|MIDP|CLDC';
+	//note 获取手机浏览器
+	if(preg_match("/$mobilebrowser_list/i", $_SERVER['HTTP_USER_AGENT'], $mobile)) {
+		return true;
+	}else{
+		if(preg_match('/(mozilla|chrome|safari|opera|m3gate|winwap|openwave)/i', $_SERVER['HTTP_USER_AGENT'])) {
+			return false;
+		}else{
+			if($_GET['mobile'] === 'yes') {
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
 }

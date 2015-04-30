@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class HelpController extends Controller {
+class HelpController extends HomeController {
 	public function index(){
 		$Category=D('Category');
 		$list3=$Category->get_child_categories(0);

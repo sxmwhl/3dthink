@@ -74,7 +74,7 @@ class UserController extends HomeController {
 						<br/>
 						<a target='_blank' href='http://www.3dant.cn/'>3D蚂蚁</a>工作组 敬上<br/>
 						<small>如果不是你本人操作，请忽略此邮件。此邮件自动生成，请勿回复。</small>";
-				$res=think_send_mail($email,'3d蚂蚁工作组', '激活邮件！--3d蚂蚁www.3dant.cn',$content);
+				$res=think_send_mail($email,$username, '激活邮件！--3d蚂蚁www.3dant.cn',$content);
 				if($res!==true)$this->error($res);				
 				//TODO: 发送验证邮件
 				$this->success('注册成功！','activate?u='.$username.'&e='.$email);			

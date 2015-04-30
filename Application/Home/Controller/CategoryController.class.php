@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class CategoryController extends Controller {	
+class CategoryController extends HomeController {	
     public function index(){
     	$cate_id=I('cate');
     	if(empty($cate_id))$cate_id=0;
