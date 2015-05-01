@@ -8,7 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel='stylesheet' type='text/css' href='__BCS_PUBLIC__/css/bootstrap.min.css' />
 <link rel='stylesheet' type='text/css' href='__BCS_PUBLIC__/css/x3dom.css' />
+
+<eq name="is_mobile" value="1">
+<link rel="stylesheet" type="text/css" href="__BCS_PUBLIC__/css/mobile.style.css" />
+<else/>
 <link rel="stylesheet" type="text/css" href="__BCS_PUBLIC__/css/style.css" />
+</eq>
+
+
 <script type="text/javascript" src="__BCS_PUBLIC__/js/jquery-2.1.3.min.js"></script>
 <script type='text/javascript' src='__BCS_PUBLIC__/js/bootstrap.min.js'></script>
 <script type="text/javascript" src="__BCS_PUBLIC__/js/jquery.validate.min.js"></script>
@@ -23,14 +30,3 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<eq name="is_mobile" value="1">
-<style type="text/css">
-aside{
-left: -80%;
-width: 80%;
-}
-input#comment:checked ~ #content{ padding-left:80%; }
-input#modelinfo:checked ~ #content{ padding-left:80%; }
-input#modelcategory:checked ~ #content{ padding-left:80%; }
-</style>
-</eq>
