@@ -134,6 +134,7 @@ class IndexController extends HomeController {
     	$list=$Diy->where("id=".$id)->find();
     	if(!$list)$this->error("无此DIY！");
     	$this->diy=$list;
+    	$this->title=$list['title'];
     	$this->display();
     }
     public function user(){

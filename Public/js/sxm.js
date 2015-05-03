@@ -1,9 +1,12 @@
-var tsfNum=0;//最大ID
+var tsfNum=0;//最大ID+1,使用后+1
 var pickID="";//选择的transform的id
 var pickNum=0;//选择的transform的id数字
 var last_pick_id="";//上一次选择的transform的ID
 var tsf_selector="";//transform#pickID
 var pickInfo;//点击位置信息
+/**
+ * 通过线球旋转物体，并侧边栏旋转参数，内部调用
+ */
 var viewFunc = function(evt) {
 	pos = evt.position;
 	rot = evt.orientation;
@@ -19,7 +22,12 @@ var viewFunc = function(evt) {
 	set_form();	
 	// x3dom.debug.logInfo('position: ' + pos.x+' '+pos.y+' '+pos.z +'\n' +
 	// 'orientation: ' + rot[0].x+' '+rot[0].y+' '+rot[0].z+' '+rot[1]);
-};	
+};
+/**
+ * 通过调整视角旋转坐标指针。
+ * @param viewpointId 视角ID
+ * @param transformId 坐标transform id
+ */
 function rotate(viewpointId,transformId){
 	var viewFunc2 = function(evt) {
 		pos = evt.position;
@@ -30,6 +38,10 @@ function rotate(viewpointId,transformId){
 	}
 	document.getElementById(viewpointId).addEventListener('viewpointChanged', viewFunc2, true);
 }
+/**
+ * 获取载入文档最大transform ID 末尾数
+ * @returns {Number} ID最大数
+ */
 function get_max_id(){
 	var i = 0;
 	var id="";
@@ -49,6 +61,9 @@ function get_max_id(){
 	lastNum=Number(arr[arr.length-1].substr(1));
 	return lastNum;
 }
+/**
+ * 显示已插入模型列表，情况原来模型列表，重写
+ */
 function show_model_list(){
 	var i = 0;
 	$("tr#title").nextAll("tr").remove();
@@ -71,23 +86,38 @@ function show_model_list(){
 	   var endStr="<tr><td colspan='5'>共计"+i+"个模型</td></tr>";
 	   $("tr#title").after(endStr);
 }
+/**
+ * 根据最新选择的transform ID ，更新相关数据
+ * @param id
+ */
 function set_pickid(id){
-	last_pick_id=pickID;
+	last_pick_id=pickID;//更新前一次选择
 	pickID=id;
 	pickNum=parseInt(pickID.substr(1));
 	tsf_selector="transform#"+pickID;
-	document.getElementById("coordinateAxesViewpoint").addEventListener('viewpointChanged', viewFunc, true);
+	document.getElementById("coordinateAxesViewpoint").addEventListener('viewpointChanged', viewFunc, true);//更新旋转球，旋转对象
+	set_form();
 }
+/**
+ * 无选择时，禁用表格，隐藏点球
+ */
 function form_disable(){	
 	$("[onchange='change()']").attr("disabled","disabled");
 	$("input#radius").attr("disabled","disabled");
 	$("shape#point_sphere").attr("render","false");
 }
+/**
+ * 有选择对象是启用表格，显示点球
+ */
 function form_enable(){
 	$(":disabled").removeAttr("disabled");
 	$("#point_sphere").attr("render","true");
 }
-function set_form(){	
+/**
+ * 根据选择对象，设置表格显示内容。
+ * @returns {Boolean} 无选择对象是返回false
+ */
+function set_form(){
 	if(!pickID){		
 		form_disable();	
 		$(":disabled").val("");
@@ -135,21 +165,39 @@ function set_form(){
 	var title=$(tsf_selector).attr("description");
 	$("input#title").val(title);
 }
-function selectmodel(tsf){
-	set_pickid($(tsf).attr("id"));	
-	set_form();	
+/**
+ * 通过transform自身选择模型
+ * @param tsf this
+ */
+function selectmodel(tsf_this){
+	set_pickid($(tsf_this).attr("id"));	
+	set_form();
 }
+/**
+ * 通过列表ID选择模型，隐藏列表模态块
+ * @param id 列表传递的ID
+ */
 function list_select_model(id){
 	set_pickid(id);
 	set_form();
 	$('#modelListModal').modal('hide');
 }
+/**
+ * 通过列表显示当前选择模型
+ * @param id 列表传递的模型id
+ * @return 列表模态块隐藏
+ */
 function list_show_model(id){
 	set_pickid(id);
 	set_form();
 	showObject();
 	$('#modelListModal').modal('hide');
 }
+/**
+ * 表格数据改变，更新文档内容。
+ * @returns {Boolean} 没有选择模型返回false
+ *TODO: 区别更新内容，更新对应文档内容
+ */
 function change(){
 	if(!pickID){
 		alert("请选择模型后，再调整参数！");
@@ -171,11 +219,19 @@ function change(){
 	var torus2=$("input#torus2").val();
 	$(tsf_selector).find("torus").attr("outerradius",torus2);
 }
+/**
+ * 更新点球大小
+ */
 function change_point_sphere(){
 	var radius=$("#radius").val();
 	var sc=radius+","+radius+","+radius;
 	$("#marker").attr("scale",sc);
 }
+/**
+ * group点击事件
+ * @param event
+ * @return 显示点击位置坐标
+ */
 function groupClick(event){
 	pickInfo=event.hitPnt;
 	$('#marker').attr('translation', pickInfo);
@@ -186,6 +242,11 @@ function groupClick(event){
 	var xyz="X:"+x+"<br/>Y:"+y+"<br/>Z:"+z;
 	$("#xyz").html(xyz);
 }
+/**
+ * 删除选择的模型
+ * @returns {Boolean} 选择错误是报警
+ * @return pickID设置为空，更新表格。
+ */
 function deletemodel(){
 	if(!pickID){
 		alert("请点击选择要删除的模型！");
@@ -201,8 +262,11 @@ function deletemodel(){
 	}
 	pickID="";
 	set_form();
-	//TODO:删除后变更表格状态
 }
+/**
+ * 移动模型，先点击要移动的模型，再点击目标位置
+ * @returns {Boolean} 如果没有pickID 和 last_pick_id报错 返回false
+ */
 function moveModel(){
 	if(!last_pick_id){
 		alert("请点击选择要移动的模型和位置！");
@@ -210,6 +274,11 @@ function moveModel(){
 	}
 	$("#"+last_pick_id).attr("translation",pickInfo);
 }
+/**
+ * 对齐模型，先点要移动的模型，再点击目标物体，分别对齐xyz
+ * @returns {Boolean} 选择错误报错，返回false
+ * @return 对齐模态块隐藏
+ */
 function alignModel(){	
 	if(!last_pick_id){
 		alert("请先后点击选择要对齐的模型！");
@@ -229,11 +298,22 @@ function alignModel(){
 	$("#"+last_pick_id).attr("translation",transform2.join(","));
 	$('#alignModelModal').modal('hide');
 }
+/**
+ * 从列表删除模型，设置pickID 调用删除模型函数
+ * @param id 列表传递ID
+ * @return 列表模态块隐藏
+ */
 function list_delete_model(id){
 	set_pickid(id);
 	deletemodel();
 	$('#modelListModal').modal('hide');
 }
+/**
+ * 清空当前diy所有模型
+ * @param 确认框确认值
+ * @returns {Boolean} 确认框取消返回false
+ * 最大数设为0 
+ */
 function emptymodel(){
 	if(!confirm("确定移除所以模型？")){
 		return false;
@@ -245,12 +325,22 @@ function emptymodel(){
 	pickID="";
 	set_form();
 }
+/**
+ * 清除非数字字符
+ * @param obj 输入框本身
+ */
 function clearNoNum(obj) {
 	obj.value = obj.value.replace(/[^\d.-]/g, ""); //清除“数字”和“.”以外的字符  
 	obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字而不是. 
 	obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的.   
 	obj.value = obj.value.replace(".", "$#$").replace(/\./g,"").replace("$#$",".");
 }
+/**
+ * 添加站内分享的模型，实际添加transform 及子节点
+ * @param lujing 模型上传路径upload /Public/upload/...
+ * @param 输入模型代码，直接通过jquery获取
+ * @returns {Boolean}
+ */
 function addmodel(lujing){
 	  var daimaRegex=/^([a-fA-F0-9]{32})$/;
 	  var daima=$("#daima").val();
@@ -266,6 +356,11 @@ function addmodel(lujing){
 		tsfNum +=1;
 		$('#addModelModal').modal('hide');
 }
+/**
+ * 添加基本模型
+ * @param shape 基本模型种类 box Sphere cylinder...
+ * @returns {Boolean}
+ */
 function insert_shape(shape){
 	var solid="true";
 	var radius="";
@@ -279,13 +374,13 @@ function insert_shape(shape){
 	var color=get_num()+","+get_num()+","+get_num();
 	var str="<transform id='s"+tsfNum+"' tag='basic' description='未命名' onMouseDown='selectmodel(this)' rotation='0,0,1,0' scale='1,1,1' translation='0,0,0'><shape><appearance><material diffuseColor='"+color+"'> </material></appearance><"+shape+" id='g"+tsfNum+"' "+radius+" solid='"+solid+"'></"+shape+"></shape></transform>";
 	$('group#cn_3dant_basic').append(str);
-	if(shape==="text"){
+	if(shape==="text"){//如果基本模型为文字，弹出输入框
 		var str=prompt("请输入文字内容：（50字以内）","");
-		if(str.length>50){
+		if(str.length>50){//如果字符过长
 			alert("输入文字内容过长！");
 			return false;
-		}//TODO：如果为空
-		if(str.length===0){
+		}
+		if(str.length===0){//如果为空
 			alert("请输入文字内容！");
 			return false;
 		}
@@ -296,13 +391,75 @@ function insert_shape(shape){
 	set_form();
 	$("shape#point_sphere").attr("render","false");
 	tsfNum +=1;
-	if(shape==="torus")$(tsf_selector).find("torus").attr({
+	if(shape==="torus")$(tsf_selector).find("torus").attr({//如果基本模型为救生圈，要重写默认值
 		"innerradius":"0.5",
 		"outerradius":"1"
 	});	
 	$('#addModelModal').modal('hide');
-	//if(shape==="torus")$(tsf_selector).attr("translation","0,0,0");
 }
+/**
+ * 复制当前选择模型
+ * 
+ */
+function copyModel(){	
+		var newID="s"+tsfNum;				
+		var newScale=$(tsf_selector).attr('scale');		
+		var newRotation=$(tsf_selector).attr('rotation');		
+		var newTranslation=$(tsf_selector).attr('translation');		
+		var xyz=newTranslation.split(',');		
+		var x=parseInt(xyz[0])+1;
+		var y=parseInt(xyz[1])+1;
+		var z=parseInt(xyz[2])+1;
+		newTranslation=x+','+y+','+z;
+		var newTag=$(tsf_selector).attr('tag');	
+		var newDescription=$(tsf_selector).attr('description')+"_副本";	
+		var newNode=$(tsf_selector).html();
+		var res=$(tsf_selector).after("<transform id="+newID+" onmousedown='selectmodel(this)'>"+newNode+"</transform>");
+		$("transform#"+newID).attr('scale',newScale);
+		$("transform#"+newID).attr('rotation',newRotation);
+		$("transform#"+newID).attr('translation',newTranslation);
+		$("transform#"+newID).attr('tag',newTag);
+		$("transform#"+newID).attr('description',newDescription);
+		set_pickid(newID);
+		tsfNum += 1 ;
+}
+/**
+ * 克隆当前选择模型 USE="def"
+
+function cloneModel(){
+	var mainNode=$(tsf_selector).children()[0];
+	var tagName=mainNode.tagName;	
+	if(!mainNode.getAttribute('USE')){
+		var DEF="USED_"+pickID
+		mainNode.setAttribute("DEF",DEF);		
+		var newID="s"+tsfNum;				
+		var newScale=$(tsf_selector).attr('scale');		
+		var newRotation=$(tsf_selector).attr('rotation');		
+		var newTranslation=$(tsf_selector).attr('translation');		
+		var xyz=newTranslation.split(',');		
+		var x=parseInt(xyz[0])+1;
+		var y=parseInt(xyz[1])+1;
+		var z=parseInt(xyz[2])+1;
+		newTranslation=x+','+y+','+z;		
+		var newNode="<"+tagName+" use='"+DEF+"'></"+tagName+">";
+		var res=$(tsf_selector).after("<transform id="+newID+" onmousedown='selectmodel(this)'>"+newNode+"</transform>");
+
+		$("transform#"+newID).attr('scale',newScale);
+		$("transform#"+newID).attr('rotation',newRotation);
+		$("transform#"+newID).attr('translation',newTranslation);
+		var sss=$("#cn_3dant_diy").detach();
+		$("#marker").after(sss);
+		set_pickid(newID);
+		tsfNum += 1 ;
+	}
+}
+ * 
+ */
+
+/**
+ * 更换背景
+ * @param self
+ */
 function change_background(self){
 	var sreg = /_\d_/;
 	var topurl=$("background").attr("topurl");
@@ -325,12 +482,22 @@ function change_background(self){
 	$("background").attr("righturl",righturl);
 	$("background").attr("lefturl",lefturl);
 }
+/**
+ * 截取Canvas显示内容
+ * @param x3dID x3d标签ID
+ * @returns imgUrl 图像数据
+ */
 function screenShot(x3dID){
 	var imgUrl = document
 	.getElementById(x3dID).runtime
 	.getScreenshot();
 	return imgUrl;
 }
+/**
+ * 放缩当前选择模型至适合窗口显示
+ * 如果是基本模型放缩shape
+ * 如果是分享的模型放缩inline
+ */
 function showObject(){
 	var model;
 	if($(tsf_selector).find("shape").length){
@@ -340,7 +507,16 @@ function showObject(){
 	}
 	document.getElementById("model").runtime.showObject(model);
 }
-/*jquery 提示汉化*/
+/**
+ * 重载模型
+ */
+function cleanScreen(){
+	var sss=$("#cn_3dant_diy").detach();
+	$("#marker").after(sss);
+}
+/**
+ * jquery 提示汉化
+ */
 jQuery.extend(jQuery.validator.messages, {
         required: "必选字段",
     	remote: "请修正该字段",

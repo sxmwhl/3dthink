@@ -46,7 +46,9 @@ $(document).ready(function(){
    $("button#alignModelOkBt").click(function(){
 	   alignModel();
    });
-
+   $("button#copyModelBt").click(function(){
+	   copyModel();
+   });
 });
 </script>
 </head>
@@ -130,9 +132,13 @@ $(document).ready(function(){
 		<h4>模型调整（当前选择模型：<small class="info"></small>）</h4>
 		<div class="form-group">
 		<h6><strong>模型名称：</strong>
-		<button id="showObjectBt" type="button" class="btn btn-default btn-xs" aria-label="插入模型">
+		<button id="showObjectBt" type="button" class="btn btn-default btn-xs" aria-label="查看当前模型">
 				<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
 				查看当前模型
+		</button>
+		<button id="copyModelBt" type="button" class="btn btn-default btn-xs" aria-label="复制模型">
+				<span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+				复制
 		</button>
 		</h6>
 		<div class="input-group">

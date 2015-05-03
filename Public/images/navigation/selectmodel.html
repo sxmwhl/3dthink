@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />   
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <title>Click model</title>
+    <script type="text/javascript" src="../../js/x3dom.js"></script>
+    <link rel='stylesheet' type='text/css' href='../../css/x3dom.css' />
+    <script type="text/javascript" src="../../js/jquery-2.1.3.min.js"></script>
+<style>
+body {
+	margin:0;
+	padding:0;
+}
+#overlayHeader {
+	position:absolute;
+	z-index:5;
+	top:50px;
+	left:50px;
+	padding:5px;
+	color:#FFF;
+	background-color:#000;
+	opacity:0.5;
+}
+</style>
+</head>
+<body>
+<div id="overlayHeader">
+<h1>Click model</h1>
+<button id="bt">show</button>
+<div id="info"></div>
+</div>
+<x3d id='x3dElement' showStat='false' showLog='false' style='position: absolute; width:100%; height:100%; border:0; margin:0; padding:0;'>
+    <scene DEF='scene'>
+        <viewpoint id="vpp" orientation='0 0 1 0' position='1.5 0 6'></viewpoint>
+        <navigationInfo type='"EXAMINE" "WALK"' id="navType"></navigationInfo>
+        <directionalLight direction="0 -1 0" ></directionalLight>
+        <transform id="tsf1" onClick="selectmodel(this)">
+            <Shape DEF="sphere">
+                <Appearance>
+                    <Material diffuseColor="#FFD966"></Material>
+                </Appearance>
+                <Sphere></Sphere>
+            </Shape>
+        </transform>
+        <transform id="tsf2" translation='3 0 0' onClick="selectmodel(this)">
+            <Shape USE="sphere">
+            </Shape>
+        </transform>
+    </scene>
+</x3d>
+<script>
+
+var e;
+var info;
+$("button#bt").click(function(){
+	var e = document.getElementById('x3dElement');
+	message = e.runtime.viewMatrix();
+	alert(message);
+	var q = new x3dom.fields.Quaternion();
+	q.setValue(message);
+	var orientation=q.toAxisAngle();
+	alert(orientation);
+	for (p in q){
+	info=info+p+"----"+q[p]+"<br/>";
+	}
+	$("#info").html(info);
+});
+
+function selectmodel(tsf_this){
+	alert($(tsf_this).attr("id"));
+}
+</script>
+</body>
+</html>
