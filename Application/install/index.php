@@ -106,6 +106,7 @@ CREATE TABLE `think_diy` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0'COMMENT '用户 ID',
   `title` char(100) NOT NULL DEFAULT '' COMMENT '名称',
   `description` varchar(255) NOT NULL DEFAULT '' COMMENT '名称',
+  `header` text NOT NULL DEFAULT '' COMMENT '头部设置',
   `shared` text NOT NULL DEFAULT '' COMMENT '分享的模型',
   `basic` text NOT NULL DEFAULT '' COMMENT '分享的模型',
   `internet` text NOT NULL DEFAULT '' COMMENT '分享的模型',

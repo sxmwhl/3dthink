@@ -29,9 +29,11 @@ body {
 <div id="overlayHeader">
 <h1>Click model</h1>
 <button id="bt">show</button>
+<button id="newView">new view</button>
+<button id="defaultView">default view</button>
 <div id="info"></div>
 </div>
-<x3d id='x3dElement' showStat='false' showLog='false' style='position: absolute; width:100%; height:100%; border:0; margin:0; padding:0;'>
+<x3d def="df" id='x3dElement' showStat='false' showLog='false' style='position: absolute; width:100%; height:100%; border:0; margin:0; padding:0;'>
     <scene DEF='scene'>
         <viewpoint id="vpp" orientation='0 0 1 0' position='1.5 0 6'></viewpoint>
         <navigationInfo type='"EXAMINE" "WALK"' id="navType"></navigationInfo>
@@ -41,33 +43,78 @@ body {
                 <Appearance>
                     <Material diffuseColor="#FFD966"></Material>
                 </Appearance>
-                <Sphere></Sphere>
+                <Box/>
             </Shape>
         </transform>
         <transform id="tsf2" translation='3 0 0' onClick="selectmodel(this)">
-            <Shape USE="sphere">
+            <Shape DEF="sphere">
+                <Appearance>
+                    <Material diffuseColor="#FFD966"></Material>
+                </Appearance>
+                <Cone/>
+            </Shape>
+        </transform>
+    </scene>
+</x3d>
+<x3d def="df2" id='x3dElement2' showStat='false' showLog='false' style='position: absolute; width:100%; height:100%; border:0; margin:0; padding:0;'>
+    <scene DEF='scene'>
+        <viewpoint id="vpp" orientation='0 0 1 0' position='1.5 0 6'></viewpoint>
+        <navigationInfo type='"EXAMINE" "WALK"' id="navType"></navigationInfo>
+        <directionalLight direction="0 -1 0" ></directionalLight>
+        <transform id="tsf1" onClick="selectmodel(this)">
+            <Shape DEF="sphere">
+                <Appearance>
+                    <Material diffuseColor="#FFD966"></Material>
+                </Appearance>
+                <Box/>
+            </Shape>
+        </transform>
+        <transform id="tsf2" translation='3 0 0' onClick="selectmodel(this)">
+            <Shape DEF="sphere">
+                <Appearance>
+                    <Material diffuseColor="#FFD966"></Material>
+                </Appearance>
+                <Cone/>
             </Shape>
         </transform>
     </scene>
 </x3d>
 <script>
+var pos;
+var rot;
+var mat;
 
-var e;
+
+x3dom.runtime.ready = function() {	
+	var viewFunc = function(evt) {
+		pos = evt.position;
+		rot = evt.orientation;
+		mat = evt.matrix;
+	};
+	document.getElementById('vpp').addEventListener('viewpointChanged', viewFunc, true);
+}
+var e = document.getElementById('x3dElement');
 var info;
-$("button#bt").click(function(){
-	var e = document.getElementById('x3dElement');
-	message = e.runtime.viewMatrix();
-	alert(message);
-	var q = new x3dom.fields.Quaternion();
-	q.setValue(message);
-	var orientation=q.toAxisAngle();
-	alert(orientation);
-	for (p in q){
-	info=info+p+"----"+q[p]+"<br/>";
-	}
-	$("#info").html(info);
+var t=new x3dom.fields.SFVec3f();
+var r=new x3dom.fields.Quaternion();
+var s=new x3dom.fields.SFVec3f();
+var so=new x3dom.fields.Quaternion();
+var c=new x3dom.fields.SFVec3f();
+$("#newView").click(function(){
+	document.getElementById('newVpp').setAttribute('set_bind','true');	
 });
-
+$("#defaultView").click(function(){
+	document.getElementById('vpp').setAttribute('set_bind','true');
+});
+$("button#bt").click(function(){
+	//e.runtime.resetExamin ();
+	message = e.runtime.viewMatrix();
+	message = message.negate();
+	message.getTransform(t,r,s,so);
+	alert(t);
+	alert(r);
+	$("viewpoint#vpp").after("<viewpoint id='newVpp' orientation='"+rot+"' position='"+pos+"'></viewpoint>");
+});
 function selectmodel(tsf_this){
 	alert($(tsf_this).attr("id"));
 }

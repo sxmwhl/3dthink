@@ -2,15 +2,11 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="keywords" content="{$keywords}" />
-    <meta name="description" content="{$description}" />    
-    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
-    
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" /> 
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>    
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-       
+    <meta http-equiv="Expires" content="0" />       
     <title>手机浏览示范页面</title>
     <script type="text/javascript" src="../../js/x3dom.js"></script>
     <link rel='stylesheet' type='text/css' href='../../css/x3dom.css' />
@@ -37,12 +33,11 @@ body {
 <h1>手机浏览示范页面</h1>
 </div>
 <x3d id='x3dElement' showStat='false' showLog='false' style='position: absolute; width:100%; height:100%; border:0; margin:0; padding:0;' disableTouch="true">
-    <scene DEF='scene'>
-        <viewpoint id="vpp" orientation='-0.21 0.97 0.0644 0.59193' position='40.15 1.42 -8.11813'></viewpoint>
-        <navigationInfo type='"EXAMINE" "WALK"' id="navType"></navigationInfo>
-        <!-- <background backUrl='"texture/BK.png"' bottomUrl='"texture/DN.png"' frontUrl='"texture/FR.png"' leftUrl='"texture/LF.png"' rightUrl='"texture/RT.png"' topUrl='"texture/UP.png"' ></background>  -->
-        <directionalLight direction="0 -1 0" ></directionalLight>
-        <background
+	<scene id="mainScene" dopickpass="true" pickmode="idBuf"
+		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
+	<viewpoint id="v" orientation="-0.064 0.997 0.052 2.19" position="40.828 1.593 -6.561" fieldofview="0.785398" centerofrotation="0,0,0" znear="-1" zfar="-1" set_bind="true"></viewpoint>	<navigationInfo id="head" headlight='true' type='"EXAMINE" "ANY"'></navigationInfo> 
+	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
+	<background
 		topurl="/Public/images/background/horizon_0_top.jpg"
 		righturl="/Public/images/background/horizon_0_right.jpg"
 		lefturl="/Public/images/background/horizon_0_left.jpg"
@@ -60,66 +55,16 @@ body {
                 <Sphere></Sphere>
             </Shape>
         </Transform>	
-	<group id="cn_3dant_diy" onclick="groupClick(event)"> <group id="cn_3dant_shared"> <transform id="s1" tag="shared"
-		description="未命名" onmousedown="selectmodel(this)" rotation="0,0,1,0"
-		scale="1,1,1" translation="0,0,0" render="true" bboxcenter="0,0,0"
-		bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0">
-	<inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true"
-		url="/Public/upload/bc9d82af10ad7f66923ecb9affeecb4d/model.x3d"
-		render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform>
-	<transform id="s2" tag="shared" description="cube1"
-		onmousedown="selectmodel(this)" rotation="-0.641,-0.757,0.128,1.188"
-		scale="0.5,0.5,0.5" translation="42.4,0.7,-9.322" render="true"
-		bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0"
-		scaleorientation="0,0,0,0" position="0,0,0">
-	<inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true"
-		url="/Public/upload/fede7d17f530d53e88199565ac7c7eea/model.x3d"
-		render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform>
-	<transform id="s3" tag="shared" description="未命名"
-		onmousedown="selectmodel(this)" rotation="0,0,1,0" scale="1,1,1"
-		translation="52.061,1.309,-12.738" render="true" bboxcenter="0,0,0"
-		bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0">
-	<inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true"
-		url="/Public/upload/fede7d17f530d53e88199565ac7c7eea/model.x3d"
-		render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform>
-	<transform id="s4" tag="shared" description="未命名"
-		onmousedown="selectmodel(this)" rotation="0,0,1,0" scale="1,1,1"
-		translation="36.307,0.483,-5.631" render="true" bboxcenter="0,0,0"
-		bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0">
-	<inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true"
-		url="/Public/upload/fede7d17f530d53e88199565ac7c7eea/model.x3d"
-		render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform>
-	<transform id="s5" tag="shared" description="未命名"
-		onmousedown="selectmodel(this)" rotation="0,0,1,0" scale="1,1,1"
-		translation="42.948,3.008,-6.807" render="true" bboxcenter="0,0,0"
-		bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0">
-	<inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true"
-		url="/Public/upload/fede7d17f530d53e88199565ac7c7eea/model.x3d"
-		render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform>
-	<transform id="s6" tag="shared" description="未命名"
-		onmousedown="selectmodel(this)" rotation="0,0,1,0" scale="1,1,1"
-		translation="32.96,0.269,-13.508" render="true" bboxcenter="0,0,0"
-		bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0">
-	<inline DEF="inline" namespacename="in" tag="cn_3dant_inline" mapdeftoid="true"
-		url="/Public/upload/fede7d17f530d53e88199565ac7c7eea/model.x3d"
-		render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform>
-	<transform id="s7" tag="shared" description="未命名"
-		onmousedown="selectmodel(this)" rotation="0,0,1,0" scale="1,1,1"
-		translation="32.96,1.269,-13.508" render="true" bboxcenter="0,0,0"
-		bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0">
-	<inline USE="inline"></inline></transform>
-	</group> <group id="cn_3dant_basic">
-	
-			</group>
-	<group id="cn_3dant_internet">
-	
-			</group>	
+	<group id="cn_3dant_diy" onclick="groupClick(event)">
+	<group id="cn_3dant_shared">
+	<transform id="s1" tag="shared" description="未命名" onmousedown="selectmodel(this)" rotation="0,0,1,0" scale="0.1,0.1,0.1" translation="40.573,0.1,-8.647" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0"><inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true" url="/Public/upload/4756aaa49d937d9117e350ec34639b03/model.x3d" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform><transform id="s9" onmousedown="selectmodel(this)" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" translation="42.121,2.8,-6.503" rotation="-0.876,-0.344,-0.337,1.791" scale="0.1,0.1,0.1" scaleorientation="0,0,0,0" tag="shared" description="未命名_副本" position="0,0,0"><inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true" url="/Public/upload/4756aaa49d937d9117e350ec34639b03/model.x3d" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform><transform id="s6" onmousedown="selectmodel(this)" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" translation="37.3,-0.02,-3.417" rotation="0,0,1,0" scale="0.1,0.1,0.1" scaleorientation="0,0,0,0" tag="shared" description="未命名_副本"><inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true" url="/Public/upload/4756aaa49d937d9117e350ec34639b03/model.x3d" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform><transform id="s7" onmousedown="selectmodel(this)" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" translation="33,2.7,-7.7" rotation="0,0,1,0" scale="0.1,0.1,0.1" scaleorientation="0,0,0,0" tag="shared" description="未命名_副本_副本"><inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true" url="/Public/upload/4756aaa49d937d9117e350ec34639b03/model.x3d" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform><transform id="s5" onmousedown="selectmodel(this)" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" translation="33.1,0.2,-13.7" rotation="0,0,1,0" scale="0.1,0.1,0.1" scaleorientation="0,0,0,0" tag="shared" description="未命名_副本"><inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true" url="/Public/upload/4756aaa49d937d9117e350ec34639b03/model.x3d" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform><transform id="s4" onmousedown="selectmodel(this)" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" translation="51,1.693,-13" rotation="0,0,1,0" scale="0.1,0.1,0.1" scaleorientation="0,0,0,0" tag="shared" description="未命名_副本"><inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true" url="/Public/upload/4756aaa49d937d9117e350ec34639b03/model.x3d" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform><transform id="s3" onmousedown="selectmodel(this)" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" translation="41.055,0.65,-10.87" rotation="0,0,1,0" scale="0.1,0.1,0.1" scaleorientation="0,0,0,0" tag="shared" description="未命名_副本"><inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true" url="/Public/upload/4756aaa49d937d9117e350ec34639b03/model.x3d" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform><transform id="s8" onmousedown="selectmodel(this)" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" translation="38.351,2.7,-7.361" rotation="0.945,0.316,0.08,4.046" scale="0.1,0.1,0.1" scaleorientation="0,0,0,0" tag="shared" description="未命名_副本_副本" position="0,0,0"><inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true" url="/Public/upload/4756aaa49d937d9117e350ec34639b03/model.x3d" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform><transform id="s2" tag="shared" description="未命名" onmousedown="selectmodel(this)" rotation="0,0,0,0" scale="1,1,1" translation="0,0,0" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0" position="0,0,0"><inline namespacename="in" tag="cn_3dant_inline" mapdeftoid="true" url="/Public/upload/b9562b9dba7a63533409684bb296ebcc/model.x3d" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" load="true"></inline></transform>	</group>
+	<group id="cn_3dant_basic">
+		</group>
+	<group id="cn_3dant_internet"></group>	
 	</group>	
-
-    </scene>
-</x3d>
+	</scene>
+	</x3d>
 <script>
-/*
     var runtime = null;
     var degreeToRadiansFactor = Math.PI / 180;
 
@@ -151,7 +96,7 @@ body {
     {
         runtime = document.getElementById('x3dElement').runtime;
         var element = document.getElementById("x3dElement");
-        MYAPP.viewpoint = document.getElementById('vpp');
+        MYAPP.viewpoint = document.getElementById('v');
         element.runtime.exitFrame = function() {
             //handle device orientation change
             if(!MYAPP.deviceOrientation)
@@ -170,7 +115,7 @@ body {
             MYAPP.viewpoint.setAttribute("orientation", aa[0].x + " " + aa[0].y + " " + aa[0].z + " " + aa[1]);
         };
     }
-*/
+
 </script>
 </body>
 </html>

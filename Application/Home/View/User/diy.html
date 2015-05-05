@@ -1,6 +1,6 @@
 <include file="Public:header" />
 <script>
-$(document).ready(function(){
+$(document).ready(function(){   
    form_disable();
    tsfNum=get_max_id()+1;
    $("button#addModelOkBt").click(function(){
@@ -8,8 +8,15 @@ $(document).ready(function(){
 	   addmodel(lujing);
    });
    $("button#saveBt").click(function(){
+	   var header="";
+	   $("#mainScene").children("viewpoint").each(function(){
+		   if($(this).attr('id')!="v"){
+			   header=header+$(this).prop("outerHTML");
+		   }		   
+	   });	   
 	   var sharedHtml=$("group#cn_3dant_shared").html();
 	   var obj=new Object();
+	   obj.header=header;
 	   $("[tag='cn_3dant_inline']").empty();
 	   obj.shared=$("group#cn_3dant_shared").html();
 	   $("group#cn_3dant_shared").html(sharedHtml);
@@ -24,7 +31,11 @@ $(document).ready(function(){
    $("button#modelListOkBt").click(function(){
 	   $('#modelListModal').modal('hide');
    });
+   $("button#viewListOkBt").click(function(){
+	   $('#viewListModal').modal('hide');
+   });
    $("button#modelListBt").click(show_model_list);
+   $("button#viewListBt").click(show_view_list);
    $("button#saveOkBt").click(function(){
 	   $('#modelListModal').modal('hide');
    });
@@ -49,6 +60,14 @@ $(document).ready(function(){
    $("button#copyModelBt").click(function(){
 	   copyModel();
    });
+   $("button#viewBt").click(function(){
+	   var lastViewID=$("scene#mainScene").children("viewpoint").last().attr('id');
+	   saveView(lastViewID);
+   });
+   $("button#recoverBt").click(function(){
+	   recover();
+   })   
+   getViewChange();
 });
 </script>
 </head>
@@ -67,17 +86,27 @@ $(document).ready(function(){
 	<include file="Public:userCenter" />
 
 				<h3>辅助信息</h3>
-				<button id="modelListBt" type="button" class="btn btn-default"
-					aria-label="插入模型" data-toggle="modal" data-target="#modelListModal"
+				<button id="modelListBt" type="button" class="btn btn-default btn-xs"
+					aria-label="显示已插入模型" data-toggle="modal" data-target="#modelListModal"
 					data-backdrop="static">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					显示已插入模型
+					显示模型
 				</button>
-				<button id="saveBt" type="button" class="btn btn-default">
-					<span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
-					保存
+				<button id="viewListBt" type="button" class="btn btn-default btn-xs"
+					aria-label="显示已保存视角" data-toggle="modal" data-target="#viewListModal"
+					data-backdrop="static">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					显示视角
 				</button>
-			<button id="screenShotBt" type="button" class="btn btn-default"
+				<button id="viewBt" type="button" class="btn btn-default btn-xs" aria-label="保存视角">
+				<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+				保存视角
+		        </button>				
+				<button id="recoverBt" type="button" class="btn btn-default btn-xs">
+					<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+					恢复
+				</button>
+			<button id="screenShotBt" type="button" class="btn btn-default btn-xs"
 					aria-label="DIY截图" data-toggle="modal" data-target="#screenShotModal"
 					data-backdrop="static">
 				<span class="glyphicon glyphicon-scissors" aria-hidden="true"> </span>
@@ -119,13 +148,17 @@ $(document).ready(function(){
 				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
 				插入模型
 			</button>
-			<button type="button" class="btn btn-default" id="deletemodel" onclick="deletemodel()">
+			<button type="button" class="btn btn-warning" id="deletemodel" onclick="deletemodel()">
 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-				删除模型
+				删除
 			</button>
 			<button type="button" class="btn btn-danger" id="emptymodel" onclick="emptymodel()">
 				<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-				清空模型
+				清空
+			</button>
+			<button id="saveBt" type="button" class="btn btn-success">
+					<span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
+					保存
 			</button>	
 	</div>
 		<form id="diy_form" name="diy_form" action="__URL__/save" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">	
@@ -139,7 +172,7 @@ $(document).ready(function(){
 		<button id="copyModelBt" type="button" class="btn btn-default btn-xs" aria-label="复制模型">
 				<span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
 				复制
-		</button>
+		</button>		
 		</h6>
 		<div class="input-group">
                    <label class="sr-only" for="ts_x">模型名称</label>
@@ -256,9 +289,11 @@ $(document).ready(function(){
 	</div>
 	</aside>
 
-	<x3d id="model"> <scene dopickpass="true" pickmode="idBuf"
+	<x3d id="model"> 
+	<scene id="mainScene" dopickpass="true" pickmode="idBuf"
 		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
-	<Viewpoint bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,50'></Viewpoint> 
+	<viewpoint id="v" orientation='0,0,0,1' position='0,0,50'></viewpoint>
+	{$diy['header']}
 	<navigationInfo id="head" headlight='true' type='"EXAMINE" "ANY"'></navigationInfo> 
 	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
 	<background
@@ -356,6 +391,34 @@ $(document).ready(function(){
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 					<button id="modelListOkBt" type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="viewListModal" tabindex="-1" role="dialog"
+		aria-labelledby="视角列表" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">已保存视角列表</h4>
+				</div>
+				<div class="modal-body">
+				<table id="modelListTable" class="table table-striped">
+						<tr id="view_title" class="success">
+							<td>ID</td>
+							<td>名称</td>
+							<td>删除</td>
+							<td>查看</td>
+						</tr>						
+				</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button id="viewListOkBt" type="button" class="btn btn-primary">确定</button>
 				</div>
 			</div>
 		</div>

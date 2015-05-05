@@ -4,6 +4,10 @@ var pickNum=0;//选择的transform的id数字
 var last_pick_id="";//上一次选择的transform的ID
 var tsf_selector="";//transform#pickID
 var pickInfo;//点击位置信息
+var pos;
+var rot;
+var x3d=new Array();
+var recover_time=0;
 /**
  * 通过线球旋转物体，并侧边栏旋转参数，内部调用
  */
@@ -62,7 +66,7 @@ function get_max_id(){
 	return lastNum;
 }
 /**
- * 显示已插入模型列表，情况原来模型列表，重写
+ * 显示已插入模型列表，清空原来模型列表，重写
  */
 function show_model_list(){
 	var i = 0;
@@ -83,8 +87,46 @@ function show_model_list(){
 			   i += 1;
 		   });		   
 	   });
-	   var endStr="<tr><td colspan='5'>共计"+i+"个模型</td></tr>";
+	   var endStr="<tr><td colspan='6'>共计"+i+"个模型</td></tr>";
 	   $("tr#title").after(endStr);
+}
+/**
+ * 显示已保存视角列表，清空原来列表，重写
+ */
+function show_view_list(){
+	var i = 0;
+	$("tr#view_title").nextAll("tr").remove();
+	   $('#mainScene').children('viewpoint').each(function(){		   
+			   var id=$(this).attr("id");
+			   var description=$(this).attr("description")?$(this).attr("description"):"暂无";			   
+			   if(id=="v"){
+				  var delete_view="默认";
+			   }else{
+				   var delete_view="<button id='view_delete"+id+"' type='button' class='btn btn-default btn-xs' aria-label='删除'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>";
+			   }			   
+			   var show_view="<button id='view_show"+id+"' type='button' class='btn btn-default btn-xs' aria-label='查看'><span class='glyphicon glyphicon-zoom-in' aria-hidden='true'></span></button>";
+			   var str="<tr><td>"+id+"</td><td>"+description+"</td><td>"+delete_view+"</td><td>"+show_view+"</td></tr>";
+			   $("tr#view_title").after(str);
+			   $("button#view_delete"+id).attr("onclick","list_delete_view('"+id+"')");
+			   $("button#view_show"+id).attr("onclick","list_show_view('"+id+"')");
+			   i += 1;		  	   
+	   });
+	   var endStr="<tr><td colspan='4'>共计"+i+"个视角</td></tr>";
+	   $("tr#view_title").after(endStr);
+}
+/**
+ * 删除指定视角，默认视角v，无法删除。
+ * @param viewID 视角id
+ */
+function list_delete_view(viewID){
+	if(viewID=="v")return;
+	cache();//缓存页面内容
+	$("viewpoint#"+viewID).remove();
+	$('#viewListModal').modal('hide');
+}
+function list_show_view(viewID){
+	$("viewpoint#"+viewID).attr("set_bind","true");
+	$('#viewListModal').modal('hide');
 }
 /**
  * 根据最新选择的transform ID ，更新相关数据
@@ -254,7 +296,8 @@ function deletemodel(){
 	}
 	if (!confirm("确定删除模型"+pickID+"？")){
 		return false;
-	}	
+	}
+	cache();//缓存页面内容
 	var result=$(tsf_selector).remove();	
 	if(result.attr("id")==null){
 		alert("模型"+pickID+"已不存在！");
@@ -272,6 +315,7 @@ function moveModel(){
 		alert("请点击选择要移动的模型和位置！");
 		return false;
 	}
+	cache();//缓存页面内容
 	$("#"+last_pick_id).attr("translation",pickInfo);
 }
 /**
@@ -290,6 +334,7 @@ function alignModel(){
 		$('#alignModelModal').modal('hide');
 		return false;
 	}
+	cache();//缓存页面内容
 	var transform1 = $("#"+pickID).attr("translation").split(",");
 	var transform2 = $("#"+last_pick_id).attr("translation").split(",");
 	if($("input#align_x").is(":checked"))transform2[0]=transform1[0];
@@ -304,6 +349,7 @@ function alignModel(){
  * @return 列表模态块隐藏
  */
 function list_delete_model(id){
+	cache();//缓存页面内容
 	set_pickid(id);
 	deletemodel();
 	$('#modelListModal').modal('hide');
@@ -318,9 +364,11 @@ function emptymodel(){
 	if(!confirm("确定移除所以模型？")){
 		return false;
 	}
+	cache();//缓存页面内容
 	$("group#cn_3dant_shared").empty();
 	$("group#cn_3dant_basic").empty();
 	$("group#cn_3dant_internet").empty();
+	$("viewpoint#v").nextAll('viewpoint').remove();
 	tsfNum=0;
 	pickID="";
 	set_form();
@@ -493,6 +541,39 @@ function screenShot(x3dID){
 	.getScreenshot();
 	return imgUrl;
 }
+function getViewChange(){
+	x3dom.runtime.ready = function() {	
+		var viewFunc = function(evt) {
+			pos = evt.position;
+			var p_x=Math.round(pos.x*1000)/1000;
+			var p_y=Math.round(pos.y*1000)/1000;
+			var p_z=Math.round(pos.z*1000)/1000;
+			pos = p_x+" "+p_y+" "+p_z;
+			rot = evt.orientation;
+			var r_x=Math.round(rot[0].x*1000)/1000;
+			var r_y=Math.round(rot[0].y*1000)/1000;
+			var r_z=Math.round(rot[0].z*1000)/1000;
+			var r_a=Math.round(rot[1]*1000)/1000;
+			rot = r_x+" "+r_y+" "+r_z+" "+r_a;			
+		};
+		$('viewpoint#v')[0].addEventListener('viewpointChanged', viewFunc, true);
+	}
+}
+/**
+ * 保存视角，
+ * @param viewIDafter
+ */
+function saveView(viewIDafter){
+	var num=Number(viewIDafter.substr(1))+1;
+	var newViewID="v"+num;
+	$("viewpoint#"+viewIDafter).after("<viewpoint id='"+newViewID+"' orientation='"+rot+"' position='"+pos+"'></viewpoint>");	
+}
+/**
+ * 保存文档
+ */
+function saveDocument(){
+	
+}
 /**
  * 放缩当前选择模型至适合窗口显示
  * 如果是基本模型放缩shape
@@ -505,7 +586,7 @@ function showObject(){
 	}else{
 		model=$(tsf_selector).find("inline")[0];
 	}
-	document.getElementById("model").runtime.showObject(model);
+	$("x3d#model")[0].runtime.showObject(model);
 }
 /**
  * 重载模型
@@ -513,6 +594,26 @@ function showObject(){
 function cleanScreen(){
 	var sss=$("#cn_3dant_diy").detach();
 	$("#marker").after(sss);
+}
+/**
+ * 缓存
+ */
+function cache(){
+	if(x3d.length<5){
+		x3d[x3d.length] = $("scene#mainScene").html();
+	}else{
+		x3d[5]=$("scene#mainScene").html();
+		for(var i = 0;i < 5; i++) {
+			x3d[i]=x3d[i+1];
+		}
+	}	
+}
+/**
+ * 恢复
+ */
+function recover(){
+	$("scene#mainScene").html(x3d[x3d.length-1]);
+	x3d.pop();
 }
 /**
  * jquery 提示汉化

@@ -343,15 +343,17 @@ class UserController extends HomeController {
     	$this->success('删除成功！');   	
     }    
     public function saveDiy(){
-    	if ( !is_login() ) {
+    	if ( !is_login() ){
     		$this->error( '您还没有登陆',U('User/login') );
     	}
     	$id=I('get.id',0,'int');
-    	$data=I('post.');
-    	$data['shared']=htmlspecialchars_decode($data['shared']);
-    	$data['shared']=strip_tags($data['shared'],'<transform><inline>');
-    	$data['basic']=htmlspecialchars_decode($data['basic']);
-    	$data['basic']=strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text><torus><plane>');
+    	$input=I('post.');
+    	$data['header']=htmlspecialchars_decode($input['header']);
+    	$data['header']=trim(strip_tags($data['header'],'<viewpoint><navigationInfo><directionalLight><background><Environment>'));
+    	$data['shared']=htmlspecialchars_decode($input['shared']);
+    	$data['shared']=trim(strip_tags($data['shared'],'<transform><inline>'));
+    	$data['basic']=htmlspecialchars_decode($input['basic']);
+    	$data['basic']=trim(strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text><torus><plane>'));
     	$data['basic']=preg_replace( "@>(.*?)<@is", ">\n<", $data['basic'] );
     	$data['time_update']=time();
     	$Diy=D('Diy');
