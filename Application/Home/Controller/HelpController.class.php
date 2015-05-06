@@ -43,4 +43,8 @@ class HelpController extends HomeController {
 		$this->description=$list['description'];
 		$this->display();
 	}
+	public function material(){
+		$this->title="材质编辑器";
+		$this->display();
+	}
 }

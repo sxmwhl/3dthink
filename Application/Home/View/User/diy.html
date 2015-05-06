@@ -11,7 +11,7 @@ $(document).ready(function(){
 	   var header="";
 	   $("#mainScene").children("viewpoint").each(function(){
 		   if($(this).attr('id')!="v"){
-			   header=header+$(this).prop("outerHTML");
+			   header=header+$.trim($(this).prop("outerHTML"));
 		   }		   
 	   });	   
 	   var sharedHtml=$("group#cn_3dant_shared").html();
