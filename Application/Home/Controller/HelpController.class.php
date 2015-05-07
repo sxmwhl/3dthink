@@ -44,7 +44,7 @@ class HelpController extends HomeController {
 		$this->display();
 	}
 	public function material(){
-		$this->title="材质编辑器";
+		$this->title="web3d在线材质编辑器";
 		$this->display();
 	}
 }

@@ -12,11 +12,11 @@
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 				<ol>
-					<li><h4><a href="__MODULE__/Help/about">关于3D蚂蚁</a></h4></li>
-					<li><h4><a href="__MODULE__/Help/browserSupport">浏览器支持</a></h4></li>
-					<li><h4><a href="__MODULE__/Help/navigation">模型浏览操作方法</a></h4></li>
+					<li><h4><a href="__MODULE__/Help/about">关于3D蚂蚁</a><small>---2014-12-20</small></h4></li>
+					<li><h4><a href="__MODULE__/Help/browserSupport">浏览器支持</a><small>---2015-03-2</small></h4></li>
+					<li><h4><a href="__MODULE__/Help/navigation">模型浏览操作方法</a><small>---2015-04-5</small></h4></li>
 					<volist name="articles" id="vo">
-					<li><h4><a href="__MODULE__/Help/article?id={$vo.id}">{$vo.title}</a></h4></li>
+					<li><h4><a href="__MODULE__/Help/article?id={$vo.id}">{$vo.title}</a><small>---{$vo.update_time|date="Y-m-d",###}</small></h4></li>
 					</volist>
 				</ol>
 			</div>
