@@ -12,7 +12,13 @@
         <x3d id="model">
             <scene dopickpass="true" pickmode="idBuf" bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
                 <background topurl="" righturl="" lefturl="" fronturl="" bottomurl="" backurl="" skyangle="" groundangle="" groundcolor="" transparency="1.0" skycolor="0 0 0"></background>
+                <transform DEF="tsf">
                 <Inline nameSpaceName="s" url="teapot.x3d" />
+                </transform>
+                <TimeSensor DEF="shijian" cycleInterval="20" loop="true" enabled="true" first="true"></TimeSensor>
+                <OrientationInterpolator DEF="shijianzhuanhuanjiaodu" key="0 0.25 0.5 0.75 1" keyValue="0 1 0 0 0 1 0 1.571 0 1 0 3.142 0 1 0 4.712 0 1 0 6.283"></OrientationInterpolator>
+                <ROUTE fromField="fraction_changed" fromNode="shijian" toField="set_fraction" toNode="shijianzhuanhuanjiaodu"></ROUTE>
+                <ROUTE fromField="value_changed" fromNode="shijianzhuanhuanjiaodu" toField="set_rotation" toNode="tsf"></ROUTE>
             </scene>
         </x3d>
 

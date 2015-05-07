@@ -59,7 +59,7 @@
 	<div class="row">
 			<volist name="diys" id="vo">
 			<div class="col-md-3">
-				<div class='item'>
+				<div class='itemimage'>
 					<img src='__BCS_PUBLIC__/diy/{$vo.uid}/{$vo.id}/preview.png' alt='{$vo.title}' />
 					<div class='item-background'></div>
 					<a href='__CONTROLLER__/diy?id={$vo.id}' class='title' title='模型名称'>DIY名称：{$vo.title}</a>
@@ -75,7 +75,7 @@
 			<case value="8"></case>
 			<default />
 			<div class="col-md-3">
-			<div class='item'>
+			<div class='itemimage'>
 					<img src='__BCS_PUBLIC__/images/add.png'
 						alt='添加diy' />
 					<div class='item-background'></div>
@@ -95,7 +95,7 @@
 	<div class="row">
 			<volist name="moxings" id="vo">
 			<div class="col-md-3">
-				<div class='item'>
+				<div class='itemimage'>
 					<img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}'
 						alt='{$vo.title}' />
 					<div class='item-background'></div>
@@ -109,7 +109,7 @@
 			</div>
 			</volist>			
 			<div class="col-md-3">
-				<div class='item'>
+				<div class='itemimage'>
 					<img src='__BCS_PUBLIC__/images/add.png' alt='添加diy' />
 					<div class='item-background'></div>
 					<div class="title">

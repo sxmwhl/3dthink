@@ -13,7 +13,7 @@
 </aside>
 <include file="Public:logo" />
 <div class="container-fluid" align="center">
-		<div class="row bg-info">
+		<div class="row gray mg-top20">
 			<h3>
 				<span style="color: red" class="glyphicon glyphicon-fire"
 					aria-hidden="true"></span> <strong>热 门 模 型</strong>
@@ -22,7 +22,7 @@
 <div class="row">
   <volist name="models1" id="vo">
   	<div class="col-md-3 col-sm-6 col-xs-12">
-  	<div class='item'>
+  	<div class='itemimage'>
     <a href='__CONTROLLER__/model?f={$vo.folder}'><img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}虚拟模型' /></a>
     <div class='item-background'></div>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='title'>模型名称：{$vo.title}</a>
@@ -32,11 +32,11 @@
 	</div>
   </volist>
 </div>
-<div class="row bg-info"><h3><span style="color:green" class="glyphicon glyphicon-leaf" aria-hidden="true"></span> <strong>最 新 模 型</strong></h3></div>
+<div class="row gray"><h3><span style="color:green" class="glyphicon glyphicon-leaf" aria-hidden="true"></span> <strong>最 新 模 型</strong></h3></div>
 <div class="row">
     <volist name="models2" id="vo">
     <div class="col-md-3 col-sm-6 col-xs-12">
-    <div class='item'>
+    <div class='itemimage'>
     <a href='__CONTROLLER__/model?f={$vo.folder}'><img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}虚拟模型' /></a>
     <div class='item-background'></div>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='title'>模型名称：{$vo.title}</a>
@@ -46,11 +46,11 @@
     </div>
     </volist>
     </div>
-<div class="row bg-info"><h3><span style="color:blue" class="glyphicon glyphicon-globe" aria-hidden="true"></span> <strong> 热 门 DIY</strong></h3></div>
+<div class="row gray"><h3><span style="color:blue" class="glyphicon glyphicon-globe" aria-hidden="true"></span> <strong> 热 门 DIY</strong></h3></div>
 <div class="row">
     <volist name="diys" id="vo">
     <div class="col-md-3 col-sm-6 col-xs-12">
-    <div class='item'>
+    <div class='itemimage'>
     <a href='__CONTROLLER__/diy?id={$vo.id}'><img src='__BCS_PUBLIC__/diy/{$vo.uid}/{$vo.id}/preview.png' alt='{$vo.title}虚拟模型' /></a>
     <div class='item-background'></div>
     <a href='__CONTROLLER__/diy?id={$vo.id}' class='title'>DIY名称：{$vo.title}</a>

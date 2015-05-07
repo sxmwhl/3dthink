@@ -92,13 +92,13 @@ body{
   line-height: 18px;
 }
 
-.item {
+.itemimage {
 	margin:28px auto;
 	width:280px;
 	position: relative;
 	overflow: hidden;
 }
-.item img {
+.itemimage img {
 	padding: 20px;
 	background-color:#F89F00;
 	float: left;
@@ -116,7 +116,7 @@ body{
 	-o-transition: all ease 0.5s;
 	transition: all ease 0.5s;
 }
-.item x3d {
+.itemimage x3d {
 	padding: 20px;
 	background-color:#F89F00;
 	float: left;
@@ -129,7 +129,7 @@ body{
 	left: 0;
 	opacity: 1;
 }
-.item .item-background {
+.itemimage .item-background {
   position: absolute;
   z-index: 2;
   left: 0;
@@ -141,7 +141,7 @@ body{
   opacity: 0.3;
 
 }
-.item .creator {
+.itemimage .creator {
 	position: absolute;
 	display: block;
 	z-index: 3;
@@ -159,7 +159,7 @@ body{
 	-o-transition: all ease 0.9s;
 	transition: all ease 0.9s;	
 }
-.item .time {
+.itemimage .time {
 	position: absolute;
 	display: block;
 	z-index: 3;
@@ -177,7 +177,7 @@ body{
 	opacity: 1;
 	padding: 0 10px;
 }
-.item .title {
+.itemimage .title {
 	white-space:nowrap;
 	overflow:hidden;
 	position: absolute;
