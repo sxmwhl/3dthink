@@ -11,7 +11,7 @@ return array(
 		'DB_HOST'   => '127.0.0.1', // 服务器地址
 		'DB_NAME'   => '3dshare', // 数据库名
 		'DB_USER'   => 'root', // 用户名
-		'DB_PWD'    => '', // 密码
+		'DB_PWD'    => 'a123456', // 密码
 		'DB_PORT'   => 3306, // 端口
 		'DB_PREFIX' => 'think_', // 数据库表前缀
 		'DB_CHARSET'=> 'utf8', // 字符集
@@ -25,7 +25,7 @@ return array(
 				//'__BCS_PUBLIC__' => 'http://bcs.duapp.com/x3dfile/public',
 				'__BCS_PUBLIC__' => __ROOT__.'/Public',
 				/*********本地、远程切换完毕**************/
-				'__SITENAME__' => '全新的网络虚拟现实平台-3D蚂蚁',
+				'__SITENAME__' => '全新的网络虚拟现实平台-3D蚂蚁网',
 		),
 		'THINK_EMAIL' => array(		
 				'SMTP_HOST'   => 'smtp.3dant.cn', //SMTP服务器		
