@@ -40,6 +40,7 @@ $(document).ready(function(){
    });
    $("button#modelListBt").click(show_model_list);
    $("button#viewListBt").click(show_view_list);
+   $("button#buttonListBt").click(show_button_list);
    $("button#saveOkBt").click(function(){
 	   $('#modelListModal').modal('hide');
    });
@@ -112,6 +113,12 @@ $(document).ready(function(){
 					data-backdrop="static">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					显示视角
+				</button>
+				<button id="buttonListBt" type="button" class="btn btn-default btn-xs"
+					aria-label="显示按钮" data-toggle="modal" data-target="#buttonListModal"
+					data-backdrop="static">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					显示按钮
 				</button>
 				<button id="viewBt" type="button" class="btn btn-default btn-xs" aria-label="保存视角">
 				<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
@@ -461,6 +468,32 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="buttonListModal" tabindex="-1" role="dialog"
+		aria-labelledby="按钮列表" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">已添加按钮列表</h4>
+				</div>
+				<div class="modal-body">
+				<table id="modelListTable" class="table table-striped">
+						<tr id="button_title" class="success">
+							<td>ID</td>
+							<td>名称</td>
+							<td>删除</td>
+						</tr>						
+				</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="modal fade" id="screenShotModal" tabindex="-1" role="dialog"
 		aria-labelledby="DIY截图" aria-hidden="true">
 		<div class="modal-dialog">
@@ -564,6 +597,14 @@ $(document).ready(function(){
 								<option class="bg-danger" value="btn-danger">危险（红）</option>
 								<option value="btn-link">链接</option>								
 							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<label class="sr-only" for="buttonName">目标函数</label>
+							<div class="input-group-addon">目标函数</div>
+							<input type="text" name="buttonFunc" id="buttonFunc"
+								class="form-control" />
 						</div>
 					</div>
 				</div>

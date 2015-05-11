@@ -9,6 +9,17 @@ function iframeChangeBackground(self){
 </script>
 </head>
 <body class="model_in">
+
+    <nav class="navbar navbar-fixed-top">
+		<div class="container-fluid" align="right">
+		<div class="row">
+		<div id="control" class="col-md-6 col-md-offset-6">
+		{$diy['control']}
+		<!-- 按钮添加位置 -->
+		</div>
+		</div>
+		</div>
+	</nav>
 	<x3d id="model"> 
     <scene dopickpass="true" pickmode="idBuf"
 		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
@@ -59,21 +70,6 @@ function iframeChangeBackground(self){
 	</h2>
 	</div>
 <script type="text/javascript">
-x3dom.runtime.ready = function() {	
-	var e = document.getElementById("model");
-	$("[tag='cn_3dant_inline']").first().load(function(){	
-		$(this).attr("onload","showAll()");
-		setTimeout(function(){
-			e.runtime.showAll();
-		},1000);			
-	});
-	$("[tag='cn_3dant_inline']").last().load(function(){	
-		$(this).attr("onload","showAll()");
-		setTimeout(function(){
-			e.runtime.showAll();
-		},1000);			
-	});
-	rotate("viewpoint","CoordinateAxes__CoordinateAxes");
-};
+{$diy['script']}
 </script>
 <include file="Public:foot" />

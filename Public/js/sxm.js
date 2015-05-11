@@ -115,6 +115,24 @@ function show_view_list(){
 	   $("tr#view_title").after(endStr);
 }
 /**
+ * 显示已添加按钮列表，清空原来列表，重写
+ */
+function show_button_list(){
+	var i = 0;
+	$("tr#button_title").nextAll("tr").remove();
+	   $('#control').children('button').each(function(){
+			   var id=$(this).attr("id");
+			   var name=$(this).attr("aria-label");
+			   var delete_button="<button id='button_delete_"+id+"' type='button' class='btn btn-default btn-xs' aria-label='删除'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>";
+			   var str="<tr><td>"+id+"</td><td>"+name+"</td><td>"+delete_button+"</td></tr>";
+			   $("tr#button_title").after(str);
+			   $("button#button_delete_"+id).attr("onclick","list_delete_button('"+id+"')");
+			   i += 1;		  	   
+	   });
+	   var endStr="<tr><td colspan='3'>共计"+i+"个按钮</td></tr>";
+	   $("tr#button_title").after(endStr);
+}
+/**
  * 删除指定视角，默认视角v，无法删除。
  * @param viewID 视角id
  */
@@ -124,6 +142,19 @@ function list_delete_view(viewID){
 	$("viewpoint#"+viewID).remove();
 	$('#viewListModal').modal('hide');
 }
+/**
+ * 删除指定按钮
+ * @param buttonID 按钮id
+ */
+function list_delete_button(buttonID){
+	cache();//缓存页面内容
+	$("button#"+buttonID).remove();
+	$('#buttonListModal').modal('hide');
+}
+/**
+ * 查看制定视角
+ * @param viewID
+ */
 function list_show_view(viewID){
 	$("viewpoint#"+viewID).attr("set_bind","true");
 	$('#viewListModal').modal('hide');
@@ -677,9 +708,14 @@ function addButton(){
 		alert("请输入按钮名称");
 		return;
 	}
+	var func=$('#buttonFunc').val();
+	if(!func){
+		alert("请输入目标函数");
+		return;
+	}
 	var size=$('#buttonSize').val();
 	var kind=$('#buttonKind').val();
-	var bt_code="<button id='"+id+"' type='button' class='btn "+kind+" "+size+"' aria-label='"+name+"'>"+name+"</button> ";
+	var bt_code="<button id='"+id+"' type='button' class='btn "+kind+" "+size+"' aria-label='"+name+"' onclick='"+func+"'>"+name+"</button> ";
 	$("div#control").append(bt_code);
 	$('#addButtonModal').modal('hide');
 }
