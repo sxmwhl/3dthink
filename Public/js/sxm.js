@@ -724,3 +724,8 @@ function addScript(){
 	$('#customerCode').html(code);
 	$('#addScriptModal').modal('hide');
 }
+function addRoute(){
+	var code=$("#route").val();
+	$('group#cn_3dant_route').html(code);
+	$('#addRouteModal').modal('hide');
+}

@@ -10,6 +10,8 @@ class HelpController extends HomeController {
 		$list=$Article->where('display=1')->order('views')->select();
 		$this->articles=$list;
 		$this->title="帮助文档";
+		$this->keywords='3d蚂蚁网使用帮助文档,在线3d交互帮助,虚拟现实web3d帮助,x3d模型,三维网站,三维模型';
+		$this->description='3D蚂蚁网网络虚拟现实平台使用帮助，如何分享模型，在线编辑修改模型，模型浏览交互模式帮助。';
 		$this->display();
 	}
 	public function navigation(){

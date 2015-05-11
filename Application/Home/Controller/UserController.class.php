@@ -353,11 +353,15 @@ class UserController extends HomeController {
     	$data['script']=htmlspecialchars_decode($input['script']);
     	$data['control']=htmlspecialchars_decode($input['control']);
     	$data['control']=trim(strip_tags($data['control'],'<button>'));
+    	$data['route']=htmlspecialchars_decode($input['route']);
+    	$data['route']=trim(strip_tags($data['route'],'<Route><TimeSensor><ColorInterpolator><CoordinateInterpolator><NormalInterpolator><OrientationInterpolator><PositionInterpolator><ScalarInterpolator><SplinePositionInterpolator><X3DInterpolatorNode>'));
     	$data['shared']=htmlspecialchars_decode($input['shared']);
     	$data['shared']=trim(strip_tags($data['shared'],'<transform><inline>'));
     	$data['basic']=htmlspecialchars_decode($input['basic']);
     	$data['basic']=trim(strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text><torus><plane>'));
     	$data['basic']=preg_replace( "@>(.*?)<@is", ">\n<", $data['basic'] );
+    	$data['header']=preg_replace( "@>(.*?)<@is", ">\n<", $data['header'] );	
+    	$data['route']=preg_replace( "@>(.*?)<@is", ">\n<", $data['route'] );
     	$data['time_update']=time();
     	$Diy=D('Diy');
     	if (!$Diy->create($data,2)){ // 创建数据对象
