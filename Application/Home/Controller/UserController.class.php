@@ -350,6 +350,9 @@ class UserController extends HomeController {
     	$input=I('post.');
     	$data['header']=htmlspecialchars_decode($input['header']);
     	$data['header']=trim(strip_tags($data['header'],'<viewpoint><navigationInfo><directionalLight><background><Environment>'));
+    	$data['script']=htmlspecialchars_decode($input['script']);
+    	$data['control']=htmlspecialchars_decode($input['control']);
+    	$data['control']=trim(strip_tags($data['control'],'<button>'));
     	$data['shared']=htmlspecialchars_decode($input['shared']);
     	$data['shared']=trim(strip_tags($data['shared'],'<transform><inline>'));
     	$data['basic']=htmlspecialchars_decode($input['basic']);

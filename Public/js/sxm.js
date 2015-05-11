@@ -166,6 +166,7 @@ function set_form(){
 		$(".info").text(pickID);
 		return false;
 	}
+	//$(tsf_selector)[0].highlight(true,'1 0 0');选择高亮显示
 	form_enable();
 	$(".info").html(pickID);
 	var ts=$(tsf_selector).attr("translation").split(",");
@@ -661,4 +662,29 @@ function colorRgb(sHex){
     }else{  
         return sColor;    
     } 
+}
+/**
+ * 添加控制按钮
+ */
+function addButton(){
+	var id=$('#buttonID').val();
+	if(!id){
+		alert("请输入ID");
+		return;
+	}	
+	var name=$('#buttonName').val();
+	if(!name){
+		alert("请输入按钮名称");
+		return;
+	}
+	var size=$('#buttonSize').val();
+	var kind=$('#buttonKind').val();
+	var bt_code="<button id='"+id+"' type='button' class='btn "+kind+" "+size+"' aria-label='"+name+"'>"+name+"</button> ";
+	$("div#control").append(bt_code);
+	$('#addButtonModal').modal('hide');
+}
+function addScript(){
+	var code=$("#script").val();
+	$('#customerCode').html(code);
+	$('#addScriptModal').modal('hide');
 }

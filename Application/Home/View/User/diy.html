@@ -8,6 +8,8 @@ $(document).ready(function(){
 	   addmodel(lujing);
    });
    $("button#saveBt").click(function(){
+	   var control=$.trim($('#control').html());
+	   var script=$('#customerCode').html();
 	   var header="";
 	   $("#mainScene").children("viewpoint").each(function(){
 		   if($(this).attr('id')!="v"){
@@ -17,6 +19,8 @@ $(document).ready(function(){
 	   var sharedHtml=$("group#cn_3dant_shared").html();
 	   var obj=new Object();
 	   obj.header=header;
+	   obj.control=control;
+	   obj.script=script;
 	   $("[tag='cn_3dant_inline']").empty();
 	   obj.shared=$("group#cn_3dant_shared").html();
 	   $("group#cn_3dant_shared").html(sharedHtml);
@@ -66,7 +70,18 @@ $(document).ready(function(){
    });
    $("button#recoverBt").click(function(){
 	   recover();
-   })   
+   });
+   $("button#addButtonOkBt").click(function(){
+	   addButton();
+   });
+   $("button#addScriptBt").click(function(){
+	   var code=$.trim($("#customerCode").html());
+	   $("#script").val(code);
+	   $('#addScriptModal').modal("show");
+   });
+   $("button#addScriptOkBt").click(function(){
+	   addScript();
+   });
    getViewChange();
 });
 </script>
@@ -112,6 +127,18 @@ $(document).ready(function(){
 				<span class="glyphicon glyphicon-scissors" aria-hidden="true"> </span>
 				 截图
 			</button>
+			
+			<button id="addButtonBt" type="button" class="btn btn-default btn-xs"
+					aria-label="添加控制按钮" data-toggle="modal" data-target="#addButtonModal"
+					data-backdrop="static">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"> </span>
+				 添加按钮
+			</button>
+			
+			<button id="addScriptBt" type="button" class="btn btn-default btn-xs">
+				<span class="glyphicon glyphicon-console" aria-hidden="true"> </span>
+				 添加脚本
+			</button>
 
 			<h6><strong>点球半径：</strong></h6>
                    <label class="sr-only" for="radius">点球大小</label>
@@ -132,7 +159,7 @@ $(document).ready(function(){
 			<h6><strong>DIY缩略图：(点击更换)</strong></h6>
 			<a href="__MODULE__/User/diyPreview?id={$diy['id']}">
 			<img class="w280h200" src="__BCS_PUBLIC__/diy/{$diy['uid']}/{$diy['id']}/preview.png" alt=" {$model['title']}" />	
-			</a>		
+			</a>				
 	</div>
 	</aside>
 	<aside class="modelcategory">
@@ -288,6 +315,17 @@ $(document).ready(function(){
 		</form>		
 	</div>
 	</aside>
+
+	<nav class="navbar navbar-fixed-top">
+		<div class="container-fluid" align="right">
+		<div class="row">
+		<div id="control" class="col-md-6 col-md-offset-6">
+		{$diy['control']}
+		<!-- 按钮添加位置 -->
+		</div>
+		</div>
+		</div>
+	</nav>
 
 	<x3d id="model"> 
 	<scene id="mainScene" dopickpass="true" pickmode="idBuf"
@@ -472,4 +510,96 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="addButtonModal" tabindex="-1" role="dialog"
+		aria-labelledby="添加控制按钮" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">添加控制按钮</h4>
+				</div>
+				<div class="modal-body">
+				<h5><strong>请输入按钮信息:</strong></h5>
+					<div class="form-group">
+						<div class="input-group">
+							<label class="sr-only" for="buttonID">ID</label>
+							<div class="input-group-addon">ID</div>
+							<input type="text" name="buttonID" id="buttonID"
+								class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<label class="sr-only" for="buttonName">按钮名称</label>
+							<div class="input-group-addon">按钮名称</div>
+							<input type="text" name="buttonName" id="buttonName"
+								class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<label class="sr-only" for="buttonSize">按钮大小</label>
+							<div class="input-group-addon">按钮大小</div>
+							<select id="buttonSize" name="buttonSize" class="form-control">
+								<option value="btn-lg">大</option>
+								<option value="" selected="selected">默认（中）</option>
+								<option value="btn-sm">小</option>
+								<option value="btn-xs">超小</option>								
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<label class="sr-only" for="buttonKind">按钮种类</label>
+							<div class="input-group-addon">按钮种类</div>
+							<select id="buttonKind" name="buttonKind" class="form-control">
+								<option value="btn-default">默认样式（白）</option>
+								<option class="bg-primary" value="btn-primary" selected="selected">首选项（蓝）</option>
+								<option class="bg-success" value="btn-success">成功（绿）</option>
+								<option class="bg-info" value="btn-info">一般信息（浅蓝）</option>
+								<option class="bg-warning" value="btn-warning">警告（黄）</option>
+								<option class="bg-danger" value="btn-danger">危险（红）</option>
+								<option value="btn-link">链接</option>								
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button id="addButtonOkBt" type="button" class="btn btn-primary">插入</button>					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="addScriptModal" tabindex="-1" role="dialog"
+		aria-labelledby="添加脚本" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">添加脚本</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="description">请输入脚本内容:</label>
+						<textarea name="script" id="script" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+					<button id="addScriptOkBt" type="button" class="btn btn-primary">确定</button>					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script id="customerCode" type="text/javascript">
+	{$diy['script']}
+	</script>
 <include file="Public:foot" />
