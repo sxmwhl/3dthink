@@ -50,4 +50,8 @@ class HelpController extends HomeController {
 		$this->title="web3d在线材质编辑器";
 		$this->display();
 	}
+	public function music(){
+		$this->title="音乐播放器";
+		$this->display();
+	}
 }

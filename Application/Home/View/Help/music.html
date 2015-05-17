@@ -1,0 +1,387 @@
+<include file="Public:header" />
+<script>
+x3dom.runtime.ready = function() {
+	var myapp=new MYAPP();
+	myapp.init();
+	$('#playDefault').click(function(){
+		myapp.displayDefault(myapp.url);
+	});
+}
+var MYAPP = function(){
+	this.NUM=100;
+	this.appName='3D music player';
+    this.audioContext;
+    this.source;
+    this.url = '__BCS_PUBLIC__/music/3dplayer.mp3';
+    this.file;	
+    this.processing=false;
+    this.infoContainer = document.getElementById('info');
+    this.statsContainer = document.getElementById('stats');
+    this.forceStop = false; //the audio is stoped by a new file or normally end
+}
+MYAPP.prototype = {
+		init: function(){
+			window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
+	        window.cancelAnimationFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame;
+	        window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
+	        try {
+	            this.audioContext = new window.AudioContext();
+	        } catch (e) {
+	            this.infoContainer.textContent = 'audio context is not supported :(';
+	        }
+			this._initDisplay();
+			this._handleDragDrop();
+		},
+		_initDisplay: function(){
+			var cylinder=$('#c0').prop("outerHTML");
+			var sphere=$('#s0').prop("outerHTML");
+			var box=$('#b0').prop("outerHTML");
+			for(var i=1; i < this.NUM; i++){
+				$("#container").append(cylinder);
+				var lastC=$('transform').last();
+				lastC.attr("id","c"+i);
+				lastC.attr("translation",(i-50)+" 0 0");
+				lastC.find("material").attr('diffusecolor','0.7 0 '+(i/100));
+				$("#container").append(sphere);
+				var lastS=$('transform').last();
+				lastS.attr('id',"s"+i);
+				lastS.attr("translation",(i-50)+" 1.5 0");
+				lastS.find("material").attr('diffusecolor','0.7 0 '+(1-i/100));
+				$("#container").append(box);
+				var lastB=$('transform').last();
+				lastB.attr("id","b"+i);
+				lastB.attr("translation",(i-50)+" 0 0");
+				lastB.find("material").attr('diffusecolor','0.7 0 '+(1-i/100));
+			}
+		},
+		displayDefault: function(url){
+			var that = this;
+            // load the default file
+            var xhr = new XMLHttpRequest();
+            if (!this.audioContext) {
+            this.processing = false;
+            this.infoContainer.textContent = 'audio context is not supported :(';
+            return;
+        };
+        if (this.processing) {
+            this.processing = false;
+            console.log('there is a file under processing, please wait');
+            return;
+        };
+        this.fileName = '3dplayer.mp3'
+        xhr.open('GET', url, true);
+        xhr.responseType = "arraybuffer";
+        xhr.onload = function() {
+            that.infoContainer.textContent = 'load success, start next process...';
+            var result = xhr.response;
+            that.play(result);
+        };
+        xhr.onerror = xhr.onabord = function() {
+
+            that.processing = false;
+            that.infoContainer.textContent = 'fail to load the audio :(';
+        };
+        this.infoContainer.textContent = 'loading the audio...';
+        this.processing = true;
+        xhr.send();
+		},
+	    _handleDragDrop: function() {
+	        var that = this,
+	            dropContainer = document.body,
+	            uploadBtn = document.getElementById('upload');
+	        //listen the file upload
+	        uploadBtn.onchange = function() {
+	            if (!that.audioContext || that.processing) {
+	                return;
+	            };
+	            if (uploadBtn.files.length !== 0) {
+	                that.processing = true;
+	                that.infoContainer.textContent = 'uploading...';
+	                that.file = uploadBtn.files[0];
+	                that.fileName = that.file.name;
+	                that._readFile(that.file);
+	                uploadBtn.value='';//fix for chrome: when uploading the same file this onchange event wont trigger
+	            };
+	        };
+	        //handle drag and drop
+	        dropContainer.addEventListener("dragenter", function() {
+	            if (that.processing) {
+	                return;
+	            };
+	            that.infoContainer.textContent = 'drop it to the page...';
+	        }, false);
+	        dropContainer.addEventListener("dragover", function(e) {
+	            e.stopPropagation();
+	            e.preventDefault();
+	            e.dataTransfer.dropEffect = 'copy';
+	        }, false);
+	        dropContainer.addEventListener("dragleave", function() {
+	            if (that.status) {
+	                that.infoContainer.textContent = 'playing ' + that.fileName;
+	            } else {
+	                that.infoContainer.textContent = that.appName;
+	            };
+	        }, false);
+	        dropContainer.addEventListener("drop", function(e) {
+	            e.stopPropagation();
+	            e.preventDefault();
+	            if (!that.audioContext || that.processing) {
+	                console.log('there is a file under processing, please wait');
+	                return;
+	            };
+	            that.processing = true;
+	            that.infoContainer.textContent = 'uploading...';
+	            //get the dropped file
+	            that.file = e.dataTransfer.files[0];
+	            that.fileName = that.file.name;
+	            that._readFile(e.dataTransfer.files[0]);
+	        }, false);
+	    },
+	    _readFile: function(file) {
+	        var that = this,
+	            fr = new FileReader();
+	        fr.onload = function(e) {
+	            var fileResult = e.target.result;
+	            if (!that.audioContext) {
+	                return;
+	            };
+	            that.play(fileResult);
+	        };
+	        fr.onerror = function(e) {
+	            this.processing = false;
+	            that.infoContainer.textContent = '!Fail to read';
+	        };
+	        that.infoContainer.textContent = 'Starting read the file';
+	        fr.readAsArrayBuffer(file);
+	    },
+		play: function(saudio) {
+	        var that = this;
+	        that.infoContainer.textContent = 'Decoding the audio...';
+        	
+	        that.audioContext.decodeAudioData(saudio,function(sbuffer){	        	
+	            that.infoContainer.textContent = 'Decode succussfully,start the visualizer';
+	            that._visualize(sbuffer);
+	        }, function(a) {
+	            that.processing = false;
+	            that.infoContainer.textContent = '!Fail to decode';
+	        });
+	    },
+	    _visualize: function(buffer) {
+	        var audioContext = this.audioContext,
+	            audioBufferSouceNode = audioContext.createBufferSource(),
+	            analyser = audioContext.createAnalyser(),
+	            that = this;
+	        //connect the source to the analyser
+	        audioBufferSouceNode.connect(analyser);
+	        //connect the analyser to the destination(the speaker), or we won't hear the sound
+	        analyser.connect(audioContext.destination);
+	        //then assign the buffer to the buffer source node
+	        audioBufferSouceNode.buffer = buffer;
+	        //stop the previous sound if any
+	        if (this.source) {
+	            if (this.status != 0) {
+	                this.forceStop = true;
+	                this.source.stop(0);
+	            };
+	        }
+	        this.source = audioBufferSouceNode;
+	        audioBufferSouceNode.start(0);
+	        this.status = 1;
+	        this.processing = false;
+	        this.source.onended = function() {
+	            that._audioEnd();
+	        };
+	        this.infoContainer.textContent = 'playing ' + this.fileName;
+	        if (this.animationId) {
+	            cancelAnimationFrame(this.animationId);
+	        };
+	        this._drawVisualizer(this.scene, this.render, this.camera, analyser);
+	    },
+	    _audioEnd: function() {
+	        if (this.forceStop) {
+	            this.forceStop = false;
+	            return;
+	        } else {
+	            this.forceStop = false;
+	            this.status = 0;
+	            this.infoContainer.textContent = this.appName;
+	        };
+	    },
+	    _drawVisualizer: function(scene, render, camera, analyser) {
+	    	var that = this,
+	    	     NUM = this.NUM;
+	    	
+	    	var renderAnimation = function() {
+	    		if (analyser) {
+	    			//get spectrum data from the analyser
+	                var array = new Uint8Array(analyser.frequencyBinCount);
+	                analyser.getByteFrequencyData(array);
+	                //update the height of each meter
+	                 var step = Math.round(array.length / NUM); //sample limited data from the total array
+	                 var torus=$('#t0');
+	                 var valueSum=0;
+	                 for (var i = 0; i < NUM; i++) {
+	                     var value = array[i * step] / 4;
+	                     //console.log(value);
+	                     value = value < 1 ? 1 : value; //NOTE: if the scale value is less than 1 there will be warnings in the console! so lets make sure its above 1
+	                     var  cylinder = $('#c'+i),
+	                          sphere = $('#s'+i),
+	                          box=$('#b'+i);	                     
+	                     //cylinder
+	                     cylinder.attr('scale','0.4 '+value+' 0.4');
+	                     var dif=cylinder.find('material').attr('diffusecolor').split(" ");
+	                     cylinder.find('material').attr('diffusecolor',dif[0]+' '+(value/50)+' '+dif[2]);
+	                     //box
+	                     box.attr('scale','0.4 0.4 '+value);
+	                     var dif=box.find('material').attr('diffusecolor').split(" ");
+	                     box.find('material').attr('diffusecolor',dif[0]+' '+(value/50)+' '+dif[2]);
+	                     //sphere jumping
+	                     var height = value;
+	                     var trl=sphere.attr('translation').split(" ");
+	                     if (height >= trl[1]) {
+	                    	 if(height!=1){
+	                    		 sphere.attr('translation',trl[0]+' '+height+' '+trl[2]);
+	                    		 var dif=sphere.find('material').attr('diffusecolor').split(" ");
+	    	                     sphere.find('material').attr('diffusecolor',dif[0]+' '+(value/50)+' '+dif[2]);
+	                    	 }	                    		 
+	                     }else{
+	                    	 sphere.attr('translation',trl[0]+' '+(trl[1]-0.15)+' '+trl[2]);
+	                     };
+	                     valueSum +=value;
+	                 } 
+	               //torus
+	               var dif=torus.find('material').attr('diffusecolor').split(" ");
+                   torus.attr('scale',(valueSum/150)+' '+(valueSum/150)+' '+(valueSum/150));
+                   torus.find('material').attr('diffusecolor',dif[0]+' '+(valueSum/3000)+' '+dif[2]);
+	    		}
+	    		that.animationId = requestAnimationFrame(renderAnimation);
+	    	};
+	    	that.animationId = requestAnimationFrame(renderAnimation);
+	    }
+}
+</script>
+</head>
+<body class="model_in">
+	<input type='radio' name='model' id='modelcategory' checked="checked" />
+	<input type='radio' name='model' id='myhide' />
+	<div id='content'>
+	<a id='slider' class='home' href='__ROOT__/'>
+	<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+	</a> 
+	<label id='slider' class='modelcategory' for='modelcategory'>
+	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+	</label> 
+	<label id='slider' class='myhide' for='myhide'>
+	<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+	</label>
+	</div>
+	<aside class="modelcategory margin_left">
+	<div class="container-fluid" >
+			<h3>音乐播放器Music player</h3>
+			<div class="form-group">
+                 <button id="playDefault" type="button" class="btn btn-primary">播放默认音乐</button>
+            </div>            		
+			
+			<h6><strong>选择本地音乐</strong></h6>
+			<div class="form-group">
+			<div class="input-group">
+                   <label class="sr-only" for="dc_input">本地音乐</label>
+                   <div class="input-group-addon">本地音乐</div>
+                   <input type="file" name="upload" id="upload" class="form-control" onchange="changeColor(this,'diffuseColor')"/>
+            </div>
+            </div>
+            <h6><strong>更换场景：</strong></h6>
+            <select onchange="change_background(this)" class="form-control">
+				<option value="0" selected="selected">蓝天</option>
+				<option value="1">草地</option>
+				<option value="2">戈壁</option>
+				<option value="3">海洋</option>
+				<option value="4">冰原</option>
+				<option value="5">晚霞</option>
+				<option value="6">沙滩</option>
+				<option value="7">星空</option>
+				<option value="8">纯色（白）</option>
+				<option value="9">纯色（黑）</option>
+			</select>
+	</div>
+	</aside>
+	
+	<nav class="navbar navbar-fixed-top">
+		<div class="container-fluid" align="right">
+		<div class="row">
+		<div id="info" class="col-md-6 col-md-offset-6">
+
+		</div>
+		</div>
+		<div class="row">
+		<div id="status" class="col-md-6 col-md-offset-6">
+
+		</div>
+		</div>
+		</div>
+	</nav>
+
+	<x3d id="model"> 
+	<scene dopickpass="true" pickmode="idBuf" bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
+	<Viewpoint id='viewpoint' description='Default Viewpoint' position='0 25 100' orientation='1 0 0 -0.2'></Viewpoint>
+	<navigationInfo id="head" headlight='true' type='"turntable"' typeparams="0.0 0.0 0.2 1.4"></navigationInfo>
+	<directionalLight id="directional" ambientIntensity='0.2' color='1,1,1' direction='0,-1,0.6' global='false' intensity='1' on='true' shadowCascades='1' shadowFilterSize='0' shadowIntensity='0' shadowMapSize='1024' shadowOffset='0' shadowSplitFactor='1' shadowSplitOffset='0.1' zFar='-1' zNear='-1'></directionalLight>
+	<PointLight id="point" ambientIntensity='0.2' attenuation='1,0,0' color='1,1,1' global='false' intensity='1' location='-3,0,0' on='true' radius='100' shadowFilterSize='0' shadowIntensity='0' shadowMapSize='1024' shadowOffset='0' zFar='-1' zNear='-1' ></PointLight>
+	<SpotLight id="spot" ambientIntensity='0.2' attenuation='1,0,0' beamWidth='1.5707963' color='1,1,1' cutOffAngle='1.5707963' direction='0,0,-1' global='false' intensity='1' location='2,2,0' on='true' radius='100' shadowCascades='1' shadowFilterSize='0' shadowIntensity='0' shadowMapSize='1024' shadowOffset='0' shadowSplitFactor='1' shadowSplitOffset='0.1' zFar='-1' zNear='-1' ></SpotLight>
+	<background
+		topurl="__BCS_PUBLIC__/images/background/horizon_0_top.jpg"
+		righturl="__BCS_PUBLIC__/images/background/horizon_0_right.jpg"
+		lefturl="__BCS_PUBLIC__/images/background/horizon_0_left.jpg"
+		fronturl="__BCS_PUBLIC__/images/background/horizon_0_front.jpg"
+		bottomurl="__BCS_PUBLIC__/images/background/horizon_0_bottom.jpg"
+		backurl="__BCS_PUBLIC__/images/background/horizon_0_back.jpg"
+		skyangle="1.57" groundangle="1.57" groundcolor="1,0,0" transparency="1.0"
+		skycolor="0,0,0"> </background>
+
+<transform id="container">
+<transform id="t0" rotation="0,1,0,1.57" scale="1 1 1" translation="50 0 0">
+<shape>
+<appearance>
+<material id="mtr" description="" ambientintensity="0.2" diffusecolor="0.618 0.149 0.402" emissivecolor="0,0,0" shininess="0.8" specularcolor="0.251,0.502,0.502" transparency="0.05">
+</material>
+</appearance>
+<torus/>
+</shape>
+</transform>
+<transform id="c0" rotation="0,0,1,0" scale="0.4,1,0.4" translation="-50 0 0">
+<shape>
+<appearance>
+<material diffusecolor="0.7 0 0" ambientintensity="0.2" emissivecolor="0,0,0" shininess="0.6" specularcolor="0.6,0.4,0.5">
+</material>
+</appearance>
+<cylinder/>
+</shape>
+</transform>
+<transform id="s0" rotation="0,0,1,0" scale="0.3,0.3,0.3" translation="-50 1.5 0">
+<shape>
+<appearance>
+<material diffusecolor="0.7 0 1" ambientintensity="0.2" emissivecolor="0,0,0" shininess="0.6" specularcolor="0.6,0.4,0.5">
+</material>
+</appearance>
+<sphere/>
+</shape>
+</transform>
+<transform id="b0" rotation="0,0,1,0" scale="0.4,0.4,1" translation="-50 0 0">
+<shape>
+<appearance>
+<material diffusecolor="0.7 0 1" ambientintensity="0.2" emissivecolor="0,0,0" shininess="0.6" specularcolor="0.6,0.4,0.5">
+</material>
+</appearance>
+<box/>
+</shape>
+</transform>
+</transform>
+
+<TimeSensor DEF="shijian" cycleInterval="50" loop="true" enabled="true" first="true"></TimeSensor>
+<OrientationInterpolator DEF="shijianzhuanhuanjiaodu" key="0 0.25 0.5 0.75 1" keyValue="0 1 0 0 0 1 0 1.571 0 1 0 3.142 0 1 0 4.712 0 1 0 6.283"></OrientationInterpolator>
+<ROUTE fromField="fraction_changed" fromNode="shijian" toField="set_fraction" toNode="shijianzhuanhuanjiaodu"></ROUTE>
+<ROUTE fromField="value_changed" fromNode="shijianzhuanhuanjiaodu" toField="set_rotation" toNode="container"></ROUTE>
+          
+	</scene>
+	</x3d>
+<include file="Public:foot" />

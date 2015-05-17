@@ -11,21 +11,37 @@ var recover_time=0;
 /**
  * 通过线球旋转物体，并侧边栏旋转参数，内部调用
  */
-var viewFunc = function(evt) {
-	pos = evt.position;
-	rot = evt.orientation;
-	mat = evt.matrix;
-	x=Math.round(rot[0].x*1000)/1000;
-	y=Math.round(rot[0].y*1000)/1000;
-	z=Math.round(rot[0].z*1000)/1000;
-	a=Math.round(rot[1]*1000)/1000;
+var viewRotateFunc = function(evt) {
+	//var pos = evt.position;
+	var rot = evt.orientation;
+	//var mat = evt.matrix;
+	var x=Math.round(rot[0].x*1000)/1000;
+	var y=Math.round(rot[0].y*1000)/1000;
+	var z=Math.round(rot[0].z*1000)/1000;
+	var a=Math.round(rot[1]*1000)/1000;
 	// document.getElementById('coordinateAxesViewpoint').setAttribute(
 	// 'position', pos.x+' '+pos.y+' '+pos.z);
-	$("#" + pickID).attr('position', 0 + ',' + 0 + ',' + 0);
+	//$("#" + pickID).attr('position', 0 + ',' + 0 + ',' + 0);
 	$("#" + pickID).attr('rotation', x + ',' + y + ',' + z + ',' + a);
 	set_form();	
 	// x3dom.debug.logInfo('position: ' + pos.x+' '+pos.y+' '+pos.z +'\n' +
 	// 'orientation: ' + rot[0].x+' '+rot[0].y+' '+rot[0].z+' '+rot[1]);
+};
+/**
+ * 获取当前视角信息
+ */
+var viewPointFunc = function(evt) {
+	pos = evt.position;
+	var p_x=Math.round(pos.x*1000)/1000;
+	var p_y=Math.round(pos.y*1000)/1000;
+	var p_z=Math.round(pos.z*1000)/1000;
+	pos = p_x+" "+p_y+" "+p_z;
+	rot = evt.orientation;
+	var r_x=Math.round(rot[0].x*1000)/1000;
+	var r_y=Math.round(rot[0].y*1000)/1000;
+	var r_z=Math.round(rot[0].z*1000)/1000;
+	var r_a=Math.round(rot[1]*1000)/1000;
+	rot = r_x+" "+r_y+" "+r_z+" "+r_a;			
 };
 /**
  * 通过调整视角旋转坐标指针。
@@ -168,7 +184,7 @@ function set_pickid(id){
 	pickID=id;
 	pickNum=parseInt(pickID.substr(1));
 	tsf_selector="transform#"+pickID;
-	document.getElementById("coordinateAxesViewpoint").addEventListener('viewpointChanged', viewFunc, true);//更新旋转球，旋转对象
+	document.getElementById("coordinateAxesViewpoint").addEventListener('viewpointChanged', viewRotateFunc, true);//更新旋转球，旋转对象
 	set_form();
 }
 /**
@@ -573,22 +589,11 @@ function screenShot(x3dID){
 	.getScreenshot();
 	return imgUrl;
 }
-function getViewChange(){
-	x3dom.runtime.ready = function() {	
-		var viewFunc = function(evt) {
-			pos = evt.position;
-			var p_x=Math.round(pos.x*1000)/1000;
-			var p_y=Math.round(pos.y*1000)/1000;
-			var p_z=Math.round(pos.z*1000)/1000;
-			pos = p_x+" "+p_y+" "+p_z;
-			rot = evt.orientation;
-			var r_x=Math.round(rot[0].x*1000)/1000;
-			var r_y=Math.round(rot[0].y*1000)/1000;
-			var r_z=Math.round(rot[0].z*1000)/1000;
-			var r_a=Math.round(rot[1]*1000)/1000;
-			rot = r_x+" "+r_y+" "+r_z+" "+r_a;			
-		};
-		$('viewpoint#v')[0].addEventListener('viewpointChanged', viewFunc, true);
+function getViewChange(sss){
+	x3dom.runtime.ready = function() {			
+		$(sss).each(function(){
+			$(this)[0].addEventListener('viewpointChanged', viewPointFunc, true);
+		});
 	}
 }
 /**
@@ -599,6 +604,7 @@ function saveView(viewIDafter){
 	var num=Number(viewIDafter.substr(1))+1;
 	var newViewID="v"+num;
 	$("viewpoint#"+viewIDafter).after("<viewpoint id='"+newViewID+"' orientation='"+rot+"' position='"+pos+"'></viewpoint>");	
+	$("viewpoint#"+newViewID)[0].addEventListener('viewpointChanged', viewPointFunc, true);
 }
 /**
  * 保存文档

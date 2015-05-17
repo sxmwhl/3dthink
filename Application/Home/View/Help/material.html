@@ -164,11 +164,12 @@
 	<SpotLight id="spot" ambientIntensity='0.2' attenuation='1,0,0' beamWidth='1.5707963' color='1,1,1' cutOffAngle='1.5707963' direction='0,0,-1' global='false' intensity='1' location='2,2,0' on='true' radius='100' shadowCascades='1' shadowFilterSize='0' shadowIntensity='0' shadowMapSize='1024' shadowOffset='0' shadowSplitFactor='1' shadowSplitOffset='0.1' zFar='-1' zNear='-1' ></SpotLight>
 	 
 	<Environment bind='false' enableARC='false' frustumCulling='true' gammaCorrectionDefault='"linear"' isActive='false' lowPriorityCulling='false' lowPriorityFactor='-1' lowPriorityThreshold='1.0' maxFrameRate='62.5' minFrameRate='1.0' occlusionCulling='false' occlusionVisibilityFactor='-1' occlusionVisibilityThreshold='0.0' shadowExcludeTransparentObjects='false' smallFeatureCulling='false' smallFeatureFactor='-1' smallFeatureThreshold='1.0' sortTrans='true' SSAO='"false"' SSAOamount='"1.0"' SSAOblurDepthTreshold='"5"' SSAOradius='"4"' SSAOrandomTextureSize='"4"' tessellationDetailCulling='false' tessellationErrorFactor='-1' tessellationErrorThreshold='0.0' userDataFactor='-1' ></Environment>
+
 	<Shape>
         <Appearance id="target">
 		  <Material id="mtr" description='' ambientIntensity='0.2' diffuseColor='0.8,0.8,0.8' emissiveColor='0,0,0' shininess='0.2' specularColor='0,0,0' transparency='0' ></Material>          
         </Appearance>
-        <Sphere/>
+        <Sphere />
       </Shape>
     <transform id="s1" tag="basic" description="floor" rotation="0,0,1,0" scale="5,0.1,5" translation="0,-1.5,0" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0">
       <shape render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" ispickable="true">
@@ -180,6 +181,7 @@
          <Box/>
       </shape>
    </transform>
+
 	</scene>
 	</x3d>
 <include file="Public:foot" />

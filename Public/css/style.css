@@ -269,7 +269,7 @@ input#myhide{ display:none; }
 	position: fixed;
 	top: 10%;
 	left: 0;
-	z-index:300;
+	z-index:1100;
 }
 #slider {
 	box-shadow: 2px 2px 2px #666633;
@@ -279,7 +279,7 @@ input#myhide{ display:none; }
 	transition: 0.25s ease-out;
 	-webkit-transition: 0.25s ease-out;
 	position: relative;
-	z-index: 300;
+	z-index: 1100;
 	border-bottom-right-radius: 15px;
 	border-top-right-radius: 15px;
 	color: #FFF;
@@ -308,7 +308,7 @@ aside{
 	background: #ffffff;
 	transition: 0.2s ease-out;
 	-webkit-transition: 0.2s ease-out;
-	z-index: 300;
+	z-index: 1100;
 }
 *:focus {
 	outline: none;
