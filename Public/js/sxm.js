@@ -63,23 +63,16 @@ function rotate(viewpointId,transformId){
  * @returns {Number} ID最大数
  */
 function get_max_id(){
-	var i = 0;
-	var id="";
+	var id=0;
 	var arr=new Array();
-	var lastNum=0;
 	$('group#cn_3dant_diy').children().each(function(){
 		$(this).children().each(function(){
-			id=$(this).attr("id");			
-			arr[i]=id;
-			i += 1;
+			var idNew=$(this).attr("id");
+			idNew=Number(idNew.substr(1));			
+			id=(id<idNew)?idNew:id;
 		   });
 	});
-	if(arr.length===0){	
-		return 0;
-	}
-	arr.sort();
-	lastNum=Number(arr[arr.length-1].substr(1));
-	return lastNum;
+	return id;
 }
 /**
  * 显示已插入模型列表，清空原来模型列表，重写
@@ -117,17 +110,20 @@ function show_view_list(){
 			   var description=$(this).attr("description")?$(this).attr("description"):"暂无";			   
 			   if(id=="v"){
 				  var delete_view="默认";
+				  var set_default_view="----";
 			   }else{
+				   var set_default_view="<button id='set_default_view"+id+"' type='button' class='btn btn-default btn-xs' aria-label='设为默认'><span class='glyphicon glyphicon-home' aria-hidden='true'></span></button>";
 				   var delete_view="<button id='view_delete"+id+"' type='button' class='btn btn-default btn-xs' aria-label='删除'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>";
 			   }			   
 			   var show_view="<button id='view_show"+id+"' type='button' class='btn btn-default btn-xs' aria-label='查看'><span class='glyphicon glyphicon-zoom-in' aria-hidden='true'></span></button>";
-			   var str="<tr><td>"+id+"</td><td>"+description+"</td><td>"+delete_view+"</td><td>"+show_view+"</td></tr>";
+			   var str="<tr><td>"+id+"</td><td>"+description+"</td><td>"+set_default_view+"</td><td>"+delete_view+"</td><td>"+show_view+"</td></tr>";
 			   $("tr#view_title").after(str);
 			   $("button#view_delete"+id).attr("onclick","list_delete_view('"+id+"')");
 			   $("button#view_show"+id).attr("onclick","list_show_view('"+id+"')");
+			   $("button#set_default_view"+id).attr("onclick","list_set_default_view('"+id+"')");
 			   i += 1;		  	   
 	   });
-	   var endStr="<tr><td colspan='4'>共计"+i+"个视角</td></tr>";
+	   var endStr="<tr><td colspan='5'>共计"+i+"个视角</td></tr>";
 	   $("tr#view_title").after(endStr);
 }
 /**
@@ -156,6 +152,14 @@ function list_delete_view(viewID){
 	if(viewID=="v")return;
 	cache();//缓存页面内容
 	$("viewpoint#"+viewID).remove();
+	$('#viewListModal').modal('hide');
+}
+function list_set_default_view(viewID){
+	var r=$("viewpoint#"+viewID).attr('orientation');
+	var p=$("viewpoint#"+viewID).attr('position');
+	$("viewpoint#v").attr('orientation',r);
+	$("viewpoint#v").attr('position',p);
+	list_show_view('v');
 	$('#viewListModal').modal('hide');
 }
 /**
@@ -734,4 +738,294 @@ function addRoute(){
 	var code=$("#route").val();
 	$('group#cn_3dant_route').html(code);
 	$('#addRouteModal').modal('hide');
+}
+/**
+ * 音乐播放器
+ */
+var MUSIC = function(){
+	this.NUM=50;
+	this.TRANSFORM=25;
+	this.VALUEDOWN=8;
+	this.COLORDOWN=25;
+	this.appName='3D music player';
+    this.audioContext;
+    this.source;
+    this.url = '/Public/music/3dplayer.mp3';
+    this.file;	
+    this.processing=false;
+    this.infoContainer = document.getElementById('info');
+    this.statsContainer = document.getElementById('stats');
+    this.forceStop = false; //the audio is stoped by a new file or normally end
+    this.animationId;
+}
+MUSIC.prototype = {
+		init: function(){
+			window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
+	        window.cancelAnimationFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame;
+	        window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
+	        try {
+	            this.audioContext = new window.AudioContext();
+	        } catch (e) {
+	            this.infoContainer.textContent = 'audio context is not supported :(';
+	        }
+			this._initDisplay();
+			this._handleDragDrop();
+		},
+		_initDisplay: function(){
+			var cylinder=$('#c0').prop("outerHTML");
+			var sphere=$('#s0').prop("outerHTML");
+			var box=$('#b0').prop("outerHTML");
+			for(var i=1; i < this.NUM; i++){
+				$("#container").append(cylinder);
+				var lastC=$('transform').last();
+				lastC.attr("id","c"+i);
+				lastC.attr("translation",(i-this.TRANSFORM)+" 0 0");
+				lastC.find("material").attr('diffusecolor','0.7 0 '+(i/100));
+				$("#container").append(sphere);
+				var lastS=$('transform').last();
+				lastS.attr('id',"s"+i);
+				lastS.attr("translation",(i-this.TRANSFORM)+" 1.5 0");
+				lastS.find("material").attr('diffusecolor','0.7 0 '+(1-i/100));
+				for(var j=0; j<5; j++){
+					//add sphere					
+			    	var s = (j===0)?$('#s'+i).prop('outerHTML'):$('#s'+i+'_'+(j-1)).prop('outerHTML');
+			    	$('#container').append(s);
+			    	//modify ID
+			    	var lastS=$('transform').last();
+			    	lastS.attr('id','s'+i+'_'+j);
+			    	var trl=lastS.attr('translation').split(' ');
+			    	lastS.attr('translation',trl[0]+' '+trl[1]+' '+(parseInt(trl[2])-1));
+				}
+				$("#container").append(box);
+				var lastB=$('transform').last();
+				lastB.attr("id","b"+i);
+				lastB.attr("translation",(i-this.TRANSFORM)+" 0 0");
+				lastB.find("material").attr('diffusecolor','0.7 0 '+(1-i/100));
+			}
+		},
+		displayDefault: function(url){
+			var that = this;
+            // load the default file
+            var xhr = new XMLHttpRequest();
+            if (!this.audioContext) {
+            this.processing = false;
+            this.infoContainer.textContent = 'audio context is not supported :(';
+            return;
+        };
+        if (this.processing) {
+            this.processing = false;
+            console.log('there is a file under processing, please wait');
+            return;
+        };
+        this.fileName = '3dplayer.mp3'
+        xhr.open('GET', url, true);
+        xhr.responseType = "arraybuffer";
+        xhr.onload = function() {
+            that.infoContainer.textContent = 'load success, start next process...';
+            var result = xhr.response;
+            that.play(result);
+        };
+        xhr.onerror = xhr.onabord = function() {
+
+            that.processing = false;
+            that.infoContainer.textContent = 'fail to load the audio :(';
+        };
+        this.infoContainer.textContent = 'loading the audio...';
+        this.processing = true;
+        xhr.send();
+		},
+	    _handleDragDrop: function() {
+	        var that = this,
+	            dropContainer = document.body,
+	            uploadBtn = document.getElementById('upload');
+	        //listen the file upload
+	        uploadBtn.onchange = function() {
+	            if (!that.audioContext || that.processing) {
+	                return;
+	            };
+	            if (uploadBtn.files.length !== 0) {
+	                that.processing = true;
+	                that.infoContainer.textContent = 'uploading...';
+	                that.file = uploadBtn.files[0];
+	                that.fileName = that.file.name;
+	                that._readFile(that.file);
+	                uploadBtn.value='';//fix for chrome: when uploading the same file this onchange event wont trigger
+	            };
+	        };
+	        //handle drag and drop
+	        dropContainer.addEventListener("dragenter", function() {
+	            if (that.processing) {
+	                return;
+	            };
+	            that.infoContainer.textContent = 'drop it to the page...';
+	        }, false);
+	        dropContainer.addEventListener("dragover", function(e) {
+	            e.stopPropagation();
+	            e.preventDefault();
+	            e.dataTransfer.dropEffect = 'copy';
+	        }, false);
+	        dropContainer.addEventListener("dragleave", function() {
+	            if (that.status) {
+	                that.infoContainer.textContent = 'playing ' + that.fileName;
+	            } else {
+	                that.infoContainer.textContent = that.appName;
+	            };
+	        }, false);
+	        dropContainer.addEventListener("drop", function(e) {
+	            e.stopPropagation();
+	            e.preventDefault();
+	            if (!that.audioContext || that.processing) {
+	                console.log('there is a file under processing, please wait');
+	                return;
+	            };
+	            that.processing = true;
+	            that.infoContainer.textContent = 'uploading...';
+	            //get the dropped file
+	            that.file = e.dataTransfer.files[0];
+	            that.fileName = that.file.name;
+	            that._readFile(e.dataTransfer.files[0]);
+	        }, false);
+	    },
+	    _readFile: function(file) {
+	        var that = this,
+	            fr = new FileReader();
+	        fr.onload = function(e) {
+	            var fileResult = e.target.result;
+	            if (!that.audioContext) {
+	                return;
+	            };
+	            that.play(fileResult);
+	        };
+	        fr.onerror = function(e) {
+	            this.processing = false;
+	            that.infoContainer.textContent = '!Fail to read';
+	        };
+	        that.infoContainer.textContent = 'Starting read the file';
+	        fr.readAsArrayBuffer(file);
+	    },
+		play: function(saudio) {
+	        var that = this;
+	        that.infoContainer.textContent = 'Decoding the audio...';
+        	
+	        that.audioContext.decodeAudioData(saudio,function(sbuffer){	        	
+	            that.infoContainer.textContent = 'Decode succussfully,start the visualizer';
+	            that._visualize(sbuffer);
+	        }, function(a) {
+	            that.processing = false;
+	            that.infoContainer.textContent = '!Fail to decode';
+	        });
+	    },
+	    _visualize: function(buffer) {
+	        var audioContext = this.audioContext,
+	            audioBufferSouceNode = audioContext.createBufferSource(),
+	            analyser = audioContext.createAnalyser(),
+	            that = this;
+	        //connect the source to the analyser
+	        audioBufferSouceNode.connect(analyser);
+	        //connect the analyser to the destination(the speaker), or we won't hear the sound
+	        analyser.connect(audioContext.destination);
+	        //then assign the buffer to the buffer source node
+	        audioBufferSouceNode.buffer = buffer;
+	        //stop the previous sound if any
+	        if (this.source) {
+	            if (this.status != 0) {
+	                this.forceStop = true;
+	                this.source.stop(0);
+	            };
+	        }
+	        this.source = audioBufferSouceNode;
+	        audioBufferSouceNode.start(0);
+	        this.status = 1;
+	        this.processing = false;
+	        this.source.onended = function() {
+	            that._audioEnd();
+	        };
+	        this.infoContainer.textContent = 'playing ' + this.fileName;
+	        if (this.animationId) {
+	            cancelAnimationFrame(this.animationId);
+	        };
+	        this._drawVisualizer(this.scene, this.render, this.camera, analyser);
+	    },
+	    _audioEnd: function() {
+	        if (this.forceStop) {
+	            this.forceStop = false;
+	            return;
+	        } else {
+	            this.forceStop = false;
+	            this.status = 0;
+	            this.infoContainer.textContent = this.appName;
+	        };
+	    },
+	    _drawVisualizer: function(scene, render, camera, analyser) {
+	    	var that = this,
+	    	     NUM = this.NUM,
+	    	COLORDOWN=this.COLORDOWN,
+	    	VALUEDOWN=this.VALUEDOWN;
+	    	//var j=0;
+	    	var renderAnimation = function() {
+	    		if (analyser) {
+	    			//get spectrum data from the analyser
+	                var array = new Uint8Array(analyser.frequencyBinCount);
+	                analyser.getByteFrequencyData(array);
+	                //update the height of each meter
+	                 var step = Math.round(array.length / NUM); //sample limited data from the total array
+	                 var torus=$('#t0');
+	                 var valueSum=0;
+	                 
+	                 for (var i = 0; i < NUM; i++) {
+	                     var value = array[i * step] / VALUEDOWN;
+	                     //console.log(value);
+	                     value = value < 1 ? 1 : value; //NOTE: if the scale value is less than 1 there will be warnings in the console! so lets make sure its above 1
+	                     var  cylinder = $('#c'+i),
+	                          sphere = $('#s'+i),
+	                          box=$('#b'+i);	                     
+	                     //cylinder
+	                     cylinder.attr('scale','0.4 '+value+' 0.4');
+	                     var dif=cylinder.find('material').attr('diffusecolor').split(" ");
+	                     cylinder.find('material').attr('diffusecolor',dif[0]+' '+(value/COLORDOWN)+' '+dif[2]);
+	                     //box
+	                     box.attr('scale','0.4 0.4 '+value);
+	                     var dif=box.find('material').attr('diffusecolor').split(" ");
+	                     box.find('material').attr('diffusecolor',dif[0]+' '+(value/COLORDOWN)+' '+dif[2]);
+	                     //sphere jumping
+	                     var height = value;
+	                     var trl=sphere.attr('translation').split(" ");
+	                     if (height >= trl[1]) {
+	                    	 if(height!=1){
+	                    		 sphere.attr('translation',trl[0]+' '+height+' '+trl[2]);
+	                    		 var dif=sphere.find('material').attr('diffusecolor').split(" ");
+	    	                     sphere.find('material').attr('diffusecolor',dif[0]+' '+(value/COLORDOWN)+' '+dif[2]);
+	    	                     
+	                    	 }	                    		 
+	                     }else{
+	                    	 sphere.attr('translation',trl[0]+' '+(trl[1]-0.2)+' '+trl[2]);
+	                     };	 
+	                     that._moveSphere(5,i);
+	                     valueSum +=value;	                     
+	                 }
+	                 //j++;
+	               //torus
+	               var dif=torus.find('material').attr('diffusecolor').split(" ");
+	               var t_trl=torus.attr('translation').split(" ");
+                   torus.attr('scale',(valueSum/100)+' '+(valueSum/100)+' '+(valueSum/100));
+                   torus.attr('translation',t_trl[0]+' '+(valueSum/70)+' '+t_trl[2]);
+                   torus.find('material').attr('diffusecolor',dif[0]+' '+(valueSum/(COLORDOWN*50))+' '+dif[2]);
+	    		}
+	    		that.animationId = requestAnimationFrame(renderAnimation);
+	    	};
+	    	that.animationId = requestAnimationFrame(renderAnimation);
+	    },
+	    _moveSphere: function (n,i){	    	
+	    	//move sphere
+	    	//var a=4-j%5;
+	    	for(var a = n-1; a >= 0; a--){
+	    		var s_s_1 = (a===0)?$('#s'+i):$('#s'+i+'_'+(a-1));
+	    		var s_s=$('#s'+i+'_'+a);
+	    		var trl_1=s_s_1.attr('translation').split(' ');
+	    		var dif_1=s_s_1.find('material').attr('diffusecolor').split(' ');
+	    		var trl=s_s.attr('translation').split(' ');	    		
+		    	s_s.attr('translation',trl[0]+' '+trl_1[1]+' '+trl[2]);
+		    	s_s.find('material').attr('diffusecolor',dif_1[0]+' '+dif_1[1]+' '+dif_1[2]);
+	    	}
+	    }
 }

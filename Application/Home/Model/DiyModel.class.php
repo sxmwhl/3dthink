@@ -15,5 +15,6 @@ class DiyModel extends Model {
 	);	
 	protected $_auto = array(
 			array('time_update', NOW_TIME, self::MODEL_INSERT),
+			array('header',"<viewpoint id='v' orientation='0,0,0,1' position='0,0,50'></viewpoint>", self::MODEL_INSERT),
 	);		
 }

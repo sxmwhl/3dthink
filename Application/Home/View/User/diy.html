@@ -13,9 +13,7 @@ $(document).ready(function(){
 	   var route=$.trim($('group#cn_3dant_route').html());
 	   var header="";
 	   $("#mainScene").children("viewpoint").each(function(){
-		   if($(this).attr('id')!="v"){
-			   header=header+$.trim($(this).prop("outerHTML"));
-		   }		   
+			header=header+$.trim($(this).prop("outerHTML"));	   
 	   });	   
 	   var sharedHtml=$("group#cn_3dant_shared").html();
 	   var obj=new Object();
@@ -68,7 +66,11 @@ $(document).ready(function(){
 	   copyModel();
    });
    $("button#viewBt").click(function(){
-	   var lastViewID=$("scene#mainScene").children("viewpoint").last().attr('id');
+	   if($("scene#mainScene").children("viewpoint").is('*')){
+		   var lastViewID=$("scene#mainScene").children("viewpoint").last().attr('id');
+	   }else{
+		   var lastViewID=false;
+	   }	   
 	   saveView(lastViewID);
    });
    $("button#recoverBt").click(function(){
@@ -351,8 +353,7 @@ $(document).ready(function(){
 
 	<x3d id="model"> 
 	<scene id="mainScene" dopickpass="true" pickmode="idBuf"
-		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
-	<viewpoint id="v" orientation='0,0,0,1' position='0,0,50'></viewpoint>
+		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">	
 	{$diy['header']}
 	<navigationInfo id="head" headlight='true' type='"EXAMINE" "ANY"'></navigationInfo> 
 	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
@@ -474,6 +475,7 @@ $(document).ready(function(){
 						<tr id="view_title" class="success">
 							<td>ID</td>
 							<td>名称</td>
+							<td>设为默认</td>
 							<td>删除</td>
 							<td>查看</td>
 						</tr>						

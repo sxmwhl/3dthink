@@ -6,6 +6,11 @@ function iframeFun(str){
 function iframeChangeBackground(self){
 	change_background(self)
 }
+
+function mainInit(){
+	rotate("v","CoordinateAxes__CoordinateAxes");		
+};	
+
 </script>
 </head>
 <body class="model_in">
@@ -23,7 +28,7 @@ function iframeChangeBackground(self){
 	<x3d id="model"> 
     <scene dopickpass="true" pickmode="idBuf"
 		bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
-	<Viewpoint id="viewpoint" bind='false' fieldOfView='1' isActive='false' orientation='0,0,0,1' position='0,0,50'></Viewpoint> 
+	{$diy['header']} 
 	<navigationInfo id="head" headlight='true' type='"EXAMINE" "ANY"'></navigationInfo> 
 	<directionalLight id="directional" direction='0,0,-1' on='true' intensity='1' shadowIntensity='0.0' color='0,0,0'></directionalLight> 
 	<background
@@ -61,7 +66,7 @@ function iframeChangeBackground(self){
 		id="helper_scene" dopickpass="false"> <viewpoint id="coordinateAxesViewpoint"
 		centerOfRotation='0 0 0' position='0 0 3'></viewpoint> <Inline
 		mapDEFToID="true" nameSpaceName="CoordinateAxes"
-		url="__BCS_PUBLIC__/images/x3d/CoordinateAxes.x3d"></Inline> </scene> </x3d>
+		url="__BCS_PUBLIC__/images/x3d/CoordinateAxes.x3d" onload="mainInit();"></Inline> </scene> </x3d>
 	<div class="x3dCover">
 	<h2>
 	<a title="模型操作浏览方法" alt="模型操作浏览方法" target="_blank" href="__MODULE__/Help/navigation">
