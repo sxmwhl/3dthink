@@ -39,7 +39,7 @@ class HelpController extends HomeController {
 	public function article(){
 		$id=I('get.id/d',0);
 		$Article=M('Article');
-		$list=$Article->where('id='.$id.' AND status=1')->find();
+		$list=$Article->where('id='.$id.' AND display=1')->find();
 		if(!$list)$this->error("文章不存在！","index");
 		$this->article=$list;
 		$this->title=$list['title'];

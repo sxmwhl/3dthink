@@ -364,5 +364,50 @@ class FormController extends HomeController {
     	}
     	echo '3秒后跳转至模型信息修改界面...<br/>';
     	header("refresh:3;url=modify?f=".$inputs['folder']);
-    }    
+    } 
+    public function material(){
+    	$id=I('get.id/d');
+    	if(!$id){
+    		$list['ai']='0.2';
+    		$list['si']='0.2';
+    		$list['ts']='0.01';
+    		$list['dc']='#cccccc';
+    		$list['ec']='#000000';
+    		$list['sc']='#000000';
+    		$this->material=$list;
+    		$this->title="web3d在线材质编辑器";
+    		$this->display();
+    		exit();
+    	}    	
+    	$Material=M('Material');
+    	$list=$Material->where('id='.$id)->find();
+    	if($list['ts']=='0')$list['ts']='0.01';
+    	if(!$list)$this->error('无此材质！');
+    	$this->material=$list;
+    	$this->title=$list['title'].'材质编辑';
+    	$this->description=$list['description'];
+    	$this->display();
+    }
+    public function materialSave(){
+    	$id=I('get.id/d');
+    	$data=I('post.');
+    	$Material=D('Material');
+    	if(!$id){    		
+    		if(!$Material->create($data)){
+    			exit($Material->getError());
+    		}else{
+    			$id=$Material->add();
+    			$this->success('新增材质成功！');
+    			exit();
+    		}
+    	}
+    	$data['id']=$id;
+    	if(!$Material->create($data)){
+    		exit($Material->getError());
+    	}else{
+    		$id=$Material->save();
+    		$this->success('更新材质成功！');
+    		exit();
+    	}
+    }
 }

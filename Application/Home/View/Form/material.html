@@ -1,0 +1,186 @@
+<include file="Public:header" />
+<script>
+	function changeColor(self,id){
+		var color=$(self).val();
+		//color=colorRgb(color); 
+		$("#mtr").attr(id,color);
+	}
+	function changeView() {
+		var dou = ",";
+		//头灯 开关
+		var HL_checked = document.__getElementById("HL").checked;
+		document.getElementById("head").setAttribute('headlight', HL_checked);
+		//平行光 开关
+		var DL_checked = document.__getElementById("DL").checked;
+		document.getElementById("directional").setAttribute('on', DL_checked);
+		//点光源 开关
+		var PL_checked = document.__getElementById("PL").checked;
+		document.getElementById("point").setAttribute('on', PL_checked);
+		//聚光灯 开关
+		var SL_checked = document.__getElementById("SL").checked;
+		document.getElementById("spot").setAttribute('on', SL_checked);
+
+		//环境光强度
+		var ai = document.__getElementById("ai").value;
+		document.getElementById("mtr").setAttribute('ambientIntensity', ai);
+		
+		//发光强度
+		var si = document.__getElementById("si").value;
+		document.getElementById("mtr").setAttribute('shininess', si);
+		
+		//透明度
+		var ts = document.__getElementById("ts").value;
+		document.getElementById("mtr").setAttribute('transparency', ts);
+		
+		//材质描述
+		//var description=document.__getElementById("description").value;
+		//document.getElementById("mtr").setAttribute('description', description);
+		
+		//模型形状
+		var shape = document.__getElementById("shape").value;
+		$("appearance#target").next().remove();
+		$("appearance#target").after("<"+shape+"/>");		
+	}	
+</script>
+</head>
+<body class="model_in">
+	<input type='radio' name='model' id='modelcategory' checked="checked" />
+	<input type='radio' name='model' id='myhide' />
+	<div id='content'>
+	<a id='slider' class='home' href='__ROOT__/'>
+	<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+	</a> 
+	<label id='slider' class='modelcategory' for='modelcategory'>
+	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+	</label> 
+	<label id='slider' class='myhide' for='myhide'>
+	<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+	</label>
+	</div>
+	<aside class="modelcategory margin_left">
+	<div class="container-fluid" >
+		<form id="modify_form" name="modify_form" action="__URL__/materialSave?id={$material['id']}" method="post" onkeydown="if(event.keyCode==13)return false;" role="form">
+			<h4>材质编辑器Material Editor</h4>
+			<div class="form-group">
+                 <label for="title">名称title：</label>
+                 <input type="text" name="title" id="title" value="{$material['title']}" class="form-control" />
+            </div>
+			<div class="form-group">
+                 <label for="description">描述description：</label>
+                 <textarea name="description" id="description" class="form-control">{$material['description']}</textarea>
+            </div>            		
+			<h4>灯光Lights</h4>
+			<div class="checkbox">
+			<label>
+				<input name="hl_on" type="checkbox"  id="HL" value="1" onchange="changeView()" checked="checked" />Head
+			</label>
+			<label>
+				<input name="dl_on" type="checkbox" id="DL" value="1" onchange="changeView()" />Directional
+			</label>
+			<label>
+				<input name="pl_on" type="checkbox" id="PL" value="1" onchange="changeView()" />Point
+			</label>
+			<label>
+				<input name="sl_on" type="checkbox" id="SL" value="1" onchange="changeView()" checked="checked"/>Spot
+			</label>
+			</div>			
+					
+			<h4>材质Material</h4>
+			<h6><strong>漫反射颜色</strong></h6>
+			<div class="form-group">
+			<div class="input-group">
+                   <label class="sr-only" for="dc_input">diffuseColor</label>
+                   <div class="input-group-addon">diffuseColor</div>
+                   <input type="color" name="dc" id="dc" class="form-control" value="{$material['dc']}" onchange="changeColor(this,'diffuseColor')"/>
+            </div>
+            </div>
+            <h6><strong>自发光颜色</strong></h6>
+			<div class="form-group">
+			<div class="input-group">
+                   <label class="sr-only" for="sc_input">emissiveColor</label>
+                   <div class="input-group-addon">emissiveColor</div>
+                   <input type="color" name="ec" id="ec" class="form-control" value="{$material['ec']}" onchange="changeColor(this,'emissiveColor')"/>
+            </div>
+            </div>
+            <h6><strong>高光颜色</strong></h6>
+            <div class="form-group">
+			<div class="input-group">
+                   <label class="sr-only" for="sc_input">specularColor</label>
+                   <div class="input-group-addon">specularColor</div>
+                   <input type="color" name="sc" id="sc" class="form-control" value="{$material['sc']}" onchange="changeColor(this,'specularColor')"/>
+            </div>
+            </div>            
+            	
+			<h6><strong>环境光强度</strong></h6>
+			<div class="form-group">
+			<div class="input-group">
+                   <label class="sr-only" for="ai">ambientIntensity</label>
+                   <div class="input-group-addon">ambientIntensity</div>
+                   <input name="ai" max="1" min="0" step="0.01" type="range" id="ai" value="{$material['ai']}" class="form-control" />
+            </div>
+			</div>
+			<h6><strong>发光强度</strong></h6>
+			<div class="form-group">
+			<div class="input-group">
+                   <label class="sr-only" for="si">shininess</label>
+                   <div class="input-group-addon">shininess</div>
+                   <input name="si" max="1" min="0" step="0.01" type="range" id="si" value="{$material['si']}" class="form-control" />
+            </div>
+            </div>
+            <h6><strong>透明度</strong></h6>
+			<div class="form-group">
+			<div class="input-group">
+                   <label class="sr-only" for="ts">transparency</label>
+                   <div class="input-group-addon">transparency</div>
+                   <input name="ts" max="1" min="0" step="0.01" type="range" id="ts" value="{$material['ts']}" onchange="changeView()" class="form-control" />
+            </div>
+			</div>			
+            <div class="form-group">
+               <label for="shape">模型形状</label>
+                <select name="shape" id="shape" class="form-control" onchange="changeView()" >
+				<option value="Sphere">球体Sphere</option>
+				<option value="Box">方块Box</option>
+				<option value="Cylinder">圆柱Cylinder</option>
+				<option value="Cone">圆锥Cone</option>
+				<option value="Torus">救生圈Torus</option>
+			    </select> 
+            </div>
+            <div class="form-group hidden">
+                 <label for="description">输出代码Output Code</label>
+                 <textarea name="content" id="content" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                 <button type="submit" class="btn btn-primary">保 存</button>
+            </div>            			
+		</form>		    
+	</div>
+	</aside>
+	<x3d id="model"> 
+	<scene dopickpass="true" pickmode="idBuf" bboxsize="-1,-1,-1" bboxcenter="0,0,0" render="true" def="scene">
+	<Viewpoint id='viewpoint' description='Default Viewpoint' position='0 0 5' orientation='0 0 1 0'></Viewpoint>
+	<navigationInfo id="head" headlight='true' type='"turntable"' typeparams="0.0 0.0 0.2 1.4"></navigationInfo>
+	<directionalLight id="directional" ambientIntensity='0.2' color='1,1,1' direction='0,-1,0' global='false' intensity='1' on='false' shadowCascades='1' shadowFilterSize='0' shadowIntensity='0' shadowMapSize='1024' shadowOffset='0' shadowSplitFactor='1' shadowSplitOffset='0.1' zFar='-1' zNear='-1'></directionalLight>
+	<PointLight id="point" ambientIntensity='0.2' attenuation='1,0,0' color='1,1,1' global='false' intensity='1' location='-3,0,0' on='false' radius='100' shadowFilterSize='0' shadowIntensity='0' shadowMapSize='1024' shadowOffset='0' zFar='-1' zNear='-1' ></PointLight>
+	<SpotLight id="spot" ambientIntensity='0.2' attenuation='1,0,0' beamWidth='1.5707963' color='1,1,1' cutOffAngle='1.5707963' direction='0,0,-1' global='false' intensity='1' location='2,2,0' on='true' radius='100' shadowCascades='1' shadowFilterSize='0' shadowIntensity='0' shadowMapSize='1024' shadowOffset='0' shadowSplitFactor='1' shadowSplitOffset='0.1' zFar='-1' zNear='-1' ></SpotLight>
+	 
+	<Environment bind='false' enableARC='false' frustumCulling='true' gammaCorrectionDefault='"linear"' isActive='false' lowPriorityCulling='false' lowPriorityFactor='-1' lowPriorityThreshold='1.0' maxFrameRate='62.5' minFrameRate='1.0' occlusionCulling='false' occlusionVisibilityFactor='-1' occlusionVisibilityThreshold='0.0' shadowExcludeTransparentObjects='false' smallFeatureCulling='false' smallFeatureFactor='-1' smallFeatureThreshold='1.0' sortTrans='true' SSAO='"false"' SSAOamount='"1.0"' SSAOblurDepthTreshold='"5"' SSAOradius='"4"' SSAOrandomTextureSize='"4"' tessellationDetailCulling='false' tessellationErrorFactor='-1' tessellationErrorThreshold='0.0' userDataFactor='-1' ></Environment>
+
+	<Shape>
+        <Appearance id="target">
+        <Material id="mtr" ambientIntensity="{$material['ai']}" diffuseColor="{$material['dc']}" emissiveColor="{$material['ec']}" shininess="{$material['si']}" specularColor="{$material['sc']}" transparency="{$material['ts']}" ></Material>		  
+        </Appearance>
+        <Sphere />
+      </Shape>
+    <transform id="s1" tag="basic" description="floor" rotation="0,0,1,0" scale="5,0.1,5" translation="0,-1.5,0" render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" center="0,0,0" scaleorientation="0,0,0,0">
+      <shape render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" ispickable="true">
+         <appearance sorttype="auto">
+           <material diffusecolor="0.995,0.101,0.769" ambientintensity="0.2" emissivecolor="0,0,0" shininess="0.2" specularcolor="0,0,0">
+           </material>
+           <ImageTexture url='/Public/images/ground.jpg'/>
+         </appearance>
+         <Box/>
+      </shape>
+   </transform>
+	</scene>
+	</x3d>
+<include file="Public:foot" />

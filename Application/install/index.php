@@ -45,6 +45,29 @@ CREATE TABLE `think_article` (
   KEY `status` (`status`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='文章表';
 		
+DROP TABLE IF EXISTS `think_material`;
+CREATE TABLE `think_material` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '材质ID',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `title` char(80) NOT NULL DEFAULT '' COMMENT '标题',
+  `category_id` int(10) unsigned NOT NULL COMMENT '所属分类',
+  `description` char(140) NOT NULL DEFAULT '' COMMENT '描述',
+		`dc` char(7) NOT NULL COMMENT '漫反射颜色',
+		`sc` char(7) NOT NULL COMMENT '高光颜色',
+		`ec` char(7) NOT NULL COMMENT '自发光颜色',
+		`ai` char(4) NOT NULL COMMENT '环境光强度',
+		`si` char(4) NOT NULL COMMENT '发光强度',
+		`ts` char(4) NOT NULL COMMENT '透明度',
+		`image` varchar(4) COMMENT '贴图扩展名',
+  `display` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '可见性',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `views` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览量',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
+  PRIMARY KEY (`id`),
+  KEY `status` (`status`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='材质表';
+		
 DROP TABLE IF EXISTS `think_category`;
 CREATE TABLE think_category 
 (

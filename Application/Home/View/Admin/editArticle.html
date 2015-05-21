@@ -3,7 +3,7 @@
 <body>
 <include file="Public:logo" />
 	<div class="container-fluid">
-	<form method="post" action="__SELF__" name="article_form" id="article_form" role="form">
+	<form method="post" action="__CONTROLLER__/editArticle?id={$article.id}" name="article_form" id="article_form" role="form">
 		<div class="form-group">
              <label for="title">标题*：</label>
              <input type="text" name="title" id="title" value="{$article.title}" class="form-control" />

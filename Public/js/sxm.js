@@ -160,6 +160,7 @@ function list_set_default_view(viewID){
 	$("viewpoint#v").attr('orientation',r);
 	$("viewpoint#v").attr('position',p);
 	list_show_view('v');
+	$("viewpoint#"+viewID).remove();
 	$('#viewListModal').modal('hide');
 }
 /**
