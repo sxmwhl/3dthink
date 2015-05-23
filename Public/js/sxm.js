@@ -53,8 +53,10 @@ function rotate(viewpointId,transformId){
 		pos = evt.position;
 		rot = evt.orientation;
 		mat = evt.matrix;
-		$("#"+transformId).attr('position', 0 + ',' + 0 + ',' + 0);
-		$("#"+transformId).attr('rotation', rot[0].x + ',' + rot[0].y + ',' + rot[0].z + ',' + rot[1]);
+		//$("#"+transformId).attr('position', 0 + ',' + 0 + ',' + 0);
+		//$("#"+transformId).attr('rotation', rot[0].x + ',' + rot[0].y + ',' + rot[0].z + ',' + rot[1]);
+		document.getElementById(transformId).setAttribute('position', 0 + ',' + 0 + ',' + 0);
+		document.getElementById(transformId).setAttribute('rotation', rot[0].x + ',' + rot[0].y + ',' + rot[0].z + ',' + rot[1]);
 	}
 	document.getElementById(viewpointId).addEventListener('viewpointChanged', viewFunc2, true);
 }

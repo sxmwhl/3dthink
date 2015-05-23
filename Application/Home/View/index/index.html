@@ -25,7 +25,7 @@
   	<div class="col-md-3 col-sm-6 col-xs-12">
   	<div class='itemimage'>
     <a href='__CONTROLLER__/model?f={$vo.folder}'><img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}虚拟模型' /></a>
-    <div class='item-background'></div>
+    <a href='__CONTROLLER__/model?f={$vo.folder}' ><div class='item-background'></div></a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='title'>模型名称：{$vo.title}</a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='creator'>分享者：{$vo.creator}</a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='time'>浏览次数：{$vo.views} 次</a>
@@ -39,7 +39,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
     <div class='itemimage'>
     <a href='__CONTROLLER__/model?f={$vo.folder}'><img src='__BCS_UPLOAD__/{$vo.folder}/preview.{$vo.preview_ext}' alt='{$vo.title}虚拟模型' /></a>
-    <div class='item-background'></div>
+    <a href='__CONTROLLER__/model?f={$vo.folder}'><div class='item-background'></div></a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='title'>模型名称：{$vo.title}</a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='creator'>分享者：{$vo.creator}</a>
     <a href='__CONTROLLER__/model?f={$vo.folder}' class='time'>更新时间：{$vo.time_update}</a>
@@ -53,7 +53,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
     <div class='itemimage'>
     <a href='__CONTROLLER__/diy?id={$vo.id}'><img src='__BCS_PUBLIC__/diy/{$vo.uid}/{$vo.id}/preview.png' alt='{$vo.title}虚拟模型' /></a>
-    <div class='item-background'></div>
+    <a href='__CONTROLLER__/diy?id={$vo.id}'><div class='item-background'></div></a>
     <a href='__CONTROLLER__/diy?id={$vo.id}' class='title'>DIY名称：{$vo.title}</a>
     <a href='__CONTROLLER__/diy?id={$vo.id}' class='creator'>创作者：{$vo.user}</a>
     <a href='__CONTROLLER__/diy?id={$vo.id}' class='time'>浏览次数：{$vo.views}</a>

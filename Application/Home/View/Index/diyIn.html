@@ -6,11 +6,13 @@ function iframeFun(str){
 function iframeChangeBackground(self){
 	change_background(self)
 }
-
-function mainInit(){
-	rotate("v","CoordinateAxes__CoordinateAxes");		
-};	
-
+function set_View(){
+	rotate("v","CA__CoordinateAxes");		
+}
+$(document).ready(function(){ 
+	$("transform").removeAttr("onmousedown");
+	$("group").removeAttr("onclick");
+});
 </script>
 </head>
 <body class="model_in">
@@ -65,8 +67,8 @@ function mainInit(){
 <x3d id='CoordinateAxes' showStat='false' showLog='false'> <scene
 		id="helper_scene" dopickpass="false"> <viewpoint id="coordinateAxesViewpoint"
 		centerOfRotation='0 0 0' position='0 0 3'></viewpoint> <Inline
-		mapDEFToID="true" nameSpaceName="CoordinateAxes"
-		url="__BCS_PUBLIC__/images/x3d/CoordinateAxes.x3d" onload="mainInit();"></Inline> </scene> </x3d>
+		mapDEFToID="true" nameSpaceName="CA"
+		url="__BCS_PUBLIC__/images/x3d/CoordinateAxes.x3d" onload="set_View();"></Inline> </scene> </x3d>
 	<div class="x3dCover">
 	<h2>
 	<a title="模型操作浏览方法" alt="模型操作浏览方法" target="_blank" href="__MODULE__/Help/navigation">

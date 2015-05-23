@@ -104,6 +104,53 @@ class AdminController extends Controller {
     	$did=$Member->where('uid='.$id)->delete();
     	$this->success('删除成功！');    	
     }
+    public function diy(){
+    	$id=I('get.id',0,'int');
+    	$Diy=M('Diy');
+    	$list=$Diy->where('id='.$id)->find();
+    	if(!$list)$this->error('无此diy！');
+    	$this->title=$list['title']."DIY管理";
+    	$this->diy=$list;
+    	$this->display();
+    }
+    public function saveDiy(){
+    	$id=I('get.id',0,'int');
+    	$input=I('post.');
+    	$data['header']=htmlspecialchars_decode($input['header']);
+    	$data['header']=trim(strip_tags($data['header'],'<viewpoint><navigationInfo><directionalLight><background><Environment>'));
+    	$data['script']=htmlspecialchars_decode($input['script']);
+    	$data['control']=htmlspecialchars_decode($input['control']);
+    	$data['control']=trim(strip_tags($data['control'],'<button>'));
+    	$data['route']=htmlspecialchars_decode($input['route']);
+    	$data['route']=trim(strip_tags($data['route'],'<Route><TimeSensor><ColorInterpolator><CoordinateInterpolator><NormalInterpolator><OrientationInterpolator><PositionInterpolator><ScalarInterpolator><SplinePositionInterpolator><X3DInterpolatorNode>'));
+    	$data['shared']=htmlspecialchars_decode($input['shared']);
+    	$data['shared']=trim(strip_tags($data['shared'],'<transform><inline>'));
+    	$data['basic']=htmlspecialchars_decode($input['basic']);
+    	$data['basic']=trim(strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text><torus><plane>'));
+    	$data['basic']=preg_replace( "@>(.*?)<@is", ">\n<", $data['basic'] );
+    	$data['header']=preg_replace( "@>(.*?)<@is", ">\n<", $data['header'] );
+    	$data['route']=preg_replace( "@>(.*?)<@is", ">\n<", $data['route'] );
+    	$data['time_update']=time();
+    	$Diy=D('Diy');
+    	if (!$Diy->create($data,2)){ // 创建数据对象
+    		// 如果创建失败 表示验证没有通过 输出错误提示信息
+    		$info['status']=false;
+    		$info['message']=$Diy->getError();
+    		exit(json_encode($info));
+    	}else{
+    		$map['id']=array('eq',$id);
+    		$id=$Diy->where($map)->save();
+    		if($id==false) {
+    			$info['status']=false;
+    			$info['message']="保存失败，请重试！";
+    			exit(json_encode($info));
+    		}else {
+    			$info['status']=true;
+    			$info['message']="保存成功！";
+    		}
+    	}
+    	exit(json_encode($info));
+    }
     public function sitemap(){
     	$content='<?xml version="1.0" encoding="UTF-8"?>'.chr(10);
     	$content.='<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'.chr(10);
@@ -261,5 +308,5 @@ class AdminController extends Controller {
     	$item.="</url>\n";
     	return $item;
     }
-    
+   
 }
