@@ -94,6 +94,17 @@ $(document).ready(function(){
    $("button#addRouteOkBt").click(function(){
 	   addRoute();
    });
+   $("button#editX3dBt").click(function(){
+	   $("[tag='cn_3dant_inline']").empty();
+	   var code=$.trim($("scene#mainScene").html());
+	   $("#x3dcode").val(code);
+	   $('#editX3dModal').modal("show");
+   });
+   $("button#editX3dOkBt").click(function(){
+	   var code = $('#x3dcode').val();
+	   $('scene#mainScene').html(code);
+	   $('#editX3dModal').modal("hide");
+   });
    getViewChange("viewpoint");
 });
 </script>
@@ -162,6 +173,11 @@ $(document).ready(function(){
 			<button id="addScriptBt" type="button" class="btn btn-default btn-xs">
 				<span class="glyphicon glyphicon-console" aria-hidden="true"> </span>
 				 添加脚本
+			</button>
+			
+			<button id="editX3dBt" type="button" class="btn btn-default btn-xs">
+				<span class="glyphicon glyphicon-text-background" aria-hidden="true"> </span>
+				 编辑代码
 			</button>
 
 			<h6><strong>点球半径：</strong></h6>
@@ -685,6 +701,30 @@ $(document).ready(function(){
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
 					<button id="addRouteOkBt" type="button" class="btn btn-primary">确定</button>					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="editX3dModal" tabindex="-1" role="dialog"
+		aria-labelledby="编辑代码" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">编辑代码</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="description">X3D代码:</label>
+						<textarea name="x3dcode" id="x3dcode" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+					<button id="editX3dOkBt" type="button" class="btn btn-primary">确定</button>					
 				</div>
 			</div>
 		</div>
