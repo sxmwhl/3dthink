@@ -54,4 +54,8 @@ class HelpController extends HomeController {
 		$this->title="音乐播放器";
 		$this->display();
 	}
+	public function music2(){
+		$this->title="音乐播放器";
+		$this->display();
+	}
 }
