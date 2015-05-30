@@ -563,7 +563,7 @@ function cloneModel(){
  * 更换背景
  * @param self
  */
-function change_background(self){
+function change_background(self,id){
 	var sreg = /_\d_/;
 	var topurl=$("background").attr("topurl");
 	var lefturl=$("background").attr("lefturl");
@@ -571,7 +571,7 @@ function change_background(self){
 	var fronturl=$("background").attr("fronturl");
 	var bottomurl=$("background").attr("bottomurl");
 	var backurl=$("background").attr("backurl");
-	var num="_"+self.value+"_";	
+	var num=self?"_"+self.value+"_":"_"+id+"_";	
 	topurl=topurl.replace(sreg,num);
 	bottomurl=bottomurl.replace(sreg,num);
 	fronturl=fronturl.replace(sreg,num);

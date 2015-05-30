@@ -126,7 +126,7 @@ class AdminController extends Controller {
     	$data['shared']=htmlspecialchars_decode($input['shared']);
     	$data['shared']=trim(strip_tags($data['shared'],'<transform><inline>'));
     	$data['basic']=htmlspecialchars_decode($input['basic']);
-    	$data['basic']=trim(strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text><torus><plane>'));
+    	$data['basic']=trim(strip_tags($data['basic'],'<transform><shape><appearance><material><box><sphere><cone><cylinder><text><torus><plane><planeSensor>'));
     	$data['basic']=preg_replace( "@>(.*?)<@is", ">\n<", $data['basic'] );
     	$data['header']=preg_replace( "@>(.*?)<@is", ">\n<", $data['header'] );
     	$data['route']=preg_replace( "@>(.*?)<@is", ">\n<", $data['route'] );
