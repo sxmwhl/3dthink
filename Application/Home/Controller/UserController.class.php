@@ -175,7 +175,7 @@ class UserController extends HomeController {
 					);
 					setcookie('syncuyan', des_encrypt(json_encode($encode_data), $key), time() + 3600, '/', 'www.3dant.cn');
 					//TODO:跳转到登录前页面
-					$this->success('登录成功！',U('Home/Index/index'));
+					$this->success('登录成功！',U('Home/User/index'));
 				} else {
 					$this->error("member 登陆出错");
 					$this->error($Member->getError());
