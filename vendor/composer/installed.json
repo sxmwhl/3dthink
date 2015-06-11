@@ -1,0 +1,41 @@
+[
+    {
+        "name": "topthink/thinkphp",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/liu21st/thinkphp.git",
+            "reference": "ec767d8abb167360187a0d97740602683b7dcf46"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/liu21st/thinkphp/zipball/ec767d8abb167360187a0d97740602683b7dcf46",
+            "reference": "ec767d8abb167360187a0d97740602683b7dcf46",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2015-04-14 10:46:35",
+        "type": "framework",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache2"
+        ],
+        "authors": [
+            {
+                "name": "liu21st",
+                "email": "liu21st@gmail.com"
+            }
+        ],
+        "description": "the ThinkPHP Framework",
+        "homepage": "http://thinkphp.cn/",
+        "keywords": [
+            "framework",
+            "orm",
+            "thinkphp"
+        ]
+    }
+]

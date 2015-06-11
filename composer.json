@@ -1,0 +1,5 @@
+{
+    "require": {
+        "topthink/thinkphp": "dev-master"
+    }
+}
