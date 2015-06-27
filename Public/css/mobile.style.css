@@ -245,7 +245,7 @@ input#myhide{ display:none; }
 	left: 0;
 	z-index:300;
 }
-#slider {
+.slider {
 	box-shadow: 2px 2px 2px #666633;
 	margin-top: 5px;
 	padding: 10px; 
