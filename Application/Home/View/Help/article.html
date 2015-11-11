@@ -1,9 +1,8 @@
 <include file="Public:header" />
-<script src="__BCS_PUBLIC__/tools/UEditor/ueditor.parse.js"></script>
+
 </head>
 <body>
 <include file="Public:logo" />
-<include file="Public:slide" />
 <div class="container-fluid">
 		<div class="row bg-info" align="center">
 			<h3>
@@ -17,22 +16,38 @@
 			</div>
 		</div>	
  </div>
- <include file="Public:footer" />
-<input type='radio' name='model' id='modelcategory'/>
+<include file="Public:footer" />
 <input type='radio' name='model' id='myhide'/>
+<input type='radio' name='model' id='comment' />
 <div id='content'>
   <a class='slider home' href='__ROOT__/'><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> 
-  <label class='slider modelcategory' for='modelcategory'><span class="glyphicon glyphicon-list" aria-hidden="true"></span></label>
-  
+  <label class='slider comment' for='comment'><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></label>
   <label class='slider myhide' for='myhide'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></label>
 </div>
-<aside class="modelcategory">
-<include file="Public:moreModel" />
-</aside>
 <aside class="comment">
 <include file="Public:comment" />
 </aside>
-<script type="text/javascript">
-uParse('#ueditor')
-</script>
+	<script>
+		window._bd_share_config = {
+			"common" : {
+				"bdSnsKey" : {},
+				"bdText" : "",
+				"bdMini" : "2",
+				"bdMiniList" : false,
+				"bdPic" : "",
+				"bdStyle" : "1",
+				"bdSize" : "24"
+			},
+			"share" : {},
+			"image" : {
+				"viewList" : [ "qzone", "tsina", "tqq", "renren", "weixin" ],
+				"viewText" : "分享到：",
+				"viewSize" : "16"
+			}
+		};
+		with (document)
+			0[(getElementsByTagName('head')[0] || body)
+					.appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='
+					+ ~(-new Date() / 36e5)];
+	</script>
 <include file="Public:foot" />
