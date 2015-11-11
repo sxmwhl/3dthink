@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: text/html;charset=utf-8"); 
 $con= new mysqli("localhost","root","");
-$con->select_db("3dshare");
+$con->select_db("3dthink");
 $sqls = "
 SET NAMES UTF8;
 DROP TABLE IF EXISTS `think_moxing`;
