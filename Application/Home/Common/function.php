@@ -189,3 +189,13 @@ function is_mobile() {
 		}
 	}
 }
+/**
+ * 随机生成密码
+ * @param int $length=8 密码长度，默认为8
+ * @return string
+ */
+function get_password( $length = 8 )
+{
+	$str = substr(md5(time()), 0, $length);
+	return $str;
+}

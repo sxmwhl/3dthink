@@ -422,6 +422,35 @@ class UserController extends HomeController {
     		$this->success('更换成功！','diy?id='.$id);
     	}
     }
+public function addDns(){
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}    	
+    	$uid=is_login();
+    	$data=I('post.');
+    	if(!$data){
+    		$Dns=M('Dns');
+    		$list=$Dns->where('uid='.$uid)->select();
+    		if(count($list)>=8)$this->error('Diy数量已达上限');
+    		$this->title="添加DNS";
+    		$this->display();
+    	}else {
+    		if($data['status']!=1)$data['status']=0;
+    		$data['uid']=is_login();
+    		$data['ip']=ip2long($data['ip']);
+    		$data['pw']=get_password(9);
+    		$Dns=D('Dns');
+    		if (!$Dns->create($data,1)){ // 创建数据对象
+    			// 如果创建失败 表示验证没有通过 输出错误提示信息
+    			exit($Dns->getError());
+    		}else{
+    			$id=$Dns->add();
+    			//echo $Diy->getLastSql();
+    			if(!$id) exit("添加DNS失败！");
+    		}
+    		$this->success('添加DNS成功！', 'diy?id='.$id);
+    	}    	
+    }
     /**
      * 修改密码提交
      * @author huajie <banhuajie@163.com>

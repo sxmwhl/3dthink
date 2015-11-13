@@ -128,7 +128,7 @@ CREATE TABLE `think_diy` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'DIY ID',
   `uid` int(10) unsigned NOT NULL DEFAULT '0'COMMENT '用户 ID',
   `title` char(100) NOT NULL DEFAULT '' COMMENT '名称',
-  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '名称',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '说明',
   `header` text NOT NULL DEFAULT '' COMMENT '头部设置',
   `shared` text NOT NULL DEFAULT '' COMMENT '分享的模型',
   `basic` text NOT NULL DEFAULT '' COMMENT '分享的模型',
@@ -141,7 +141,25 @@ CREATE TABLE `think_diy` (
   `time_update` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后修改时间',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='DIY表';";
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='DIY表';
+		
+DROP TABLE IF EXISTS `think_dns`;
+CREATE TABLE `think_dns` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'DNS ID',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0'COMMENT '用户 ID',
+  `title` char(16) NOT NULL DEFAULT '' COMMENT '名称',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '说明',
+  `ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '要绑定的IP',
+  `pt` int(10) unsigned NOT NULL DEFAULT '0'COMMENT '绑定的端口',
+  `pw` char(32) NOT NULL COMMENT '密码',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '绑定状态，0关闭，1开启公开，2开启不公开',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='DNS表';
+";
+
 if ($con->multi_query($sqls))
 {
 	echo "数据库安装完毕！！！";
