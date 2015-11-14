@@ -5,9 +5,9 @@
 	<div class="container-fluid">		
 		<div class="row">
 		<form name="add_dns_form" id="add_dns_form" method="post" action="__SELF__" class="formclass">
-			<h3>添加DNS</h3>
+			<h3>添加Dns网关</h3>
 <div class="form-group">
-	<label for="title">DNS名称：</label> 
+	<label for="title">Dns网关名称：</label> 
 	<input name="title" type="text" class="form-control" id="title" size="35" maxlength="50"/>
 </div>
 <div class="checkbox">
@@ -16,16 +16,12 @@
     </label>
 </div>
 <div class="form-group">
-	<label for="cate_description">DNS介绍：</label> 
+	<label for="cate_description">Dns网关介绍：</label> 
 	<textarea name="description" rows="5" class="form-control" id="description"></textarea>
 </div>
 <div class="form-group">
-	<label for="ip">IP：</label> 
-	<input name="ip" type="text" class="form-control" id="title" size="35" maxlength="50"/>
-</div>
-<div class="form-group">
-	<label for="pt">端口（PORT）：</label> 
-	<input name="pt" type="text" class="form-control" id="title" size="35" maxlength="50"/>
+	<label for="ip">绑定IP：(不能为局域网ip)</label> 
+	<input name="ip" type="text" class="form-control" id="ip" size="35" maxlength="50"/>
 </div>
 <input type="submit" class="btn btn-primary" value="确 定" /> 
 <input type="reset" class="btn btn-warning" value="重 置" />
@@ -34,14 +30,18 @@
 	</div>
 <include file="Public:footer" />
 <script>
+jQuery.validator.addMethod("isIP", function(value, element) {    
+    return this.optional(element) || /^(([1-9]|([1-9]\d)|(1\d\d)|(2([0-4]\d|5[0-5])))\.)(([1-9]|([1-9]\d)|(1\d\d)|(2([0-4]\d|5[0-5])))\.){2}([1-9]|([1-9]\d)|(1\d\d)|(2([0-4]\d|5[0-5])))$/.test(value);    
+  }, "请填写正确的IP地址。");
 $("#add_dns_form").validate({
   		 rules:{
   			 title:{
   				 required:true
   			 },
-  			 description:{
-  				 required:true
-  			 }
+  			 ip:{
+  				 required:true,
+  				 isIP:true
+  			 },
   		 }
   	 });
 </script>

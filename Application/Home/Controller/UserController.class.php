@@ -32,12 +32,15 @@ class UserController extends HomeController {
 		$Moxing=M('Moxing');
 		$list2=$Moxing->where('uid='.$uid)->select();
 		$this->member=$list0;
+		$Dns=M('Dns');
+		$listDns=$Dns->where('uid='.$uid)->select();
 		$Category=D('Category');
 		$list3=$Category->get_child_categories(0);
 		$this->categories=$list3;
 		$this->user=$info;
 		$this->diys=$list;
 		$this->moxings=$list2;
+		$this->dnses=$listDns;
 		$this->title="用户中心";
 		$this->display();
 	}
@@ -431,8 +434,8 @@ public function addDns(){
     	if(!$data){
     		$Dns=M('Dns');
     		$list=$Dns->where('uid='.$uid)->select();
-    		if(count($list)>=8)$this->error('Diy数量已达上限');
-    		$this->title="添加DNS";
+    		if(count($list)>=2)$this->error('您只能开启一个Dns网关');
+    		$this->title="添加Dns网关";
     		$this->display();
     	}else {
     		if($data['status']!=1)$data['status']=0;
@@ -448,7 +451,7 @@ public function addDns(){
     			//echo $Diy->getLastSql();
     			if(!$id) exit("添加DNS失败！");
     		}
-    		$this->success('添加DNS成功！', 'diy?id='.$id);
+    		$this->success('添加DNS成功！',U('User/index'));
     	}    	
     }
     /**
