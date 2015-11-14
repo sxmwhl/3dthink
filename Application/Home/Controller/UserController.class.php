@@ -425,7 +425,7 @@ class UserController extends HomeController {
     		$this->success('更换成功！','diy?id='.$id);
     	}
     }
-public function addDns(){
+    public function addDns(){
     	if ( !is_login() ) {
     		$this->error( '您还没有登陆',U('User/login') );
     	}    	
@@ -453,6 +453,31 @@ public function addDns(){
     		}
     		$this->success('添加DNS成功！',U('User/index'));
     	}    	
+    }
+    public function editDns(){
+    	if ( !is_login() ) {
+    		$this->error( '您还没有登陆',U('User/login') );
+    	}
+    	$uid=is_login();
+    	$id=I('get.id',0,'int');
+    	if($id===0)$this->error("参数错误！");
+    	$Diy=D('Diy');
+    	$result=$Diy->where('id='.$id)->find();
+    	if($result['uid']!==$uid)$this->error('无权编辑此DIY！');
+    	$data=I('post.');
+    	if(!$data){
+    		$this->diyinfo=$result;
+    		$this->title="修改DIY基本信息";
+    		$this->display();
+    	}else {
+    		if($data['status']!=2)$data['status']=1;
+    		if(!$Diy->create($data,2)){
+    			exit($Diy->getError());
+    		}else {
+    			$Diy->where('id='.$id)->save();
+    			$this->success('编辑成功！','index');
+    		}
+    	}
     }
     /**
      * 修改密码提交
