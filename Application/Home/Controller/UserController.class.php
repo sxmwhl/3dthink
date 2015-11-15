@@ -461,20 +461,21 @@ class UserController extends HomeController {
     	$uid=is_login();
     	$id=I('get.id',0,'int');
     	if($id===0)$this->error("参数错误！");
-    	$Diy=D('Diy');
-    	$result=$Diy->where('id='.$id)->find();
-    	if($result['uid']!==$uid)$this->error('无权编辑此DIY！');
+    	$Dns=D('Dns');
+    	$result=$Dns->where('id='.$id)->find();
+    	if($result['uid']!==$uid)$this->error('无权编辑此Dns网关！');
     	$data=I('post.');
     	if(!$data){
-    		$this->diyinfo=$result;
-    		$this->title="修改DIY基本信息";
+    		$this->dnsinfo=$result;
+    		$this->title="修改Dns网关";
     		$this->display();
     	}else {
-    		if($data['status']!=2)$data['status']=1;
-    		if(!$Diy->create($data,2)){
-    			exit($Diy->getError());
+    		if($data['status']!=1)$data['status']=0;
+    		$data['ip']=ip2long($data['ip']);
+    		if(!$Dns->create($data,2)){
+    			exit($Dns->getError());
     		}else {
-    			$Diy->where('id='.$id)->save();
+    			$Dns->where('id='.$id)->save();
     			$this->success('编辑成功！','index');
     		}
     	}

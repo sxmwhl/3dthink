@@ -4,24 +4,28 @@
 <include file="Public:logo" />
 	<div class="container-fluid">		
 		<div class="row">
-		<form name="add_dns_form" id="add_dns_form" method="post" action="__SELF__" class="formclass">
-			<h3>添加Dns网关</h3>
+<form name="edit_diy_form" id="edit_dns_form" method="post" action="__SELF__" class="formclass">
+			<h3>修改Dns网关信息</h3>
 <div class="form-group">
-	<label for="title">Dns网关名称：</label> 
-	<input name="title" type="text" class="form-control" id="title" size="35" maxlength="50"/>
+	<label for="cate_name">Dns网关名称：</label> 
+	<input name="title" type="text" class="form-control" id="title" size="35" maxlength="50" value="{$dnsinfo['title']}"/>
 </div>
 <div class="checkbox">
     <label>
-      <input name="status" type="checkbox" id="status" value="1" class="checkbox"/> 是否启用
+    <eq name="dnsinfo['status']" value="1">
+    <input name="status" type="checkbox" id="status" value="1" class="checkbox" checked="checked"/>
+    <else/>
+     <input name="status" type="checkbox" id="status" value="1" class="checkbox" />
+     </eq> 是否启用
     </label>
 </div>
 <div class="form-group">
-	<label for="cate_description">Dns网关介绍：</label> 
-	<textarea name="description" rows="5" class="form-control" id="description"></textarea>
+	<label for="description">Dns网关介绍：</label> 
+	<textarea name="description" rows="5" class="form-control" id="description">{$diyinfo['description']}</textarea>
 </div>
 <div class="form-group">
-	<label for="ip">绑定IP：(不能为局域网ip)</label> 
-	<input name="ip" type="text" class="form-control" id="ip" size="35" maxlength="50"/>
+	<label for="ip">绑定IP：</label> 
+	<input name="ip" type="text" class="form-control" id="ip" size="35" maxlength="50" value="{$dnsinfo['ip']|long2ip}"/>
 </div>
 <input type="submit" class="btn btn-primary" value="确 定" /> 
 <input type="reset" class="btn btn-warning" value="重 置" />
@@ -33,7 +37,7 @@
 jQuery.validator.addMethod("isIP", function(value, element) {    
     return this.optional(element) || /^([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$/.test(value);    
   }, "请填写正确的IP地址。");
-$("#add_dns_form").validate({
+$("#edit_dns_form").validate({
   		 rules:{
   			 title:{
   				 required:true

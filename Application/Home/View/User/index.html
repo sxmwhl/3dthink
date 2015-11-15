@@ -142,7 +142,7 @@
 					<td>{$vo.id}</td>
 					<td>{$vo.ip|long2ip}</td>
 					<td>{$vo.pw}</td>
-					<td><a href="__MODULE__/Dns?id={$vo.id}">http://www.3dant.cn__MODULE__/Dns?id={$vo.id}</a></td>
+					<td><a href="__MODULE__/Dns?id={$vo.id}">http://{$_SERVER['HTTP_HOST']}__MODULE__/Dns?id={$vo.id}</a></td>
 					<td><switch name="vo.status" >
 					       <case value="0">停用</case>
 					       <case value="1">启用</case>
