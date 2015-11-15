@@ -434,7 +434,7 @@ class UserController extends HomeController {
     	if(!$data){
     		$Dns=M('Dns');
     		$list=$Dns->where('uid='.$uid)->select();
-    		if(count($list)>=2)$this->error('您只能开启一个Dns网关');
+    		if(count($list)>=2)$this->error('暂时无法添加更多Dns网关');
     		$this->title="添加Dns网关";
     		$this->display();
     	}else {

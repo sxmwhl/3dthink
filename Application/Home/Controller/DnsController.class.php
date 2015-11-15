@@ -8,13 +8,14 @@ class DnsController extends HomeController {
 		$list=$Dns->where('id='.$id.' AND status=1')->find();
 		if(!$list)$this->error("DNS不存在或未开启！",U('Index/index'));
 		$ip=long2ip($list['ip']);			
-		redirect('http://'.$ip , 2 , '3D蚂蚁正在寻找您的机器人>>>>');
+		redirect('http://'.$ip.':'.$list['pt'] , 2 , '3D蚂蚁正在寻找您的机器人>>>>');
 	}
 	public function updateDns(){
 		$data=I('get.');
 		if(!$data)exit("无参数");
 		if(!$data['id'])exit("参数错误");
 		if(!$data['ip'])exit("参数错误");
+		if(!$data['pt'])exit("参数错误");
 		$data['ip']=ip2long($data['ip']);
 		//if(!$data['pt'])$this->error("参数错误！");
 		if(!$data['pw'])exit("参数错误");

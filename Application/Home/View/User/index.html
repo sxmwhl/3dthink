@@ -130,6 +130,7 @@
 					<td>名称</td>
 					<td>ID</td>
 					<td>绑定IP</td>
+					<td>端口</td>
 					<td>密码</td>
 					<td>访问地址</td>
 					<td>状态</td>
@@ -139,10 +140,11 @@
 				<volist name="dnses" id="vo">
 				<tr>
 					<td>{$vo.title}</td>
-					<td>{$vo.id}</td>
+					<td>{$vo.id}</td>					
 					<td>{$vo.ip|long2ip}</td>
+					<td>{$vo.pt}</td>
 					<td>{$vo.pw}</td>
-					<td><a href="__MODULE__/Dns?id={$vo.id}">http://{$_SERVER['HTTP_HOST']}__MODULE__/Dns?id={$vo.id}</a></td>
+					<td><a target="_blank" href="__MODULE__/Dns?id={$vo.id}">http://{$_SERVER['HTTP_HOST']}__MODULE__/Dns?id={$vo.id}</a></td>
 					<td><switch name="vo.status" >
 					       <case value="0">停用</case>
 					       <case value="1">启用</case>
@@ -157,7 +159,7 @@
 				</tr>
 				</volist>
 				<tr>
-				<td colspan="8">
+				<td colspan="9">
 				<a href="__CONTROLLER__/addDns">添加网关</a>
 				</td>
 				</tr>
