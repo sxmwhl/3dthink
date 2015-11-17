@@ -122,10 +122,10 @@ class UserController extends HomeController {
 			$this->display();
 			exit();
 		}
-		if((int)$info['status']!=0){
+		if((int)$info[4]!=0){
 			$this->flag=0;
-			$this->title="已激活";
-			$this->message="此帐号已激活过，请直接登录！";
+			$this->title="已激活！";
+			$this->message="此帐号已被激活，请直接登录！";
 			$this->display();
 			exit();
 		}

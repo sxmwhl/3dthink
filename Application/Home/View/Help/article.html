@@ -14,6 +14,12 @@
 			<div id="ueditor" class="col-md-10 col-md-offset-1 mg-top20">
 				{$article.content|htmlspecialchars_decode}
 			</div>
+		</div>
+		<div class='row'>
+		   <div class="col-md-10 col-md-offset-1">
+		   上一篇：<empty name="pro">没有了<else /><a href="{:U('Help/article')}?id={$pro.id}">{$pro.title}</a></empty><br>
+		   下一篇：<empty name="next">没有了<else /><a href="{:U('Help/article')}?id={$next.id}">{$next.title}</a></empty>
+		   </div>		
 		</div>	
  </div>
 <include file="Public:footer" />

@@ -44,6 +44,16 @@ class HelpController extends HomeController {
 		$this->article=$list;
 		$this->title=$list['title'];
 		$this->description=$list['description'];
+		
+		$map1['id']=array('lt',$id);
+		$map1['display']=array('eq',1);
+		$map2['id']=array('gt',$id);
+		$map2['display']=array('eq',1);
+		$pro=$Article->where($map1)->order('id desc')->limit('1')->find();		
+		$next=$Article->where($map2)->order('id asc')->limit('1')->find();
+		$this->assign('pro',$pro);		
+		$this->assign('next',$next);
+		
 		$this->display();
 	}
 	public function material(){
